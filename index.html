@@ -608,28 +608,6 @@ align-items:center;
     padding:20px;
     box-sizing:border-box;
 }
-
-
-
-header h1{
-    margin:0;
-    color:#D4AF37;
-    font-size:clamp(20px,3vw,34px);
-    font-weight:800;
-    margin:0;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    border-bottom:3px solid #d4a017;
-    padding-bottom:5px;
-    display:inline-block;
-  
-}
-
-header p{
-    margin-top:5px;
-    color:#D4AF37;
-  text-align:center;
-}
         .menu-toggle{
     background:#0f766e;
     color:white;
@@ -889,65 +867,86 @@ section h2{
 }
  
 /* LOGO */
+/* Header layout */
 .logo-container{
     display:flex;
     align-items:center;
+    gap:12px;
 }
 
-.logo-img{
-    width:45px;
-    height:45px;
-    object-fit:cover;
+/* Small logo */
+.header-logo{
+    width:40px;
+    height:40px;
     border-radius:50%;
-    border:2px solid #ffd700; /* gold */
-    box-shadow:0 0 10px rgba(255,140,0,0.6); /* orange glow */
-    background:white;
+    object-fit:cover;
+    border:2px solid #D4AF37;
+    flex-shrink:0;
 }
 
-/* TITLE */
+/* Website title */
 header h1{
-    font-size:20px;
     margin:0;
+    font-size:22px;
+    color:#D4AF37;
+    font-weight:800;
     letter-spacing:1px;
+    border:none;
+    text-transform:none;
+    line-height:1.2;
 }
 
-/* MOBILE */
-@media(max-width:600px){
-    .logo-img{
-        width:38px;
-        height:38px;
+/* Slogan */
+header p{
+    margin:3px 0 0;
+    color:#D4AF37;
+    font-size:13px;
+}
+  @media (max-width:600px){
+
+    .header-logo{
+        width:32px;
+        height:32px;
     }
 
     header h1{
-        font-size:16px;
+        font-size:17px;
     }
-}     
-    
+
+    header p{
+        font-size:11px;
+    }
+}
 </style>
 </head>
-    <header>
-    <!-- LOGO (LEFT) -->
+  <header>
     <div class="logo-container">
-      <img src="bd90b2a7-58b4-4d31-8566-4058dac1bc50.jpeg" alt="brendava tours & travel Logo" class="header-logo">
+        <img src="bd90b2a7-58b4-4d31-8566-4058dac1bc50.jpeg"
+             alt="Brendava Tours & Travel Logo"
+             class="header-logo">
+
+        <div>
+            <h1>BRENDAVA TOURS & TRAVEL</h1>
+            <p>“Where your dreams meet reality”</p>
+        </div>
     </div>
 
-    <!-- TITLE -->
-    <h1>BRENDAVA TOURS & TRAVEL</h1>
-   <p>“Where your dreams meet reality“</p>
-  </div>
-        <button class="menu-toggle" onclick="toggleMenu()">
-    <i class="fas fa-bars"></i> Menu
-</button>
-<div class="language-switcher">
-  <select id="languageSelect" onchange="changeLanguage()">
-    <option value="en">English</option>
-    <option value="fr">French</option>
-    <option value="es">Spanish</option>
-    <option value="de">German</option>
-    <option value="it">Italian</option>
-  </select>
-</div>
-    
+    <button class="menu-toggle" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i> Menu
+    </button>
+
+    <div class="language-switcher">
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="es">Spanish</option>
+            <option value="de">German</option>
+            <option value="it">Italian</option>
+        </select>
+    </div>
+
+    <!-- Your menu remains here -->
+</header> 
 <!-- menu -->
 <div id="headerMenu" class="header-menu">
     <a href="about.html">About</a>
