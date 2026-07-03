@@ -866,12 +866,21 @@ section h2{
     font-size:36px;
 }
  
-/* LOGO */
-/* Header layout */
+/* HEADER CONTAINER */
+header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:nowrap; /* keeps everything in one line */
+    text-align:center;
+}
+
+/* LOGO + TEXT GROUP */
 .logo-container{
     display:flex;
     align-items:center;
-    gap:12px;
+    gap:10px;
 }
 
 /* Small logo */
@@ -884,6 +893,14 @@ section h2{
     flex-shrink:0;
 }
 
+/* TEXT WRAPPER (important for h1 + p alignment) */
+.header-text{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    line-height:1.1;
+}
+
 /* Website title */
 header h1{
     margin:0;
@@ -891,18 +908,18 @@ header h1{
     color:#D4AF37;
     font-weight:800;
     letter-spacing:1px;
-    border:none;
     text-transform:none;
-    line-height:1.2;
 }
 
 /* Slogan */
 header p{
-    margin:3px 0 0;
+    margin:2px 0 0;
     color:#D4AF37;
     font-size:13px;
 }
-  @media (max-width:600px){
+
+/* MOBILE */
+@media (max-width:600px){
 
     .header-logo{
         width:32px;
