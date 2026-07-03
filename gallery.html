@@ -567,24 +567,20 @@ Lions sleep up to 16–20 hours a day, especially after a hunt.</p>
 
 </div>
 <script>
-/* close on background click */
-modal.addEventListener("click",(e)=>{
-  if(e.target===modal) closeModal();
-});
-  /* AUTOPLAY VIDEOS IN GALLERY */
-document.querySelectorAll(".grid video").forEach(video => {
-    video.autoplay = true;
-    video.muted = true;        // Required for autoplay
-    video.loop = true;
-    video.playsInline = true;
-    video.controls = false;
-    video.load();
+document.addEventListener("DOMContentLoaded", () => {
 
-    video.play().catch(error => {
-        console.log("Autoplay blocked:", error);
+    document.querySelectorAll(".gallery video").forEach(video => {
+        video.muted = true;
+        video.autoplay = true;
+        video.loop = true;
+        video.playsInline = true;
+        video.controls = false;
+
+        video.play().catch(err => console.log("Autoplay blocked:", err));
     });
+
 });
-    </script>
+</script>
 </body>
 
 </html>
