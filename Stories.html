@@ -613,6 +613,56 @@ gap:10px;
 }
 
 }
+  /* Guide Profile */
+
+.guide-profile{
+    display:flex;
+    align-items:center;
+    gap:25px;
+    background:#fff;
+    padding:25px;
+    border-radius:20px;
+    margin:40px auto 25px;
+    box-shadow:0 15px 35px rgba(0,0,0,.12);
+    max-width:900px;
+}
+
+.guide-profile img{
+    width:170px;
+    height:170px;
+    object-fit:cover;
+    border-radius:50%;
+    border:6px solid #D4AF37;
+    box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.guide-info h3{
+    font-size:32px;
+    color:#0B7A41;
+    margin-bottom:8px;
+}
+
+.guide-info span{
+    color:#D4AF37;
+    font-weight:700;
+    font-size:18px;
+}
+
+@media(max-width:768px){
+    .guide-profile{
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .guide-profile img{
+        width:140px;
+        height:140px;
+    }
+
+    .guide-info h3{
+        font-size:26px;
+    }
+}
   </style>
 
 </head>
