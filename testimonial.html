@@ -1,0 +1,1835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Brendava Tours & Travel</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<img src="images/logo.png" alt="">
+<h2>Brendava Tours & Travel</h2>
+</div>
+
+<nav>
+
+<a href="#">Home</a>
+<a href="#">Safaris</a>
+<a href="#">Destinations</a>
+<a href="#">Guest Stories</a>
+<a href="#">About</a>
+<a href="#">Contact</a>
+
+</nav>
+
+<a href="#" class="book-btn">
+Book Now
+</a>
+
+</header>
+
+
+<section class="hero">
+
+<video autoplay muted loop playsinline>
+
+<source src="videos/uganda.mp4" type="video/mp4">
+
+</video>
+
+<div class="overlay"></div>
+
+<div class="hero-content">
+
+<h4>DISCOVER THE PEARL OF AFRICA</h4>
+
+<h1>
+Luxury Safari Experiences Crafted With Passion
+</h1>
+
+<p>
+
+Experience unforgettable gorilla trekking, wildlife safaris, cultural adventures and tailor-made tours across Uganda with trusted local experts.
+
+</p>
+
+<div class="buttons">
+
+<a href="#" class="primary">
+Explore Tours
+</a>
+
+<a href="#" class="secondary">
+Watch Stories
+</a>
+
+</div>
+
+</div>
+
+</section>
+  <style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Poppins,sans-serif;
+}
+
+body{
+
+background:#F5F0E6;
+color:#222;
+overflow-x:hidden;
+
+}
+
+/* COLORS
+
+Green #0B6E4F
+
+Orange #F28C28
+
+Gold #C9A227
+
+Beige #F5F0E6
+
+Black #111111
+
+White #FFFFFF
+
+*/
+
+header{
+
+position:absolute;
+top:0;
+left:0;
+width:100%;
+padding:25px 8%;
+display:flex;
+justify-content:space-between;
+align-items:center;
+z-index:100;
+
+}
+
+.logo{
+
+display:flex;
+align-items:center;
+gap:15px;
+
+}
+
+.logo img{
+
+width:60px;
+
+}
+
+.logo h2{
+
+color:white;
+font-size:28px;
+
+}
+
+nav{
+
+display:flex;
+gap:35px;
+
+}
+
+nav a{
+
+text-decoration:none;
+color:white;
+font-weight:500;
+transition:.4s;
+
+}
+
+nav a:hover{
+
+color:#F28C28;
+
+}
+
+.book-btn{
+
+background:#F28C28;
+color:white;
+padding:15px 35px;
+border-radius:50px;
+text-decoration:none;
+font-weight:600;
+transition:.4s;
+
+}
+
+.book-btn:hover{
+
+background:#C9A227;
+
+}
+
+.hero{
+
+height:100vh;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+
+}
+
+.hero video{
+
+position:absolute;
+width:100%;
+height:100%;
+object-fit:cover;
+
+}
+
+.overlay{
+
+position:absolute;
+inset:0;
+background:linear-gradient(rgba(0,0,0,.65),rgba(0,0,0,.55));
+
+}
+
+.hero-content{
+
+position:relative;
+z-index:2;
+text-align:center;
+color:white;
+max-width:900px;
+padding:20px;
+
+}
+
+.hero-content h4{
+
+color:#C9A227;
+letter-spacing:3px;
+margin-bottom:20px;
+
+}
+
+.hero-content h1{
+
+font-size:68px;
+line-height:1.1;
+margin-bottom:25px;
+
+}
+
+.hero-content p{
+
+font-size:20px;
+line-height:1.8;
+margin-bottom:40px;
+
+}
+
+.buttons{
+
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+
+}
+
+.primary{
+
+background:#0B6E4F;
+padding:18px 40px;
+border-radius:50px;
+color:white;
+text-decoration:none;
+font-weight:600;
+transition:.4s;
+
+}
+
+.primary:hover{
+
+background:#C9A227;
+
+}
+
+.secondary{
+
+border:2px solid white;
+padding:18px 40px;
+border-radius:50px;
+text-decoration:none;
+color:white;
+font-weight:600;
+transition:.4s;
+
+}
+
+.secondary:hover{
+
+background:white;
+color:#111;
+
+}
+  .why-us{
+
+padding:100px 8%;
+background:#ffffff;
+
+}
+
+.section-title{
+
+text-align:center;
+max-width:800px;
+margin:auto;
+margin-bottom:70px;
+
+}
+
+.section-title span{
+
+color:#F28C28;
+font-weight:700;
+letter-spacing:3px;
+
+}
+
+.section-title h2{
+
+font-size:48px;
+margin:15px 0;
+color:#0B6E4F;
+
+}
+
+.section-title p{
+
+color:#666;
+line-height:1.8;
+
+}
+
+.why-grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:30px;
+
+}
+
+.why-card{
+
+background:#F5F0E6;
+padding:40px 30px;
+border-radius:20px;
+text-align:center;
+transition:.4s;
+border:2px solid transparent;
+
+}
+
+.why-card:hover{
+
+transform:translateY(-10px);
+border-color:#C9A227;
+box-shadow:0 15px 35px rgba(0,0,0,.12);
+
+}
+
+.icon{
+
+font-size:50px;
+margin-bottom:20px;
+
+}
+
+.why-card h3{
+
+color:#0B6E4F;
+margin-bottom:15px;
+
+}
+
+.why-card p{
+
+line-height:1.8;
+color:#555;
+
+}
+
+.stats{
+
+margin-top:80px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:25px;
+
+}
+
+.stat{
+
+background:#0B6E4F;
+padding:35px;
+border-radius:20px;
+text-align:center;
+color:white;
+
+}
+
+.stat h1{
+
+font-size:48px;
+color:#C9A227;
+
+}
+
+.stat p{
+
+margin-top:10px;
+font-size:18px;
+
+}
+  .testimonials{
+
+padding:100px 8%;
+background:#F5F0E6;
+
+}
+
+.section-heading{
+
+text-align:center;
+max-width:800px;
+margin:auto;
+margin-bottom:60px;
+
+}
+
+.section-heading span{
+
+color:#F28C28;
+font-weight:700;
+letter-spacing:3px;
+
+}
+
+.section-heading h2{
+
+font-size:48px;
+color:#0B6E4F;
+margin:15px 0;
+
+}
+
+.section-heading p{
+
+color:#555;
+line-height:1.8;
+
+}
+
+.testimonial-container{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(350px,1fr));
+gap:35px;
+
+}
+
+.testimonial-card{
+
+background:#FFFFFF;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 15px 40px rgba(0,0,0,.12);
+transition:.4s;
+
+}
+
+.testimonial-card:hover{
+
+transform:translateY(-10px);
+
+}
+
+.video-box{
+
+height:240px;
+overflow:hidden;
+
+}
+
+.video-box video{
+
+width:100%;
+height:100%;
+object-fit:cover;
+
+}
+
+.testimonial-content{
+
+padding:30px;
+
+}
+
+.stars{
+
+font-size:22px;
+color:#C9A227;
+margin-bottom:15px;
+
+}
+
+.testimonial-content h3{
+
+color:#0B6E4F;
+margin-bottom:5px;
+
+}
+
+.testimonial-content h5{
+
+color:#F28C28;
+margin-bottom:18px;
+font-weight:500;
+
+}
+
+.testimonial-content p{
+
+line-height:1.8;
+color:#444;
+
+}
+  .guide-section{
+
+padding:100px 8%;
+background:#ffffff;
+
+}
+
+.guide-container{
+
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:70px;
+align-items:center;
+
+}
+
+.guide-image{
+
+position:relative;
+
+}
+
+.guide-image img{
+
+width:100%;
+border-radius:25px;
+display:block;
+box-shadow:0 20px 45px rgba(0,0,0,.15);
+
+}
+
+.experience{
+
+position:absolute;
+bottom:30px;
+left:30px;
+background:#0B6E4F;
+color:#fff;
+padding:20px 30px;
+border-radius:18px;
+text-align:center;
+
+}
+
+.experience h2{
+
+font-size:42px;
+color:#C9A227;
+
+}
+
+.subtitle{
+
+color:#F28C28;
+font-weight:700;
+letter-spacing:3px;
+
+}
+
+.guide-content h2{
+
+font-size:48px;
+color:#0B6E4F;
+margin:15px 0;
+
+}
+
+.guide-content p{
+
+line-height:1.9;
+color:#555;
+margin-bottom:30px;
+
+}
+
+.guide-features{
+
+display:flex;
+flex-direction:column;
+gap:25px;
+
+}
+
+.feature{
+
+display:flex;
+gap:20px;
+align-items:flex-start;
+
+}
+
+.feature span{
+
+font-size:36px;
+
+}
+
+.feature h4{
+
+color:#111;
+margin-bottom:8px;
+
+}
+
+.feature p{
+
+margin:0;
+color:#666;
+
+}
+
+.guide-btn{
+
+display:inline-block;
+margin-top:35px;
+background:#F28C28;
+color:#fff;
+padding:16px 38px;
+text-decoration:none;
+border-radius:50px;
+font-weight:600;
+transition:.4s;
+
+}
+
+.guide-btn:hover{
+
+background:#C9A227;
+
+}
+
+.guide-video{
+
+margin-top:90px;
+text-align:center;
+
+}
+
+.guide-video h2{
+
+font-size:42px;
+color:#0B6E4F;
+
+}
+
+.guide-video p{
+
+max-width:850px;
+margin:20px auto 40px;
+line-height:1.8;
+color:#555;
+
+}
+
+.guide-video video{
+
+width:100%;
+max-width:1000px;
+border-radius:25px;
+box-shadow:0 20px 45px rgba(0,0,0,.18);
+
+}
+
+@media(max-width:900px){
+
+.guide-container{
+
+grid-template-columns:1fr;
+
+}
+
+.guide-content h2{
+
+font-size:36px;
+
+}
+
+.guide-video h2{
+
+font-size:32px;
+
+}
+
+}
+  .guest-stories{
+
+padding:100px 8%;
+background:#F5F0E6;
+overflow:hidden;
+
+}
+
+.story-slider{
+
+overflow:hidden;
+margin-top:60px;
+
+}
+
+.story-track{
+
+display:flex;
+gap:35px;
+width:max-content;
+animation:slideStories 24s linear infinite;
+
+}
+
+.story-card{
+
+min-width:420px;
+background:#fff;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 20px 45px rgba(0,0,0,.12);
+transition:.4s;
+
+}
+
+.story-card:hover{
+
+transform:translateY(-10px);
+
+}
+
+.story-card img{
+
+width:100%;
+height:280px;
+object-fit:cover;
+
+}
+
+.story-content{
+
+padding:30px;
+
+}
+
+.story-content h3{
+
+color:#0B6E4F;
+margin-bottom:20px;
+
+}
+
+.before{
+
+background:#fff7e6;
+border-left:5px solid #F28C28;
+padding:18px;
+border-radius:12px;
+margin-bottom:20px;
+
+}
+
+.before h4{
+
+color:#F28C28;
+margin-bottom:10px;
+
+}
+
+.after{
+
+background:#eef9f2;
+border-left:5px solid #0B6E4F;
+padding:18px;
+border-radius:12px;
+
+}
+
+.after h4{
+
+color:#0B6E4F;
+margin-bottom:10px;
+
+}
+
+.story-content p{
+
+line-height:1.8;
+color:#555;
+
+}
+
+@keyframes slideStories{
+
+0%{
+transform:translateX(0);
+}
+
+100%{
+transform:translateX(-50%);
+}
+
+}
+
+@media(max-width:768px){
+
+.story-card{
+
+min-width:320px;
+
+}
+
+}
+  .trusted-section{
+
+padding:100px 8%;
+background:#ffffff;
+
+}
+
+.trusted-grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:35px;
+margin-top:60px;
+
+}
+
+.trust-card{
+
+background:#F5F0E6;
+padding:35px;
+border-radius:25px;
+text-align:center;
+transition:.4s;
+box-shadow:0 15px 40px rgba(0,0,0,.08);
+
+}
+
+.trust-card:hover{
+
+transform:translateY(-12px);
+
+}
+
+.trust-card img{
+
+width:120px;
+height:120px;
+border-radius:50%;
+object-fit:cover;
+border:5px solid #C9A227;
+margin-bottom:20px;
+
+}
+
+.trust-card h3{
+
+color:#0B6E4F;
+margin-bottom:5px;
+
+}
+
+.trust-card h4{
+
+color:#F28C28;
+margin-bottom:15px;
+font-weight:500;
+
+}
+
+.stars{
+
+font-size:22px;
+color:#C9A227;
+margin-bottom:20px;
+
+}
+
+.trust-card p{
+
+line-height:1.8;
+color:#555;
+
+}
+
+.trust-badges{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:70px;
+
+}
+
+.badge{
+
+background:#0B6E4F;
+color:white;
+padding:35px;
+border-radius:20px;
+text-align:center;
+transition:.4s;
+
+}
+
+.badge:hover{
+
+background:#111111;
+
+}
+
+.badge{
+
+font-size:40px;
+
+}
+
+.badge h4{
+
+margin-top:20px;
+font-size:20px;
+color:#C9A227;
+
+}
+  .insights-section{
+
+padding:100px 8%;
+background:#F5F0E6;
+
+}
+
+.insights-grid{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+gap:35px;
+margin-top:60px;
+
+}
+
+.insight-card{
+
+background:#ffffff;
+border-radius:22px;
+overflow:hidden;
+box-shadow:0 18px 45px rgba(0,0,0,.08);
+transition:.4s;
+
+}
+
+.insight-card:hover{
+
+transform:translateY(-10px);
+
+}
+
+.insight-card img{
+
+width:100%;
+height:230px;
+object-fit:cover;
+
+}
+
+.insight-content{
+
+padding:28px;
+
+}
+
+.insight-content h3{
+
+color:#0B6E4F;
+margin-bottom:15px;
+font-size:24px;
+
+}
+
+.insight-content p{
+
+line-height:1.8;
+color:#555;
+
+}
+  .booking-section{
+
+position:relative;
+padding:120px 8%;
+background:url("images/cta-background.jpg") center/cover no-repeat;
+text-align:center;
+overflow:hidden;
+
+}
+
+.booking-overlay{
+
+position:absolute;
+inset:0;
+background:rgba(11,110,79,.88);
+
+}
+
+.booking-content{
+
+position:relative;
+z-index:2;
+max-width:900px;
+margin:auto;
+color:#fff;
+
+}
+
+.booking-content span{
+
+color:#C9A227;
+font-weight:700;
+letter-spacing:3px;
+
+}
+
+.booking-content h2{
+
+font-size:54px;
+margin:20px 0;
+
+}
+
+.booking-content p{
+
+font-size:20px;
+line-height:1.9;
+margin-bottom:40px;
+
+}
+
+.booking-buttons{
+
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+margin-bottom:60px;
+
+}
+
+.whatsapp-btn,
+.email-btn{
+
+padding:18px 40px;
+border-radius:50px;
+text-decoration:none;
+font-weight:600;
+transition:.4s;
+
+}
+
+.whatsapp-btn{
+
+background:#25D366;
+color:#fff;
+
+}
+
+.whatsapp-btn:hover{
+
+transform:translateY(-5px);
+
+}
+
+.email-btn{
+
+background:#F28C28;
+color:#fff;
+
+}
+
+.email-btn:hover{
+
+background:#C9A227;
+
+}
+
+.contact-box{
+
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+
+}
+
+.contact-item{
+
+background:rgba(255,255,255,.12);
+backdrop-filter:blur(12px);
+padding:30px;
+border-radius:20px;
+
+}
+
+.contact-item i{
+
+font-size:36px;
+color:#C9A227;
+margin-bottom:15px;
+
+}
+
+.contact-item h4{
+
+margin-bottom:10px;
+
+}
+
+.contact-item p{
+
+margin:0;
+font-size:17px;
+line-height:1.6;
+
+}
+
+@media(max-width:768px){
+
+.booking-content h2{
+
+font-size:38px;
+
+}
+
+.booking-content p{
+
+font-size:18px;
+
+}
+
+}
+</style>
+</head>
+  <section class="why-us">
+
+<div class="section-title">
+
+<span>WHY CHOOSE US</span>
+
+<h2>Experience Uganda With Confidence</h2>
+
+<p>
+We create unforgettable journeys through personalized service, expert local guides, and carefully planned safari experiences that leave lasting memories.
+</p>
+
+</div>
+
+<div class="why-grid">
+
+<div class="why-card">
+
+<div class="icon">🦍</div>
+
+<h3>Expert Safari Guides</h3>
+
+<p>
+Our experienced guides know Uganda's wildlife, culture, and hidden gems, making every adventure informative and exciting.
+</p>
+
+</div>
+
+<div class="why-card">
+
+<div class="icon">🛻</div>
+
+<h3>Comfortable Safari Vehicles</h3>
+
+<p>
+Travel in modern 4x4 safari vehicles with pop-up roofs, designed for comfort and excellent wildlife viewing.
+</p>
+
+</div>
+
+<div class="why-card">
+
+<div class="icon">🛡️</div>
+
+<h3>Safe & Reliable</h3>
+
+<p>
+From your arrival to departure, we prioritize your safety, comfort, and peace of mind.
+</p>
+
+</div>
+
+<div class="why-card">
+
+<div class="icon">⭐</div>
+
+<h3>Tailor-Made Adventures</h3>
+
+<p>
+Every itinerary is customized to suit your interests, budget, and travel style.
+</p>
+
+</div>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+
+<h1>500+</h1>
+
+<p>Happy Travelers</p>
+
+</div>
+
+<div class="stat">
+
+<h1>150+</h1>
+
+<p>Successful Safaris</p>
+
+</div>
+
+<div class="stat">
+
+<h1>10+</h1>
+
+<p>Destinations</p>
+
+</div>
+
+<div class="stat">
+
+<h1>98%</h1>
+
+<p>Guest Satisfaction</p>
+
+</div>
+
+</div>
+
+</section>
+<section class="testimonials" id="testimonials">
+
+<div class="section-heading">
+
+<span>CLIENT TESTIMONIALS</span>
+
+<h2>Stories From Our Happy Travelers</h2>
+
+<p>
+Hear from guests who trusted Brendava Tours & Travel and created unforgettable memories across Uganda.
+</p>
+
+</div>
+
+<div class="testimonial-container">
+
+<div class="testimonial-card">
+
+<div class="video-box">
+
+<video controls poster="images/client1.jpg">
+<source src="videos/client1.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="testimonial-content">
+
+<div class="stars">
+★★★★★
+</div>
+
+<h3>Sarah Williams</h3>
+
+<h5>United Kingdom 🇬🇧</h5>
+
+<p>
+
+"I was nervous before booking because it was my first safari in Africa. Brendava Tours made everything easy, safe, and unforgettable."
+
+</p>
+
+</div>
+
+</div>
+
+<div class="testimonial-card">
+
+<div class="video-box">
+
+<video controls poster="images/client2.jpg">
+<source src="videos/client2.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="testimonial-content">
+
+<div class="stars">
+★★★★★
+</div>
+
+<h3>David Miller</h3>
+
+<h5>Canada 🇨🇦</h5>
+
+<p>
+
+"The gorilla trekking experience exceeded every expectation. The guides were knowledgeable, friendly, and professional."
+
+</p>
+
+</div>
+
+</div>
+
+<div class="testimonial-card">
+
+<div class="video-box">
+
+<video controls poster="images/client3.jpg">
+<source src="videos/client3.mp4" type="video/mp4">
+</video>
+
+</div>
+
+<div class="testimonial-content">
+
+<div class="stars">
+★★★★★
+</div>
+
+<h3>Emily Johnson</h3>
+
+<h5>Australia 🇦🇺</h5>
+
+<p>
+
+"Every detail was perfectly organized. Uganda is beautiful, and Brendava Tours gave us memories that will last forever."
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<section class="guide-section">
+
+<div class="guide-container">
+
+<div class="guide-image">
+
+<img src="images/guide.jpg" alt="Professional Safari Guide">
+
+<div class="experience">
+<h2>12+</h2>
+<p>Years of Safari Experience</p>
+</div>
+
+</div>
+
+<div class="guide-content">
+
+<span class="subtitle">MEET YOUR EXPERT GUIDE</span>
+
+<h2>Explore Uganda With Knowledgeable Local Guides</h2>
+
+<p>
+Our professional safari guides are passionate conservationists with years of experience tracking wildlife across Uganda's national parks. They share fascinating stories, explain animal behaviour, identify birds, and ensure every safari is educational, safe, and unforgettable.
+</p>
+
+<div class="guide-features">
+
+<div class="feature">
+<span>🦁</span>
+<div>
+<h4>Animal Behaviour</h4>
+<p>Learn why lions hunt, elephants communicate, and gorillas live in family groups.</p>
+</div>
+</div>
+
+<div class="feature">
+<span>🦅</span>
+<div>
+<h4>Bird Watching</h4>
+<p>Discover Uganda's incredible birdlife with expert identification and photography tips.</p>
+</div>
+</div>
+
+<div class="feature">
+<span>🌍</span>
+<div>
+<h4>Local Knowledge</h4>
+<p>Enjoy authentic cultural stories, traditions, and hidden places known only to local guides.</p>
+</div>
+</div>
+
+</div>
+
+<a href="#" class="guide-btn">Meet Our Team</a>
+
+</div>
+
+</div>
+
+<div class="guide-video">
+
+<h2>Watch Your Guide Explain Uganda's Wildlife</h2>
+
+<p>
+Watch our experienced safari guide explain the behaviour of gorillas, elephants, lions, giraffes, buffaloes, leopards, birds, and many other amazing animals found in Uganda.
+</p>
+
+<video controls poster="images/guide-video.jpg">
+
+<source src="videos/guide.mp4" type="video/mp4">
+
+</video>
+
+</div>
+
+</section>
+<section class="guest-stories" id="stories">
+
+<div class="section-title">
+
+<span>GUEST STORIES</span>
+
+<h2>From Uncertainty to Unforgettable Memories</h2>
+
+<p>
+Every traveler begins with questions. These are real emotions our guests experienced before and after exploring Uganda with Brendava Tours & Travel.
+</p>
+
+</div>
+
+<div class="story-slider">
+
+<div class="story-track">
+
+<!-- Story 1 -->
+
+<div class="story-card">
+
+<img src="images/story1.jpg" alt="Guest">
+
+<div class="story-content">
+
+<h3>Emily • United Kingdom 🇬🇧</h3>
+
+<div class="before">
+<h4>😟 Before Booking</h4>
+<p>
+"I was worried about safety and didn't know what to expect from Africa."
+</p>
+</div>
+
+<div class="after">
+<h4>😊 After My Safari</h4>
+<p>
+"I felt completely safe. The guides were incredible and Uganda became one of my favourite destinations."
+</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- Story 2 -->
+
+<div class="story-card">
+
+<img src="images/story2.jpg" alt="Guest">
+
+<div class="story-content">
+
+<h3>Michael • Canada 🇨🇦</h3>
+
+<div class="before">
+<h4>😟 Before Booking</h4>
+<p>
+"I thought gorilla trekking would be too difficult."
+</p>
+</div>
+
+<div class="after">
+<h4>😊 After My Safari</h4>
+<p>
+"It was the greatest wildlife experience of my life. Every step was worth it."
+</p>
+</div>
+
+</div>
+
+</div>
+
+<!-- Story 3 -->
+
+<div class="story-card">
+
+<img src="images/story3.jpg" alt="Guest">
+
+<div class="story-content">
+
+<h3>Sophia • Germany 🇩🇪</h3>
+
+<div class="before">
+<h4>😟 Before Booking</h4>
+<p>
+"I wasn't sure if everything would be well organised."
+</p>
+</div>
+
+<div class="after">
+<h4>😊 After My Safari</h4>
+<p>
+"Everything was perfectly planned. I relaxed and enjoyed every single moment."
+</p>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<section class="trusted-section">
+
+<div class="section-title">
+
+<span>TRUSTED WORLDWIDE</span>
+
+<h2>Trusted by Travelers From Around the World</h2>
+
+<p>
+Thousands of unforgettable memories have been created with Brendava Tours & Travel. Our commitment to quality service, safety, and authentic experiences has earned the trust of travelers from every corner of the globe.
+</p>
+
+</div>
+
+<div class="trusted-grid">
+
+<div class="trust-card">
+
+<img src="images/traveler1.jpg" alt="Traveler">
+
+<h3>Sarah Johnson</h3>
+
+<h4>United Kingdom 🇬🇧</h4>
+
+<div class="stars">★★★★★</div>
+
+<p>
+"The most organized safari I've ever experienced. Professional guides, excellent hotels, and unforgettable wildlife."
+</p>
+
+</div>
+
+<div class="trust-card">
+
+<img src="images/traveler2.jpg" alt="Traveler">
+
+<h3>David Smith</h3>
+
+<h4>Australia 🇦🇺</h4>
+
+<div class="stars">★★★★★</div>
+
+<p>
+"Everything exceeded our expectations. We felt safe, welcomed, and inspired throughout the journey."
+</p>
+
+</div>
+
+<div class="trust-card">
+
+<img src="images/traveler3.jpg" alt="Traveler">
+
+<h3>Emma Brown</h3>
+
+<h4>Canada 🇨🇦</h4>
+
+<div class="stars">★★★★★</div>
+
+<p>
+"Our gorilla trekking experience was simply magical. I would recommend Brendava Tours to anyone."
+</p>
+
+</div>
+
+<div class="trust-card">
+
+<img src="images/traveler4.jpg" alt="Traveler">
+
+<h3>Michael Wilson</h3>
+
+<h4>Germany 🇩🇪</h4>
+
+<div class="stars">★★★★★</div>
+
+<p>
+"The guides were knowledgeable, friendly, and passionate about Uganda's wildlife. Every day was amazing."
+</p>
+
+</div>
+
+</div>
+
+<div class="trust-badges">
+
+<div class="badge">
+🏆
+<h4>Top Rated Safari Company</h4>
+</div>
+
+<div class="badge">
+🦍
+<h4>Expert Gorilla Trekking</h4>
+</div>
+
+<div class="badge">
+🌍
+<h4>Local Travel Experts</h4>
+</div>
+
+<div class="badge">
+💚
+<h4>Trusted Customer Service</h4>
+</div>
+
+</div>
+
+</section>
+<section class="insights-section" id="local-insights">
+
+<div class="section-title">
+
+<span>LOCAL INSIGHTS</span>
+
+<h2>Discover Uganda Through Local Eyes</h2>
+
+<p>
+Our local guides don't just show you wildlife—they share the stories, traditions, and hidden wonders that make Uganda truly unforgettable.
+</p>
+
+</div>
+
+<div class="insights-grid">
+
+<div class="insight-card">
+
+<img src="images/gorilla.jpg" alt="Mountain Gorilla">
+
+<div class="insight-content">
+
+<h3>🦍 Mountain Gorillas</h3>
+
+<p>
+Mountain gorillas are peaceful and highly intelligent. They live in close family groups led by a dominant silverback who protects the entire family.
+</p>
+
+</div>
+
+</div>
+
+<div class="insight-card">
+
+<img src="images/elephant.jpg" alt="Elephants">
+
+<div class="insight-content">
+
+<h3>🐘 African Elephants</h3>
+
+<p>
+Elephants communicate through deep vibrations that can travel several kilometers. They have remarkable memories and strong family bonds.
+</p>
+
+</div>
+
+</div>
+
+<div class="insight-card">
+
+<img src="images/lion.jpg" alt="Lion">
+
+<div class="insight-content">
+
+<h3>🦁 Lions</h3>
+
+<p>
+Most lions rest during the day and become active in the evening. Your guide will explain how they hunt and protect their pride.
+</p>
+
+</div>
+
+</div>
+
+<div class="insight-card">
+
+<img src="images/giraffe.jpg" alt="Giraffe">
+
+<div class="insight-content">
+
+<h3>🦒 Giraffes</h3>
+
+<p>
+Giraffes have unique spot patterns, just like human fingerprints. No two giraffes have exactly the same markings.
+</p>
+
+</div>
+
+</div>
+
+<div class="insight-card">
+
+<img src="images/culture.jpg" alt="Culture">
+
+<div class="insight-content">
+
+<h3>🎭 Local Culture</h3>
+
+<p>
+Visit local communities, enjoy traditional dances, taste authentic Ugandan cuisine, and experience genuine African hospitality.
+</p>
+
+</div>
+
+</div>
+
+<div class="insight-card">
+
+<img src="images/birds.jpg" alt="Bird Watching">
+
+<div class="insight-content">
+
+<h3>🦅 Bird Watching</h3>
+
+<p>
+Uganda is home to over 1,000 bird species, making it one of Africa's top birdwatching destinations.
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+<section class="booking-section" id="book">
+
+<div class="booking-overlay"></div>
+
+<div class="booking-content">
+
+<span>YOUR ADVENTURE STARTS HERE</span>
+
+<h2>Let's Plan Your Dream Safari</h2>
+
+<p>
+Whether you're dreaming of gorilla trekking, the Big Five, bird watching, or a tailor-made Uganda adventure, Brendava Tours & Travel is ready to make it unforgettable.
+</p>
+
+<div class="booking-buttons">
+
+<a href="https://wa.me/256759413273" class="whatsapp-btn">
+<i class="fab fa-whatsapp"></i> Chat on WhatsApp
+</a>
+
+<a href="mailto:BlendavaToursAndTravel@gmail.com" class="email-btn">
+<i class="fas fa-envelope"></i> Email Us
+</a>
+
+</div>
+
+<div class="contact-box">
+
+<div class="contact-item">
+<i class="fas fa-phone"></i>
+<h4>Call Us</h4>
+  <p> +256789336441</p>
+<p>+256762584996</p>
+  <p>+256770462422</p>
+</div>
+
+<div class="contact-item">
+<i class="fas fa-envelope"></i>
+<h4>Email</h4>
+<p>BlendavaToursAndTravel@gmail.com</p>
+</div>
+
+<div class="contact-item">
+<i class="fas fa-globe"></i>
+<h4>Website</h4>
+<p>www.brendavatoursandtravel.com</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+</body>
+</html>
