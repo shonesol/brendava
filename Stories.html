@@ -41,21 +41,19 @@ overflow-x:hidden;
 HEADER
 ===========================*/
 
-header{
+/* Hide and show header on scroll */
 
+header{
 position:fixed;
 top:0;
 left:0;
 width:100%;
-padding:18px 8%;
-display:flex;
-justify-content:space-between;
-align-items:center;
-background:rgba(255,255,255,.96);
-backdrop-filter:blur(12px);
-box-shadow:0 5px 20px rgba(0,0,0,.08);
-z-index:999;
+z-index:1000;
+transition:transform 0.4s ease;
+}
 
+header.hide{
+transform:translateY(-120%);
 }
 
 .logo{
@@ -1487,7 +1485,32 @@ this.classList.add("active");
 });
 
 </script>
+<script>
+  // Hide header when scrolling down
 
+let lastScroll = 0;
+const header = document.querySelector("header");
+
+window.addEventListener("scroll", () => {
+
+    let currentScroll = window.pageYOffset;
+
+    if(currentScroll > lastScroll && currentScroll > 100){
+
+        // Scroll down
+        header.classList.add("hide");
+
+    } else {
+
+        // Scroll up
+        header.classList.remove("hide");
+
+    }
+
+    lastScroll = currentScroll;
+
+});
+</script>
 </body>
 
 </html>
