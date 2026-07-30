@@ -288,6 +288,333 @@ background:#0B7A41;
 color:white;
 
 }
+  /* ==========================================
+STORIES GRID
+========================================== */
+
+.stories-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
+gap:35px;
+padding:60px 8%;
+}
+
+/* ==========================================
+STORY CARD
+========================================== */
+
+.story-card{
+background:#fff;
+border-radius:25px;
+overflow:hidden;
+box-shadow:0 20px 40px rgba(0,0,0,.12);
+transition:.4s;
+}
+
+.story-card:hover{
+transform:translateY(-12px);
+box-shadow:0 25px 50px rgba(0,0,0,.18);
+}
+
+.video-container{
+position:relative;
+}
+
+.video-container video{
+width:100%;
+height:260px;
+object-fit:cover;
+display:block;
+}
+
+.live-badge{
+position:absolute;
+top:18px;
+left:18px;
+background:#0B7A41;
+color:#fff;
+padding:8px 18px;
+border-radius:30px;
+font-size:13px;
+font-weight:700;
+}
+
+.story-content{
+padding:28px;
+}
+
+.profile{
+display:flex;
+align-items:center;
+gap:15px;
+margin-bottom:18px;
+}
+
+.profile img{
+width:65px;
+height:65px;
+border-radius:50%;
+object-fit:cover;
+border:3px solid #D4AF37;
+}
+
+.profile h3{
+color:#0B7A41;
+margin-bottom:4px;
+}
+
+.profile span{
+font-size:14px;
+color:#777;
+}
+
+.story-content h4{
+font-size:24px;
+color:#0B7A41;
+margin-bottom:15px;
+}
+
+.story-content p{
+line-height:1.8;
+color:#555;
+}
+
+.story-footer{
+display:flex;
+justify-content:space-between;
+margin-top:25px;
+padding-top:20px;
+border-top:1px solid #eee;
+font-weight:600;
+color:#D4AF37;
+}
+
+/* ==========================================
+GUIDE STORIES
+========================================== */
+
+#guides{
+padding:90px 8%;
+background:#ffffff;
+}
+
+#guides h2{
+font-size:42px;
+color:#0B7A41;
+margin-bottom:20px;
+}
+
+#guides p{
+font-size:17px;
+line-height:1.9;
+color:#555;
+margin-bottom:35px;
+}
+
+/* ==========================================
+SHARE STORY
+========================================== */
+
+.share-story{
+padding:100px 8%;
+background:linear-gradient(135deg,#0B7A41,#145A32);
+text-align:center;
+color:#fff;
+}
+
+.share-content{
+max-width:850px;
+margin:auto;
+}
+
+.share-content h2{
+font-size:46px;
+margin-bottom:20px;
+}
+
+.share-content p{
+font-size:18px;
+line-height:1.9;
+margin-bottom:40px;
+}
+
+.share-buttons{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.share-buttons a{
+padding:16px 35px;
+border-radius:50px;
+text-decoration:none;
+font-weight:700;
+transition:.4s;
+}
+
+.share-buttons .primary{
+background:#D4AF37;
+color:#111;
+}
+
+.share-buttons .primary:hover{
+background:#fff;
+}
+
+.share-buttons .secondary{
+background:#fff;
+color:#0B7A41;
+}
+
+.share-buttons .secondary:hover{
+background:#D4AF37;
+color:#111;
+}
+
+/* ==========================================
+FOOTER
+========================================== */
+
+.footer{
+background:#111;
+color:#ddd;
+padding:80px 8% 30px;
+}
+
+.footer-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:40px;
+}
+
+.footer h3,
+.footer h4{
+color:#D4AF37;
+margin-bottom:18px;
+}
+
+.footer p,
+.footer a{
+color:#ccc;
+text-decoration:none;
+line-height:2;
+display:block;
+transition:.3s;
+}
+
+.footer a:hover{
+color:#D4AF37;
+padding-left:8px;
+}
+
+.footer-social a{
+display:inline-flex;
+align-items:center;
+justify-content:center;
+width:45px;
+height:45px;
+background:#0B7A41;
+border-radius:50%;
+margin-right:10px;
+color:#fff;
+font-size:18px;
+transition:.4s;
+}
+
+.footer-social a:hover{
+background:#D4AF37;
+color:#111;
+transform:translateY(-5px);
+}
+
+.footer hr{
+margin:50px 0 25px;
+border:none;
+height:1px;
+background:#333;
+}
+
+.copyright{
+text-align:center;
+color:#888;
+}
+
+/* ==========================================
+SCROLLBAR
+========================================== */
+
+::-webkit-scrollbar{
+width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+background:#0B7A41;
+border-radius:20px;
+}
+
+::-webkit-scrollbar-track{
+background:#eee;
+}
+
+/* ==========================================
+RESPONSIVE
+========================================== */
+
+@media(max-width:991px){
+
+header{
+flex-direction:column;
+gap:20px;
+}
+
+nav{
+flex-wrap:wrap;
+justify-content:center;
+}
+
+.hero h1{
+font-size:48px;
+}
+
+.hero p{
+font-size:18px;
+}
+
+.section-title h2{
+font-size:36px;
+}
+
+.share-content h2{
+font-size:36px;
+}
+
+}
+
+@media(max-width:768px){
+
+.stories-grid{
+grid-template-columns:1fr;
+}
+
+.hero{
+height:75vh;
+}
+
+.hero h1{
+font-size:38px;
+}
+
+.hero-buttons{
+flex-direction:column;
+}
+
+.story-footer{
+flex-direction:column;
+gap:10px;
+}
+
+}
   </style>
 
 </head>
