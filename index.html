@@ -207,62 +207,95 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-  /*====================================================
-    BRENDAVA TOURS & TRAVEL
-    PREMIUM CSS STYLESHEET
-    PART 1
-    Reset • Variables • Typography
-    Header • Navigation • Hero • Buttons
-======================================================*/
+/*====================================================
+  BRENDAVA TOURS & TRAVEL
+  ULTRA PREMIUM SAFARI DESIGN
+  
+  PART 1
+  FOUNDATION
+  HEADER
+  NAVIGATION
+  HERO SLIDER
+  BUTTONS
+====================================================*/
+
 
 /*=========================
         GOOGLE FONTS
 =========================*/
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Dancing+Script:wght@700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+
 
 /*=========================
-        CSS VARIABLES
+        ROOT COLORS
 =========================*/
+
 :root{
 
-    --primary:#0B7A41;
-    --primary-dark:#075A30;
+    --green:#0B7A41;
 
-    --secondary:#D4AF37;
-    --secondary-light:#F5D76E;
+    --green-dark:#064E2B;
 
-    --accent:#F28C28;
+    --green-light:#13A05B;
+
+
+    --gold:#D4AF37;
+
+    --gold-light:#FFE58A;
+
 
     --cream:#F8F5EE;
+
     --beige:#E8DCC4;
-    --white:#FFFFFF;
 
-    --text:#222222;
-    --text-light:#6B7280;
 
-    --shadow-sm:0 5px 15px rgba(0,0,0,.08);
-    --shadow-md:0 15px 35px rgba(0,0,0,.12);
-    --shadow-lg:0 25px 60px rgba(0,0,0,.18);
+    --white:#ffffff;
 
-    --radius:18px;
+    --black:#111111;
 
-    --transition:.35s ease;
+    --gray:#6B7280;
+
+
+    --shadow:
+
+    0 20px 50px rgba(0,0,0,.12);
+
+
+    --transition:.4s ease;
+
+
+    --radius:20px;
+
 }
+
+
 
 /*=========================
         RESET
 =========================*/
 
+
 *{
+
     margin:0;
+
     padding:0;
+
     box-sizing:border-box;
+
 }
+
+
 
 html{
 
     scroll-behavior:smooth;
+
 }
+
+
 
 body{
 
@@ -270,35 +303,25 @@ body{
 
     background:var(--cream);
 
-    color:var(--text);
+    color:var(--black);
 
     overflow-x:hidden;
 
     line-height:1.7;
 
-    -webkit-font-smoothing:antialiased;
-
 }
 
-/*=========================
-        IMAGES
-=========================*/
+
 
 img{
 
-    display:block;
-
     width:100%;
 
-    max-width:100%;
-
-    height:auto;
+    display:block;
 
 }
 
-/*=========================
-        LINKS
-=========================*/
+
 
 a{
 
@@ -306,9 +329,9 @@ a{
 
     color:inherit;
 
-    transition:var(--transition);
-
 }
+
+
 
 ul{
 
@@ -316,21 +339,12 @@ ul{
 
 }
 
-/*=========================
-        GLOBAL CONTAINER
-=========================*/
 
-.container{
-
-    width:min(1200px,92%);
-
-    margin:auto;
-
-}
 
 /*=========================
         TYPOGRAPHY
 =========================*/
+
 
 h1,
 h2,
@@ -340,49 +354,67 @@ h2,
 
 }
 
-h1{
 
-    font-size:clamp(50px,8vw,90px);
-
-    line-height:1.1;
-
-}
 
 h2{
 
-    font-size:clamp(36px,6vw,54px);
+    font-size:
 
-    color:var(--primary);
+    clamp(40px,6vw,60px);
 
-    margin-bottom:20px;
+    color:var(--green);
+
+    text-align:center;
 
 }
+
+
 
 h3{
 
+    color:var(--green);
+
     font-size:28px;
 
-    color:var(--primary);
-
 }
+
+
 
 p{
 
-    font-size:17px;
+    color:var(--gray);
 
-    color:var(--text-light);
+    font-size:17px;
 
 }
 
+
+
 /*=========================
-        HEADER
+        CONTAINER
 =========================*/
+
+
+.container{
+
+    width:min(1200px,90%);
+
+    margin:auto;
+
+}
+
+
+
+/*====================================================
+                HEADER
+====================================================*/
+
 
 header{
 
-    background:url("IMG_3231.jpeg") center/cover no-repeat;
+    position:relative;
 
-    padding:18px 6%;
+    padding:20px 7%;
 
     display:flex;
 
@@ -390,7 +422,24 @@ header{
 
     align-items:center;
 
+
+    background:
+
+    linear-gradient(
+
+    rgba(0,0,0,.35),
+
+    rgba(0,0,0,.35)
+
+    ),
+
+    url("IMG_3231.jpeg")
+
+    center/cover;
+
 }
+
+
 
 .logo-container{
 
@@ -398,73 +447,66 @@ header{
 
     align-items:center;
 
-    gap:14px;
+    gap:15px;
 
 }
+
+
 
 .header-logo{
 
-    width:60px;
+    width:65px;
 
-    height:60px;
-
-    border-radius:50%;
+    height:65px;
 
     object-fit:cover;
 
-    border:3px solid var(--secondary);
+    border-radius:50%;
 
-    box-shadow:var(--shadow-md);
+
+    border:
+
+    3px solid var(--gold);
+
+
+    box-shadow:
+
+    0 10px 30px rgba(0,0,0,.3);
 
 }
 
-.header-text{
 
-    display:flex;
 
-    flex-direction:column;
+.logo-text{
 
-}
-
-.header-text h1{
-
-    font-family:'Inter',sans-serif;
+    color:white;
 
     font-size:28px;
 
     font-weight:800;
 
-    color:#fff;
-
-    letter-spacing:1px;
-
 }
 
-.header-text p{
 
-    color:#fff;
 
-    font-size:14px;
+/*====================================================
+                NAVBAR
+====================================================*/
 
-    margin-top:4px;
 
-}
+.navbar{
 
-/*=========================
-        NAVIGATION
-=========================*/
-
-nav{
-
-    position:sticky;
+    position:fixed;
 
     top:0;
 
+    left:0;
+
+    width:100%;
+
+
     z-index:9999;
 
-    background:rgba(255,255,255,.96);
-
-    backdrop-filter:blur(16px);
 
     display:flex;
 
@@ -472,792 +514,462 @@ nav{
 
     align-items:center;
 
-    padding:18px 6%;
 
-    box-shadow:0 8px 30px rgba(0,0,0,.08);
+    padding:20px 7%;
 
-}
-
-nav h1{
-
-    font-family:'Inter',sans-serif;
-
-    font-size:28px;
-
-    color:var(--primary);
-
-    font-weight:800;
-
-}
-
-.menu{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:20px;
-
-    flex-wrap:wrap;
-
-}
-
-.menu a{
-
-    color:var(--text);
-
-    font-weight:600;
-
-    padding:10px 14px;
-
-    border-radius:10px;
-
-    transition:var(--transition);
-
-}
-
-.menu a:hover{
-
-    background:rgba(11,122,65,.08);
-
-    color:var(--primary);
-
-}
-
-.menu button{
-
-    cursor:pointer;
-
-}
-
-/*=========================
-        HERO
-=========================*/
-
-.hero{
-
-    min-height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    text-align:center;
-
-    color:white;
-
-    position:relative;
 
     background:
 
-    linear-gradient(
+    rgba(0,0,0,.25);
 
-    rgba(0,0,0,.55),
 
-    rgba(0,0,0,.45)
+    backdrop-filter:
 
-    ),
+    blur(15px);
 
-    url("e41f3c80-4431-44a8-bae2-1b7edfdc10a4.jpeg")
-
-    center/cover no-repeat;
-
-}
-
-.hero-content{
-
-    width:min(900px,90%);
-
-}
-
-.hero h1{
-
-    text-shadow:
-
-    0 10px 35px rgba(0,0,0,.5);
-
-}
-
-.hero p{
-
-    color:#fff;
-
-    font-size:22px;
-
-    margin:25px auto;
-
-    max-width:700px;
-
-}
-
-.hero-buttons{
-
-    display:flex;
-
-    justify-content:center;
-
-    gap:18px;
-
-    flex-wrap:wrap;
-
-    margin-top:35px;
-
-}
-
-/*=========================
-        BUTTONS
-=========================*/
-
-.btn{
-
-    display:inline-flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    padding:16px 34px;
-
-    border:none;
-
-    border-radius:50px;
-
-    cursor:pointer;
-
-    font-weight:700;
-
-    font-size:16px;
-
-    transition:var(--transition);
-
-    background:linear-gradient(
-
-    135deg,
-
-    var(--primary),
-
-    #118850
-
-    );
-
-    color:#fff;
-
-    box-shadow:
-
-    0 18px 35px rgba(11,122,65,.28);
-
-}
-
-.btn:hover{
-
-    transform:translateY(-5px);
-
-    box-shadow:
-
-    0 25px 50px rgba(0,0,0,.18);
-
-}
-
-.btn-outline{
-
-    background:transparent;
-
-    border:2px solid #fff;
-
-    color:#fff;
-
-}
-
-.btn-outline:hover{
-
-    background:#fff;
-
-    color:var(--primary);
-
-}
-
-/*=========================
-        MOBILE
-=========================*/
-
-@media(max-width:768px){
-
-header{
-
-    padding:14px;
-
-}
-
-.header-logo{
-
-    width:45px;
-
-    height:45px;
-
-}
-
-.header-text h1{
-
-    font-size:22px;
-
-}
-
-.header-text p{
-
-    font-size:12px;
-
-}
-
-nav{
-
-    flex-direction:column;
-
-    gap:18px;
-
-}
-
-.menu{
-
-    justify-content:center;
-
-}
-
-.hero{
-
-    min-height:85vh;
-
-}
-
-.hero h1{
-
-    font-size:56px;
-
-}
-
-.hero p{
-
-    font-size:18px;
-
-}
-
-.hero-buttons{
-
-    flex-direction:column;
-
-}
-
-.btn{
-
-    width:100%;
-
-}
-
-}
-  /*====================================================
-            PART 2
-    Sections • Cards • Gallery • Destinations
-====================================================*/
-
-
-/*=========================
-        GENERAL SECTIONS
-=========================*/
-
-section{
-    width:100%;
-    padding:100px 6%;
-    background:var(--cream);
-}
-
-section:nth-child(even){
-    background:#ffffff;
-}
-
-.section-title{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.section-subtitle{
-    max-width:750px;
-    margin:0 auto 60px;
-    text-align:center;
-    color:var(--text-light);
-    font-size:18px;
-}
-
-
-/*=========================
-        DESTINATIONS GRID
-=========================*/
-
-.destinations{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(300px,1fr));
-
-    gap:35px;
-
-    align-items:stretch;
-
-}
-
-
-/*=========================
-        DESTINATION CARD
-=========================*/
-
-.card{
-
-    background:#fff;
-
-    border-radius:22px;
-
-    overflow:hidden;
-
-    box-shadow:var(--shadow-sm);
-
-    transition:all .4s ease;
-
-    position:relative;
-
-}
-
-.card:hover{
-
-    transform:translateY(-12px);
-
-    box-shadow:var(--shadow-lg);
-
-}
-
-.card img{
-
-    height:260px;
-
-    object-fit:cover;
-
-    transition:.7s;
-
-}
-
-.card:hover img{
-
-    transform:scale(1.08);
-
-}
-
-.card-content{
-
-    padding:28px;
-
-}
-
-.card h3{
-
-    margin-bottom:15px;
-
-}
-
-.card p{
-
-    margin-bottom:20px;
-
-}
-
-.card .btn{
-
-    margin-top:10px;
-
-}
-
-
-/*=========================
-        DESTINATION TAG
-=========================*/
-
-.destination-tag{
-
-    position:absolute;
-
-    top:18px;
-
-    left:18px;
-
-    background:rgba(11,122,65,.95);
-
-    color:white;
-
-    padding:8px 16px;
-
-    border-radius:50px;
-
-    font-size:13px;
-
-    font-weight:700;
-
-}
-
-
-/*=========================
-        FEATURE BOXES
-=========================*/
-
-.features{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(250px,1fr));
-
-    gap:30px;
-
-}
-
-.feature{
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:35px;
-
-    text-align:center;
-
-    box-shadow:var(--shadow-sm);
-
-    transition:.35s;
-
-}
-
-.feature:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:var(--shadow-md);
-
-}
-
-.feature i{
-
-    font-size:50px;
-
-    color:var(--primary);
-
-    margin-bottom:20px;
-
-}
-
-.feature h3{
-
-    margin-bottom:15px;
-
-}
-
-
-/*=========================
-        GALLERY
-=========================*/
-
-.gallery{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(320px,1fr));
-
-    gap:30px;
-
-}
-
-.gallery-item{
-
-    background:white;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    box-shadow:var(--shadow-sm);
-
-    transition:.4s;
-
-}
-
-.gallery-item:hover{
-
-    transform:translateY(-10px);
-
-    box-shadow:var(--shadow-lg);
-
-}
-
-.gallery-item img{
-
-    width:100%;
-
-    height:280px;
-
-    object-fit:cover;
-
-    transition:.8s;
-
-}
-
-.gallery-item:hover img{
-
-    transform:scale(1.08);
-
-}
-
-.gallery-item h3{
-
-    margin:20px;
-
-}
-
-.gallery-item p{
-
-    padding:0 20px 25px;
-
-}
-
-
-/*=========================
-        IMAGE OVERLAY
-=========================*/
-
-.image-box{
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-.image-box::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:linear-gradient(
-
-        rgba(0,0,0,0),
-
-        rgba(0,0,0,.5)
-
-    );
-
-    opacity:0;
 
     transition:.5s;
 
 }
 
-.image-box:hover::before{
-
-    opacity:1;
-
-}
 
 
-/*=========================
-        CAPTION
-=========================*/
+.navbar.scrolled{
 
-.caption{
+    background:white;
 
-    position:absolute;
+    box-shadow:
 
-    bottom:20px;
-
-    left:20px;
-
-    background:rgba(11,122,65,.92);
-
-    color:white;
-
-    padding:10px 18px;
-
-    border-radius:12px;
-
-    font-size:14px;
-
-    font-weight:700;
+    0 15px 40px rgba(0,0,0,.15);
 
 }
 
 
-/*=========================
-      DESTINATION SLIDER
-=========================*/
 
-#destinationRotator{
-
-    width:100%;
-
-    overflow:hidden;
-
-    background:#F8F5EE;
-
-    padding:80px 0;
-
-}
-
-.destination-slide{
-
-    display:none;
-
-    opacity:0;
-
-    transform:translateY(40px);
-
-    transition:all .8s ease;
-
-}
-
-.destination-slide.active{
-
-    display:block;
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
-.destination-title{
-
-    color:var(--primary);
-
-    font-size:48px;
-
-    margin-bottom:20px;
-
-}
-
-.destination-desc{
-
-    max-width:850px;
-
-    margin:auto;
-
-    color:var(--text-light);
-
-    font-size:19px;
-
-    line-height:1.9;
-
-}
-
-
-/*=========================
-        EXPLORE BUTTON
-=========================*/
-
-.explore-btn{
-
-    margin-top:25px;
-
-    padding:14px 28px;
-
-    background:var(--primary);
-
-    color:white;
-
-    border:none;
-
-    border-radius:50px;
-
-    cursor:pointer;
-
-    font-weight:700;
-
-    transition:.35s;
-
-}
-
-.explore-btn:hover{
-
-    background:var(--primary-dark);
-
-    transform:translateY(-4px);
-
-}
-
-
-/*=========================
-        HIDDEN CONTENT
-=========================*/
-
-.more-content{
-
-    display:none;
-
-    margin-top:20px;
-
-    animation:fadeUp .5s ease;
-
-}
-
-
-/*=========================
-        BADGES
-=========================*/
-
-.badge{
-
-    display:inline-block;
-
-    padding:8px 18px;
-
-    background:var(--secondary);
+.navbar.scrolled .menu a{
 
     color:#222;
 
-    border-radius:50px;
+}
+
+
+
+.navbar.scrolled .logo-text{
+
+    color:var(--green);
+
+}
+
+
+
+
+/* MENU */
+
+
+.menu{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:35px;
+
+}
+
+
+
+.menu a{
+
+    color:white;
+
+    font-weight:600;
+
+    position:relative;
+
+}
+
+
+
+.menu a::after{
+
+    content:"";
+
+    position:absolute;
+
+
+    bottom:-8px;
+
+    left:0;
+
+
+    width:0;
+
+    height:3px;
+
+
+    background:var(--gold);
+
+
+    transition:.4s;
+
+}
+
+
+
+.menu a:hover::after{
+
+    width:100%;
+
+}
+
+
+
+/*====================================================
+                HERO SLIDER
+====================================================*/
+
+
+.hero-slider{
+
+    height:100vh;
+
+    min-height:700px;
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+
+
+.hero-slide{
+
+    position:absolute;
+
+    inset:0;
+
+
+    opacity:0;
+
+
+    transition:
+
+    opacity 1.5s ease;
+
+}
+
+
+
+.hero-slide.active{
+
+    opacity:1;
+
+    z-index:2;
+
+}
+
+
+
+.hero-slide img{
+
+    width:100%;
+
+    height:100%;
+
+
+    object-fit:cover;
+
+
+    animation:
+
+    safariZoom 15s infinite;
+
+}
+
+
+
+/* DARK OVERLAY */
+
+
+.hero-slide::after{
+
+    content:"";
+
+
+    position:absolute;
+
+    inset:0;
+
+
+    background:
+
+    linear-gradient(
+
+    rgba(0,0,0,.65),
+
+    rgba(0,0,0,.35)
+
+    );
+
+}
+
+
+
+/* HERO CONTENT */
+
+
+.hero-content{
+
+    position:absolute;
+
+
+    top:50%;
+
+    left:50%;
+
+
+    transform:
+
+    translate(-50%,-50%);
+
+
+
+    width:min(1000px,90%);
+
+
+
+    text-align:center;
+
+
+    color:white;
+
+
+    z-index:5;
+
+}
+
+
+
+.hero-content h1{
+
+    font-size:
+
+    clamp(60px,9vw,110px);
+
+
+    line-height:1;
+
+
+    color:white;
+
+
+    text-shadow:
+
+    0 15px 50px rgba(0,0,0,.7);
+
+
+}
+
+
+
+.hero-content p{
+
+    color:white;
+
+
+    font-size:24px;
+
+
+    max-width:800px;
+
+
+    margin:25px auto;
+
+}
+
+
+
+/*====================================================
+                BUTTONS
+====================================================*/
+
+
+.hero-actions{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-top:40px;
+
+}
+
+
+
+.btn{
+
+    padding:
+
+    16px 38px;
+
+
+    border-radius:
+
+    50px;
+
 
     font-weight:700;
 
-    font-size:13px;
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    var(--green),
+
+    var(--green-light)
+
+    );
+
+
+    color:white;
+
+
+    box-shadow:
+
+    0 20px 40px rgba(0,0,0,.25);
+
+
+    transition:.4s;
 
 }
 
 
-/*=========================
-        ANIMATIONS
-=========================*/
 
-.fade-up{
+.btn:hover{
 
-    animation:fadeUp .8s ease;
+    transform:
 
-}
+    translateY(-7px);
 
-.fade-left{
 
-    animation:fadeLeft .8s ease;
+    box-shadow:
+
+    0 30px 60px rgba(0,0,0,.35);
 
 }
 
-.fade-right{
 
-    animation:fadeRight .8s ease;
+
+.btn.gold{
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    var(--gold),
+
+    var(--gold-light)
+
+    );
+
+
+    color:#222;
 
 }
 
-.zoom{
 
-    animation:zoom .8s ease;
+
+/*====================================================
+                SLIDER DOTS
+====================================================*/
+
+
+.slider-dots{
+
+    position:absolute;
+
+
+    bottom:40px;
+
+
+    left:50%;
+
+
+    transform:translateX(-50%);
+
+
+    display:flex;
+
+
+    gap:15px;
+
+
+    z-index:10;
 
 }
+
+
+
+.slider-dot{
+
+    width:14px;
+
+    height:14px;
+
+
+    border-radius:50%;
+
+
+    background:white;
+
+
+    opacity:.5;
+
+}
+
+
+
+.slider-dot.active{
+
+    background:var(--gold);
+
+    opacity:1;
+
+}
+
+
+
+/*====================================================
+                ANIMATIONS
+====================================================*/
+
+
+@keyframes safariZoom{
+
+from{
+
+transform:scale(1);
+
+}
+
+to{
+
+transform:scale(1.15);
+
+}
+
+}
+
 
 
 @keyframes fadeUp{
@@ -1281,1017 +993,258 @@ transform:translateY(0);
 }
 
 
-@keyframes fadeLeft{
 
-from{
+/*====================================================
+                MOBILE
+====================================================*/
 
-opacity:0;
-
-transform:translateX(-60px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateX(0);
-
-}
-
-}
-
-
-@keyframes fadeRight{
-
-from{
-
-opacity:0;
-
-transform:translateX(60px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateX(0);
-
-}
-
-}
-
-
-@keyframes zoom{
-
-from{
-
-opacity:0;
-
-transform:scale(.85);
-
-}
-
-to{
-
-opacity:1;
-
-transform:scale(1);
-
-}
-
-}
-
-
-/*=========================
-      MOBILE RESPONSIVE
-=========================*/
 
 @media(max-width:768px){
 
-section{
 
-padding:70px 20px;
+.navbar{
 
-}
-
-.destination-title{
-
-font-size:38px;
+padding:15px 20px;
 
 }
 
-.destination-desc{
+
+
+.menu{
+
+display:none;
+
+}
+
+
+
+.logo-text{
+
+font-size:20px;
+
+}
+
+
+
+.header-logo{
+
+width:45px;
+
+height:45px;
+
+}
+
+
+
+.hero-slider{
+
+height:90vh;
+
+}
+
+
+
+.hero-content h1{
+
+font-size:55px;
+
+}
+
+
+
+.hero-content p{
 
 font-size:17px;
 
 }
 
-.gallery{
 
-grid-template-columns:1fr;
 
-}
-
-.destinations{
-
-grid-template-columns:1fr;
-
-}
-
-.card img{
-
-height:220px;
-
-}
-
-.gallery-item img{
-
-height:230px;
-
-}
-
-}
-  /*====================================================
-      PART 3A
-      BOOKING • FORMS • DROPDOWN MENU
-====================================================*/
-
-/*=========================
-      BOOKING SECTION
-=========================*/
-
-#booking{
-    width:100%;
-    padding:100px 6%;
-    background:linear-gradient(135deg,#f8f5ee,#ffffff);
-}
-
-#booking .booking-container{
-    max-width:1100px;
-    margin:auto;
-}
-
-#booking h2{
-    text-align:center;
-    color:var(--primary);
-    margin-bottom:15px;
-}
-
-#booking p{
-    text-align:center;
-    max-width:700px;
-    margin:0 auto 50px;
-}
-
-/*=========================
-      BOOKING FORM
-=========================*/
-
-.booking-form{
-
-    background:#fff;
-
-    padding:45px;
-
-    border-radius:25px;
-
-    box-shadow:var(--shadow-lg);
-
-}
-
-.booking-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:25px;
-
-}
-
-.booking-grid .full{
-
-    grid-column:1 / -1;
-
-}
-
-/*=========================
-      FORM CONTROLS
-=========================*/
-
-input,
-select,
-textarea{
-
-    width:100%;
-
-    padding:16px 18px;
-
-    border:2px solid #e5e7eb;
-
-    border-radius:14px;
-
-    font-size:16px;
-
-    background:#fff;
-
-    transition:.35s;
-
-}
-
-textarea{
-
-    min-height:180px;
-
-    resize:vertical;
-
-}
-
-input:focus,
-select:focus,
-textarea:focus{
-
-    outline:none;
-
-    border-color:var(--primary);
-
-    box-shadow:0 0 0 5px rgba(11,122,65,.12);
-
-}
-
-/*=========================
-      LABELS
-=========================*/
-
-label{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    font-weight:600;
-
-    color:#333;
-
-}
-
-/*=========================
-      SUBMIT BUTTON
-=========================*/
-
-.booking-submit{
-
-    margin-top:20px;
-
-    width:100%;
-
-}
-
-/*=========================
-      CONTACT SECTION
-=========================*/
-
-.contact-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-
-    gap:40px;
-
-    align-items:center;
-
-}
-
-.contact-card{
-
-    background:#fff;
-
-    padding:35px;
-
-    border-radius:20px;
-
-    box-shadow:var(--shadow-md);
-
-    transition:.35s;
-
-}
-
-.contact-card:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.contact-card i{
-
-    font-size:45px;
-
-    color:var(--primary);
-
-    margin-bottom:20px;
-
-}
-
-.contact-card h3{
-
-    margin-bottom:12px;
-
-}
-
-/*=========================
-      DROPDOWN MENU
-=========================*/
-
-.dropdown{
-
-    position:relative;
-
-}
-
-.dropdown-content{
-
-    position:absolute;
-
-    top:100%;
-
-    right:0;
-
-    width:430px;
-
-    background:rgba(255,255,255,.98);
-
-    backdrop-filter:blur(18px);
-
-    border-radius:22px;
-
-    padding:22px;
-
-    display:none;
-
-    box-shadow:0 25px 60px rgba(0,0,0,.18);
-
-    animation:dropdown .35s ease;
-
-    z-index:9999;
-
-}
-
-.dropdown:hover .dropdown-content{
-
-    display:block;
-
-}
-
-/*=========================
-      DROPDOWN HEADINGS
-=========================*/
-
-.dropdown-content h3{
-
-    color:var(--primary);
-
-    margin-bottom:18px;
-
-    font-size:18px;
-
-    border-left:4px solid var(--secondary);
-
-    padding-left:10px;
-
-}
-
-/*=========================
-      SUB MENU
-=========================*/
-
-.sub{
-
-    background:#f8fafc;
-
-    border-radius:14px;
-
-    padding:15px;
-
-    margin-bottom:18px;
-
-    transition:.3s;
-
-}
-
-.sub:hover{
-
-    background:#eef9f2;
-
-}
-
-.sub strong{
-
-    display:block;
-
-    margin-bottom:10px;
-
-    color:var(--primary);
-
-}
-
-.sub a{
-
-    display:block;
-
-    padding:8px 0;
-
-    color:#333;
-
-    transition:.3s;
-
-}
-
-.sub a:hover{
-
-    color:var(--primary);
-
-    padding-left:8px;
-
-}
-
-/*=========================
-      MENU DIVIDER
-=========================*/
-
-.menu-divider{
-
-    height:1px;
-
-    background:#e5e7eb;
-
-    margin:18px 0;
-
-}
-
-/*=========================
-      ANIMATION
-=========================*/
-
-@keyframes dropdown{
-
-    from{
-
-        opacity:0;
-
-        transform:translateY(20px);
-
-    }
-
-    to{
-
-        opacity:1;
-
-        transform:translateY(0);
-
-    }
-
-}
-
-/*=========================
-      MOBILE
-=========================*/
-
-@media(max-width:768px){
-
-.booking-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.booking-form{
-
-padding:25px;
-
-}
-
-.dropdown-content{
-
-width:95vw;
-
-left:50%;
-
-right:auto;
-
-transform:translateX(-50%);
-
-}
-
-}
-  /*====================================================
-                PART 3B
-      PARK CARDS • LODGES • REVIEWS
-      VIDEOS • WHATSAPP • LANGUAGE
-====================================================*/
-
-
-/*=========================
-      NATIONAL PARK CARDS
-=========================*/
-
-.park-grid{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(320px,1fr));
-
-    gap:30px;
-
-    margin-top:40px;
-
-}
-
-.park-card{
-
-    background:#fff;
-
-    border-radius:22px;
-
-    overflow:hidden;
-
-    box-shadow:var(--shadow-md);
-
-    transition:.4s;
-
-}
-
-.park-card:hover{
-
-    transform:translateY(-10px);
-
-    box-shadow:var(--shadow-lg);
-
-}
-
-.park-card img{
-
-    width:100%;
-
-    height:230px;
-
-    object-fit:cover;
-
-    transition:.6s;
-
-}
-
-.park-card:hover img{
-
-    transform:scale(1.08);
-
-}
-
-.park-info{
-
-    padding:25px;
-
-}
-
-.park-info h3{
-
-    color:var(--primary);
-
-    margin-bottom:12px;
-
-}
-
-.park-info p{
-
-    margin-bottom:18px;
-
-}
-
-.park-meta{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    flex-wrap:wrap;
-
-    gap:10px;
-
-    margin-top:20px;
-
-}
-
-.park-meta span{
-
-    background:#eef8f1;
-
-    color:var(--primary);
-
-    padding:8px 14px;
-
-    border-radius:30px;
-
-    font-size:14px;
-
-    font-weight:600;
-
-}
-
-
-/*=========================
-      LODGE CARDS
-=========================*/
-
-.lodge-card{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:18px;
-
-    background:#fff;
-
-    padding:15px;
-
-    margin-bottom:18px;
-
-    border-radius:18px;
-
-    box-shadow:var(--shadow-sm);
-
-    transition:.35s;
-
-}
-
-.lodge-card:hover{
-
-    transform:translateX(8px);
-
-    box-shadow:var(--shadow-md);
-
-}
-
-.lodge-card img{
-
-    width:90px;
-
-    height:90px;
-
-    border-radius:14px;
-
-    object-fit:cover;
-
-}
-
-.lodge-info{
-
-    flex:1;
-
-}
-
-.lodge-info h4{
-
-    color:var(--primary);
-
-    margin-bottom:6px;
-
-}
-
-.lodge-info p{
-
-    font-size:15px;
-
-}
-
-
-/*=========================
-      REVIEW SECTION
-=========================*/
-
-#reviews{
-
-    background:#F8F5EE;
-
-}
-
-.review-slider{
-
-    max-width:850px;
-
-    margin:auto;
-
-    position:relative;
-
-}
-
-.review-card{
-
-    background:#fff;
-
-    border-radius:22px;
-
-    padding:40px;
-
-    text-align:center;
-
-    box-shadow:var(--shadow-md);
-
-}
-
-.review-card img{
-
-    width:90px;
-
-    height:90px;
-
-    border-radius:50%;
-
-    object-fit:cover;
-
-    margin:0 auto 20px;
-
-    border:4px solid var(--secondary);
-
-}
-
-.review-card h3{
-
-    margin-bottom:10px;
-
-}
-
-.review-card p{
-
-    font-style:italic;
-
-    margin-bottom:20px;
-
-}
-
-.stars{
-
-    color:gold;
-
-    font-size:22px;
-
-}
-
-
-/*=========================
-      VIDEO SECTION
-=========================*/
-
-#videos{
-
-    background:#fff;
-
-    padding:90px 6%;
-
-}
-
-.video-grid{
-
-    display:grid;
-
-    grid-template-columns:
-    repeat(auto-fit,minmax(350px,1fr));
-
-    gap:30px;
-
-}
-
-.video-card{
-
-    background:#fff;
-
-    border-radius:20px;
-
-    overflow:hidden;
-
-    box-shadow:var(--shadow-md);
-
-    transition:.35s;
-
-}
-
-.video-card:hover{
-
-    transform:translateY(-8px);
-
-}
-
-.video-card video{
-
-    width:100%;
-
-    height:260px;
-
-    object-fit:cover;
-
-}
-
-.video-card h3{
-
-    padding:20px;
-
-}
-
-.video-card p{
-
-    padding:0 20px 25px;
-
-}
-
-
-/*=========================
-      WHATSAPP BUTTON
-=========================*/
-
-.whatsapp{
-
-    position:fixed;
-
-    bottom:25px;
-
-    right:25px;
-
-    width:70px;
-
-    height:70px;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    border-radius:50%;
-
-    background:#25D366;
-
-    color:#fff;
-
-    font-size:32px;
-
-    box-shadow:0 15px 40px rgba(37,211,102,.4);
-
-    z-index:999;
-
-    transition:.35s;
-
-}
-
-.whatsapp:hover{
-
-    transform:scale(1.12);
-
-    background:#1EBE5D;
-
-}
-
-
-/*=========================
-      LANGUAGE SWITCHER
-=========================*/
-
-.language-switcher{
-
-    position:absolute;
-
-    top:20px;
-
-    right:20px;
-
-}
-
-.language-switcher select{
-
-    padding:10px 14px;
-
-    border:none;
-
-    border-radius:10px;
-
-    background:var(--primary);
-
-    color:#fff;
-
-    cursor:pointer;
-
-    font-weight:600;
-
-}
-
-
-/*=========================
-      PAYMENT ICONS
-=========================*/
-
-.payment-methods{
-
-    margin-top:40px;
-
-    text-align:center;
-
-}
-
-.payment-icons{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:18px;
-
-    flex-wrap:wrap;
-
-}
-
-.payment-icons img{
-
-    width:65px;
-
-    transition:.35s;
-
-}
-
-.payment-icons img:hover{
-
-    transform:scale(1.1);
-
-}
-
-
-/*=========================
-      MOBILE
-=========================*/
-
-@media(max-width:768px){
-
-.park-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.lodge-card{
+.hero-actions{
 
 flex-direction:column;
 
-text-align:center;
-
 }
 
-.lodge-card img{
+
+
+.btn{
 
 width:100%;
 
-height:220px;
-
 }
 
-.review-card{
-
-padding:25px;
-
-}
-
-.video-grid{
-
-grid-template-columns:1fr;
-
-}
-
-.video-card video{
-
-height:220px;
-
-}
-
-.whatsapp{
-
-width:60px;
-
-height:60px;
-
-font-size:28px;
-
-bottom:20px;
-
-right:20px;
-
-}
-
-.language-switcher{
-
-position:static;
-
-margin:20px auto;
-
-text-align:center;
-
-}
 
 }
   /*====================================================
-                PART 4A
-      PREMIUM FOOTER • SOCIAL • NEWSLETTER
+  PART 2
+  ABOUT SECTION
+  WHY CHOOSE US
+  SAFARI PACKAGES
+  DESTINATIONS
+  GALLERY
 ====================================================*/
 
 
-/*=========================
-        FOOTER
-=========================*/
+/*====================================================
+        GLOBAL SECTION STYLE
+====================================================*/
 
-footer{
+section{
 
-    width:100%;
+    padding:100px 7%;
+
+    position:relative;
+
+}
+
+
+
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:20px;
+
+}
+
+
+
+.section-text{
+
+    max-width:800px;
+
+    margin:0 auto 60px;
+
+    text-align:center;
+
+}
+
+
+
+/*====================================================
+        ABOUT SECTION
+====================================================*/
+
+
+.about{
+
+    background:white;
+
+}
+
+
+
+.about-container{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(2,1fr);
+
+    gap:60px;
+
+    align-items:center;
+
+}
+
+
+
+.about-image{
+
+    position:relative;
+
+}
+
+
+
+.about-image img{
+
+    border-radius:30px;
+
+    box-shadow:
+
+    0 30px 70px rgba(0,0,0,.18);
+
+}
+
+
+
+.about-image::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:150px;
+
+    height:150px;
+
+    background:var(--gold);
+
+    border-radius:50%;
+
+    top:-40px;
+
+    left:-40px;
+
+    z-index:-1;
+
+}
+
+
+
+.about-content h2{
+
+    text-align:left;
+
+}
+
+
+
+.about-content p{
+
+    margin:20px 0;
+
+    line-height:1.9;
+
+}
+
+
+
+.about-list li{
+
+    margin:15px 0;
+
+    font-weight:600;
+
+    color:#333;
+
+}
+
+
+
+.about-list li::before{
+
+    content:"✓";
+
+    color:var(--green);
+
+    font-weight:bold;
+
+    margin-right:12px;
+
+}
+
+
+
+/*====================================================
+        WHY CHOOSE US
+====================================================*/
+
+
+.why-us{
 
     background:
 
@@ -2305,51 +1258,19 @@ footer{
 
     );
 
+}
+
+
+
+.why-us h2{
+
     color:white;
 
-    padding:90px 6% 30px;
-
-    position:relative;
-
-    overflow:hidden;
-
-    border-top:4px solid var(--secondary);
-
 }
 
 
-/* Decorative glow */
 
-footer::before{
-
-    content:"";
-
-    position:absolute;
-
-    width:300px;
-
-    height:300px;
-
-    background:rgba(212,175,55,.15);
-
-    border-radius:50%;
-
-    top:-150px;
-
-    right:-100px;
-
-}
-
-
-/*=========================
-        FOOTER GRID
-=========================*/
-
-.footer-container{
-
-    max-width:1200px;
-
-    margin:auto;
+.why-grid{
 
     display:grid;
 
@@ -2357,64 +1278,1206 @@ footer::before{
 
     repeat(auto-fit,minmax(250px,1fr));
 
-    gap:45px;
-
-    position:relative;
-
-    z-index:2;
+    gap:30px;
 
 }
 
 
-/*=========================
-        FOOTER BOX
-=========================*/
 
-.footer-box{
+.why-card{
 
-    transition:.35s;
+    background:
+
+    rgba(255,255,255,.12);
+
+    backdrop-filter:blur(15px);
+
+    padding:35px;
+
+    border-radius:25px;
+
+    color:white;
+
+    text-align:center;
+
+    border:
+
+    1px solid rgba(255,255,255,.2);
+
+    transition:.4s;
 
 }
 
-.footer-box:hover{
 
-    transform:translateY(-5px);
+
+.why-card:hover{
+
+    transform:
+
+    translateY(-12px);
+
+    background:
+
+    rgba(255,255,255,.2);
 
 }
 
 
-.footer-box h3,
-.footer-box h4{
 
-    color:var(--secondary);
+.why-card i{
 
-    font-size:24px;
+    font-size:45px;
+
+    color:var(--gold);
 
     margin-bottom:20px;
 
 }
 
 
+
+.why-card h3{
+
+    color:white;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.why-card p{
+
+    color:#eee;
+
+}
+
+
+
+/*====================================================
+        STATS COUNTERS
+====================================================*/
+
+
+.stats{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(200px,1fr));
+
+    gap:25px;
+
+}
+
+
+
+.stat-box{
+
+    background:white;
+
+    padding:35px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.1);
+
+}
+
+
+
+.stat-box h3{
+
+    font-size:50px;
+
+    color:var(--gold);
+
+}
+
+
+
+.stat-box p{
+
+    font-weight:600;
+
+    color:#333;
+
+}
+
+
+
+/*====================================================
+        SAFARI PACKAGES
+====================================================*/
+
+
+.packages{
+
+    background:var(--cream);
+
+}
+
+
+
+.package-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(300px,1fr));
+
+    gap:35px;
+
+}
+
+
+
+.package-card{
+
+    background:white;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,.12);
+
+    transition:.4s;
+
+}
+
+
+
+.package-card:hover{
+
+    transform:
+
+    translateY(-12px);
+
+}
+
+
+
+.package-card img{
+
+    height:260px;
+
+    object-fit:cover;
+
+}
+
+
+
+.package-content{
+
+    padding:30px;
+
+}
+
+
+
+.package-content h3{
+
+    margin-bottom:15px;
+
+}
+
+
+
+.package-price{
+
+    font-size:28px;
+
+    font-weight:800;
+
+    color:var(--gold);
+
+    margin:20px 0;
+
+}
+
+
+
+.package-features li{
+
+    padding:8px 0;
+
+}
+
+
+
+.package-features li::before{
+
+    content:"✓";
+
+    color:var(--green);
+
+    margin-right:10px;
+
+}
+
+
+
+/*====================================================
+        DESTINATION CARDS
+====================================================*/
+
+
+.destinations{
+
+    background:white;
+
+}
+
+
+
+.destination-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(300px,1fr));
+
+    gap:35px;
+
+}
+
+
+
+.destination-card{
+
+    position:relative;
+
+    height:420px;
+
+    overflow:hidden;
+
+    border-radius:25px;
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,.15);
+
+}
+
+
+
+.destination-card img{
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.7s;
+
+}
+
+
+
+.destination-card:hover img{
+
+    transform:scale(1.12);
+
+}
+
+
+
+.destination-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:flex-end;
+
+
+    padding:30px;
+
+
+    background:
+
+    linear-gradient(
+
+    transparent,
+
+    rgba(0,0,0,.8)
+
+    );
+
+}
+
+
+
+.destination-overlay h3{
+
+    color:white;
+
+    font-size:35px;
+
+}
+
+
+
+.destination-overlay p{
+
+    color:white;
+
+}
+
+
+
+/*====================================================
+        IMAGE GALLERY
+====================================================*/
+
+
+.gallery-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(250px,1fr));
+
+    gap:25px;
+
+}
+
+
+
+.gallery-item{
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+    height:280px;
+
+}
+
+
+
+.gallery-item img{
+
+    height:100%;
+
+    object-fit:cover;
+
+    transition:.6s;
+
+}
+
+
+
+.gallery-item:hover img{
+
+    transform:scale(1.15);
+
+}
+
+
+
+/*====================================================
+        MOBILE
+====================================================*/
+
+
+@media(max-width:768px){
+
+
+section{
+
+padding:70px 20px;
+
+}
+
+
+
+.about-container{
+
+grid-template-columns:1fr;
+
+}
+
+
+
+.about-content h2{
+
+text-align:center;
+
+}
+
+
+
+.package-card img{
+
+height:220px;
+
+}
+
+
+
+.destination-card{
+
+height:350px;
+
+}
+
+
+
+}
+  /*====================================================
+  PART 3
+  PARK CARDS
+  LODGE CARDS
+  SAFARI TIMELINE
+  BOOKING FORM
+  REVIEWS
+  VIDEO SECTION
+====================================================*/
+
+
+/*====================================================
+        NATIONAL PARK SECTION
+====================================================*/
+
+
+.parks{
+
+    background:var(--cream);
+
+}
+
+
+
+.park-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(300px,1fr));
+
+    gap:35px;
+
+}
+
+
+
+.park-card{
+
+    background:white;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,.12);
+
+    transition:.4s;
+
+}
+
+
+
+.park-card:hover{
+
+    transform:translateY(-12px);
+
+}
+
+
+
+.park-card img{
+
+    height:240px;
+
+    object-fit:cover;
+
+}
+
+
+
+.park-content{
+
+    padding:30px;
+
+}
+
+
+
+.park-content h3{
+
+    margin-bottom:12px;
+
+}
+
+
+
+.park-location{
+
+    color:var(--gold);
+
+    font-weight:700;
+
+    margin-bottom:15px;
+
+}
+
+
+
+/*====================================================
+        LODGE CARDS
+====================================================*/
+
+
+.lodge-section{
+
+    background:white;
+
+}
+
+
+
+.lodge-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(280px,1fr));
+
+    gap:30px;
+
+}
+
+
+
+.lodge-card{
+
+    background:white;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.12);
+
+    transition:.4s;
+
+}
+
+
+
+.lodge-card:hover{
+
+    transform:translateY(-10px);
+
+}
+
+
+
+.lodge-card img{
+
+    height:220px;
+
+    object-fit:cover;
+
+}
+
+
+
+.lodge-content{
+
+    padding:25px;
+
+}
+
+
+
+.lodge-rating{
+
+    color:#D4AF37;
+
+    font-size:20px;
+
+}
+
+
+
+/*====================================================
+        SAFARI ITINERARY TIMELINE
+====================================================*/
+
+
+.itinerary{
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #F8F5EE,
+
+    #ffffff
+
+    );
+
+}
+
+
+
+.timeline{
+
+    max-width:900px;
+
+    margin:auto;
+
+    position:relative;
+
+}
+
+
+
+.timeline::before{
+
+    content:"";
+
+    position:absolute;
+
+    left:50%;
+
+    top:0;
+
+    height:100%;
+
+    width:3px;
+
+    background:var(--gold);
+
+}
+
+
+
+.timeline-item{
+
+    width:50%;
+
+    padding:30px;
+
+    position:relative;
+
+}
+
+
+
+.timeline-item:nth-child(even){
+
+    margin-left:50%;
+
+}
+
+
+
+.timeline-box{
+
+    background:white;
+
+    padding:30px;
+
+    border-radius:20px;
+
+    box-shadow:
+
+    0 15px 40px rgba(0,0,0,.1);
+
+}
+
+
+
+.timeline-box h3{
+
+    color:var(--green);
+
+}
+
+
+
+/*====================================================
+        BOOKING SECTION
+====================================================*/
+
+
+.booking{
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #064E2B,
+
+    #0B7A41
+
+    );
+
+}
+
+
+
+.booking h2{
+
+    color:white;
+
+}
+
+
+
+.booking-form{
+
+    max-width:900px;
+
+    margin:auto;
+
+    background:white;
+
+    padding:45px;
+
+    border-radius:30px;
+
+    box-shadow:
+
+    0 30px 70px rgba(0,0,0,.25);
+
+}
+
+
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(2,1fr);
+
+    gap:25px;
+
+}
+
+
+
+.form-group input,
+.form-group select,
+.form-group textarea{
+
+    width:100%;
+
+    padding:16px;
+
+    border:
+
+    2px solid #eee;
+
+    border-radius:15px;
+
+    font-size:16px;
+
+}
+
+
+
+.form-group textarea{
+
+    min-height:160px;
+
+}
+
+
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus{
+
+    outline:none;
+
+    border-color:var(--green);
+
+}
+
+
+
+/*====================================================
+        REVIEWS
+====================================================*/
+
+
+.reviews{
+
+    background:var(--cream);
+
+}
+
+
+
+.review-slider{
+
+    max-width:850px;
+
+    margin:auto;
+
+}
+
+
+
+.review-card{
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:25px;
+
+    text-align:center;
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,.12);
+
+}
+
+
+
+.review-card img{
+
+    width:90px;
+
+    height:90px;
+
+    border-radius:50%;
+
+    margin:auto;
+
+    object-fit:cover;
+
+    border:3px solid var(--gold);
+
+}
+
+
+
+.review-stars{
+
+    color:#D4AF37;
+
+    font-size:25px;
+
+    margin:15px 0;
+
+}
+
+
+
+.review-card p{
+
+    font-style:italic;
+
+}
+
+
+
+/*====================================================
+        VIDEO SECTION
+====================================================*/
+
+
+.video-grid{
+
+    display:grid;
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(320px,1fr));
+
+    gap:30px;
+
+}
+
+
+
+.video-card{
+
+    background:white;
+
+    border-radius:25px;
+
+    overflow:hidden;
+
+    box-shadow:
+
+    0 20px 50px rgba(0,0,0,.12);
+
+}
+
+
+
+.video-card video{
+
+    width:100%;
+
+    height:280px;
+
+    object-fit:cover;
+
+}
+
+
+
+.video-card h3{
+
+    padding:20px;
+
+}
+
+
+
+/*====================================================
+        WHATSAPP FLOAT
+====================================================*/
+
+
+.whatsapp{
+
+    position:fixed;
+
+    right:30px;
+
+    bottom:30px;
+
+
+    width:65px;
+
+    height:65px;
+
+
+    border-radius:50%;
+
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+
+    background:#25D366;
+
+
+    color:white;
+
+
+    font-size:30px;
+
+
+    box-shadow:
+
+    0 20px 40px rgba(0,0,0,.25);
+
+
+    z-index:999;
+
+    transition:.3s;
+
+}
+
+
+
+.whatsapp:hover{
+
+    transform:scale(1.15);
+
+}
+
+
+
+/*====================================================
+        MOBILE
+====================================================*/
+
+
+@media(max-width:768px){
+
+
+.timeline::before{
+
+left:20px;
+
+}
+
+
+
+.timeline-item{
+
+width:100%;
+
+padding-left:60px;
+
+}
+
+
+
+.timeline-item:nth-child(even){
+
+margin-left:0;
+
+}
+
+
+
+.form-grid{
+
+grid-template-columns:1fr;
+
+}
+
+
+
+.booking-form{
+
+padding:25px;
+
+}
+
+
+}
+  /*====================================================
+  PART 4
+  PREMIUM FOOTER
+  SOCIAL MEDIA
+  PAYMENT
+  MOBILE MENU
+  FINAL POLISH
+====================================================*/
+
+
+/*====================================================
+        PREMIUM FOOTER
+====================================================*/
+
+
+footer{
+
+    position:relative;
+
+    background:
+
+    linear-gradient(
+
+    135deg,
+
+    #04351D,
+
+    #0B7A41
+
+    );
+
+    color:white;
+
+    padding:90px 7% 30px;
+
+    overflow:hidden;
+
+}
+
+
+
+/* Golden decoration */
+
+footer::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:-120px;
+
+    right:-120px;
+
+    width:300px;
+
+    height:300px;
+
+    background:
+
+    rgba(212,175,55,.15);
+
+    border-radius:50%;
+
+}
+
+
+
+.footer-container{
+
+    position:relative;
+
+    z-index:2;
+
+
+    display:grid;
+
+
+    grid-template-columns:
+
+    repeat(auto-fit,minmax(250px,1fr));
+
+
+    gap:45px;
+
+}
+
+
+
+.footer-box h3,
+.footer-box h4{
+
+    color:var(--gold);
+
+    margin-bottom:20px;
+
+    font-size:24px;
+
+}
+
+
+
 .footer-box p{
 
-    color:#E8F5EE;
-
-    line-height:1.8;
-
-    font-size:15px;
+    color:#eee;
 
 }
 
 
-/*=========================
-        FOOTER LINKS
-=========================*/
-
-.footer-box ul{
-
-    padding:0;
-
-}
 
 .footer-box ul li{
 
@@ -2422,46 +2485,56 @@ footer::before{
 
 }
 
+
+
 .footer-box ul li a{
 
     color:white;
 
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:8px;
-
-    transition:.35s;
+    transition:.3s;
 
 }
+
 
 
 .footer-box ul li a:hover{
 
-    color:var(--secondary-light);
+    color:var(--gold);
 
-    transform:translateX(8px);
-
-}
-
-
-/*=========================
-        FOOTER ICONS
-=========================*/
-
-.footer-box i{
-
-    color:var(--secondary);
-
-    margin-right:10px;
+    padding-left:8px;
 
 }
 
 
-/*=========================
-        SOCIAL ICONS
-=========================*/
+
+/* Contact */
+
+.footer-contact{
+
+    display:flex;
+
+    gap:12px;
+
+    align-items:center;
+
+    margin-bottom:15px;
+
+}
+
+
+
+.footer-contact i{
+
+    color:var(--gold);
+
+}
+
+
+
+/*====================================================
+        SOCIAL MEDIA
+====================================================*/
+
 
 .social-icons{
 
@@ -2471,9 +2544,8 @@ footer::before{
 
     margin-top:25px;
 
-    flex-wrap:wrap;
-
 }
+
 
 
 .social-icons a{
@@ -2482,43 +2554,48 @@ footer::before{
 
     height:48px;
 
-    border-radius:50%;
-
     display:flex;
-
-    align-items:center;
 
     justify-content:center;
 
-    background:rgba(255,255,255,.15);
+    align-items:center;
+
+
+    background:
+
+    rgba(255,255,255,.15);
+
 
     color:white;
 
-    font-size:20px;
 
-    transition:.35s;
+    border-radius:50%;
+
+
+    transition:.4s;
 
 }
+
 
 
 .social-icons a:hover{
 
-    background:var(--secondary);
+    background:var(--gold);
 
-    color:#064E2B;
+    color:#222;
 
     transform:
 
-    translateY(-8px)
-
-    rotate(5deg);
+    translateY(-8px);
 
 }
 
 
-/*=========================
+
+/*====================================================
         NEWSLETTER
-=========================*/
+====================================================*/
+
 
 .newsletter{
 
@@ -2526,85 +2603,47 @@ footer::before{
 
     gap:10px;
 
-    margin-top:20px;
-
 }
+
 
 
 .newsletter input{
 
     flex:1;
 
-    padding:14px 18px;
+    padding:15px;
 
     border:none;
 
     border-radius:50px;
-
-    outline:none;
 
 }
 
 
+
 .newsletter button{
 
-    padding:14px 25px;
+    padding:15px 25px;
 
     border:none;
 
     border-radius:50px;
 
-    background:var(--secondary);
 
-    color:#222;
+    background:var(--gold);
 
     font-weight:700;
 
     cursor:pointer;
 
-    transition:.35s;
-
 }
 
 
-.newsletter button:hover{
 
-    background:var(--accent);
-
-    color:white;
-
-}
-
-
-/*=========================
-        CONTACT DETAILS
-=========================*/
-
-.footer-contact{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:12px;
-
-    margin-bottom:15px;
-
-    color:white;
-
-}
-
-
-.footer-contact i{
-
-    font-size:20px;
-
-}
-
-
-/*=========================
+/*====================================================
         PAYMENT METHODS
-=========================*/
+====================================================*/
+
 
 .payment-methods{
 
@@ -2615,13 +2654,13 @@ footer::before{
 }
 
 
+
 .payment-methods h4{
 
-    color:var(--secondary);
-
-    margin-bottom:20px;
+    color:var(--gold);
 
 }
+
 
 
 .payment-icons{
@@ -2637,64 +2676,229 @@ footer::before{
 }
 
 
+
 .payment-icons img{
 
-    width:65px;
-
-    height:auto;
+    width:70px;
 
     background:white;
 
-    padding:5px;
+    padding:8px;
 
-    border-radius:10px;
-
-    transition:.35s;
+    border-radius:12px;
 
 }
 
 
-.payment-icons img:hover{
 
-    transform:translateY(-6px);
-
-}
-
-
-/*=========================
+/*====================================================
         FOOTER BOTTOM
-=========================*/
+====================================================*/
+
 
 .footer-bottom{
 
-    margin-top:60px;
+    margin-top:50px;
 
     padding-top:25px;
+
+
+    text-align:center;
+
 
     border-top:
 
     1px solid rgba(255,255,255,.2);
 
-    text-align:center;
 
-    color:#E8F5EE;
-
-    font-size:14px;
+    color:#ddd;
 
 }
 
 
-/*=========================
-        MOBILE FOOTER
-=========================*/
+
+/*====================================================
+        MOBILE NAVIGATION
+====================================================*/
+
+
+.menu-toggle{
+
+    display:none;
+
+    background:var(--green);
+
+    color:white;
+
+    border:none;
+
+    padding:12px 18px;
+
+    border-radius:12px;
+
+    font-size:20px;
+
+}
+
+
+
+.mobile-menu{
+
+    display:none;
+
+}
+
+
+
+/*====================================================
+        SCROLL ANIMATION
+====================================================*/
+
+
+.reveal{
+
+    opacity:0;
+
+    transform:
+
+    translateY(40px);
+
+    transition:
+
+    1s ease;
+
+}
+
+
+
+.reveal.active{
+
+    opacity:1;
+
+    transform:
+
+    translateY(0);
+
+}
+
+
+
+/*====================================================
+        LOADING EFFECT
+====================================================*/
+
+
+.loader{
+
+    position:fixed;
+
+    inset:0;
+
+    background:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    z-index:99999;
+
+}
+
+
+
+.loader span{
+
+    width:60px;
+
+    height:60px;
+
+    border-radius:50%;
+
+
+    border:
+
+    6px solid #eee;
+
+
+    border-top-color:
+
+    var(--green);
+
+
+    animation:
+
+    rotate 1s linear infinite;
+
+}
+
+
+
+@keyframes rotate{
+
+to{
+
+transform:rotate(360deg);
+
+}
+
+}
+
+
+
+/*====================================================
+        MOBILE RESPONSIVE
+====================================================*/
+
 
 @media(max-width:768px){
 
-footer{
 
-padding:70px 25px 25px;
+.menu-toggle{
+
+display:block;
 
 }
+
+
+
+.menu{
+
+display:none;
+
+position:absolute;
+
+top:80px;
+
+left:0;
+
+width:100%;
+
+background:white;
+
+flex-direction:column;
+
+padding:30px;
+
+}
+
+
+
+.menu.show{
+
+display:flex;
+
+}
+
+
+
+.menu a{
+
+color:#222;
+
+}
+
 
 
 .footer-container{
@@ -2706,11 +2910,13 @@ text-align:center;
 }
 
 
+
 .social-icons{
 
 justify-content:center;
 
 }
+
 
 
 .newsletter{
@@ -2720,412 +2926,17 @@ flex-direction:column;
 }
 
 
-.newsletter button{
-
-width:100%;
 
 }
 
 
-.footer-contact{
 
-justify-content:center;
-
-}
-
-}
-  /*====================================================
-                PART 4B
-     FINAL POLISH • ANIMATIONS • UTILITIES
+/*====================================================
+        LARGE SCREEN POLISH
 ====================================================*/
 
 
-/*=========================
-        SCROLL BUTTON
-=========================*/
-
-.scroll-top{
-
-    position:fixed;
-
-    bottom:30px;
-
-    right:30px;
-
-    width:55px;
-
-    height:55px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    background:var(--primary);
-
-    color:white;
-
-    border-radius:50%;
-
-    font-size:22px;
-
-    cursor:pointer;
-
-    opacity:0;
-
-    visibility:hidden;
-
-    transition:.35s;
-
-    box-shadow:var(--shadow-md);
-
-    z-index:999;
-
-}
-
-
-.scroll-top.active{
-
-    opacity:1;
-
-    visibility:visible;
-
-}
-
-
-.scroll-top:hover{
-
-    background:var(--secondary);
-
-    color:#222;
-
-    transform:translateY(-5px);
-
-}
-
-
-/*=========================
-        PAGE LOADER
-=========================*/
-
-.page-loader{
-
-    position:fixed;
-
-    inset:0;
-
-    background:#fff;
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    z-index:99999;
-
-}
-
-
-.loader{
-
-    width:60px;
-
-    height:60px;
-
-    border-radius:50%;
-
-    border:6px solid #eee;
-
-    border-top-color:var(--primary);
-
-    animation:spin 1s linear infinite;
-
-}
-
-
-@keyframes spin{
-
-to{
-
-transform:rotate(360deg);
-
-}
-
-}
-
-
-/*=========================
-        GLASS EFFECT
-=========================*/
-
-.glass{
-
-    background:
-
-    rgba(255,255,255,.75);
-
-    backdrop-filter:
-
-    blur(15px);
-
-    border-radius:20px;
-
-    box-shadow:
-
-    0 15px 40px rgba(0,0,0,.1);
-
-}
-
-
-/*=========================
-        HOVER EFFECTS
-=========================*/
-
-.hover-up{
-
-    transition:.35s;
-
-}
-
-
-.hover-up:hover{
-
-    transform:translateY(-10px);
-
-}
-
-
-.hover-scale{
-
-    transition:.5s;
-
-}
-
-
-.hover-scale:hover{
-
-    transform:scale(1.05);
-
-}
-
-
-/*=========================
-        BADGES
-=========================*/
-
-.gold-badge{
-
-    display:inline-block;
-
-    background:
-
-    linear-gradient(
-
-    135deg,
-
-    var(--secondary),
-
-    var(--secondary-light)
-
-    );
-
-    color:#222;
-
-    padding:8px 18px;
-
-    border-radius:50px;
-
-    font-weight:700;
-
-    font-size:13px;
-
-}
-
-
-/*=========================
-        TEXT HELPERS
-=========================*/
-
-.text-center{
-
-    text-align:center;
-
-}
-
-
-.text-white{
-
-    color:white;
-
-}
-
-
-.text-green{
-
-    color:var(--primary);
-
-}
-
-
-.text-gold{
-
-    color:var(--secondary);
-
-}
-
-
-/*=========================
-        SPACING HELPERS
-=========================*/
-
-.mt-20{
-
-    margin-top:20px;
-
-}
-
-.mt-40{
-
-    margin-top:40px;
-
-}
-
-.mb-20{
-
-    margin-bottom:20px;
-
-}
-
-.mb-40{
-
-    margin-bottom:40px;
-
-}
-
-
-/*=========================
-        SECTION DIVIDER
-=========================*/
-
-.divider{
-
-    width:80px;
-
-    height:4px;
-
-    background:
-
-    linear-gradient(
-
-    90deg,
-
-    var(--primary),
-
-    var(--secondary)
-
-    );
-
-    margin:20px auto 40px;
-
-    border-radius:20px;
-
-}
-
-
-/*=========================
-        FLOAT ANIMATION
-=========================*/
-
-.float{
-
-    animation:float 4s ease-in-out infinite;
-
-}
-
-
-@keyframes float{
-
-0%,
-100%{
-
-transform:translateY(0);
-
-}
-
-50%{
-
-transform:translateY(-15px);
-
-}
-
-}
-
-
-/*=========================
-        FADE ON SCROLL
-=========================*/
-
-.reveal{
-
-    opacity:0;
-
-    transform:translateY(40px);
-
-    transition:
-
-    opacity .8s ease,
-
-    transform .8s ease;
-
-}
-
-
-.reveal.show{
-
-    opacity:1;
-
-    transform:translateY(0);
-
-}
-
-
-/*=========================
-        ACCESSIBILITY
-=========================*/
-
-button,
-a{
-
-    -webkit-tap-highlight-color:transparent;
-
-}
-
-
-button:focus,
-a:focus{
-
-    outline:
-
-    3px solid rgba(212,175,55,.5);
-
-    outline-offset:3px;
-
-}
-
-
-/*=========================
-        LARGE SCREENS
-=========================*/
-
 @media(min-width:1400px){
-
-.hero h1{
-
-font-size:100px;
-
-}
 
 
 section{
@@ -3137,124 +2948,487 @@ padding-right:10%;
 }
 
 
+.hero-content h1{
+
+font-size:120px;
+
 }
+
+
+}
+  <script>
+
+/*====================================================
+    BRENDAVA TOURS & TRAVEL
+    PREMIUM WEBSITE FUNCTIONS
+====================================================*/
 
 
 /*=========================
-        TABLETS
+      NAVBAR SCROLL EFFECT
 =========================*/
 
-@media(max-width:1024px){
+window.addEventListener("scroll",()=>{
 
-.hero h1{
+    const navbar=document.querySelector(".navbar");
 
-font-size:65px;
+    if(navbar){
 
-}
+        if(window.scrollY > 80){
 
+            navbar.classList.add("scrolled");
 
-.menu{
+        }else{
 
-gap:10px;
+            navbar.classList.remove("scrolled");
 
-}
+        }
 
+    }
 
-.card{
+});
 
-border-radius:18px;
-
-}
-
-}
 
 
 /*=========================
-        MOBILE FINAL FIXES
+      HERO IMAGE SLIDER
 =========================*/
 
-@media(max-width:600px){
 
-body{
-
-font-size:15px;
-
-}
+let currentSlide=0;
 
 
-h2{
+const slides=document.querySelectorAll(".hero-slide");
 
-font-size:38px;
-
-}
+const dots=document.querySelectorAll(".slider-dot");
 
 
-h3{
 
-font-size:24px;
-
-}
+function showSlide(index){
 
 
-.hero h1{
+    slides.forEach(slide=>{
 
-font-size:48px;
+        slide.classList.remove("active");
 
-}
-
-
-.hero p{
-
-font-size:16px;
-
-}
+    });
 
 
-section{
+    dots.forEach(dot=>{
 
-padding:60px 20px;
+        dot.classList.remove("active");
 
-}
+    });
 
 
-.scroll-top{
 
-width:45px;
+    if(slides[index]){
 
-height:45px;
+        slides[index].classList.add("active");
 
-bottom:20px;
+    }
 
-right:20px;
+
+    if(dots[index]){
+
+        dots[index].classList.add("active");
+
+    }
 
 }
 
 
+
+function nextSlide(){
+
+
+    currentSlide++;
+
+
+    if(currentSlide >= slides.length){
+
+        currentSlide=0;
+
+    }
+
+
+    showSlide(currentSlide);
+
+
 }
+
+
+
+if(slides.length){
+
+setInterval(nextSlide,6000);
+
+}
+
+
+
+
+/* Manual slider dots */
+
+
+dots.forEach((dot,index)=>{
+
+
+    dot.addEventListener("click",()=>{
+
+
+        currentSlide=index;
+
+
+        showSlide(index);
+
+
+    });
+
+
+});
+
+
+
 
 /*=========================
-        PRINT CLEANUP
+      MOBILE MENU
 =========================*/
 
-@media print{
 
-nav,
-footer,
-.whatsapp,
-.scroll-top{
+const menuToggle=document.querySelector(".menu-toggle");
 
-display:none;
+const menu=document.querySelector(".menu");
+
+
+
+if(menuToggle){
+
+
+menuToggle.addEventListener("click",()=>{
+
+
+    menu.classList.toggle("show");
+
+
+});
+
 
 }
 
 
-body{
 
-background:white;
+
+/*=========================
+      REVEAL ANIMATION
+=========================*/
+
+
+const revealElements=document.querySelectorAll(".reveal");
+
+
+
+function reveal(){
+
+
+revealElements.forEach(element=>{
+
+
+    const position=
+
+    element.getBoundingClientRect().top;
+
+
+    const screen=
+
+    window.innerHeight - 100;
+
+
+
+    if(position < screen){
+
+        element.classList.add("active");
+
+    }
+
+
+
+});
+
 
 }
 
+
+
+window.addEventListener("scroll",reveal);
+
+
+reveal();
+
+
+
+
+/*=========================
+      COUNTER ANIMATION
+=========================*/
+
+
+const counters=document.querySelectorAll(".counter");
+
+
+counters.forEach(counter=>{
+
+
+counter.innerText="0";
+
+
+const updateCounter=()=>{
+
+
+const target=
+
+Number(counter.dataset.target);
+
+
+
+const value=
+
+Number(counter.innerText);
+
+
+
+const increment=
+
+target / 100;
+
+
+
+if(value < target){
+
+
+counter.innerText=
+
+Math.ceil(value + increment);
+
+
+setTimeout(updateCounter,30);
+
+
+
+}else{
+
+
+counter.innerText=target+"+";
+
+
 }
+
+
+};
+
+
+updateCounter();
+
+
+});
+
+
+
+
+
+/*=========================
+      READ MORE BUTTONS
+=========================*/
+
+
+const exploreButtons=
+
+document.querySelectorAll(".explore-btn");
+
+
+
+exploreButtons.forEach(button=>{
+
+
+button.addEventListener("click",()=>{
+
+
+const content=
+
+button.nextElementSibling;
+
+
+
+if(content.style.display==="block"){
+
+
+content.style.display="none";
+
+
+button.innerHTML="Explore More";
+
+
+}else{
+
+
+content.style.display="block";
+
+
+button.innerHTML="Show Less";
+
+
+}
+
+
+
+});
+
+
+});
+
+
+
+
+
+/*=========================
+      REVIEW SLIDER
+=========================*/
+
+
+let reviewIndex=0;
+
+
+const reviews=document.querySelectorAll(".review-card");
+
+
+
+function changeReview(){
+
+
+reviews.forEach(review=>{
+
+review.style.display="none";
+
+});
+
+
+
+if(reviews.length){
+
+
+reviews[reviewIndex].style.display="block";
+
+
+reviewIndex++;
+
+
+
+if(reviewIndex>=reviews.length){
+
+reviewIndex=0;
+
+}
+
+
+
+}
+
+
+
+}
+
+
+
+if(reviews.length){
+
+
+changeReview();
+
+
+setInterval(changeReview,5000);
+
+
+}
+
+
+
+
+/*=========================
+      SMOOTH SCROLL
+=========================*/
+
+
+document.querySelectorAll('a[href^="#"]')
+
+.forEach(link=>{
+
+
+link.addEventListener("click",function(e){
+
+
+const target=
+
+document.querySelector(this.getAttribute("href"));
+
+
+
+if(target){
+
+
+e.preventDefault();
+
+
+target.scrollIntoView({
+
+behavior:"smooth"
+
+});
+
+
+}
+
+
+
+});
+
+
+});
+
+
+
+
+/*=========================
+      LOADER
+=========================*/
+
+
+window.addEventListener("load",()=>{
+
+
+const loader=document.querySelector(".loader");
+
+
+if(loader){
+
+
+loader.style.opacity="0";
+
+
+setTimeout(()=>{
+
+
+loader.style.display="none";
+
+
+},500);
+
+
+}
+
+
+
+});
+
 </style>
 </head>
   <link rel="stylesheet" href="Brenda.css">
