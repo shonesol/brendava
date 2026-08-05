@@ -99,23 +99,117 @@ to{
     transform: scale(1.05);
 }
 
-/* Lightbox (zoom view) */
-#lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0,0.8);
-    display: none;
-    justify-content: center;
-    align-items: center;
+/* ===== PREMIUM LIGHTBOX ===== */
+
+#lightbox{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.95);
+    backdrop-filter:blur(8px);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+    animation:fadeIn .4s ease;
 }
 
-#lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-    border-radius: 10px;
+#lightbox img{
+    max-width:90%;
+    max-height:85%;
+    border-radius:18px;
+    box-shadow:0 25px 70px rgba(0,0,0,.6);
+    animation:zoom .4s ease;
+}
+
+#lightbox .close{
+    position:absolute;
+    top:25px;
+    right:35px;
+    color:#fff;
+    font-size:45px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+#lightbox .close:hover{
+    color:#D4AF37;
+    transform:rotate(90deg);
+}
+
+.lightbox-btn{
+    position:absolute;
+    top:50%;
+    transform:translateY(-50%);
+    width:65px;
+    height:65px;
+    border:none;
+    border-radius:50%;
+    background:rgba(255,255,255,.15);
+    color:#fff;
+    font-size:34px;
+    cursor:pointer;
+    transition:.3s;
+    backdrop-filter:blur(10px);
+}
+
+.lightbox-btn:hover{
+    background:#D4AF37;
+    color:#111;
+}
+
+.prev{
+    left:25px;
+}
+
+.next{
+    right:25px;
+}
+
+#counter{
+    position:absolute;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    background:rgba(255,255,255,.15);
+    color:#fff;
+    padding:10px 22px;
+    border-radius:30px;
+    font-size:16px;
+    backdrop-filter:blur(10px);
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+@keyframes zoom{
+    from{
+        transform:scale(.85);
+        opacity:0;
+    }
+    to{
+        transform:scale(1);
+        opacity:1;
+    }
+}
+
+@media(max-width:768px){
+
+    .lightbox-btn{
+        width:50px;
+        height:50px;
+        font-size:24px;
+    }
+
+    #lightbox img{
+        max-width:95%;
+        max-height:75%;
+    }
+
+    #counter{
+        font-size:14px;
+    }
 }
     .cta {
     text-align: center;
@@ -240,8 +334,18 @@ to{
         </div>
 
 <!-- Zoom overlay -->
-<div id="lightbox" onclick="closeImage()">
+<div id="lightbox">
+
+    <span class="close" onclick="closeImage()">&times;</span>
+
+    <button class="lightbox-btn prev" onclick="previousImage()">&#10094;</button>
+
     <img id="lightbox-img">
+
+    <button class="lightbox-btn next" onclick="nextImage()">&#10095;</button>
+
+    <div id="counter"></div>
+
 </div>
 
 
@@ -264,41 +368,91 @@ to{
 
 <script>
 
-let slides = document.querySelectorAll(".slide");
-let currentSlide = 0;
+const galleryImages = document.querySelectorAll(".gallery img");
 
+let currentImage = 0;
 
-function changeSlide(){
+function openImage(img){
 
-    slides[currentSlide].classList.remove("active");
+    currentImage = Array.from(galleryImages).indexOf(img);
 
+    showImage();
 
-    currentSlide++;
+    document.getElementById("lightbox").style.display="flex";
 
-    if(currentSlide >= slides.length){
-        currentSlide = 0;
+}
+
+function showImage(){
+
+    document.getElementById("lightbox-img").src =
+    galleryImages[currentImage].src;
+
+    document.getElementById("counter").innerHTML =
+    (currentImage+1)+" / "+galleryImages.length;
+
+}
+
+function nextImage(){
+
+    currentImage++;
+
+    if(currentImage>=galleryImages.length){
+
+        currentImage=0;
+
     }
 
-
-    slides[currentSlide].classList.add("active");
+    showImage();
 
 }
 
+function previousImage(){
 
-// change every 6 seconds
-setInterval(changeSlide,6000);
+    currentImage--;
 
+    if(currentImage<0){
 
-</script>
-    <script>
-function openImage(img) {
-    document.getElementById("lightbox").style.display = "flex";
-    document.getElementById("lightbox-img").src = img.src;
+        currentImage=galleryImages.length-1;
+
+    }
+
+    showImage();
+
 }
 
-function closeImage() {
-    document.getElementById("lightbox").style.display = "none";
+function closeImage(){
+
+    document.getElementById("lightbox").style.display="none";
+
 }
+
+document.addEventListener("keydown",function(e){
+
+    const lightbox=document.getElementById("lightbox");
+
+    if(lightbox.style.display==="flex"){
+
+        if(e.key==="ArrowRight"){
+
+            nextImage();
+
+        }
+
+        if(e.key==="ArrowLeft"){
+
+            previousImage();
+
+        }
+
+        if(e.key==="Escape"){
+
+            closeImage();
+
+        }
+
+    }
+
+});
 </script>
 </body>
 </html>
