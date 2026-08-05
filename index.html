@@ -6,27 +6,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
 <title>Brendava Tours & Travel | Uganda Safaris, Gorilla Trekking & East Africa Luxury Adventures</title>
-
 
 <meta name="description" content="Brendava Tours & Travel Co. Ltd offers unforgettable Uganda safari experiences, luxury gorilla trekking, wildlife safaris, chimpanzee tracking, cultural adventures and tailor-made East Africa tours for travelers from Europe, Asia, Australia, North America, South America, Gulf countries and Africa.">
 
-
 <meta name="keywords" content="Brendava Tours & Travel, Uganda safari company, Uganda luxury safaris, gorilla trekking Uganda, Bwindi gorilla trekking, Murchison Falls safari, Queen Elizabeth National Park safari, Kibale chimpanzee trekking, Kidepo Valley safari, Uganda wildlife tours, East Africa safari packages, Kenya safari, Maasai Mara safari, Tanzania Serengeti safari, Ngorongoro Crater safari, Rwanda gorilla trekking, Africa luxury travel, adventure holidays Africa, family safaris Africa, honeymoon safari Africa, private safari Uganda, tailor-made African tours">
-
 
 <meta name="author" content="Brendava Tours & Travel Co. Ltd">
 
-
 <meta name="robots" content="index, follow">
-
 
 <meta name="language" content="English">
 
-
 <meta name="theme-color" content="#123A73">
-
 
 <!-- Geographic SEO -->
 
@@ -38,64 +30,43 @@
 
 <meta name="ICBM" content="0.3476,32.5825">
 
-
 <meta name="rating" content="General">
 
 <meta name="revisit-after" content="7 days">
 
 <meta name="distribution" content="global">
 
-
 <!-- Canonical URL -->
 
 <link rel="canonical" href="https://www.brendavatoursandtravel.com/">
 
-
-
 <!-- Open Graph Social SEO -->
-
 
 <meta property="og:locale" content="en_US">
 
 <meta property="og:site_name" content="Brendava Tours & Travel Co. Ltd">
 
-
 <meta property="og:title" content="Brendava Tours & Travel | Discover Uganda & East Africa">
-
 
 <meta property="og:description" content="Experience Uganda's best gorilla trekking, wildlife safaris, cultural journeys and luxury East Africa adventures with Brendava Tours & Travel. Trusted by travelers worldwide.">
 
-
 <meta property="og:type" content="website">
-
 
 <meta property="og:url" content="https://www.brendavatoursandtravel.com/">
 
-
 <meta property="og:image" content="https://www.brendavatoursandtravel.com/images/logo.jpg">
-
-
-
 
 <!-- Twitter / X SEO -->
 
-
 <meta name="twitter:card" content="summary_large_image">
-
 
 <meta name="twitter:title" content="Brendava Tours & Travel | Uganda Safari Experts">
 
-
 <meta name="twitter:description" content="Gorilla Trekking • Wildlife Safaris • Cultural Experiences • Luxury East Africa Tours">
-
 
 <meta name="twitter:image" content="https://www.brendavatoursandtravel.com/images/logo.jpg">
 
-
-
-
 <!-- Google Structured Data -->
-
 
 <script type="application/ld+json">
 
@@ -105,18 +76,13 @@
 
 "@type":"TravelAgency",
 
-
 "name":"Brendava Tours & Travel Co. Ltd",
-
 
 "url":"https://www.brendavatoursandtravel.com",
 
-
 "logo":"https://www.brendavatoursandtravel.com/images/logo.jpg",
 
-
 "description":"Brendava Tours & Travel Co. Ltd specializes in Uganda safaris, gorilla trekking, wildlife adventures, cultural tours and customized East Africa travel experiences for international travelers.",
-
 
 "telephone":[
 
@@ -128,12 +94,9 @@
 
 ],
 
-
 "email":"brendavatoursandtravel@gmail.com",
 
-
 "identifier":"URSB Registration Number: 80034588624947",
-
 
 "address":{
 
@@ -146,7 +109,6 @@
 "addressCountry":"UG"
 
 },
-
 
 "areaServed":[
 
@@ -174,7 +136,6 @@
 
 ],
 
-
 "knowsAbout":[
 
 "Gorilla Trekking",
@@ -191,7 +152,6 @@
 
 ],
 
-
 "sameAs":[
 
 "https://www.instagram.com/brendavatoursandtravel",
@@ -207,685 +167,994 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-/* =====================================================
-   BRENDAVA TOURS & TRAVEL
-   5 STAR LUXURY SAFARI WEBSITE DESIGN
-===================================================== */
-
-:root{
-    --green:#0B7A41;
-    --dark-green:#064E2B;
-    --gold:#D4AF37;
-    --orange:#F28C28;
-    --cream:#F8F3E7;
-    --white:#ffffff;
-    --dark:#14221B;
-    --shadow:0 20px 50px rgba(0,0,0,.12);
-}
-
-
-*{
-    box-sizing:border-box;
+html, body{
     margin:0;
     padding:0;
+    width:100%;
+    overflow-x:hidden;
 }
-
-
-html{
-    scroll-behavior:smooth;
-}
-
 
 body{
-
-    font-family:'Inter',sans-serif;
-    background:var(--cream);
-    color:#333;
-    overflow-x:hidden;
-
+margin:0;
+font-family:'Inter',sans-serif;
+background:#E8DCC4;
+}
+/* NAVIGATION */
+.menu{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
 }
 
-
-
-/* ==========================
- PREMIUM HEADER
-========================== */
-
-
-header{
-
-    width:100%;
-    padding:15px 5%;
-    background:rgba(255,255,255,.95);
-    backdrop-filter:blur(15px);
+nav{
     display:flex;
     justify-content:space-between;
     align-items:center;
+    padding:12px 20px;
+    background:beige;
     position:sticky;
     top:0;
-    z-index:9999;
-    box-shadow:0 8px 30px rgba(0,0,0,.08);
-
+    z-index:1000;
 }
 
+@media(max-width:768px){
+    nav{
+        flex-direction:column;
+        gap:10px;
+    }
 
-.logo-container{
+    .menu{
+        justify-content:center;
+    }
 
-    display:flex;
-    align-items:center;
-    gap:15px;
+    .btn{
+        font-size:14px;
+        padding:10px 15px;
+    }
 
+    .dropdown-content{
+        width:95vw;
+        left:-150px;
+    }
+}
+nav h1{
+color:#D4AF37;
+margin:0;
 }
 
-
-.header-logo{
-
-    width:65px;
-    height:65px;
-    border-radius:50%;
-    object-fit:cover;
-    border:3px solid var(--gold);
-
-}
-
-
-header h1{
-
-    font-family:'Dancing Script',cursive;
-    font-size:35px;
-    color:var(--green);
-
-}
-
-
-header p{
-
-    font-size:13px;
-    color:#555;
-
-}
-
-
-
-/* ==========================
- PREMIUM MENU BUTTON
-========================== */
-
-
-.menu-toggle{
-
-    background:linear-gradient(135deg,var(--green),var(--dark-green));
-    color:white;
-    border:none;
-    padding:14px 25px;
-    border-radius:50px;
-    font-weight:bold;
-    cursor:pointer;
-
-}
-
-
-
-/* ==========================
- HERO PREMIUM SLIDER
-========================== */
-
-
+/* HERO */
 .hero{
-
 height:95vh;
-
 background:
-
-linear-gradient(
-rgba(0,0,0,.45),
-rgba(0,0,0,.55)
-),
-
-url("e41f3c80-4431-44a8-bae2-1b7edfdc10a4.jpeg");
-
+linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+url('e41f3c80-4431-44a8-bae2-1b7edfdc10a4.jpeg');
 background-size:cover;
-
 background-position:center;
-
+background-repeat:no-repeat;
 display:flex;
-
 justify-content:center;
-
 align-items:center;
-
 text-align:center;
-
 color:white;
-
 }
-
 
 .hero h1{
-
-font-family:'Dancing Script',cursive;
-font-size:90px;
-font-weight:700;
-text-shadow:0 10px 30px black;
-
+font-size:60px;
+margin-bottom:10px;
+text-shadow:0 3px 10px rgba(0,0,0,.5);
 }
-
 
 .hero p{
-
-font-size:28px;
-margin:20px 0;
-
+font-size:22px;
 }
 
-
-
-/* PREMIUM BUTTON */
-
-
+/* BUTTONS */
 .btn{
-
-background:
-linear-gradient(
-135deg,
-var(--green),
-#13A05B
-);
-
+background:#0f766e;
 color:white;
-
-padding:15px 35px;
-
-border-radius:50px;
-
-font-weight:700;
-
+padding:12px 24px;
+border:none;
+border-radius:8px;
 text-decoration:none;
-
 display:inline-block;
-
-transition:.4s;
-
-box-shadow:0 10px 25px rgba(11,122,65,.3);
-
+cursor:pointer;
+transition:.3s;
 }
-
 
 .btn:hover{
-
-transform:translateY(-5px);
-
-background:
-linear-gradient(
-135deg,
-var(--gold),
-var(--orange)
-);
-
+background:#115e59;
+transform:translateY(-2px);
 }
-
-
-
-/* ==========================
- SECTION DESIGN
-========================== */
-
 
 section{
-
-padding:90px 6%;
-background:white;
-
-}
-
-
-section h2{
-
-font-family:'Dancing Script',cursive;
-
-font-size:55px;
-
-color:var(--green);
-
-margin-bottom:40px;
-
+width:100%;
+padding:60px 5%;
+box-sizing:border-box;
 text-align:center;
-
+  background:#F5F5DC;
 }
 
+/* DESTINATION CARDS */
+#destinationRotator{
+    width:100%;
+    text-align:center;
+    padding:40px 0;
+    overflow:hidden;
+    background:#f5f7fa;
+    position:relative;
+}
 
+/* each slide */
 
-/* ==========================
- DESTINATION SLIDER
-KEEP SLIDE FORM
-========================== */
+.destination-slide{
+    display:none;
+    opacity:0;
+    transform:translateY(20px);
+    transition:all 0.8s ease;
+}
 
+/* active slide */
+
+.destination-slide.active{
+    display:block;
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* title */
+
+.destination-title{
+    font-size:32px;
+    color:#0f766e;
+    font-weight:800;
+    margin-bottom:10px;
+    animation:fadeIn 1s ease;
+}
+
+/* description */
+
+.destination-desc{
+    font-size:18px;
+    color:#444;
+    max-width:800px;
+    margin:0 auto;
+    line-height:1.6;
+    animation:fadeIn 1s ease;
+}
+
+/* fade animation */
+
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+.destinations{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+}
+
+.card{
+flex:1;
+min-width:220px;
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+text-align:center;
+}
+  }
+
+/*/* DESTINATION SLIDER */
 
 #destinationRotator{
-
-background:
-
-linear-gradient(
-135deg,
-#f8f5ed,
-#ffffff
-);
-
-overflow:hidden;
-
+    width:100%;
+    overflow:hidden;
+    background:#f5f7fa;
+    padding:40px 0;
 }
-
 
 .gallery{
-
-display:flex;
-
-width:100%;
-
-transition:transform 1s ease;
-
+    display:flex;
+    width:100%;
+    transition:transform 1s ease-in-out;
 }
-
 
 .gallery-item{
-
-min-width:100%;
-
-background:white;
-
-border-radius:25px;
-
-overflow:hidden;
-
-box-shadow:var(--shadow);
-
-padding-bottom:40px;
-
+    flex:0 0 100%;
+    width:100%;
+    padding:20px;
+    box-sizing:border-box;
+    text-align:center;
 }
-
-
 
 .gallery-item img{
-
-width:100%;
-
-height:550px;
-
-object-fit:cover;
-
+    width:100%;
+    max-width:900px;
+    height:450px;
+    object-fit:cover;
+    border-radius:15px;
+    display:block;
+    margin:auto;
 }
-
-
 
 .gallery-item h3{
-
-font-family:'Dancing Script',cursive;
-
-font-size:45px;
-
-color:var(--green);
-
-margin:25px;
-
+    color:#0f766e;
+    margin:20px 0 10px;
+    font-size:30px;
 }
-
 
 .gallery-item p{
-
-font-size:20px;
-
-line-height:1.8;
-
-padding:0 30px;
-
+    max-width:850px;
+    margin:auto;
+    line-height:1.8;
+    font-size:18px;
+    color:#444;
 }
 
-
-
-/* ==========================
- EXPLORE BUTTON
-========================== */
-
+.more-content{
+    display:none;
+    margin-top:15px;
+}
 
 .explore-btn{
+    margin-top:15px;
+}
 
-margin-top:25px;
-
-padding:14px 30px;
-
-border-radius:50px;
-
-border:none;
-
-background:var(--gold);
-
+.caption{
+position:absolute;
+bottom:15px;
+left:15px;
+background:rgba(15,118,110,.9);
 color:white;
-
+padding:8px 12px;
+border-radius:8px;
+font-size:13px;
 font-weight:bold;
-
-cursor:pointer;
-
 }
 
-
-
-/* ==========================
- REVIEWS PREMIUM SLIDER
-========================== */
-
-
-#reviews-section{
-
-background:#f5f7f3;
-
-}
-
-
-.review-card{
-
-background:white;
-
-padding:40px;
-
-border-radius:25px;
-
-max-width:650px;
-
+/* FORMS */
+form{
+max-width:700px;
 margin:auto;
-
-box-shadow:var(--shadow);
-
-animation:fade .7s;
-
-}
-
-
-.review-card h4{
-
-font-size:25px;
-
-color:var(--green);
-
-}
-
-
-.review-card p{
-
-font-size:18px;
-
-line-height:1.8;
-
-}
-
-
-
-/* ==========================
- BOOKING FORM
-========================== */
-
-
-#booking{
-
-background:
-
-linear-gradient(
-135deg,
-#ffffff,
-#f1eee5
-);
-
-}
-
-
-#booking form{
-
-max-width:800px;
-
-margin:auto;
-
-padding:45px;
-
-border-radius:30px;
-
 background:white;
-
-box-shadow:var(--shadow);
-
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
 }
-
-
 
 input,
 textarea,
 select{
-
 width:100%;
-
-padding:18px;
-
-margin:12px 0;
-
-border-radius:15px;
-
+padding:14px;
+margin:10px 0;
 border:1px solid #ddd;
-
+border-radius:8px;
 font-size:16px;
-
+box-sizing:border-box;
 }
-
-
 
 textarea{
-
-height:180px;
-
+min-height:180px;
+resize:vertical;
 }
 
+#reviewComment{
+min-height:160px;
+}
 
+.review-card{
+background:#E8DCC4;
+padding:25px;
+margin:20px auto;
+max-width:700px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+text-align:center;
+}
 
-/* ==========================
- FOOTER LUXURY
-========================== */
+/* WHATSAPP */
+.whatsapp{
+background:#25D366;
+margin:10px;
+}
 
+.whatsapp:hover{
+background:#1fa855;
+}
 
-footer{
+/* SOCIAL MEDIA */
+.social-section{
+padding:40px 20px;
+text-align:center;
+}
 
-background:
-
-linear-gradient(
-135deg,
-#064E2B,
-#0B7A41
-);
-
+.social{
+display:inline-flex;
+justify-content:center;
+align-items:center;
+width:60px;
+height:60px;
+margin:10px;
+border-radius:50%;
+background:#0f766e;
 color:white;
-
-padding:80px 6% 30px;
-
-border-top:5px solid var(--gold);
-
+font-size:24px;
+text-decoration:none;
+transition:.3s;
 }
 
+.social:hover{
+transform:scale(1.1);
+}
 
+/* FOOTER */
+/* ===========================
+   PREMIUM FOOTER
+=========================== */
+footer{
+    width:100vw;
+    margin-left:calc(50% - 50vw);
+    margin-right:calc(50% - 50vw);
+    background:linear-gradient(135deg,#0B7A41,#085A31);
+    color:#fff;
+    padding:70px 20px 25px;
+    box-sizing:border-box;
+    position:relative;
+    overflow:hidden;
+    border-top:4px solid #D4AF37;
+}
+
+footer::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:linear-gradient(90deg,#D4AF37,#F28C28,#D4AF37);
+}
 
 .footer-container{
-
-display:grid;
-
-grid-template-columns:
-repeat(auto-fit,minmax(250px,1fr));
-
-gap:40px;
-
+    max-width:1200px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:40px;
+    position:relative;
+    z-index:2;
 }
 
-
-
-.footer-box h3{
-
-font-family:'Dancing Script',cursive;
-
-font-size:35px;
-
-color:var(--gold);
-
+.footer-box h3,
+.footer-box h4{
+    color:#D4AF37;
+    font-size:22px;
+    margin-bottom:18px;
+    font-weight:700;
 }
 
-
-
-.footer-box p,
-.footer-box li{
-
-line-height:1.8;
-
-color:#eee;
-
+.footer-box p{
+    color:#EAF7EF;
+    line-height:1.8;
+    font-size:15px;
+    margin-bottom:12px;
 }
 
+.footer-box ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
 
+.footer-box ul li{
+    margin-bottom:12px;
+}
+
+.footer-box ul li a{
+    color:#fff;
+    text-decoration:none;
+    transition:.3s ease;
+    display:inline-block;
+}
+
+.footer-box ul li a:hover{
+    color:#F28C28;
+    transform:translateX(6px);
+}
+
+.footer-box i{
+    color:#D4AF37;
+    margin-right:10px;
+}
+
+.social-icons{
+    display:flex;
+    gap:12px;
+    margin-top:18px;
+}
 
 .social-icons a{
-
-width:50px;
-
-height:50px;
-
-display:inline-flex;
-
-align-items:center;
-
-justify-content:center;
-
-border-radius:50%;
-
-background:rgba(255,255,255,.15);
-
-color:white;
-
-margin:5px;
-
-transition:.3s;
-
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,.12);
+    color:#fff;
+    text-decoration:none;
+    transition:.35s;
+    backdrop-filter:blur(6px);
 }
-
 
 .social-icons a:hover{
+    background:#D4AF37;
+    color:#0B7A41;
+    transform:translateY(-5px);
+}
 
-background:var(--gold);
+.footer-bottom{
+    max-width:1200px;
+    margin:45px auto 0;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.15);
+    text-align:center;
+    color:#EAF7EF;
+    font-size:14px;
+}
 
-transform:translateY(-5px);
+@media (max-width:768px){
+
+    footer{
+        padding:55px 20px 20px;
+    }
+
+    .footer-container{
+        grid-template-columns:1fr;
+        text-align:center;
+        gap:30px;
+    }
+
+    .social-icons{
+        justify-content:center;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+}
+
+.gallery{
+grid-template-columns:1fr;
+}
+
+.card{
+width:90%;
+}
+  .menu{
+display:flex;
+gap:10px;
+align-items:center;
+}
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(-10px);}
+  to{opacity:1; transform:translateY(0);}
+}
+
+.dropdown-content h3{
+    margin:18px 0 10px;
+  color:#0f766e;
+  font-size:16px;
+  border-left:4px solid #0f766e;
+  padding-left:8px;
+}
+.park-card{
+  background:linear-gradient(145deg,#f8fafc,#ffffff);
+  border-radius:14px;
+  padding:10px;
+  margin-bottom:18px;
+  border:1px solid #e5e7eb;
+  transition:0.3s;
+}
+
+.park-card:hover{
+  transform:scale(1.01);
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.park-card img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:8px;
+}
+
+.park-card h4{
+  margin:6px 0;
+  font-size:15px;
+  color:#111827;
+}
+
+.lodge-card{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#F5F5DC;
+  padding:8px;
+  margin:6px 0;
+  border-radius:10px;
+  transition:0.3s;
+}
+
+.lodge-card:hover{
+  background:#e6fffa;
+}
+
+.lodge-card img{
+  width:45px;
+  height:45px;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+.lodge-card a{
+  text-decoration:none;
+  color:#111827;
+  font-weight:600;
+  font-size:14px;
+}
+
+.dropdown{
+  position:relative;
+  display:inline-block;
+}
+
+.dropdown-content{
+  display:none;
+  position:absolute;
+  background:#fff;
+  width:420px;
+  right:0;
+  left:auto;
+  max-height:80vh;
+  overflow-y:auto;
+  box-shadow:0 20px 50px rgba(0,0,0,0.25);
+  border-radius:16px;
+  padding:15px;
+  z-index:9999;
+}
+
+.dropdown:hover .dropdown-content{
+  display:block;
+}
+
+.sub{
+  background:#f8fafc;
+  margin:10px 0;
+  padding:10px;
+  border-radius:10px;
+}
+
+.sub strong{
+  display:block;
+  margin-bottom:6px;
+  color:#0f766e;
+}
+
+.sub a{
+  display:block;
+  text-decoration:none;
+  color:#111827;
+  padding:3px 0;
+}
+
+.sub a:hover{
+  color:#0f766e;
+  padding:60px 20px;
+  background:#f8fafc;
+}
+#videos{
+  padding:60px 20px;
+  background:#f8fafc;
+}
+
+#videos video{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  border-radius:15px;
+}
+.navbar{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:8px 15px;
+    background:#ffffff;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.navbar h1{
+    margin:0;
+    color:#0f766e;
+    font-size:15px;
+    font-weight:400;
+}
+
+.navbar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:6px 12px;
+}
+.menu{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.menu a,
+.menu button{
+    white-space:nowrap;
+}
+        @media(max-width:768px){
+    .dropdown-content{
+        width:95vw;
+        left:50%;
+        transform:translateX(-50%);
+    }
+}
+        header{
+          background-image: url("IMG_3231.jpeg");
+    width:100%;
+    margin:0;
+    padding:20px;
+    box-sizing:border-box;
+}
+        .menu-toggle{
+    background:#0f766e;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    margin-top:10px;
+    transition:0.3s;
+}
+
+.menu-toggle:hover{
+    background:#115e59;
+}
+
+.header-menu{
+    display:none;
+    max-width:300px;
+    margin:15px auto;
+    background:white;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    overflow:hidden;
+}
+
+.header-menu a{
+    display:block;
+    padding:14px 20px;
+    text-decoration:none;
+    color:#111827;
+    border-bottom:1px solid #eee;
+    transition:.3s;
+}
+
+.header-menu a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+.header-menu.show{
+    display:block;
+}
+    
+.language-switcher {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+.language-switcher select {
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: green;
+}
+      .payment-methods{
+    margin-top:20px;
+    text-align:center;
+}
+
+.payment-methods h4{
+    font-size:16px;
+    margin-bottom:10px;
+    color:#fff;
+}
+
+.payment-icons{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.payment-icons img{
+    width:60px;
+    height:auto;
+    border-radius:0;
+    box-shadow:none;
+    filter:none !important;
+    opacity:1;
+    background:transparent;
+    transition:transform .3s ease;
+}
+
+.payment-icons img:hover{
+    transform:scale(1.1);
+    filter:none !important;
+}
+  .container img{
+    width:100%;
+    height:auto;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+.container h2{
+
+    color:#2c3e50;
 
 }
 
-
-
-/* ==========================
- MOBILE PREMIUM
-========================== */
-
-
-@media(max-width:768px){
-
-
-header{
-
-flex-direction:column;
-
-gap:15px;
-
+img{
+    width:100%;
+    height:auto;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.2);
 }
 
-
-header h1{
-
-font-size:25px;
-
+.more-content{
+    display:none;
+    margin-top:10px;
+    animation:fadeIn .4s ease;
 }
 
-
-.hero{
-
-height:85vh;
-
+.explore-btn{
+    background:#0f766e;
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top:10px;
+    transition:.3s;
 }
 
-
-.hero h1{
-
-font-size:55px;
-
+.explore-btn:hover{
+    background:#115e59;
+}
+        .review-slider{
+    max-width:700px;
+    margin:auto;
+    transition:opacity .5s ease;
 }
 
-
-.hero p{
-
-font-size:18px;
-
+.gallery-item {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
-
-
-.gallery-item img{
-
-height:350px;
-
+.gallery-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
 }
-
-
-.gallery-item h3{
-
-font-size:35px;
-
+.more-content{
+    display:none;
+    margin-top:10px;
+    animation:fadeIn 0.4s ease;
 }
-
-
-section h2{
-
-font-size:40px;
-
-}
-
-
-#booking form{
-
-padding:25px;
-
-}
-
-
-}
-
-
-
-
-/* ANIMATION */
 
 @keyframes fade{
-
-from{
-
-opacity:0;
-
-transform:translateY(30px);
-
+    from{opacity:0;}
+    to{opacity:1;}
+}
+      .review-slider{
+    max-width:700px;
+    margin:auto;
+    transition:opacity .5s ease;
 }
 
-to{
+/* Paste the new code here */
 
-opacity:1;
-
-transform:none;
-
+#booking{
+    width:100%;
+    margin:0;
+    padding:60px 0;
+    background:#f5f7fa;
 }
 
+#booking h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#0f766e;
 }
-    </style>
+
+#booking form{
+    width:100%;
+    max-width:100%;
+    margin:0;
+    padding:30px 20px;
+    box-sizing:border-box;
+    border-radius:0;
+    box-shadow:none;
+    background:white;
+}
+
+#booking input,
+#booking textarea,
+#booking select{
+    width:100%;
+    box-sizing:border-box;
+    margin-bottom:15px;
+}
+
+#booking textarea{
+    min-height:180px;
+}
+
+#destinationRotator{
+    width:100%;
+    text-align:center;
+    padding:25px 0;
+    overflow:hidden;
+}
+
+.destination-title{
+    font-size:32px;
+    color:#0f766e;
+    font-weight:bold;
+    white-space:nowrap;
+    animation:fade 1s;
+}
+
+.destination-desc{
+    font-size:18px;
+    color:#444;
+    margin-top:10px;
+    animation:fade 1s;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateX(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+      /* Handwritten font */
+.hero h1,
+header h1,
+section h2,
+.destination-title,
+.gallery-item h3{
+    font-family: 'Dancing Script', cursive;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+/* Hero title */
+.hero h1{
+    font-size:72px;
+}
+
+/* Section headings */
+section h2{
+    font-size:46px;
+    color:#0f766e;
+}
+
+/* Destination titles */
+.gallery-item h3{
+    font-size:36px;
+}
+ 
+/* HEADER CONTAINER */
+header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:nowrap; /* keeps everything in one line */
+    text-align:center;
+}
+
+/* LOGO + TEXT GROUP */
+.logo-container{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+/* Small logo */
+.header-logo{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #D4AF37;
+    flex-shrink:0;
+}
+
+/* TEXT WRAPPER (important for h1 + p alignment) */
+.header-text{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    line-height:1.1;
+}
+
+/* Website title */
+header h1{
+    margin:0;
+    font-size:22px;
+    color:black;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:none;
+}
+
+/* Slogan */
+header p{
+    margin:2px 0 0;
+    color:black;
+  ;
+    font-size:13px;
+}
+
+/* MOBILE */
+@media (max-width:600px){
+
+    .header-logo{
+        width:32px;
+        height:32px;
+    }
+
+    header h1{
+        font-size:17px;
+    }
+
+    header p{
+        font-size:11px;
+    }
+} make that style the most professional style ever made
   <script>
 
 /*====================================================
     BRENDAVA TOURS & TRAVEL
     PREMIUM WEBSITE FUNCTIONS
 ====================================================*/
-
 
 /*=========================
       NAVBAR SCROLL EFFECT
@@ -911,24 +1180,17 @@ window.addEventListener("scroll",()=>{
 
 });
 
-
-
 /*=========================
       HERO IMAGE SLIDER
 =========================*/
 
-
 let currentSlide=0;
-
 
 const slides=document.querySelectorAll(".hero-slide");
 
 const dots=document.querySelectorAll(".slider-dot");
 
-
-
 function showSlide(index){
-
 
     slides.forEach(slide=>{
 
@@ -936,21 +1198,17 @@ function showSlide(index){
 
     });
 
-
     dots.forEach(dot=>{
 
         dot.classList.remove("active");
 
     });
 
-
-
     if(slides[index]){
 
         slides[index].classList.add("active");
 
     }
-
 
     if(dots[index]){
 
@@ -960,13 +1218,9 @@ function showSlide(index){
 
 }
 
-
-
 function nextSlide(){
 
-
     currentSlide++;
-
 
     if(currentSlide >= slides.length){
 
@@ -974,13 +1228,9 @@ function nextSlide(){
 
     }
 
-
     showSlide(currentSlide);
 
-
 }
-
-
 
 if(slides.length){
 
@@ -988,85 +1238,55 @@ setInterval(nextSlide,6000);
 
 }
 
-
-
-
 /* Manual slider dots */
-
 
 dots.forEach((dot,index)=>{
 
-
     dot.addEventListener("click",()=>{
-
 
         currentSlide=index;
 
-
         showSlide(index);
-
 
     });
 
-
 });
-
-
-
 
 /*=========================
       MOBILE MENU
 =========================*/
 
-
 const menuToggle=document.querySelector(".menu-toggle");
 
 const menu=document.querySelector(".menu");
 
-
-
 if(menuToggle){
-
 
 menuToggle.addEventListener("click",()=>{
 
-
     menu.classList.toggle("show");
-
 
 });
 
-
 }
-
-
-
 
 /*=========================
       REVEAL ANIMATION
 =========================*/
 
-
 const revealElements=document.querySelectorAll(".reveal");
-
-
 
 function reveal(){
 
-
 revealElements.forEach(element=>{
-
 
     const position=
 
     element.getBoundingClientRect().top;
 
-
     const screen=
 
     window.innerHeight - 100;
-
-
 
     if(position < screen){
 
@@ -1074,159 +1294,101 @@ revealElements.forEach(element=>{
 
     }
 
-
-
 });
-
 
 }
 
-
-
 window.addEventListener("scroll",reveal);
 
-
 reveal();
-
-
-
 
 /*=========================
       COUNTER ANIMATION
 =========================*/
 
-
 const counters=document.querySelectorAll(".counter");
-
 
 counters.forEach(counter=>{
 
-
 counter.innerText="0";
 
-
 const updateCounter=()=>{
-
 
 const target=
 
 Number(counter.dataset.target);
 
-
-
 const value=
 
 Number(counter.innerText);
-
-
 
 const increment=
 
 target / 100;
 
-
-
 if(value < target){
-
 
 counter.innerText=
 
 Math.ceil(value + increment);
 
-
 setTimeout(updateCounter,30);
-
-
 
 }else{
 
-
 counter.innerText=target+"+";
-
 
 }
 
-
 };
-
 
 updateCounter();
 
-
 });
-
-
-
-
 
 /*=========================
       READ MORE BUTTONS
 =========================*/
 
-
 const exploreButtons=
 
 document.querySelectorAll(".explore-btn");
 
-
-
 exploreButtons.forEach(button=>{
 
-
 button.addEventListener("click",()=>{
-
 
 const content=
 
 button.nextElementSibling;
 
-
-
 if(content.style.display==="block"){
-
 
 content.style.display="none";
 
-
 button.innerHTML="Explore More";
-
 
 }else{
 
-
 content.style.display="block";
-
 
 button.innerHTML="Show Less";
 
-
 }
 
-
-
 });
 
-
 });
-
-
-
-
 
 /*=========================
       REVIEW SLIDER
 =========================*/
 
-
 let reviewIndex=0;
-
 
 const reviews=document.querySelectorAll(".review-card");
 
-
-
 function changeReview(){
-
 
 reviews.forEach(review=>{
 
@@ -1234,17 +1396,11 @@ review.style.display="none";
 
 });
 
-
-
 if(reviews.length){
-
 
 reviews[reviewIndex].style.display="block";
 
-
 reviewIndex++;
-
-
 
 if(reviewIndex>=reviews.length){
 
@@ -1252,54 +1408,35 @@ reviewIndex=0;
 
 }
 
-
-
 }
 
-
-
 }
-
-
 
 if(reviews.length){
 
-
 changeReview();
-
 
 setInterval(changeReview,5000);
 
-
 }
-
-
-
 
 /*=========================
       SMOOTH SCROLL
 =========================*/
 
-
 document.querySelectorAll('a[href^="#"]')
 
 .forEach(link=>{
 
-
 link.addEventListener("click",function(e){
-
 
 const target=
 
 document.querySelector(this.getAttribute("href"));
 
-
-
 if(target){
 
-
 e.preventDefault();
-
 
 target.scrollIntoView({
 
@@ -1307,48 +1444,31 @@ behavior:"smooth"
 
 });
 
-
 }
 
-
-
 });
 
-
 });
-
-
-
 
 /*=========================
       LOADER
 =========================*/
 
-
 window.addEventListener("load",()=>{
-
 
 const loader=document.querySelector(".loader");
 
-
 if(loader){
-
 
 loader.style.opacity="0";
 
-
 setTimeout(()=>{
-
 
 loader.style.display="none";
 
-
 },500);
 
-
 }
-
-
 
 });
 
@@ -2158,4 +2278,4 @@ function toggleContent(id, button) {
 }
 </script>
 </body>
-</html>
+</html>   Update my styles to premium but leave the slides in slide form and reviews in slide form and some beautiful styles just make the home so precious and beautiful with good styles and good  designs like most 5 star websites 
