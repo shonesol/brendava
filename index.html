@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 <head>
 <title>Brendava Tours & Travel | Uganda Safaris, Gorilla Trekking & East Africa Tours</title>
@@ -167,1999 +167,988 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
-/*====================================================
- BRENDAVA TOURS & TRAVEL
- 5 STAR LUXURY SAFARI DESIGN
-====================================================*/
-
-
-:root{
-
---green:#0B7A41;
---dark-green:#064D2B;
---gold:#D4AF37;
---orange:#F28C28;
---cream:#F8F2E7;
---white:#ffffff;
---text:#333;
-
+html, body{
+    margin:0;
+    padding:0;
+    width:100%;
+    overflow-x:hidden;
 }
-
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-}
-
-
-html{
-scroll-behavior:smooth;
-}
-
 
 body{
-
+margin:0;
 font-family:'Inter',sans-serif;
-background:var(--cream);
-color:var(--text);
-overflow-x:hidden;
-
+background:#E8DCC4;
 }
-
-
-
-/*========================
- PREMIUM HEADER
-========================*/
-
-
-header{
-
-background:
-linear-gradient(
-135deg,
-rgba(255,255,255,.95),
-rgba(248,242,231,.95)
-);
-
-padding:18px 5%;
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-box-shadow:
-
-0 10px 30px rgba(0,0,0,.08);
-
-position:relative;
-
-z-index:1000;
-
-}
-
-
-
-.logo-container{
-
-display:flex;
-
-align-items:center;
-
-gap:15px;
-
-}
-
-
-
-.header-logo{
-
-width:70px;
-
-height:70px;
-
-border-radius:50%;
-
-object-fit:cover;
-
-border:3px solid var(--gold);
-
-box-shadow:
-
-0 5px 20px rgba(212,175,55,.4);
-
-}
-
-
-
-header h1{
-
-font-family:'Dancing Script',cursive;
-
-font-size:34px;
-
-color:var(--green);
-
-letter-spacing:1px;
-
-}
-
-
-
-header p{
-
-font-size:13px;
-
-color:#555;
-
-}
-
-
-
-
-
-/*========================
- PREMIUM MENU BUTTON
-========================*/
-
-
-.menu-toggle{
-
-background:
-
-linear-gradient(
-135deg,
-var(--green),
-var(--dark-green)
-);
-
-color:white;
-
-border:none;
-
-padding:13px 25px;
-
-border-radius:50px;
-
-font-weight:600;
-
-cursor:pointer;
-
-box-shadow:
-
-0 10px 25px rgba(11,122,65,.3);
-
-transition:.4s;
-
-}
-
-
-.menu-toggle:hover{
-
-transform:translateY(-3px);
-
-box-shadow:
-
-0 15px 35px rgba(11,122,65,.45);
-
-}
-
-
-
-
-
-/*========================
- MOBILE MENU
-========================*/
-
-
-.header-menu{
-
-position:absolute;
-
-top:100%;
-
-right:5%;
-
-width:280px;
-
-background:white;
-
-border-radius:20px;
-
-overflow:hidden;
-
-box-shadow:
-
-0 20px 50px rgba(0,0,0,.2);
-
-display:none;
-
-}
-
-
-
-.header-menu.show{
-
-display:block;
-
-animation:
-
-menuShow .4s ease;
-
-}
-
-
-@keyframes menuShow{
-
-from{
-
-opacity:0;
-
-transform:translateY(-20px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-
-
-.header-menu a{
-
-display:block;
-
-padding:15px 20px;
-
-text-decoration:none;
-
-color:#333;
-
-border-bottom:1px solid #eee;
-
-transition:.3s;
-
-}
-
-
-
-.header-menu a:hover{
-
-background:var(--green);
-
-color:white;
-
-padding-left:30px;
-
-}
-
-
-
-
-
-/*========================
- NAVIGATION BAR
-========================*/
-
-
-nav{
-
-background:white;
-
-padding:15px 5%;
-
-display:flex;
-
-justify-content:center;
-
-position:sticky;
-
-top:0;
-
-z-index:999;
-
-box-shadow:
-
-0 5px 20px rgba(0,0,0,.08);
-
-}
-
-
-
+/* NAVIGATION */
 .menu{
-
-display:flex;
-
-gap:15px;
-
-flex-wrap:wrap;
-
-justify-content:center;
-
-}
-
-
-
-.btn{
-
-background:
-
-linear-gradient(
-135deg,
-var(--green),
-#13a05c
-);
-
-color:white;
-
-padding:14px 28px;
-
-border-radius:50px;
-
-text-decoration:none;
-
-font-weight:600;
-
-display:inline-flex;
-
-align-items:center;
-
-gap:8px;
-
-border:none;
-
-cursor:pointer;
-
-transition:.4s;
-
-box-shadow:
-
-0 10px 25px rgba(11,122,65,.25);
-
-}
-
-
-
-.btn:hover{
-
-transform:
-
-translateY(-5px);
-
-background:
-
-linear-gradient(
-135deg,
-var(--gold),
-#b8860b
-);
-
-color:white;
-
-}
-
-
-
-
-
-/*========================
- LUXURY HERO
-========================*/
-
-
-.hero{
-
-height:95vh;
-
-background:
-
-linear-gradient(
-
-rgba(0,0,0,.45),
-
-rgba(0,0,0,.55)
-
-),
-
-url('e41f3c80-4431-44a8-bae2-1b7edfdc10a4.jpeg');
-
-
-background-size:cover;
-
-background-position:center;
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-text-align:center;
-
-color:white;
-
-position:relative;
-
-}
-
-
-
-.hero::before{
-
-content:"";
-
-position:absolute;
-
-inset:0;
-
-background:
-
-linear-gradient(
-
-90deg,
-
-rgba(0,0,0,.5),
-
-transparent
-
-);
-
-}
-
-
-
-.hero div{
-
-position:relative;
-
-z-index:2;
-
-}
-
-
-
-.hero h1{
-
-font-family:'Dancing Script',cursive;
-
-font-size:90px;
-
-font-weight:700;
-
-letter-spacing:2px;
-
-text-shadow:
-
-0 10px 30px black;
-
-animation:
-
-fadeHero 1.5s ease;
-
-}
-
-
-
-.hero p{
-
-font-size:28px;
-
-margin:20px 0 35px;
-
-letter-spacing:2px;
-
-}
-
-
-
-@keyframes fadeHero{
-
-from{
-
-opacity:0;
-
-transform:translateY(40px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-    /*====================================================
- DESTINATION SLIDER
- LUXURY SAFARI EXPERIENCE
-====================================================*/
-
-
-#destinationRotator{
-
-background:
-
-linear-gradient(
-180deg,
-#ffffff,
-#f8f2e7
-);
-
-padding:90px 5%;
-
-overflow:hidden;
-
-}
-
-
-
-#destinationRotator h2{
-
-font-family:'Dancing Script',cursive;
-
-font-size:55px;
-
-color:var(--green);
-
-margin-bottom:40px;
-
-}
-
-
-
-.gallery{
-
-display:flex;
-
-width:100%;
-
-transition:transform 1s ease-in-out;
-
-}
-
-
-
-.gallery-item{
-
-flex:0 0 100%;
-
-background:white;
-
-border-radius:30px;
-
-overflow:hidden;
-
-padding-bottom:35px;
-
-box-shadow:
-
-0 25px 60px rgba(0,0,0,.15);
-
-transition:.5s;
-
-}
-
-
-
-.gallery-item:hover{
-
-transform:translateY(-10px);
-
-}
-
-
-
-.gallery-item img{
-
-width:100%;
-
-height:500px;
-
-object-fit:cover;
-
-}
-
-
-
-.gallery-item h3{
-
-font-family:'Dancing Script',cursive;
-
-font-size:45px;
-
-color:var(--green);
-
-margin:25px 0 10px;
-
-}
-
-
-
-.gallery-item p{
-
-font-size:18px;
-
-line-height:1.8;
-
-color:#555;
-
-max-width:800px;
-
-margin:auto;
-
-padding:0 25px;
-
-}
-
-
-
-.more-content{
-
-margin:20px auto;
-
-max-width:750px;
-
-font-size:17px;
-
-line-height:1.8;
-
-color:#444;
-
-padding:20px;
-
-background:#faf7ef;
-
-border-radius:15px;
-
-}
-
-
-
-/* Explore button */
-
-.explore-btn{
-
-background:
-
-linear-gradient(
-135deg,
-var(--gold),
-#b8860b
-);
-
-color:white;
-
-border:none;
-
-padding:14px 30px;
-
-border-radius:50px;
-
-font-weight:600;
-
-cursor:pointer;
-
-margin-top:20px;
-
-transition:.4s;
-
-}
-
-
-
-.explore-btn:hover{
-
-transform:scale(1.05);
-
-}
-
-
-
-
-
-/*====================================================
- PREMIUM REVIEW SECTION
-====================================================*/
-
-
-#reviews-section{
-
-background:
-
-linear-gradient(
-
-135deg,
-
-#064D2B,
-
-#0B7A41
-
-);
-
-padding:90px 5%;
-
-color:white;
-
-}
-
-
-
-#reviews-section h2{
-
-font-family:'Dancing Script',cursive;
-
-font-size:55px;
-
-color:var(--gold);
-
-margin-bottom:40px;
-
-}
-
-
-
-#reviewName,
-#reviewRating,
-#reviewComment{
-
-
-max-width:700px;
-
-margin:12px auto;
-
-display:block;
-
-background:white;
-
-border:none;
-
-padding:16px;
-
-border-radius:15px;
-
-font-size:16px;
-
-box-shadow:
-
-0 10px 30px rgba(0,0,0,.15);
-
-}
-
-
-
-#reviews-section button{
-
-background:
-
-linear-gradient(
-135deg,
-var(--gold),
-#f2c94c
-);
-
-color:#333;
-
-border:none;
-
-padding:15px 35px;
-
-border-radius:50px;
-
-font-weight:700;
-
-cursor:pointer;
-
-transition:.3s;
-
-}
-
-
-
-#reviews-section button:hover{
-
-transform:translateY(-5px);
-
-}
-
-
-
-
-
-.review-card{
-
-background:
-
-rgba(255,255,255,.12);
-
-backdrop-filter:blur(15px);
-
-border:1px solid rgba(255,255,255,.2);
-
-color:white;
-
-padding:35px;
-
-border-radius:25px;
-
-max-width:700px;
-
-margin:40px auto;
-
-box-shadow:
-
-0 20px 50px rgba(0,0,0,.25);
-
-animation:
-
-reviewFade .8s ease;
-
-}
-
-
-
-.review-card h4{
-
-font-size:25px;
-
-color:var(--gold);
-
-}
-
-
-
-.review-card p{
-
-font-size:18px;
-
-line-height:1.7;
-
-}
-
-
-
-@keyframes reviewFade{
-
-from{
-
-opacity:0;
-
-transform:translateY(30px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-
-
-
-
-/*====================================================
- LUXURY BOOKING SECTION
-====================================================*/
-
-
-#booking{
-
-background:
-
-linear-gradient(
-
-135deg,
-
-#f8f2e7,
-
-#ffffff
-
-);
-
-padding:100px 5%;
-
-}
-
-
-
-#booking h2{
-
-font-family:'Dancing Script',cursive;
-
-font-size:60px;
-
-color:var(--green);
-
-margin-bottom:40px;
-
-}
-
-
-
-#booking form{
-
-max-width:800px;
-
-margin:auto;
-
-background:white;
-
-padding:45px;
-
-border-radius:30px;
-
-box-shadow:
-
-0 25px 60px rgba(0,0,0,.12);
-
-}
-
-
-
-#booking input,
-#booking textarea,
-#booking select{
-
-
-width:100%;
-
-padding:18px;
-
-margin-bottom:20px;
-
-border-radius:15px;
-
-border:1px solid #ddd;
-
-font-size:16px;
-
-transition:.3s;
-
-}
-
-
-
-#booking input:focus,
-#booking textarea:focus{
-
-outline:none;
-
-border-color:var(--green);
-
-box-shadow:
-
-0 0 15px rgba(11,122,65,.2);
-
-}
-
-
-
-#booking textarea{
-
-min-height:200px;
-
-}
-
-
-
-
-
-/*====================================================
- WHATSAPP PREMIUM BUTTON
-====================================================*/
-
-
-.whatsapp{
-
-background:
-
-linear-gradient(
-135deg,
-#25D366,
-#128C7E
-);
-
-padding:18px 35px;
-
-border-radius:50px;
-
-font-size:18px;
-
-box-shadow:
-
-0 15px 30px rgba(37,211,102,.35);
-
-}
-
-
-
-.whatsapp:hover{
-
-background:
-
-linear-gradient(
-135deg,
-#128C7E,
-#075E54
-);
-
-}
-
-
-
-
-
-/*====================================================
- MAP SECTION
-====================================================*/
-
-
-.container{
-
-background:white;
-
-padding:50px;
-
-border-radius:30px;
-
-margin:40px auto;
-
-max-width:1200px;
-
-box-shadow:
-
-0 20px 50px rgba(0,0,0,.1);
-
-}
-
-
-
-.container h2{
-
-font-family:'Dancing Script',cursive;
-
-font-size:50px;
-
-color:var(--green);
-
-}
-
-
-
-.container img{
-
-margin-top:30px;
-
-border-radius:25px;
-
-box-shadow:
-
-0 20px 40px rgba(0,0,0,.15);
-
-}
-    /*====================================================
- ULTRA PREMIUM FOOTER
-====================================================*/
-
-footer{
-    background:linear-gradient(135deg,#06391F,#0B7A41,#0F5E34);
-    color:#fff;
-    padding:90px 5% 35px;
-    position:relative;
-    overflow:hidden;
-    border-top:5px solid var(--gold);
-}
-
-footer::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-    radial-gradient(circle at top right,rgba(212,175,55,.12),transparent 45%),
-    radial-gradient(circle at bottom left,rgba(255,255,255,.05),transparent 40%);
-    pointer-events:none;
-}
-
-.footer-container{
-    position:relative;
-    z-index:2;
-    max-width:1400px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:45px;
-}
-
-.footer-box{
-    transition:.4s;
-}
-
-.footer-box:hover{
-    transform:translateY(-6px);
-}
-
-.footer-box h3{
-    font-family:'Dancing Script',cursive;
-    font-size:34px;
-    color:var(--gold);
-    margin-bottom:20px;
-}
-
-.footer-box p,
-.footer-box li{
-    line-height:1.9;
-    color:#eef6ef;
-    font-size:15px;
-}
-
-.footer-box ul{
-    list-style:none;
-    padding:0;
-}
-
-.footer-box li{
-    margin:12px 0;
-}
-
-.footer-box a{
-    color:white;
-    text-decoration:none;
-    transition:.3s;
-}
-
-.footer-box a:hover{
-    color:var(--gold);
-    padding-left:8px;
-}
-
-.social-icons{
-    display:flex;
-    gap:15px;
-    margin-top:25px;
-}
-
-.social-icons a{
-    width:52px;
-    height:52px;
-    border-radius:50%;
     display:flex;
     align-items:center;
-    justify-content:center;
-    background:rgba(255,255,255,.10);
-    color:white;
-    transition:.4s;
-    font-size:20px;
-}
-
-.social-icons a:hover{
-    background:var(--gold);
-    color:#06391F;
-    transform:translateY(-6px) rotate(360deg);
-}
-
-.payment-methods{
-    margin-top:60px;
-    text-align:center;
-}
-
-.payment-methods h4{
-    color:var(--gold);
-    font-size:24px;
-    margin-bottom:25px;
-}
-
-.payment-icons{
-    display:flex;
-    justify-content:center;
+    gap:12px;
     flex-wrap:wrap;
-    gap:25px;
 }
 
-.payment-icons img{
-    width:70px;
-    transition:.35s;
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:12px 20px;
+    background:beige;
+    position:sticky;
+    top:0;
+    z-index:1000;
 }
 
-.payment-icons img:hover{
-    transform:scale(1.15);
+@media(max-width:768px){
+    nav{
+        flex-direction:column;
+        gap:10px;
+    }
+
+    .menu{
+        justify-content:center;
+    }
+
+    .btn{
+        font-size:14px;
+        padding:10px 15px;
+    }
+
+    .dropdown-content{
+        width:95vw;
+        left:-150px;
+    }
+}
+nav h1{
+color:#D4AF37;
+margin:0;
 }
 
-.footer-bottom{
-    text-align:center;
-    margin-top:50px;
-    padding-top:25px;
-    border-top:1px solid rgba(255,255,255,.15);
-    color:#d9e8d9;
-    font-size:15px;
+/* HERO */
+.hero{
+height:95vh;
+background:
+linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.45)),
+url('e41f3c80-4431-44a8-bae2-1b7edfdc10a4.jpeg');
+background-size:cover;
+background-position:center;
+background-repeat:no-repeat;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
 }
 
-/*====================================================
- PREMIUM SECTION HEADINGS
-====================================================*/
+.hero h1{
+font-size:60px;
+margin-bottom:10px;
+text-shadow:0 3px 10px rgba(0,0,0,.5);
+}
 
-section h2{
-    font-family:'Dancing Script',cursive;
-    font-size:56px;
-    color:var(--green);
-    margin-bottom:25px;
+.hero p{
+font-size:22px;
+}
+
+/* BUTTONS */
+.btn{
+background:#0f766e;
+color:white;
+padding:12px 24px;
+border:none;
+border-radius:8px;
+text-decoration:none;
+display:inline-block;
+cursor:pointer;
+transition:.3s;
+}
+
+.btn:hover{
+background:#115e59;
+transform:translateY(-2px);
 }
 
 section{
-    padding:90px 5%;
+width:100%;
+padding:60px 5%;
+box-sizing:border-box;
+text-align:center;
+  background:#F5F5DC;
 }
 
-/*====================================================
- PREMIUM ANIMATIONS
-====================================================*/
-
-.gallery-item,
-.review-card,
-.footer-box,
-.container,
-#booking form{
-    animation:fadeUp .8s ease;
+/* DESTINATION CARDS */
+#destinationRotator{
+    width:100%;
+    text-align:center;
+    padding:40px 0;
+    overflow:hidden;
+    background:#f5f7fa;
+    position:relative;
 }
 
-@keyframes fadeUp{
+/* each slide */
 
+.destination-slide{
+    display:none;
+    opacity:0;
+    transform:translateY(20px);
+    transition:all 0.8s ease;
+}
+
+/* active slide */
+
+.destination-slide.active{
+    display:block;
+    opacity:1;
+    transform:translateY(0);
+}
+
+/* title */
+
+.destination-title{
+    font-size:32px;
+    color:#0f766e;
+    font-weight:800;
+    margin-bottom:10px;
+    animation:fadeIn 1s ease;
+}
+
+/* description */
+
+.destination-desc{
+    font-size:18px;
+    color:#444;
+    max-width:800px;
+    margin:0 auto;
+    line-height:1.6;
+    animation:fadeIn 1s ease;
+}
+
+/* fade animation */
+
+@keyframes fadeIn{
     from{
         opacity:0;
-        transform:translateY(40px);
+        transform:translateY(20px);
     }
-
     to{
         opacity:1;
         transform:translateY(0);
     }
 }
 
-/*====================================================
- CUSTOM SCROLLBAR
-====================================================*/
-
-::-webkit-scrollbar{
-    width:10px;
+.destinations{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
 }
 
-::-webkit-scrollbar-track{
-    background:#f5f5f5;
+.card{
+flex:1;
+min-width:220px;
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+text-align:center;
+}
+  }
+
+/*/* DESTINATION SLIDER */
+
+#destinationRotator{
+    width:100%;
+    overflow:hidden;
+    background:#f5f7fa;
+    padding:40px 0;
 }
 
-::-webkit-scrollbar-thumb{
-    background:linear-gradient(var(--gold),var(--green));
-    border-radius:20px;
-}
-
-::-webkit-scrollbar-thumb:hover{
-    background:var(--green);
-}
-
-/*====================================================
- IMAGE EFFECTS
-====================================================*/
-
-img{
-    transition:.5s;
-}
-
-.gallery-item img:hover,
-.container img:hover{
-    transform:scale(1.03);
-}
-
-/*====================================================
- MOBILE DESIGN
-====================================================*/
-
-@media(max-width:992px){
-
-.hero h1{
-    font-size:64px;
-}
-
-.gallery-item img{
-    height:380px;
-}
-
-section h2{
-    font-size:44px;
-}
-
-#booking h2,
-#reviews-section h2{
-    font-size:48px;
-}
-
-}
-
-@media(max-width:768px){
-
-header{
-    flex-direction:column;
-    gap:18px;
-    text-align:center;
-}
-
-.hero{
-    height:80vh;
-    padding:20px;
-}
-
-.hero h1{
-    font-size:48px;
-}
-
-.hero p{
-    font-size:20px;
+.gallery{
+    display:flex;
+    width:100%;
+    transition:transform 1s ease-in-out;
 }
 
 .gallery-item{
-    border-radius:20px;
-}
-
-.gallery-item img{
-    height:260px;
-}
-
-.gallery-item h3{
-    font-size:34px;
-}
-
-#booking form{
-    padding:25px;
-}
-
-.footer-container{
-    grid-template-columns:1fr;
+    flex:0 0 100%;
+    width:100%;
+    padding:20px;
+    box-sizing:border-box;
     text-align:center;
 }
 
-.social-icons{
-    justify-content:center;
-}
-
-.payment-icons img{
-    width:55px;
-}
-
-section{
-    padding:70px 20px;
-}
-
-}
-
-@media(max-width:480px){
-
-.hero h1{
-    font-size:38px;
-}
-
-.hero p{
-    font-size:17px;
-}
-
-.btn{
-    padding:12px 22px;
-    font-size:15px;
-}
-
-section h2{
-    font-size:36px;
+.gallery-item img{
+    width:100%;
+    max-width:900px;
+    height:450px;
+    object-fit:cover;
+    border-radius:15px;
+    display:block;
+    margin:auto;
 }
 
 .gallery-item h3{
+    color:#0f766e;
+    margin:20px 0 10px;
     font-size:30px;
 }
 
-.footer-box h3{
-    font-size:28px;
+.gallery-item p{
+    max-width:850px;
+    margin:auto;
+    line-height:1.8;
+    font-size:18px;
+    color:#444;
 }
 
-}
-    /*====================================================
- PART 4
- ULTRA LUXURY EFFECTS
-====================================================*/
-
-/* ---------- PREMIUM BACKGROUNDS ---------- */
-
-section{
-    position:relative;
-    overflow:hidden;
+.more-content{
+    display:none;
+    margin-top:15px;
 }
 
-section::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    background:
-    radial-gradient(circle at top right,
-    rgba(212,175,55,.06),
-    transparent 35%),
-    radial-gradient(circle at bottom left,
-    rgba(11,122,65,.05),
-    transparent 35%);
-    pointer-events:none;
-}
-
-/* ---------- GLASS CARDS ---------- */
-
-.gallery-item,
-.review-card,
-.container,
-#booking form{
-
-    background:rgba(255,255,255,.92);
-
-    backdrop-filter:blur(18px);
-
-    border:1px solid rgba(255,255,255,.35);
-
-}
-
-/* ---------- GOLD LINE ---------- */
-
-section h2::after{
-
-    content:"";
-
-    display:block;
-
-    width:120px;
-
-    height:5px;
-
-    margin:18px auto 0;
-
-    border-radius:20px;
-
-    background:linear-gradient(
-        90deg,
-        transparent,
-        #D4AF37,
-        #F2C94C,
-        #D4AF37,
-        transparent
-    );
-
-}
-
-/* ---------- CARD SHADOW ---------- */
-
-.gallery-item{
-
-    transition:
-    transform .45s,
-    box-shadow .45s;
-
-}
-
-.gallery-item:hover{
-
-    transform:
-    translateY(-12px);
-
-    box-shadow:
-
-    0 40px 80px rgba(0,0,0,.22);
-
-}
-
-/* ---------- IMAGE ZOOM ---------- */
-
-.gallery-item{
-
-overflow:hidden;
-
-}
-
-.gallery-item img{
-
-transition:1s;
-
-}
-
-.gallery-item:hover img{
-
-transform:scale(1.08);
-
-}
-
-/* ---------- BUTTON ---------- */
-
-.btn,
 .explore-btn{
-
-position:relative;
-
-overflow:hidden;
-
+    margin-top:15px;
 }
 
-.btn::before,
-.explore-btn::before{
-
-content:"";
-
+.caption{
 position:absolute;
-
-top:0;
-
-left:-120%;
-
-width:60%;
-
-height:100%;
-
-background:
-
-linear-gradient(
-
-90deg,
-
-transparent,
-
-rgba(255,255,255,.45),
-
-transparent
-
-);
-
-transform:skewX(-25deg);
-
-transition:1s;
-
+bottom:15px;
+left:15px;
+background:rgba(15,118,110,.9);
+color:white;
+padding:8px 12px;
+border-radius:8px;
+font-size:13px;
+font-weight:bold;
 }
 
-.btn:hover::before,
-.explore-btn:hover::before{
-
-left:160%;
-
+/* FORMS */
+form{
+max-width:700px;
+margin:auto;
+background:white;
+padding:30px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
 }
-
-/* ---------- HERO ---------- */
-
-.hero{
-
-background-attachment:fixed;
-
-}
-
-.hero h1{
-
-animation:
-
-heroTitle 1.3s ease;
-
-}
-
-.hero p{
-
-animation:
-
-heroSub 1.8s ease;
-
-}
-
-.hero .btn{
-
-animation:
-
-heroButton 2.3s ease;
-
-}
-
-@keyframes heroTitle{
-
-from{
-
-opacity:0;
-
-transform:translateY(70px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:none;
-
-}
-
-}
-
-@keyframes heroSub{
-
-from{
-
-opacity:0;
-
-transform:translateY(40px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:none;
-
-}
-
-}
-
-@keyframes heroButton{
-
-from{
-
-opacity:0;
-
-transform:scale(.8);
-
-}
-
-to{
-
-opacity:1;
-
-transform:scale(1);
-
-}
-
-}
-
-/* ---------- IMAGES ---------- */
-
-img{
-
-transition:.6s;
-
-}
-
-img:hover{
-
-filter:brightness(1.03);
-
-}
-
-/* ---------- INPUT ---------- */
 
 input,
 textarea,
 select{
-
-transition:.35s;
-
+width:100%;
+padding:14px;
+margin:10px 0;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:16px;
+box-sizing:border-box;
 }
 
-input:focus,
-textarea:focus,
-select:focus{
-
-transform:translateY(-2px);
-
-box-shadow:
-
-0 12px 30px rgba(11,122,65,.18);
-
+textarea{
+min-height:180px;
+resize:vertical;
 }
 
-/* ---------- SOCIAL ---------- */
+#reviewComment{
+min-height:160px;
+}
+
+.review-card{
+background:#E8DCC4;
+padding:25px;
+margin:20px auto;
+max-width:700px;
+border-radius:15px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+text-align:center;
+}
+
+/* WHATSAPP */
+.whatsapp{
+background:#25D366;
+margin:10px;
+}
+
+.whatsapp:hover{
+background:#1fa855;
+}
+
+/* SOCIAL MEDIA */
+.social-section{
+padding:40px 20px;
+text-align:center;
+}
+
+.social{
+display:inline-flex;
+justify-content:center;
+align-items:center;
+width:60px;
+height:60px;
+margin:10px;
+border-radius:50%;
+background:#0f766e;
+color:white;
+font-size:24px;
+text-decoration:none;
+transition:.3s;
+}
+
+.social:hover{
+transform:scale(1.1);
+}
+
+/* FOOTER */
+/* ===========================
+   PREMIUM FOOTER
+=========================== */
+footer{
+    width:100vw;
+    margin-left:calc(50% - 50vw);
+    margin-right:calc(50% - 50vw);
+    background:linear-gradient(135deg,#0B7A41,#085A31);
+    color:#fff;
+    padding:70px 20px 25px;
+    box-sizing:border-box;
+    position:relative;
+    overflow:hidden;
+    border-top:4px solid #D4AF37;
+}
+
+footer::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:linear-gradient(90deg,#D4AF37,#F28C28,#D4AF37);
+}
+
+.footer-container{
+    max-width:1200px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:40px;
+    position:relative;
+    z-index:2;
+}
+
+.footer-box h3,
+.footer-box h4{
+    color:#D4AF37;
+    font-size:22px;
+    margin-bottom:18px;
+    font-weight:700;
+}
+
+.footer-box p{
+    color:#EAF7EF;
+    line-height:1.8;
+    font-size:15px;
+    margin-bottom:12px;
+}
+
+.footer-box ul{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.footer-box ul li{
+    margin-bottom:12px;
+}
+
+.footer-box ul li a{
+    color:#fff;
+    text-decoration:none;
+    transition:.3s ease;
+    display:inline-block;
+}
+
+.footer-box ul li a:hover{
+    color:#F28C28;
+    transform:translateX(6px);
+}
+
+.footer-box i{
+    color:#D4AF37;
+    margin-right:10px;
+}
+
+.social-icons{
+    display:flex;
+    gap:12px;
+    margin-top:18px;
+}
 
 .social-icons a{
-
-transition:.45s;
-
-}
-
-.social-icons a:hover{
-
-transform:
-
-translateY(-8px)
-
-scale(1.12)
-
-rotate(360deg);
-
-}
-
-/* ---------- FOOTER ---------- */
-
-footer{
-
-background:
-
-linear-gradient(
-
-135deg,
-
-#04351d,
-
-#07542f,
-
-#0B7A41
-
-);
-
-}
-
-.footer-box{
-
-transition:.4s;
-
-}
-
-.footer-box:hover{
-
-transform:translateY(-8px);
-
-}
-
-/* ---------- SCROLL ANIMATION ---------- */
-
-.gallery-item,
-.review-card,
-.footer-box,
-.container{
-
-animation:
-
-fadeLuxury .9s ease;
-
-}
-
-@keyframes fadeLuxury{
-
-from{
-
-opacity:0;
-
-transform:translateY(60px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:none;
-
-}
-
-/* ---------- MOBILE ---------- */
-
-@media(max-width:768px){
-
-.hero{
-
-background-attachment:scroll;
-
-}
-
-.gallery-item:hover{
-
-transform:none;
-
-}
-
-}
-    /*====================================================
-PART 5
-LUXURY FINISHING TOUCHES
-====================================================*/
-
-/* Floating WhatsApp */
-
-.whatsapp{
-    position:fixed;
-    right:25px;
-    bottom:25px;
-    z-index:9999;
-    width:70px;
-    height:70px;
+    width:45px;
+    height:45px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:30px;
-    box-shadow:0 15px 40px rgba(0,0,0,.25);
-    animation:whatsPulse 2s infinite;
+    background:rgba(255,255,255,.12);
+    color:#fff;
+    text-decoration:none;
+    transition:.35s;
+    backdrop-filter:blur(6px);
 }
 
-@keyframes whatsPulse{
-
-0%{
-transform:scale(1);
+.social-icons a:hover{
+    background:#D4AF37;
+    color:#0B7A41;
+    transform:translateY(-5px);
 }
 
-50%{
-transform:scale(1.08);
+.footer-bottom{
+    max-width:1200px;
+    margin:45px auto 0;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.15);
+    text-align:center;
+    color:#EAF7EF;
+    font-size:14px;
 }
 
-100%{
-transform:scale(1);
+@media (max-width:768px){
+
+    footer{
+        padding:55px 20px 20px;
+    }
+
+    .footer-container{
+        grid-template-columns:1fr;
+        text-align:center;
+        gap:30px;
+    }
+
+    .social-icons{
+        justify-content:center;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
 }
 
+.gallery{
+grid-template-columns:1fr;
 }
 
-/* Luxury underline */
+.card{
+width:90%;
+}
+  .menu{
+display:flex;
+gap:10px;
+align-items:center;
+}
+@keyframes fadeIn{
+  from{opacity:0; transform:translateY(-10px);}
+  to{opacity:1; transform:translateY(0);}
+}
 
-h2{
+.dropdown-content h3{
+    margin:18px 0 10px;
+  color:#0f766e;
+  font-size:16px;
+  border-left:4px solid #0f766e;
+  padding-left:8px;
+}
+.park-card{
+  background:linear-gradient(145deg,#f8fafc,#ffffff);
+  border-radius:14px;
+  padding:10px;
+  margin-bottom:18px;
+  border:1px solid #e5e7eb;
+  transition:0.3s;
+}
 
-position:relative;
+.park-card:hover{
+  transform:scale(1.01);
+  box-shadow:0 10px 25px rgba(0,0,0,0.08);
+}
+
+.park-card img{
+  width:100%;
+  height:150px;
+  object-fit:cover;
+  border-radius:12px;
+  margin-bottom:8px;
+}
+
+.park-card h4{
+  margin:6px 0;
+  font-size:15px;
+  color:#111827;
+}
+
+.lodge-card{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:#F5F5DC;
+  padding:8px;
+  margin:6px 0;
+  border-radius:10px;
+  transition:0.3s;
+}
+
+.lodge-card:hover{
+  background:#e6fffa;
+}
+
+.lodge-card img{
+  width:45px;
+  height:45px;
+  object-fit:cover;
+  border-radius:8px;
+}
+
+.lodge-card a{
+  text-decoration:none;
+  color:#111827;
+  font-weight:600;
+  font-size:14px;
+}
+
+.dropdown{
+  position:relative;
+  display:inline-block;
+}
+
+.dropdown-content{
+  display:none;
+  position:absolute;
+  background:#fff;
+  width:420px;
+  right:0;
+  left:auto;
+  max-height:80vh;
+  overflow-y:auto;
+  box-shadow:0 20px 50px rgba(0,0,0,0.25);
+  border-radius:16px;
+  padding:15px;
+  z-index:9999;
+}
+
+.dropdown:hover .dropdown-content{
+  display:block;
+}
+
+.sub{
+  background:#f8fafc;
+  margin:10px 0;
+  padding:10px;
+  border-radius:10px;
+}
+
+.sub strong{
+  display:block;
+  margin-bottom:6px;
+  color:#0f766e;
+}
+
+.sub a{
+  display:block;
+  text-decoration:none;
+  color:#111827;
+  padding:3px 0;
+}
+
+.sub a:hover{
+  color:#0f766e;
+  padding:60px 20px;
+  background:#f8fafc;
+}
+#videos{
+  padding:60px 20px;
+  background:#f8fafc;
+}
+
+#videos video{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+  border-radius:15px;
+}
+.navbar{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:8px 15px;
+    background:#ffffff;
+    box-shadow:0 2px 10px rgba(0,0,0,.08);
+}
+
+.navbar h1{
+    margin:0;
+    color:#0f766e;
+    font-size:15px;
+    font-weight:400;
+}
+
+.navbar{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:6px 12px;
+}
+.menu{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    flex-wrap:wrap;
+}
+
+.menu a,
+.menu button{
+    white-space:nowrap;
+}
+        @media(max-width:768px){
+    .dropdown-content{
+        width:95vw;
+        left:50%;
+        transform:translateX(-50%);
+    }
+}
+        header{
+          background-image: url("IMG_3231.jpeg");
+    width:100%;
+    margin:0;
+    padding:20px;
+    box-sizing:border-box;
+}
+        .menu-toggle{
+    background:#0f766e;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+    font-size:16px;
+    margin-top:10px;
+    transition:0.3s;
+}
+
+.menu-toggle:hover{
+    background:#115e59;
+}
+
+.header-menu{
+    display:none;
+    max-width:300px;
+    margin:15px auto;
+    background:white;
+    border-radius:15px;
+    box-shadow:0 10px 30px rgba(0,0,0,.15);
+    overflow:hidden;
+}
+
+.header-menu a{
+    display:block;
+    padding:14px 20px;
+    text-decoration:none;
+    color:#111827;
+    border-bottom:1px solid #eee;
+    transition:.3s;
+}
+
+.header-menu a:hover{
+    background:#0f766e;
+    color:white;
+}
+
+.header-menu.show{
+    display:block;
+}
+    
+.language-switcher {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+.language-switcher select {
+  padding: 6px 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: green;
+}
+      .payment-methods{
+    margin-top:20px;
+    text-align:center;
+}
+
+.payment-methods h4{
+    font-size:16px;
+    margin-bottom:10px;
+    color:#fff;
+}
+
+.payment-icons{
+    display:flex;
+    gap:12px;
+    align-items:center;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.payment-icons img{
+    width:60px;
+    height:auto;
+    border-radius:0;
+    box-shadow:none;
+    filter:none !important;
+    opacity:1;
+    background:transparent;
+    transition:transform .3s ease;
+}
+
+.payment-icons img:hover{
+    transform:scale(1.1);
+    filter:none !important;
+}
+  .container img{
+    width:100%;
+    height:auto;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.2);
+}
+.container h2{
+
+    color:#2c3e50;
 
 }
 
-h2::after{
-
-content:"";
-
-display:block;
-
-width:90px;
-
-height:4px;
-
-margin:18px auto;
-
-border-radius:20px;
-
-background:linear-gradient(
-90deg,
-transparent,
-#D4AF37,
-transparent
-);
-
+img{
+    width:100%;
+    height:auto;
+    border-radius:12px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.2);
 }
 
-/* Glass navigation */
-
-nav{
-
-backdrop-filter:blur(20px);
-
-background:rgba(255,255,255,.92);
-
+.more-content{
+    display:none;
+    margin-top:10px;
+    animation:fadeIn .4s ease;
 }
 
-/* Elegant cards */
-
-.card,
-.gallery-item,
-.review-card{
-
-transition:.45s;
-
+.explore-btn{
+    background:#0f766e;
+    color:#fff;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    margin-top:10px;
+    transition:.3s;
 }
 
-.card:hover,
-.gallery-item:hover,
-.review-card:hover{
-
-transform:translateY(-10px);
-
-box-shadow:
-0 25px 60px rgba(0,0,0,.18);
-
+.explore-btn:hover{
+    background:#115e59;
+}
+        .review-slider{
+    max-width:700px;
+    margin:auto;
+    transition:opacity .5s ease;
 }
 
-/* Images */
-
-.gallery-item img{
-
-border-bottom:4px solid #D4AF37;
-
+.gallery-item {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+.gallery-item img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+}
+.more-content{
+    display:none;
+    margin-top:10px;
+    animation:fadeIn 0.4s ease;
 }
 
-/* Premium booking button */
-
-#booking button{
-
-width:100%;
-
-padding:18px;
-
-font-size:18px;
-
-font-weight:700;
-
-letter-spacing:1px;
-
+@keyframes fade{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+      .review-slider{
+    max-width:700px;
+    margin:auto;
+    transition:opacity .5s ease;
 }
 
-/* Footer icons */
+/* Paste the new code here */
 
-.footer-box i{
-
-font-size:18px;
-
-margin-right:10px;
-
-color:#D4AF37;
-
+#booking{
+    width:100%;
+    margin:0;
+    padding:60px 0;
+    background:#f5f7fa;
 }
 
-/* Smooth fade */
-
-body{
-
-animation:pageFade .8s ease;
-
+#booking h2{
+    text-align:center;
+    margin-bottom:25px;
+    color:#0f766e;
 }
 
-@keyframes pageFade{
-
-from{
-
-opacity:0;
-
+#booking form{
+    width:100%;
+    max-width:100%;
+    margin:0;
+    padding:30px 20px;
+    box-sizing:border-box;
+    border-radius:0;
+    box-shadow:none;
+    background:white;
 }
 
-to{
-
-opacity:1;
-
+#booking input,
+#booking textarea,
+#booking select{
+    width:100%;
+    box-sizing:border-box;
+    margin-bottom:15px;
 }
 
+#booking textarea{
+    min-height:180px;
 }
 
-/* Mobile */
-
-@media(max-width:768px){
-
-.whatsapp{
-
-width:60px;
-
-height:60px;
-
-font-size:26px;
-
-right:18px;
-
-bottom:18px;
-
+#destinationRotator{
+    width:100%;
+    text-align:center;
+    padding:25px 0;
+    overflow:hidden;
 }
 
-header h1{
-
-font-size:20px;
-
+.destination-title{
+    font-size:32px;
+    color:#0f766e;
+    font-weight:bold;
+    white-space:nowrap;
+    animation:fade 1s;
 }
 
+.destination-desc{
+    font-size:18px;
+    color:#444;
+    margin-top:10px;
+    animation:fade 1s;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateX(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateX(0);
+    }
+}
+      /* Handwritten font */
+.hero h1,
+header h1,
+section h2,
+.destination-title,
+.gallery-item h3{
+    font-family: 'Dancing Script', cursive;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+/* Hero title */
 .hero h1{
-
-font-size:46px;
-
+    font-size:72px;
 }
 
-.hero p{
-
-font-size:18px;
-
+/* Section headings */
+section h2{
+    font-size:46px;
+    color:#0f766e;
 }
 
+/* Destination titles */
+.gallery-item h3{
+    font-size:36px;
 }
+ 
+/* HEADER CONTAINER */
+header{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    flex-wrap:nowrap; /* keeps everything in one line */
+    text-align:center;
+}
+
+/* LOGO + TEXT GROUP */
+.logo-container{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+/* Small logo */
+.header-logo{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid #D4AF37;
+    flex-shrink:0;
+}
+
+/* TEXT WRAPPER (important for h1 + p alignment) */
+.header-text{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    line-height:1.1;
+}
+
+/* Website title */
+header h1{
+    margin:0;
+    font-size:22px;
+    color:black;
+    font-weight:800;
+    letter-spacing:1px;
+    text-transform:none;
+}
+
+/* Slogan */
+header p{
+    margin:2px 0 0;
+    color:black;
+  ;
+    font-size:13px;
+}
+
+/* MOBILE */
+@media (max-width:600px){
+
+    .header-logo{
+        width:32px;
+        height:32px;
+    }
+
+    header h1{
+        font-size:17px;
+    }
+
+    header p{
+        font-size:11px;
+    }
+} 
     </style>
   <script>
 
@@ -3290,4 +2279,4 @@ function toggleContent(id, button) {
 }
 </script>
 </body>
-</html>   Update my styles to premium but leave the slides in slide form and reviews in slide form and some beautiful styles just make the home so precious and beautiful with good styles and good  designs like most 5 star websites 
+          </html>
