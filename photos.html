@@ -238,6 +238,108 @@ to{
 .cta a:active {
     transform: translateY(0);
 }
+    /* ===========================
+   PREMIUM FOOTER
+=========================== */
+
+footer{
+    background:linear-gradient(135deg,#0B7A41,#085A31);
+    color:#fff;
+    text-align:center;
+    padding:60px 20px 25px;
+    margin-top:60px;
+    position:relative;
+    overflow:hidden;
+    border-top:4px solid #D4AF37;
+}
+
+footer::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:4px;
+    background:linear-gradient(90deg,#D4AF37,#F28C28,#D4AF37);
+}
+
+footer p{
+    margin:12px 0;
+    font-size:16px;
+    color:#F8F8F8;
+    letter-spacing:.5px;
+    transition:.3s;
+}
+
+footer p:hover{
+    color:#D4AF37;
+    transform:translateY(-2px);
+}
+
+footer a{
+    color:#fff;
+    text-decoration:none;
+    transition:.3s;
+}
+
+footer a:hover{
+    color:#D4AF37;
+}
+
+.footer-social{
+    display:flex;
+    justify-content:center;
+    gap:15px;
+    margin:25px 0;
+}
+
+.footer-social a{
+    width:48px;
+    height:48px;
+    border-radius:50%;
+    background:rgba(255,255,255,.12);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:#fff;
+    font-size:22px;
+    transition:.35s;
+}
+
+.footer-social a:hover{
+    background:#D4AF37;
+    color:#0B7A41;
+    transform:translateY(-5px) scale(1.08);
+}
+
+.footer-bottom{
+    margin-top:25px;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,.2);
+    font-size:14px;
+    color:#EAEAEA;
+}
+
+@media(max-width:768px){
+
+    footer{
+        padding:50px 15px 20px;
+    }
+
+    footer p{
+        font-size:15px;
+    }
+
+    .footer-social{
+        gap:10px;
+    }
+
+    .footer-social a{
+        width:42px;
+        height:42px;
+        font-size:18px;
+    }
+}
 </style>
 </head>
 
@@ -363,7 +465,24 @@ to{
     <p>📞 +256789336441</p>
     <p>📧 brendavatoursandtravel@gmail.com</p>
     <p>📍 Kampala, Uganda</p>
-    <p>© 2026 Brendava Tours & Travel</p>
+       <div class="footer-social">
+
+        <a href="https://www.facebook.com/brendavatoursandtravel"><i class="fab fa-facebook-f"></i></a>
+
+        <a href="https://www.instagram.com/brendavatoursandtravel"><i class="fab fa-instagram"></i></a>
+
+        <a href="https://www.tiktok.com/@brendava.tours.andtravel"><i class="fab fa-tiktok"></i></a>
+
+        <a href="https://www.youtube.com/@brendavatoursandtravel"><i class="fab fa-youtube"></i></a>
+
+    </div>
+
+    <div class="footer-bottom">
+
+        © 2026 Brendava Tours & Travel • Where Your Dreams Meet Reality
+
+    </div>
+
 </footer>
 
 <script>
