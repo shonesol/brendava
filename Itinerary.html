@@ -7,509 +7,13 @@
   <title>Brendava S
     tours and travel| East african Safari Packages</title>
 
-  <style>
-    :root {
-      --green-dark: #174d32;
-      --green: #276749;
-      --green-light: #3f7d54;
-      --orange: #d96b27;
-      --orange-light: #e98a43;
-      --beige: #f5eddd;
-      --cream: #fffaf0;
-      --gold: #c99a3e;
-      --gold-light: #e2bd68;
-      --brown: #5c4528;
-      --white: #ffffff;
-      --text: #333333;
-      --shadow: 0 12px 35px rgba(23, 77, 50, 0.14);
-      --radius: 18px;
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--beige);
-      color: var(--text);
-      line-height: 1.7;
-    }
-
-    /* =========================
-       HERO
-    ========================= */
-
-    .safari-hero {
-      position: relative;
-      padding: 90px 20px;
-      text-align: center;
-      color: white;
-      background:
-        linear-gradient(rgba(23, 77, 50, 0.88), rgba(23, 77, 50, 0.92)),
-        radial-gradient(circle at center, #5b8b57, #174d32);
-      overflow: hidden;
-    }
-
-    .safari-hero::before,
-    .safari-hero::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      background: rgba(201, 154, 62, 0.15);
-    }
-
-    .safari-hero::before {
-      width: 350px;
-      height: 350px;
-      top: -180px;
-      left: -100px;
-    }
-
-    .safari-hero::after {
-      width: 450px;
-      height: 450px;
-      bottom: -250px;
-      right: -150px;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .brand {
-      color: var(--gold-light);
-      text-transform: uppercase;
-      letter-spacing: 4px;
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 15px;
-    }
-
-    .safari-hero h1 {
-      font-size: clamp(38px, 6vw, 70px);
-      line-height: 1.1;
-      margin-bottom: 20px;
-    }
-
-    .safari-hero h1 span {
-      color: var(--gold-light);
-    }
-
-    .safari-hero p {
-      max-width: 750px;
-      margin: auto;
-      font-size: 18px;
-      opacity: 0.94;
-    }
-
-    .hero-line {
-      width: 90px;
-      height: 4px;
-      background: var(--orange);
-      margin: 28px auto;
-      border-radius: 10px;
-    }
-
-    /* =========================
-       INTRO
-    ========================= */
-
-    .intro {
-      max-width: 1000px;
-      margin: 60px auto 30px;
-      padding: 0 20px;
-      text-align: center;
-    }
-
-    .section-label {
-      color: var(--orange);
-      text-transform: uppercase;
-      font-size: 13px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-
-    .intro h2 {
-      color: var(--green-dark);
-      font-size: clamp(30px, 4vw, 46px);
-      margin: 8px 0 15px;
-    }
-
-    .intro p {
-      max-width: 780px;
-      margin: auto;
-      color: #666;
-    }
-
-    /* =========================
-       ITINERARIES
-    ========================= */
-
-    .itinerary-container {
-      max-width: 1200px;
-      margin: 50px auto 90px;
-      padding: 0 20px;
-      display: grid;
-      gap: 35px;
-    }
-
-    .itinerary {
-      background: var(--cream);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-      border: 1px solid rgba(201, 154, 62, 0.28);
-    }
-
-    .itinerary-header {
-      background: linear-gradient(135deg, var(--green-dark), var(--green));
-      color: white;
-      padding: 35px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 25px;
-      flex-wrap: wrap;
-      position: relative;
-    }
-
-    .itinerary-header::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      width: 160px;
-      height: 5px;
-      background: var(--orange);
-    }
-
-    .day-number {
-      color: var(--gold-light);
-      text-transform: uppercase;
-      font-weight: bold;
-      letter-spacing: 2px;
-      font-size: 13px;
-      margin-bottom: 5px;
-    }
-
-    .itinerary-header h2 {
-      font-size: clamp(25px, 4vw, 38px);
-      line-height: 1.2;
-    }
-
-    .itinerary-subtitle {
-      margin-top: 8px;
-      opacity: 0.85;
-      font-size: 15px;
-    }
-
-    .price-box {
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(226,189,104,0.55);
-      border-radius: 15px;
-      padding: 18px 25px;
-      min-width: 190px;
-      text-align: center;
-      backdrop-filter: blur(5px);
-    }
-
-    .price-box small {
-      display: block;
-      color: var(--gold-light);
-      font-weight: bold;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .price {
-      font-size: 32px;
-      font-weight: 800;
-      margin-top: 3px;
-    }
-
-    .per-day {
-      font-size: 12px;
-      opacity: 0.8;
-    }
-
-    /* =========================
-       HIGHLIGHTS
-    ========================= */
-
-    .highlights {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      padding: 25px 35px;
-      background: #f1e6cf;
-      border-bottom: 1px solid #dfd0b3;
-    }
-
-    .highlight {
-      background: white;
-      color: var(--green-dark);
-      padding: 7px 13px;
-      border-radius: 30px;
-      font-size: 13px;
-      font-weight: bold;
-      border: 1px solid rgba(39,103,73,0.15);
-    }
-
-    /* =========================
-       ITINERARY BODY
-    ========================= */
-
-    .itinerary-body {
-      padding: 35px;
-    }
-
-    .day {
-      display: grid;
-      grid-template-columns: 105px 1fr;
-      gap: 25px;
-      padding: 25px 0;
-      border-bottom: 1px solid #e4d9c4;
-    }
-
-    .day:first-child {
-      padding-top: 0;
-    }
-
-    .day:last-child {
-      border-bottom: none;
-    }
-
-    .day-label {
-      color: var(--orange);
-      font-weight: 800;
-      text-transform: uppercase;
-      font-size: 13px;
-      letter-spacing: 1px;
-    }
-
-    .day h3 {
-      color: var(--green-dark);
-      font-size: 21px;
-      margin-bottom: 9px;
-    }
-
-    .day p {
-      color: #555;
-    }
-
-    .day ul {
-      padding-left: 20px;
-      color: #555;
-    }
-
-    .day li {
-      margin-bottom: 5px;
-    }
-
-    /* =========================
-       INFO BOXES
-    ========================= */
-
-    .info-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 20px;
-      margin-top: 25px;
-    }
-
-    .info-box {
-      padding: 25px;
-      border-radius: 14px;
-      background: #f3ead9;
-      border-left: 5px solid var(--gold);
-    }
-
-    .info-box h3 {
-      color: var(--green-dark);
-      margin-bottom: 10px;
-    }
-
-    .info-box ul {
-      padding-left: 20px;
-      color: #555;
-    }
-
-    /* =========================
-       BOOKING FOOTER
-    ========================= */
-
-    .booking-footer {
-      padding: 30px 35px;
-      background: var(--green-dark);
-      color: white;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 25px;
-      flex-wrap: wrap;
-    }
-
-    .booking-footer h3 {
-      color: var(--gold-light);
-      margin-bottom: 4px;
-    }
-
-    .booking-footer p {
-      opacity: 0.88;
-    }
-
-    .book-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      background: var(--orange);
-      color: white;
-      padding: 15px 28px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: bold;
-      border: 2px solid var(--orange);
-      transition: all 0.3s ease;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .book-button:hover {
-      background: var(--gold);
-      border-color: var(--gold);
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
-    }
-
-    .whatsapp-icon {
-      font-size: 20px;
-    }
-
-    /* =========================
-       QUICK PRICE SECTION
-    ========================= */
-
-    .price-summary {
-      max-width: 1100px;
-      margin: 0 auto 80px;
-      padding: 0 20px;
-    }
-
-    .price-summary h2 {
-      text-align: center;
-      color: var(--green-dark);
-      margin-bottom: 25px;
-      font-size: 34px;
-    }
-
-    .price-table {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--cream);
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .price-table th {
-      background: var(--green-dark);
-      color: white;
-      padding: 16px;
-      text-align: left;
-    }
-
-    .price-table td {
-      padding: 15px 16px;
-      border-bottom: 1px solid #e3d8c2;
-    }
-
-    .price-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .price-table tr:hover {
-      background: #f5ecd9;
-    }
-
-    .table-price {
-      color: var(--orange);
-      font-weight: bold;
-    }
-
-    /* =========================
-       NOTE
-    ========================= */
-
-    .pricing-note {
-      max-width: 900px;
-      margin: -40px auto 70px;
-      padding: 0 20px;
-      text-align: center;
-      color: #666;
-      font-size: 14px;
-    }
-
-    /* =========================
-       RESPONSIVE
-    ========================= */
-
-    @media (max-width: 700px) {
-
-      .safari-hero {
-        padding: 65px 18px;
-      }
-
-      .itinerary-header {
-        padding: 28px 22px;
-      }
-
-      .price-box {
-        width: 100%;
-      }
-
-      .highlights,
-      .itinerary-body,
-      .booking-footer {
-        padding-left: 22px;
-        padding-right: 22px;
-      }
-
-      .day {
-        grid-template-columns: 1fr;
-        gap: 7px;
-      }
-
-      .info-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .booking-footer {
-        align-items: flex-start;
-      }
-
-      .book-button {
-        width: 100%;
-      }
-
-      .price-table {
-        font-size: 14px;
-      }
-    }
-    
-<!-- =========================================================
+  <!-- =========================================================
      BRENDAVA SAFARIS
      UGANDA • KENYA • TANZANIA ITINERARIES
      Rate: $520 per day
 ========================================================= -->
 
-
+<style>
   .brendava-itineraries {
     --green: #174d32;
     --green2: #276749;
@@ -790,7 +294,1106 @@
       width: 100%;
     }
   }
-  </style>
+</style>
+
+
+<section class="brendava-itineraries">
+
+  <div class="brendava-intro">
+    <div class="label">Brendava Safaris</div>
+    <h2>Uganda, Kenya & Tanzania Safaris</h2>
+    <p>
+      Experience mountain gorillas, chimpanzees, the Big Five,
+      spectacular savannahs and the great wildlife destinations
+      of East Africa.
+    </p>
+  </div>
+
+
+  <div class="brendava-list">
+
+
+    <!-- =====================================================
+         7 DAY UGANDA KENYA
+    ====================================================== -->
+
+    <article class="brendava-card">
+
+      <div class="brendava-card-header">
+
+        <div>
+          <div class="duration">7 Days / 6 Nights</div>
+          <h3>Uganda–Kenya Wildlife Safari</h3>
+          <div class="route">
+            Uganda • Bwindi • Queen Elizabeth • Nairobi • Maasai Mara
+          </div>
+        </div>
+
+        <div class="price">
+          <small>Total Price</small>
+          <strong>$3,640</strong>
+          <span>$520 per day</span>
+        </div>
+
+      </div>
+
+
+      <div class="tags">
+        <span class="tag">Bwindi</span>
+        <span class="tag">Gorillas</span>
+        <span class="tag">Queen Elizabeth</span>
+        <span class="tag">Nairobi</span>
+        <span class="tag">Maasai Mara</span>
+      </div>
+
+
+      <div class="brendava-days">
+
+        <div class="brendava-day">
+          <div class="day-number">Day 1</div>
+          <div>
+            <h4>Entebbe/Kampala → Queen Elizabeth</h4>
+            <ul>
+              <li>Pickup from Entebbe/Kampala.</li>
+              <li>Scenic drive west.</li>
+              <li>Equator stop.</li>
+              <li>Afternoon game drive.</li>
+              <li>Dinner and overnight.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 2</div>
+          <div>
+            <h4>Queen Elizabeth National Park</h4>
+            <ul>
+              <li>Morning game drive.</li>
+              <li>Search for elephants, buffalo, lions and antelope.</li>
+              <li>Kazinga Channel boat cruise.</li>
+              <li>Overnight Queen Elizabeth.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 3</div>
+          <div>
+            <h4>Queen Elizabeth → Bwindi</h4>
+            <ul>
+              <li>Early breakfast.</li>
+              <li>Scenic journey through southwestern Uganda.</li>
+              <li>Optional Ishasha game drive.</li>
+              <li>Arrival and preparation for gorilla trekking.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 4</div>
+          <div>
+            <h4>Mountain Gorilla Trekking</h4>
+            <ul>
+              <li>Early breakfast.</li>
+              <li>Gorilla trekking briefing.</li>
+              <li>Mountain gorilla trekking.</li>
+              <li>Packed lunch.</li>
+              <li>Optional Batwa/community experience.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 5</div>
+          <div>
+            <h4>Bwindi → Nairobi, Kenya</h4>
+            <ul>
+              <li>Breakfast.</li>
+              <li>Transfer toward Entebbe.</li>
+              <li>Flight/connection to Nairobi.</li>
+              <li>Overnight Nairobi.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 6</div>
+          <div>
+            <h4>Nairobi → Maasai Mara</h4>
+            <ul>
+              <li>Morning departure.</li>
+              <li>Scenic drive to Maasai Mara.</li>
+              <li>Lunch.</li>
+              <li>Afternoon game drive.</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 7</div>
+          <div>
+            <h4>Maasai Mara → Nairobi</h4>
+            <ul>
+              <li>Early morning game drive.</li>
+              <li>Breakfast.</li>
+              <li>Return to Nairobi.</li>
+              <li>Airport or hotel transfer.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="details">
+
+        <div class="detail-box">
+          <h4>Highlights</h4>
+          <ul>
+            <li>Mountain gorillas</li>
+            <li>Queen Elizabeth wildlife</li>
+            <li>Kazinga Channel</li>
+            <li>Maasai Mara</li>
+            <li>Big Five viewing</li>
+          </ul>
+        </div>
+
+        <div class="detail-box">
+          <h4>Included</h4>
+          <ul>
+            <li>Private 4x4 safari vehicle</li>
+            <li>Professional driver-guide</li>
+            <li>Park fees</li>
+            <li>Gorilla trekking permit</li>
+            <li>Game drives</li>
+          </ul>
+        </div>
+
+      </div>
+
+
+      <div class="booking">
+
+        <div>
+          <h4>Book this safari</h4>
+          <p>7 Days Uganda–Kenya • $3,640</p>
+        </div>
+
+        <a
+          class="book-btn"
+          target="_blank"
+          href="https://wa.me/256762584996?text=Hello%20Brendava%20Safaris%2C%20I%20would%20like%20to%20book%20the%207-Day%20Uganda-Kenya%20Wildlife%20Safari%20for%20%243%2C640.">
+          Book on WhatsApp
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- =====================================================
+         9 DAY UGANDA KENYA
+    ====================================================== -->
+
+    <article class="brendava-card">
+
+      <div class="brendava-card-header">
+
+        <div>
+          <div class="duration">9 Days / 8 Nights</div>
+          <h3>Uganda–Kenya Primate & Wildlife Safari</h3>
+          <div class="route">
+            Kibale • Queen Elizabeth • Bwindi • Lake Nakuru • Maasai Mara
+          </div>
+        </div>
+
+        <div class="price">
+          <small>Total Price</small>
+          <strong>$4,680</strong>
+          <span>$520 per day</span>
+        </div>
+
+      </div>
+
+
+      <div class="tags">
+        <span class="tag">Kibale</span>
+        <span class="tag">Chimpanzees</span>
+        <span class="tag">Bwindi</span>
+        <span class="tag">Lake Nakuru</span>
+        <span class="tag">Maasai Mara</span>
+      </div>
+
+
+      <div class="brendava-days">
+
+        <div class="brendava-day">
+          <div class="day-number">Day 1</div>
+          <div>
+            <h4>Entebbe/Kampala → Kibale</h4>
+            <p>
+              Scenic journey west to Kibale Forest National Park,
+              lunch en route and evening relaxation.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 2</div>
+          <div>
+            <h4>Chimpanzee Trekking & Bigodi</h4>
+            <p>
+              Chimpanzee trekking followed by lunch and a Bigodi
+              Wetland/community experience.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 3</div>
+          <div>
+            <h4>Kibale → Queen Elizabeth</h4>
+            <p>
+              Scenic transfer and afternoon game drive in
+              Queen Elizabeth National Park.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 4</div>
+          <div>
+            <h4>Queen Elizabeth Wildlife Safari</h4>
+            <p>
+              Morning game drive and afternoon Kazinga Channel
+              boat cruise.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 5</div>
+          <div>
+            <h4>Queen Elizabeth → Bwindi</h4>
+            <p>
+              Drive through southwestern Uganda with optional
+              Ishasha wildlife viewing.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 6</div>
+          <div>
+            <h4>Mountain Gorilla Trekking</h4>
+            <p>
+              Full gorilla trekking experience in Bwindi
+              Impenetrable Forest.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 7</div>
+          <div>
+            <h4>Bwindi → Nairobi</h4>
+            <p>
+              Breakfast, transfer toward Entebbe and onward
+              connection to Nairobi.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 8</div>
+          <div>
+            <h4>Nairobi → Lake Nakuru → Maasai Mara</h4>
+            <p>
+              Wildlife experience at Lake Nakuru followed by
+              transfer to Maasai Mara.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 9</div>
+          <div>
+            <h4>Maasai Mara → Nairobi</h4>
+            <p>
+              Early morning game drive and return to Nairobi
+              for airport or hotel transfer.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="details">
+
+        <div class="detail-box">
+          <h4>Highlights</h4>
+          <ul>
+            <li>Chimpanzee trekking</li>
+            <li>Mountain gorillas</li>
+            <li>Queen Elizabeth</li>
+            <li>Lake Nakuru</li>
+            <li>Maasai Mara</li>
+          </ul>
+        </div>
+
+        <div class="detail-box">
+          <h4>Accommodation</h4>
+          <ul>
+            <li>Kibale Forest Camp</li>
+            <li>Buffalo Safari Lodge</li>
+            <li>Ichumbi Gorilla Lodge</li>
+            <li>Nakuru safari lodge</li>
+            <li>Maasai Mara lodge/camp</li>
+          </ul>
+        </div>
+
+      </div>
+
+
+      <div class="booking">
+
+        <div>
+          <h4>Book this safari</h4>
+          <p>9 Days Uganda–Kenya • $4,680</p>
+        </div>
+
+        <a
+          class="book-btn"
+          target="_blank"
+          href="https://wa.me/256762584996?text=Hello%20Brendava%20Safaris%2C%20I%20would%20like%20to%20book%20the%209-Day%20Uganda-Kenya%20Primate%20%26%20Wildlife%20Safari%20for%20%244%2C680.">
+          Book on WhatsApp
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- =====================================================
+         11 DAY UGANDA TANZANIA
+    ====================================================== -->
+
+    <article class="brendava-card">
+
+      <div class="brendava-card-header">
+
+        <div>
+          <div class="duration">11 Days / 10 Nights</div>
+          <h3>Uganda–Tanzania Wildlife & Primate Safari</h3>
+          <div class="route">
+            Kibale • Queen Elizabeth • Bwindi • Tarangire • Serengeti • Ngorongoro
+          </div>
+        </div>
+
+        <div class="price">
+          <small>Total Price</small>
+          <strong>$5,720</strong>
+          <span>$520 per day</span>
+        </div>
+
+      </div>
+
+
+      <div class="tags">
+        <span class="tag">Chimpanzees</span>
+        <span class="tag">Gorillas</span>
+        <span class="tag">Tarangire</span>
+        <span class="tag">Serengeti</span>
+        <span class="tag">Ngorongoro</span>
+      </div>
+
+
+      <div class="brendava-days">
+
+        <div class="brendava-day">
+          <div class="day-number">Day 1</div>
+          <div>
+            <h4>Entebbe/Kampala → Kibale</h4>
+            <p>
+              Scenic transfer to Kibale Forest National Park.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 2</div>
+          <div>
+            <h4>Chimpanzee Trekking</h4>
+            <p>
+              Chimpanzee trekking and optional Bigodi Wetland
+              community experience.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 3</div>
+          <div>
+            <h4>Kibale → Queen Elizabeth</h4>
+            <p>
+              Scenic drive and afternoon wildlife game drive.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 4</div>
+          <div>
+            <h4>Queen Elizabeth National Park</h4>
+            <p>
+              Morning game drive and Kazinga Channel boat cruise.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 5</div>
+          <div>
+            <h4>Queen Elizabeth → Bwindi</h4>
+            <p>
+              Scenic journey through southwestern Uganda.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 6</div>
+          <div>
+            <h4>Gorilla Trekking in Bwindi</h4>
+            <p>
+              Full-day mountain gorilla trekking experience.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 7</div>
+          <div>
+            <h4>Bwindi → Entebbe → Arusha</h4>
+            <p>
+              Transfer and onward connection to Tanzania.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 8</div>
+          <div>
+            <h4>Arusha → Tarangire</h4>
+            <p>
+              Game drive in Tarangire National Park,
+              famous for elephants and baobab landscapes.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 9</div>
+          <div>
+            <h4>Tarangire → Serengeti</h4>
+            <p>
+              Scenic transfer toward Serengeti with an
+              afternoon game drive.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 10</div>
+          <div>
+            <h4>Full-Day Serengeti Safari</h4>
+            <p>
+              Morning and afternoon game drives searching for
+              lions, elephants, buffalo, cheetahs and other wildlife.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 11</div>
+          <div>
+            <h4>Serengeti → Ngorongoro → Arusha</h4>
+            <p>
+              Morning wildlife viewing followed by transfer
+              toward Ngorongoro and onward to Arusha/airport.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="details">
+
+        <div class="detail-box">
+          <h4>Highlights</h4>
+          <ul>
+            <li>Kibale chimpanzees</li>
+            <li>Uganda mountain gorillas</li>
+            <li>Queen Elizabeth</li>
+            <li>Tarangire</li>
+            <li>Serengeti</li>
+            <li>Ngorongoro</li>
+          </ul>
+        </div>
+
+        <div class="detail-box">
+          <h4>Included</h4>
+          <ul>
+            <li>Park fees</li>
+            <li>Chimpanzee permit</li>
+            <li>Gorilla permit</li>
+            <li>Game drives</li>
+            <li>Private safari vehicle</li>
+            <li>Professional guide</li>
+          </ul>
+        </div>
+
+      </div>
+
+
+      <div class="booking">
+
+        <div>
+          <h4>Book this safari</h4>
+          <p>11 Days Uganda–Tanzania • $5,720</p>
+        </div>
+
+        <a
+          class="book-btn"
+          target="_blank"
+          href="https://wa.me/256762584996?text=Hello%20Brendava%20Safaris%2C%20I%20would%20like%20to%20book%20the%2011-Day%20Uganda-Tanzania%20Wildlife%20%26%20Primate%20Safari%20for%20%245%2C720.">
+          Book on WhatsApp
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- =====================================================
+         15 DAY UGANDA KENYA TANZANIA
+    ====================================================== -->
+
+    <article class="brendava-card">
+
+      <div class="brendava-card-header">
+
+        <div>
+          <div class="duration">15 Days / 14 Nights</div>
+          <h3>Uganda–Kenya–Tanzania Grand Safari</h3>
+          <div class="route">
+            Kibale • Queen Elizabeth • Bwindi • Maasai Mara • Tarangire • Ngorongoro
+          </div>
+        </div>
+
+        <div class="price">
+          <small>Total Price</small>
+          <strong>$7,800</strong>
+          <span>$520 per day</span>
+        </div>
+
+      </div>
+
+
+      <div class="tags">
+        <span class="tag">Uganda</span>
+        <span class="tag">Kenya</span>
+        <span class="tag">Tanzania</span>
+        <span class="tag">Gorillas</span>
+        <span class="tag">Maasai Mara</span>
+        <span class="tag">Serengeti</span>
+        <span class="tag">Ngorongoro</span>
+      </div>
+
+
+      <div class="brendava-days">
+
+        <div class="brendava-day">
+          <div class="day-number">Day 1</div>
+          <div>
+            <h4>Entebbe/Kampala → Kibale</h4>
+            <p>Scenic journey to Kibale Forest.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 2</div>
+          <div>
+            <h4>Chimpanzee Trekking & Bigodi</h4>
+            <p>Chimpanzee trekking and community experience.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 3</div>
+          <div>
+            <h4>Kibale → Queen Elizabeth</h4>
+            <p>Scenic transfer and afternoon game drive.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 4</div>
+          <div>
+            <h4>Queen Elizabeth</h4>
+            <p>Morning game drive and Kazinga Channel cruise.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 5</div>
+          <div>
+            <h4>Queen Elizabeth → Bwindi</h4>
+            <p>Scenic journey through southwestern Uganda.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 6</div>
+          <div>
+            <h4>Mountain Gorilla Trekking</h4>
+            <p>Gorilla trekking and optional cultural experience.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 7</div>
+          <div>
+            <h4>Bwindi → Nairobi</h4>
+            <p>Transfer toward Entebbe and onward connection to Nairobi.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 8</div>
+          <div>
+            <h4>Nairobi → Lake Nakuru</h4>
+            <p>Wildlife viewing and overnight near Lake Nakuru.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 9</div>
+          <div>
+            <h4>Lake Nakuru → Maasai Mara</h4>
+            <p>Transfer to Maasai Mara and afternoon game drive.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 10</div>
+          <div>
+            <h4>Full-Day Maasai Mara</h4>
+            <p>Morning and afternoon game drives with optional Maasai cultural visit.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 11</div>
+          <div>
+            <h4>Maasai Mara → Nairobi → Arusha</h4>
+            <p>Travel onward to Tanzania.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 12</div>
+          <div>
+            <h4>Arusha → Tarangire</h4>
+            <p>Wildlife safari through Tarangire National Park.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 13</div>
+          <div>
+            <h4>Tarangire → Ngorongoro</h4>
+            <p>Scenic transfer toward the Ngorongoro Conservation Area.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 14</div>
+          <div>
+            <h4>Ngorongoro Crater</h4>
+            <p>Full-day crater wildlife safari.</p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 15</div>
+          <div>
+            <h4>Ngorongoro → Arusha/Airport</h4>
+            <p>Morning wildlife viewing and airport transfer.</p>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="details">
+
+        <div class="detail-box">
+          <h4>Three-Country Highlights</h4>
+          <ul>
+            <li>Uganda gorillas</li>
+            <li>Uganda chimpanzees</li>
+            <li>Kenya Maasai Mara</li>
+            <li>Tanzania Tarangire</li>
+            <li>Ngorongoro Crater</li>
+          </ul>
+        </div>
+
+        <div class="detail-box">
+          <h4>Safari Experience</h4>
+          <ul>
+            <li>Private 4x4 safari</li>
+            <li>Professional guide</li>
+            <li>Wildlife game drives</li>
+            <li>Primate trekking</li>
+            <li>Cultural experiences</li>
+          </ul>
+        </div>
+
+      </div>
+
+
+      <div class="booking">
+
+        <div>
+          <h4>Book the Grand Safari</h4>
+          <p>15 Days Uganda–Kenya–Tanzania • $7,800</p>
+        </div>
+
+        <a
+          class="book-btn"
+          target="_blank"
+          href="https://wa.me/256762584996?text=Hello%20Brendava%20Safaris%2C%20I%20would%20like%20to%20book%20the%2015-Day%20Uganda-Kenya-Tanzania%20Grand%20Safari%20for%20%247%2C800.">
+          Book on WhatsApp
+        </a>
+
+      </div>
+
+    </article>
+
+
+    <!-- =====================================================
+         20 DAY UGANDA KENYA TANZANIA
+    ====================================================== -->
+
+    <article class="brendava-card">
+
+      <div class="brendava-card-header">
+
+        <div>
+          <div class="duration">20 Days / 19 Nights</div>
+          <h3>Ultimate Uganda–Kenya–Tanzania Safari</h3>
+          <div class="route">
+            Uganda • Kenya • Tanzania • Gorillas • Chimpanzees • Big Five
+          </div>
+        </div>
+
+        <div class="price">
+          <small>Total Price</small>
+          <strong>$10,400</strong>
+          <span>$520 per day</span>
+        </div>
+
+      </div>
+
+
+      <div class="tags">
+        <span class="tag">Lake Mburo</span>
+        <span class="tag">Bwindi</span>
+        <span class="tag">Queen Elizabeth</span>
+        <span class="tag">Kibale</span>
+        <span class="tag">Maasai Mara</span>
+        <span class="tag">Amboseli</span>
+        <span class="tag">Tarangire</span>
+        <span class="tag">Serengeti</span>
+        <span class="tag">Ngorongoro</span>
+      </div>
+
+
+      <div class="brendava-days">
+
+        <div class="brendava-day">
+          <div class="day-number">Day 1</div>
+          <div>
+            <h4>Entebbe/Kampala → Lake Mburo</h4>
+            <p>
+              Scenic drive to Lake Mburo with an optional Equator
+              stop and evening wildlife experience.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 2</div>
+          <div>
+            <h4>Lake Mburo Wildlife & Ankole Culture</h4>
+            <p>
+              Morning game drive or walking safari, optional
+              horseback safari and Ankole cultural experience.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 3</div>
+          <div>
+            <h4>Lake Mburo → Bwindi</h4>
+            <p>
+              Scenic journey through the Kigezi highlands.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 4</div>
+          <div>
+            <h4>Mountain Gorilla Trekking</h4>
+            <p>
+              Full gorilla trekking experience in Bwindi
+              Impenetrable Forest.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 5</div>
+          <div>
+            <h4>Bwindi → Queen Elizabeth</h4>
+            <p>
+              Travel through southwestern Uganda with optional
+              Ishasha wildlife viewing.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 6</div>
+          <div>
+            <h4>Queen Elizabeth National Park</h4>
+            <p>
+              Morning game drive and Kazinga Channel boat cruise.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 7</div>
+          <div>
+            <h4>Queen Elizabeth → Kibale</h4>
+            <p>
+              Scenic transfer to Kibale Forest National Park.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 8</div>
+          <div>
+            <h4>Chimpanzee Trekking & Bigodi</h4>
+            <p>
+              Chimpanzee trekking followed by Bigodi Wetland
+              and community experience.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 9</div>
+          <div>
+            <h4>Kibale → Entebbe → Nairobi</h4>
+            <p>
+              Transfer toward Entebbe and onward connection to Kenya.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 10</div>
+          <div>
+            <h4>Nairobi → Lake Nakuru</h4>
+            <p>
+              Travel to Lake Nakuru for a wildlife experience.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 11</div>
+          <div>
+            <h4>Lake Nakuru → Maasai Mara</h4>
+            <p>
+              Scenic transfer to Maasai Mara and afternoon game drive.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 12</div>
+          <div>
+            <h4>Full-Day Maasai Mara</h4>
+            <p>
+              Full-day game drives with opportunities to see
+              predators, elephants, buffalo and other wildlife.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 13</div>
+          <div>
+            <h4>Maasai Mara → Amboseli</h4>
+            <p>
+              Scenic transfer to Amboseli National Park and
+              evening wildlife viewing.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 14</div>
+          <div>
+            <h4>Amboseli National Park</h4>
+            <p>
+              Full-day game drive with elephant viewing and
+              Mount Kilimanjaro scenery.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 15</div>
+          <div>
+            <h4>Amboseli → Arusha, Tanzania</h4>
+            <p>
+              Cross into Tanzania and continue to Arusha.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 16</div>
+          <div>
+            <h4>Arusha → Tarangire</h4>
+            <p>
+              Full wildlife safari in Tarangire National Park.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 17</div>
+          <div>
+            <h4>Tarangire → Serengeti</h4>
+            <p>
+              Scenic transfer to Serengeti with an afternoon
+              game drive.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 18</div>
+          <div>
+            <h4>Full-Day Serengeti Safari</h4>
+            <p>
+              Morning and afternoon game drives across the
+              Serengeti ecosystem.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 19</div>
+          <div>
+            <h4>Serengeti → Ngorongoro</h4>
+            <p>
+              Morning game drive followed by transfer to
+              the Ngorongoro area.
+            </p>
+          </div>
+        </div>
+
+        <div class="brendava-day">
+          <div class="day-number">Day 20</div>
+          <div>
+            <h4>Ngorongoro Crater → Arusha/Airport</h4>
+            <p>
+              Early crater game drive, picnic lunch and transfer
+              to Arusha or the airport.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="details">
+
+        <div class="detail-box">
+          <h4>Ultimate Highlights</h4>
+          <ul>
+            <li>Mountain gorillas</li>
+            <li>Chimpanzees</li>
+            <li>Queen Elizabeth</li>
+            <li>Maasai Mara</li>
+            <li>Amboseli</li>
+            <li>Tarangire</li>
+            <li>Serengeti</li>
+            <li>Ngorongoro</li>
+          </ul>
+        </div>
+
+        <div class="detail-box">
+          <h4>Safari Includes</h4>
+          <ul>
+            <li>Private 4x4 safari vehicle</li>
+            <li>Professional English-speaking guide</li>
+            <li>Park entry fees</li>
+            <li>Game drives</li>
+            <li>Chimpanzee trekking</li>
+            <li>Gorilla trekking</li>
+            <li>Boat cruise</li>
+            <li>Cultural experiences</li>
+          </ul>
+        </div>
+
+      </div>
+
+
+      <div class="booking">
+
+        <div>
+          <h4>Book the Ultimate East African Safari</h4>
+          <p>20 Days Uganda–Kenya–Tanzania • $10,400</p>
+        </div>
+
+        <a
+          class="book-btn"
+          target="_blank"
+          href="https://wa.me/256762584996?text=Hello%20Brendava%20Safaris%2C%20I%20would%20like%20to%20book%20the%2020-Day%20Uganda-Kenya-Tanzania%20Ultimate%20Safari%20for%20%2410%2C400.">
+          Book on WhatsApp
+        </a>
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+</section>
 </head>
 
 <body>
