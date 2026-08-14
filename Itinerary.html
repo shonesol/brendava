@@ -1,4045 +1,1783 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Brendava Safaris | Uganda & Rwanda</title>
-
-<style>
-:root{
-    --green-dark:#123d29;
-    --green:#286044;
-    --green-light:#6d8d61;
-    --orange:#dc6f29;
-    --orange-light:#ef8d4a;
-    --beige:#f3e7d1;
-    --beige-light:#fbf8f1;
-    --gold:#c99a3d;
-    --gold-light:#e2bf6a;
-    --white:#fff;
-    --dark:#26352d;
-    --muted:#6d766f;
-    --border:#e5dac7;
-    --shadow:0 18px 50px rgba(18,61,41,.12);
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    color:var(--dark);
-    background:var(--beige-light);
-    line-height:1.7;
-}
-
-button,
-input,
-select,
-textarea{
-    font-family:inherit;
-}
-
-a{
-    text-decoration:none;
-    color:inherit;
-}
-
-/* =========================
-   NAVBAR
-========================= */
-
-.navbar{
-    position:sticky;
-    top:0;
-    z-index:999;
-    background:rgba(18,61,41,.97);
-    box-shadow:0 4px 20px rgba(0,0,0,.12);
-}
-
-.nav-container{
-    max-width:1200px;
-    margin:auto;
-    padding:16px 22px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    color:#fff;
-    font-size:29px;
-    font-weight:900;
-    letter-spacing:1px;
-}
-
-.logo span{
-    color:var(--gold-light);
-}
-
-.nav-links{
-    display:flex;
-    list-style:none;
-    gap:28px;
-    color:#fff;
-    font-size:14px;
-}
-
-.nav-links a:hover{
-    color:var(--gold-light);
-}
-
-.nav-book{
-    background:var(--orange);
-    color:#fff;
-    padding:11px 20px;
-    border-radius:30px;
-    font-weight:bold;
-}
-
-.nav-book:hover{
-    background:var(--orange-light);
-}
-
-/* =========================
-   HERO
-========================= */
-
-.hero{
-    min-height:650px;
-    display:flex;
-    align-items:center;
-    position:relative;
-
-    background:
-    linear-gradient(
-        rgba(10,43,29,.72),
-        rgba(10,43,29,.72)
-    ),
-    url("https://images.unsplash.com/photo-1516426122078-c23e76319801?auto=format&fit=crop&w=2000&q=85")
-    center/cover;
-}
-
-.hero-content{
-    max-width:1200px;
-    width:100%;
-    margin:auto;
-    padding:80px 22px;
-    color:#fff;
-}
-
-.hero-badge{
-    display:inline-block;
-    background:var(--gold);
-    color:var(--green-dark);
-    padding:8px 17px;
-    border-radius:30px;
-    font-size:12px;
-    font-weight:900;
-    text-transform:uppercase;
-    letter-spacing:1.5px;
-    margin-bottom:22px;
-}
-
-.hero h1{
-    max-width:850px;
-    font-size:clamp(42px,7vw,78px);
-    line-height:1.02;
-    margin-bottom:25px;
-}
-
-.hero h1 span{
-    color:var(--gold-light);
-}
-
-.hero p{
-    max-width:700px;
-    color:#f2eee5;
-    font-size:19px;
-    margin-bottom:30px;
-}
-
-.hero-buttons{
-    display:flex;
-    gap:13px;
-    flex-wrap:wrap;
-}
-
-.btn{
-    border:0;
-    cursor:pointer;
-    display:inline-flex;
-    justify-content:center;
-    align-items:center;
-    padding:14px 24px;
-    border-radius:40px;
-    font-weight:800;
-    transition:.25s ease;
-}
-
-.btn:hover{
-    transform:translateY(-2px);
-}
-
-.btn-orange{
-    background:var(--orange);
-    color:#fff;
-}
-
-.btn-orange:hover{
-    background:var(--orange-light);
-}
-
-.btn-gold{
-    background:var(--gold);
-    color:var(--green-dark);
-}
-
-.btn-green{
-    background:var(--green);
-    color:#fff;
-}
-
-.btn-outline{
-    border:1px solid rgba(255,255,255,.6);
-    color:#fff;
-    background:transparent;
-}
-
-/* =========================
-   GENERAL
-========================= */
-
-.section{
-    padding:90px 20px;
-}
-
-.container{
-    max-width:1200px;
-    margin:auto;
-}
-
-.heading{
-    text-align:center;
-    max-width:760px;
-    margin:0 auto 50px;
-}
-
-.eyebrow{
-    color:var(--orange);
-    text-transform:uppercase;
-    font-weight:900;
-    letter-spacing:2px;
-    font-size:13px;
-    margin-bottom:10px;
-}
-
-.heading h2{
-    color:var(--green-dark);
-    font-size:clamp(32px,5vw,50px);
-    line-height:1.15;
-    margin-bottom:14px;
-}
-
-.heading p{
-    color:var(--muted);
-}
-
-/* =========================
-   PRICE BANNER
-========================= */
-
-.price-banner{
-    background:var(--green-dark);
-    color:#fff;
-    padding:24px 20px;
-}
-
-.price-banner-inner{
-    max-width:1100px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-    text-align:center;
-}
-
-.price-banner strong{
-    color:var(--gold-light);
-    font-size:26px;
-}
-
-.price-banner span{
-    color:#dce5de;
-}
-
-/* =========================
-   FILTER
-========================= */
-
-.filters{
-    display:flex;
-    justify-content:center;
-    gap:10px;
-    flex-wrap:wrap;
-    margin-bottom:45px;
-}
-
-.filter{
-    background:#fff;
-    border:1px solid var(--border);
-    color:var(--green-dark);
-    padding:10px 18px;
-    border-radius:30px;
-    cursor:pointer;
-    font-weight:bold;
-}
-
-.filter:hover,
-.filter.active{
-    background:var(--green);
-    color:#fff;
-    border-color:var(--green);
-}
-
-/* =========================
-   SAFARI CARDS
-========================= */
-
-.safari-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:28px;
-}
-
-.safari-card{
-    background:#fff;
-    border-radius:22px;
-    overflow:hidden;
-    box-shadow:var(--shadow);
-    border:1px solid rgba(201,154,61,.18);
-    transition:.3s;
-}
-
-.safari-card:hover{
-    transform:translateY(-7px);
-}
-
-.safari-image{
-    height:245px;
-    position:relative;
-    overflow:hidden;
-}
-
-.safari-image img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    transition:.5s;
-}
-
-.safari-card:hover .safari-image img{
-    transform:scale(1.07);
-}
-
-.duration{
-    position:absolute;
-    left:18px;
-    top:18px;
-    background:var(--orange);
-    color:#fff;
-    padding:8px 14px;
-    border-radius:30px;
-    font-size:12px;
-    font-weight:900;
-}
-
-.price-tag{
-    position:absolute;
-    right:18px;
-    bottom:18px;
-    background:rgba(18,61,41,.94);
-    color:#fff;
-    padding:12px 16px;
-    border-radius:13px;
-    backdrop-filter:blur(5px);
-}
-
-.price-tag small{
-    display:block;
-    color:var(--gold-light);
-    font-size:10px;
-    text-transform:uppercase;
-}
-
-.price-tag strong{
-    display:block;
-    font-size:21px;
-}
-
-.safari-content{
-    padding:27px;
-}
-
-.safari-content h3{
-    color:var(--green-dark);
-    font-size:23px;
-    line-height:1.25;
-    margin-bottom:10px;
-}
-
-.safari-description{
-    color:var(--muted);
-    font-size:14px;
-    margin-bottom:20px;
-}
-
-.features{
-    list-style:none;
-    margin-bottom:20px;
-}
-
-.features li{
-    font-size:14px;
-    padding:5px 0 5px 22px;
-    position:relative;
-}
-
-.features li:before{
-    content:"✓";
-    color:var(--orange);
-    font-weight:bold;
-    position:absolute;
-    left:0;
-}
-
-.price-box{
-    background:var(--beige);
-    padding:16px;
-    border-radius:14px;
-    margin-bottom:18px;
-    border-left:4px solid var(--gold);
-}
-
-.price-box .per-day{
-    color:var(--muted);
-    font-size:12px;
-}
-
-.price-box .total{
-    color:var(--green-dark);
-    font-size:27px;
-    font-weight:900;
-}
-
-.price-box .total span{
-    color:var(--orange);
-}
-
-.card-actions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:10px;
-}
-
-.card-actions button{
-    width:100%;
-    font-size:13px;
-    padding:12px 8px;
-}
-
-/* =========================
-   INDIVIDUAL ITINERARY
-========================= */
-
-.itineraries{
-    background:var(--beige);
-}
-
-.itinerary-section{
-    max-width:1100px;
-    margin:0 auto 80px;
-    background:#fff;
-    border-radius:28px;
-    overflow:hidden;
-    box-shadow:var(--shadow);
-    border:1px solid rgba(201,154,61,.2);
-}
-
-.itinerary-hero{
-    min-height:300px;
-    padding:50px;
-    display:flex;
-    align-items:end;
-    position:relative;
-    color:#fff;
-
-    background:
-    linear-gradient(
-        rgba(18,61,41,.25),
-        rgba(18,61,41,.88)
-    ),
-    url("https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=1600&q=80")
-    center/cover;
-}
-
-.itinerary-section:nth-child(even) .itinerary-hero{
-    background:
-    linear-gradient(
-        rgba(18,61,41,.25),
-        rgba(18,61,41,.88)
-    ),
-    url("https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=1600&q=80")
-    center/cover;
-}
-
-.itinerary-title{
-    max-width:700px;
-}
-
-.itinerary-title .label{
-    color:var(--gold-light);
-    font-weight:900;
-    text-transform:uppercase;
-    letter-spacing:2px;
-    font-size:12px;
-}
-
-.itinerary-title h3{
-    font-size:clamp(30px,5vw,48px);
-    line-height:1.1;
-    margin:8px 0;
-}
-
-.itinerary-title p{
-    color:#eee;
-}
-
-.itinerary-price{
-    position:absolute;
-    right:40px;
-    top:40px;
-    background:var(--gold);
-    color:var(--green-dark);
-    padding:18px 22px;
-    border-radius:17px;
-    text-align:center;
-}
-
-.itinerary-price small{
-    display:block;
-    font-size:11px;
-    font-weight:bold;
-}
-
-.itinerary-price strong{
-    font-size:27px;
-}
-
-.days{
-    padding:28px;
-}
-
-.day{
-    border:1px solid var(--border);
-    border-radius:16px;
-    margin-bottom:13px;
-    overflow:hidden;
-    background:#fff;
-}
-
-.day:last-child{
-    margin-bottom:0;
-}
-
-.day-button{
-    width:100%;
-    background:#fff;
-    border:0;
-    cursor:pointer;
-    padding:20px;
-    display:flex;
-    align-items:center;
-    gap:17px;
-    text-align:left;
-}
-
-.day-number{
-    min-width:55px;
-    height:55px;
-    border-radius:50%;
-    display:grid;
-    place-items:center;
-    background:var(--green);
-    color:#fff;
-    font-size:12px;
-    font-weight:900;
-}
-
-.day-info{
-    flex:1;
-}
-
-.day-info strong{
-    color:var(--green-dark);
-    display:block;
-    font-size:17px;
-}
-
-.day-info span{
-    color:var(--muted);
-    font-size:13px;
-}
-
-.day-plus{
-    font-size:25px;
-    color:var(--orange);
-    transition:.3s;
-}
-
-.day.open .day-plus{
-    transform:rotate(45deg);
-}
-
-.day-content{
-    max-height:0;
-    overflow:hidden;
-    transition:max-height .4s ease;
-}
-
-.day-inner{
-    padding:0 25px 25px 95px;
-}
-
-.day-inner ul{
-    padding-left:20px;
-}
-
-.day-inner li{
-    margin:6px 0;
-    color:#505b54;
-}
-
-/* =========================
-   BOOKING CTA IN ITINERARY
-========================= */
-
-.itinerary-bottom{
-    background:var(--green-dark);
-    padding:30px;
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:20px;
-    flex-wrap:wrap;
-    color:#fff;
-}
-
-.itinerary-bottom h4{
-    font-size:20px;
-}
-
-.itinerary-bottom p{
-    color:#cbd8d0;
-    font-size:14px;
-}
-
-.itinerary-bottom .booking-price{
-    color:var(--gold-light);
-    font-weight:900;
-    font-size:22px;
-}
-
-/* =========================
-   INCLUDED / EXCLUDED
-========================= */
-
-.inclusions{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:25px;
-}
-
-.info-box{
-    background:#fff;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:var(--shadow);
-}
-
-.info-box h3{
-    color:var(--green-dark);
-    margin-bottom:20px;
-    font-size:23px;
-}
-
-.info-box ul{
-    list-style:none;
-}
-
-.info-box li{
-    padding:8px 0 8px 25px;
-    border-bottom:1px solid #eee7db;
-    position:relative;
-    font-size:14px;
-}
-
-.info-box li:last-child{
-    border-bottom:0;
-}
-
-.includes li:before{
-    content:"✓";
-    position:absolute;
-    left:0;
-    color:var(--green);
-    font-weight:bold;
-}
-
-.excludes li:before{
-    content:"×";
-    position:absolute;
-    left:0;
-    color:var(--orange);
-    font-weight:bold;
-}
-
-/* =========================
-   WHY US
-========================= */
-
-.why{
-    background:var(--green-dark);
-    color:#fff;
-}
-
-.why .heading h2{
-    color:#fff;
-}
-
-.why .heading p{
-    color:#d0ddd4;
-}
-
-.why-grid{
-    display:grid;
-    grid-template-columns:repeat(4,1fr);
-    gap:20px;
-}
-
-.why-card{
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:18px;
-    padding:30px 20px;
-    text-align:center;
-}
-
-.why-icon{
-    font-size:38px;
-    margin-bottom:12px;
-}
-
-.why-card h3{
-    color:var(--gold-light);
-    margin-bottom:8px;
-}
-
-.why-card p{
-    color:#ccd8d1;
-    font-size:14px;
-}
-
-/* =========================
-   CTA
-========================= */
-
-.cta{
-    padding:90px 20px;
-    background:var(--beige);
-    text-align:center;
-}
-
-.cta h2{
-    color:var(--green-dark);
-    font-size:clamp(32px,5vw,52px);
-    line-height:1.1;
-    margin-bottom:15px;
-}
-
-.cta p{
-    max-width:650px;
-    margin:0 auto 25px;
-    color:var(--muted);
-}
-
-/* =========================
-   FOOTER
-========================= */
-
-footer{
-    background:#0c2b1d;
-    color:#fff;
-    padding:55px 20px 25px;
-}
-
-.footer-grid{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr;
-    gap:40px;
-}
-
-.footer-logo{
-    font-size:29px;
-    font-weight:900;
-}
-
-.footer-logo span{
-    color:var(--gold-light);
-}
-
-.footer-brand p{
-    max-width:500px;
-    color:#b9c9bf;
-    margin-top:12px;
-}
-
-.footer-column h4{
-    color:var(--gold-light);
-    margin-bottom:14px;
-}
-
-.footer-column a{
-    display:block;
-    color:#cbd7d0;
-    font-size:14px;
-    margin:7px 0;
-}
-
-.copyright{
-    max-width:1200px;
-    margin:40px auto 0;
-    padding-top:20px;
-    border-top:1px solid rgba(255,255,255,.1);
-    text-align:center;
-    color:#91a199;
-    font-size:13px;
-}
-
-/* =========================
-   BOOKING MODAL
-========================= */
-
-.modal{
-    position:fixed;
-    inset:0;
-    z-index:3000;
-    background:rgba(0,0,0,.7);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-}
-
-.modal.show{
-    display:flex;
-}
-
-.modal-box{
-    width:100%;
-    max-width:680px;
-    max-height:92vh;
-    overflow:auto;
-    background:#fff;
-    border-radius:25px;
-    position:relative;
-    box-shadow:0 25px 80px rgba(0,0,0,.3);
-}
-
-.modal-top{
-    background:var(--green-dark);
-    color:#fff;
-    padding:30px;
-}
-
-.modal-top h2{
-    font-size:30px;
-    margin-bottom:6px;
-}
-
-.modal-top p{
-    color:#d3ddd6;
-}
-
-.close{
-    position:absolute;
-    right:18px;
-    top:14px;
-    width:40px;
-    height:40px;
-    border:0;
-    border-radius:50%;
-    background:rgba(255,255,255,.15);
-    color:#fff;
-    font-size:25px;
-    cursor:pointer;
-}
-
-.booking-summary{
-    margin:25px 30px;
-    padding:20px;
-    background:var(--beige);
-    border-radius:15px;
-    border-left:5px solid var(--gold);
-}
-
-.booking-summary small{
-    color:var(--muted);
-    display:block;
-}
-
-.booking-summary strong{
-    color:var(--green-dark);
-    font-size:25px;
-}
-
-.booking-form{
-    padding:0 30px 30px;
-}
-
-.form-group{
-    margin-bottom:15px;
-}
-
-.form-group label{
-    display:block;
-    color:var(--green-dark);
-    font-size:13px;
-    font-weight:bold;
-    margin-bottom:5px;
-}
-
-.form-group input,
-.form-group select,
-.form-group textarea{
-    width:100%;
-    padding:13px;
-    border:1px solid var(--border);
-    border-radius:10px;
-    outline:none;
-}
-
-.form-group textarea{
-    min-height:100px;
-    resize:vertical;
-}
-
-.form-group input:focus,
-.form-group select:focus,
-.form-group textarea:focus{
-    border-color:var(--green);
-}
-
-.booking-submit{
-    width:100%;
-    background:var(--orange);
-    color:#fff;
-    border:0;
-    padding:15px;
-    border-radius:12px;
-    font-size:16px;
-    font-weight:900;
-    cursor:pointer;
-}
-
-.booking-submit:hover{
-    background:var(--orange-light);
-}
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:1050px){
-
-    .safari-grid{
-        grid-template-columns:repeat(2,1fr);
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Brendava Safaris | Uganda & Rwanda Safari Packages</title>
+
+  <style>
+    :root {
+      --green-dark: #174d32;
+      --green: #276749;
+      --green-light: #3f7d54;
+      --orange: #d96b27;
+      --orange-light: #e98a43;
+      --beige: #f5eddd;
+      --cream: #fffaf0;
+      --gold: #c99a3e;
+      --gold-light: #e2bd68;
+      --brown: #5c4528;
+      --white: #ffffff;
+      --text: #333333;
+      --shadow: 0 12px 35px rgba(23, 77, 50, 0.14);
+      --radius: 18px;
     }
 
-    .why-grid{
-        grid-template-columns:repeat(2,1fr);
-    }
-}
-
-@media(max-width:700px){
-
-    .nav-links{
-        display:none;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
     }
 
-    .nav-container{
-        padding:13px 17px;
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--beige);
+      color: var(--text);
+      line-height: 1.7;
     }
 
-    .nav-book{
-        padding:9px 13px;
-        font-size:12px;
+    /* =========================
+       HERO
+    ========================= */
+
+    .safari-hero {
+      position: relative;
+      padding: 90px 20px;
+      text-align: center;
+      color: white;
+      background:
+        linear-gradient(rgba(23, 77, 50, 0.88), rgba(23, 77, 50, 0.92)),
+        radial-gradient(circle at center, #5b8b57, #174d32);
+      overflow: hidden;
     }
 
-    .hero{
-        min-height:600px;
+    .safari-hero::before,
+    .safari-hero::after {
+      content: "";
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(201, 154, 62, 0.15);
     }
 
-    .hero h1{
-        font-size:44px;
+    .safari-hero::before {
+      width: 350px;
+      height: 350px;
+      top: -180px;
+      left: -100px;
     }
 
-    .hero p{
-        font-size:16px;
+    .safari-hero::after {
+      width: 450px;
+      height: 450px;
+      bottom: -250px;
+      right: -150px;
     }
 
-    .section{
-        padding:65px 15px;
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+      margin: auto;
     }
 
-    .safari-grid{
-        grid-template-columns:1fr;
+    .brand {
+      color: var(--gold-light);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 15px;
     }
 
-    .inclusions{
-        grid-template-columns:1fr;
+    .safari-hero h1 {
+      font-size: clamp(38px, 6vw, 70px);
+      line-height: 1.1;
+      margin-bottom: 20px;
     }
 
-    .why-grid{
-        grid-template-columns:1fr;
+    .safari-hero h1 span {
+      color: var(--gold-light);
     }
 
-    .itinerary-hero{
-        padding:30px 22px;
-        min-height:390px;
+    .safari-hero p {
+      max-width: 750px;
+      margin: auto;
+      font-size: 18px;
+      opacity: 0.94;
     }
 
-    .itinerary-price{
-        position:static;
-        display:inline-block;
-        margin-bottom:120px;
+    .hero-line {
+      width: 90px;
+      height: 4px;
+      background: var(--orange);
+      margin: 28px auto;
+      border-radius: 10px;
     }
 
-    .days{
-        padding:15px;
+    /* =========================
+       INTRO
+    ========================= */
+
+    .intro {
+      max-width: 1000px;
+      margin: 60px auto 30px;
+      padding: 0 20px;
+      text-align: center;
     }
 
-    .day-button{
-        padding:15px;
+    .section-label {
+      color: var(--orange);
+      text-transform: uppercase;
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 2px;
     }
 
-    .day-number{
-        min-width:46px;
-        height:46px;
-        font-size:10px;
+    .intro h2 {
+      color: var(--green-dark);
+      font-size: clamp(30px, 4vw, 46px);
+      margin: 8px 0 15px;
     }
 
-    .day-inner{
-        padding:0 18px 20px;
+    .intro p {
+      max-width: 780px;
+      margin: auto;
+      color: #666;
     }
 
-    .itinerary-bottom{
-        padding:25px 20px;
+    /* =========================
+       ITINERARIES
+    ========================= */
+
+    .itinerary-container {
+      max-width: 1200px;
+      margin: 50px auto 90px;
+      padding: 0 20px;
+      display: grid;
+      gap: 35px;
     }
 
-    .footer-grid{
-        grid-template-columns:1fr;
+    .itinerary {
+      background: var(--cream);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      border: 1px solid rgba(201, 154, 62, 0.28);
     }
 
-    .card-actions{
-        grid-template-columns:1fr;
+    .itinerary-header {
+      background: linear-gradient(135deg, var(--green-dark), var(--green));
+      color: white;
+      padding: 35px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+      flex-wrap: wrap;
+      position: relative;
     }
-}
-</style>
+
+    .itinerary-header::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      bottom: 0;
+      width: 160px;
+      height: 5px;
+      background: var(--orange);
+    }
+
+    .day-number {
+      color: var(--gold-light);
+      text-transform: uppercase;
+      font-weight: bold;
+      letter-spacing: 2px;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .itinerary-header h2 {
+      font-size: clamp(25px, 4vw, 38px);
+      line-height: 1.2;
+    }
+
+    .itinerary-subtitle {
+      margin-top: 8px;
+      opacity: 0.85;
+      font-size: 15px;
+    }
+
+    .price-box {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(226,189,104,0.55);
+      border-radius: 15px;
+      padding: 18px 25px;
+      min-width: 190px;
+      text-align: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .price-box small {
+      display: block;
+      color: var(--gold-light);
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .price {
+      font-size: 32px;
+      font-weight: 800;
+      margin-top: 3px;
+    }
+
+    .per-day {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    /* =========================
+       HIGHLIGHTS
+    ========================= */
+
+    .highlights {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 25px 35px;
+      background: #f1e6cf;
+      border-bottom: 1px solid #dfd0b3;
+    }
+
+    .highlight {
+      background: white;
+      color: var(--green-dark);
+      padding: 7px 13px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: bold;
+      border: 1px solid rgba(39,103,73,0.15);
+    }
+
+    /* =========================
+       ITINERARY BODY
+    ========================= */
+
+    .itinerary-body {
+      padding: 35px;
+    }
+
+    .day {
+      display: grid;
+      grid-template-columns: 105px 1fr;
+      gap: 25px;
+      padding: 25px 0;
+      border-bottom: 1px solid #e4d9c4;
+    }
+
+    .day:first-child {
+      padding-top: 0;
+    }
+
+    .day:last-child {
+      border-bottom: none;
+    }
+
+    .day-label {
+      color: var(--orange);
+      font-weight: 800;
+      text-transform: uppercase;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    .day h3 {
+      color: var(--green-dark);
+      font-size: 21px;
+      margin-bottom: 9px;
+    }
+
+    .day p {
+      color: #555;
+    }
+
+    .day ul {
+      padding-left: 20px;
+      color: #555;
+    }
+
+    .day li {
+      margin-bottom: 5px;
+    }
+
+    /* =========================
+       INFO BOXES
+    ========================= */
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 25px;
+    }
+
+    .info-box {
+      padding: 25px;
+      border-radius: 14px;
+      background: #f3ead9;
+      border-left: 5px solid var(--gold);
+    }
+
+    .info-box h3 {
+      color: var(--green-dark);
+      margin-bottom: 10px;
+    }
+
+    .info-box ul {
+      padding-left: 20px;
+      color: #555;
+    }
+
+    /* =========================
+       BOOKING FOOTER
+    ========================= */
+
+    .booking-footer {
+      padding: 30px 35px;
+      background: var(--green-dark);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 25px;
+      flex-wrap: wrap;
+    }
+
+    .booking-footer h3 {
+      color: var(--gold-light);
+      margin-bottom: 4px;
+    }
+
+    .booking-footer p {
+      opacity: 0.88;
+    }
+
+    .book-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: var(--orange);
+      color: white;
+      padding: 15px 28px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: bold;
+      border: 2px solid var(--orange);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .book-button:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.18);
+    }
+
+    .whatsapp-icon {
+      font-size: 20px;
+    }
+
+    /* =========================
+       QUICK PRICE SECTION
+    ========================= */
+
+    .price-summary {
+      max-width: 1100px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+
+    .price-summary h2 {
+      text-align: center;
+      color: var(--green-dark);
+      margin-bottom: 25px;
+      font-size: 34px;
+    }
+
+    .price-table {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--cream);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .price-table th {
+      background: var(--green-dark);
+      color: white;
+      padding: 16px;
+      text-align: left;
+    }
+
+    .price-table td {
+      padding: 15px 16px;
+      border-bottom: 1px solid #e3d8c2;
+    }
+
+    .price-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .price-table tr:hover {
+      background: #f5ecd9;
+    }
+
+    .table-price {
+      color: var(--orange);
+      font-weight: bold;
+    }
+
+    /* =========================
+       NOTE
+    ========================= */
+
+    .pricing-note {
+      max-width: 900px;
+      margin: -40px auto 70px;
+      padding: 0 20px;
+      text-align: center;
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      .safari-hero {
+        padding: 65px 18px;
+      }
+
+      .itinerary-header {
+        padding: 28px 22px;
+      }
+
+      .price-box {
+        width: 100%;
+      }
+
+      .highlights,
+      .itinerary-body,
+      .booking-footer {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+      .day {
+        grid-template-columns: 1fr;
+        gap: 7px;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .booking-footer {
+        align-items: flex-start;
+      }
+
+      .book-button {
+        width: 100%;
+      }
+
+      .price-table {
+        font-size: 14px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
 <!-- =========================
-     NAVIGATION
-========================= -->
-
-<nav class="navbar">
-
-    <div class="nav-container">
-
-        <a href="index.html" class="home-btn">
-            BRENDAVA<span>.</span>
-        </a>
-
-        <ul class="nav-links">
-            <li><a href="#safaris">Safaris</a></li>
-            <li><a href="#itineraries">Itineraries</a></li>
-            <li><a href="#why">Why Brendava</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-
-        <a href="#safaris" class="nav-book">
-            Book Safari
-        </a>
-
-    </div>
-
-</nav>
-
-
-<!-- =========================
      HERO
 ========================= -->
 
-<section class="hero">
+<section class="safari-hero">
+  <div class="hero-content">
 
-    <div class="hero-content">
+    <div class="brand">Brendava Safaris</div>
 
-        <span class="hero-badge">
-            Uganda & Rwanda Safari Specialists
-        </span>
+    <h1>
+      Uganda & Rwanda
+      <span>Safari Adventures</span>
+    </h1>
 
-        <h1>
-            Explore the
-            <span>Wild Heart</span>
-            of Africa
-        </h1>
+    <div class="hero-line"></div>
 
-        <p>
-            Discover gorillas, chimpanzees, lions, elephants,
-            breathtaking landscapes and authentic African culture
-            with Brendava Safaris.
-        </p>
+    <p>
+      Discover Uganda's incredible wildlife, mountain gorillas,
+      chimpanzees and breathtaking landscapes with our private
+      safari experiences.
+    </p>
 
-        <div class="hero-buttons">
+  </div>
+</section>
 
-            <a href="#safaris" class="btn btn-orange">
-                Explore Our Safaris
-            </a>
 
-            <a href="#contact" class="btn btn-outline">
-                Plan Your Journey
-            </a>
+<!-- =========================
+     INTRO
+========================= -->
 
-        </div>
+<section class="intro">
 
-    </div>
+  <div class="section-label">Explore East Africa</div>
+
+  <h2>Choose Your Safari</h2>
+
+  <p>
+    From short wildlife escapes to unforgettable Uganda–Rwanda
+    adventures, choose the itinerary that suits your time and
+    travel style. Our safari rate is <strong>$520 per day</strong>.
+  </p>
 
 </section>
 
 
 <!-- =========================
-     PRICE BANNER
+     PRICE SUMMARY
 ========================= -->
 
-<div class="price-banner">
+<section class="price-summary">
 
-    <div class="price-banner-inner">
+  <h2>Safari Prices</h2>
 
-        <strong>$520 / Day</strong>
+  <table class="price-table">
 
-        <span>
-            Private safari rate • Vehicle • Professional guide •
-            Wildlife experiences
-        </span>
+    <thead>
+      <tr>
+        <th>Safari</th>
+        <th>Duration</th>
+        <th>Price Per Day</th>
+        <th>Total Price</th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr>
+        <td>Uganda Wildlife Escape</td>
+        <td>4 Days / 3 Nights</td>
+        <td>$520</td>
+        <td class="table-price">$2,080</td>
+      </tr>
+
+      <tr>
+        <td>Uganda Wildlife & Primate Safari</td>
+        <td>5 Days / 4 Nights</td>
+        <td>$520</td>
+        <td class="table-price">$2,600</td>
+      </tr>
+
+      <tr>
+        <td>Uganda Wildlife & Gorilla Safari</td>
+        <td>6 Days / 5 Nights</td>
+        <td>$520</td>
+        <td class="table-price">$3,120</td>
+      </tr>
+
+      <tr>
+        <td>Uganda Wildlife & Primate Safari</td>
+        <td>7 Days / 6 Nights</td>
+        <td>$520</td>
+        <td class="table-price">$3,640</td>
+      </tr>
+
+      <tr>
+        <td>Uganda–Rwanda Wildlife & Primate Safari</td>
+        <td>10 Days / 9 Nights</td>
+        <td>$520</td>
+        <td class="table-price">$5,200</td>
+      </tr>
+
+      <tr>
+        <td>Uganda–Rwanda Wildlife, Primate & Cultural Safari</td>
+        <td>14 Days / 13 Nights</td>
+        <td>$520</td>
+        <td class="table-price">$7,280</td>
+      </tr>
+
+    </tbody>
+
+  </table>
+
+</section>
+
+
+<div class="itinerary-container">
+
+
+<!-- =========================================================
+     4 DAY SAFARI
+========================================================= -->
+
+<article class="itinerary">
+
+  <div class="itinerary-header">
+
+    <div>
+      <div class="day-number">4 Days / 3 Nights</div>
+
+      <h2>Uganda Wildlife Escape</h2>
+
+      <div class="itinerary-subtitle">
+        Murchison Falls • Wildlife • Nile Cruise
+      </div>
+    </div>
+
+    <div class="price-box">
+      <small>Total Safari</small>
+      <div class="price">$2,080</div>
+      <div class="per-day">$520 per day</div>
+    </div>
+
+  </div>
+
+
+  <div class="highlights">
+    <span class="highlight">Murchison Falls</span>
+    <span class="highlight">Game Drives</span>
+    <span class="highlight">Nile Boat Cruise</span>
+    <span class="highlight">Rhino Tracking</span>
+  </div>
+
+
+  <div class="itinerary-body">
+
+    <div class="day">
+      <div class="day-label">Day 1</div>
+
+      <div>
+        <h3>Entebbe/Kampala → Murchison Falls</h3>
+
+        <ul>
+          <li>Pickup from Entebbe/Kampala.</li>
+          <li>Optional Ziwa Rhino Sanctuary visit.</li>
+          <li>Lunch en route.</li>
+          <li>Continue to Murchison Falls National Park.</li>
+          <li>Afternoon game drive, time permitting.</li>
+          <li>Check in and relax at the lodge.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 2</div>
+
+      <div>
+        <h3>Murchison Falls Wildlife Safari</h3>
+
+        <ul>
+          <li>Early morning game drive.</li>
+          <li>Breakfast at the lodge.</li>
+          <li>Lunch and relaxation.</li>
+          <li>Victoria Nile boat cruise.</li>
+          <li>Visit the Top of Murchison Falls.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 3</div>
+
+      <div>
+        <h3>Murchison Falls Adventure</h3>
+
+        <ul>
+          <li>Morning wildlife activity.</li>
+          <li>Explore the park and surrounding landscapes.</li>
+          <li>Optional additional game drive.</li>
+          <li>Relax at the lodge.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 4</div>
+
+      <div>
+        <h3>Murchison Falls → Entebbe/Kampala</h3>
+
+        <ul>
+          <li>Breakfast.</li>
+          <li>Begin journey back to Kampala/Entebbe.</li>
+          <li>Lunch en route.</li>
+          <li>Optional Equator stop.</li>
+          <li>Airport or hotel transfer.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="info-grid">
+
+      <div class="info-box">
+        <h3>Accommodation</h3>
+        <ul>
+          <li>Pakuba Safari Lodge</li>
+          <li>Murchison River Lodge</li>
+          <li>Paraa Safari Lodge</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>Included</h3>
+        <ul>
+          <li>Private 4x4 safari vehicle</li>
+          <li>Professional driver-guide</li>
+          <li>Park fees</li>
+          <li>Game drives</li>
+          <li>Nile boat cruise</li>
+        </ul>
+      </div>
 
     </div>
+
+  </div>
+
+
+  <div class="booking-footer">
+
+    <div>
+      <h3>Ready for your adventure?</h3>
+      <p>Book your 4-day Uganda safari with Brendava Safaris.</p>
+    </div>
+
+    <a
+      class="book-button"
+      href="https://wa.me/256762584996?text=Hello%20Brendava%20Safaris%2C%20I%20would%20like%20to%20book%20the%204-Day%20Uganda%20Wildlife%20Escape%20for%20%242%2C080."
+      target="_blank"
+      rel="noopener">
+      <span class="whatsapp-icon">☏</span>
+      Book on WhatsApp
+    </a>
+
+  </div>
+
+</article>
+
+
+<!-- =========================================================
+     5 DAY SAFARI
+========================================================= -->
+
+<article class="itinerary">
+
+  <div class="itinerary-header">
+
+    <div>
+      <div class="day-number">5 Days / 4 Nights</div>
+
+      <h2>Uganda Wildlife & Primate Safari</h2>
+
+      <div class="itinerary-subtitle">
+        Kibale • Queen Elizabeth • Chimpanzees
+      </div>
+    </div>
+
+    <div class="price-box">
+      <small>Total Safari</small>
+      <div class="price">$2,600</div>
+      <div class="per-day">$520 per day</div>
+    </div>
+
+  </div>
+
+
+  <div class="highlights">
+    <span class="highlight">Kibale Forest</span>
+    <span class="highlight">Chimpanzees</span>
+    <span class="highlight">Queen Elizabeth</span>
+    <span class="highlight">Kazinga Channel</span>
+  </div>
+
+
+  <div class="itinerary-body">
+
+    <div class="day">
+      <div class="day-label">Day 1</div>
+
+      <div>
+        <h3>Entebbe/Kampala → Kibale Forest</h3>
+
+        <ul>
+          <li>Early morning pickup.</li>
+          <li>Scenic drive toward Kibale Forest.</li>
+          <li>Lunch en route.</li>
+          <li>Arrival and lodge check-in.</li>
+          <li>Evening relaxation.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 2</div>
+
+      <div>
+        <h3>Chimpanzee Trekking in Kibale</h3>
+
+        <ul>
+          <li>Early breakfast.</li>
+          <li>Chimpanzee trekking briefing.</li>
+          <li>Chimpanzee trekking in Kibale Forest.</li>
+          <li>Return for lunch.</li>
+          <li>Optional Bigodi Wetland experience.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 3</div>
+
+      <div>
+        <h3>Kibale → Queen Elizabeth</h3>
+
+        <ul>
+          <li>Breakfast and departure.</li>
+          <li>Scenic drive to Queen Elizabeth National Park.</li>
+          <li>Afternoon game drive.</li>
+          <li>Search for elephants, buffalo, antelope and lions.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 4</div>
+
+      <div>
+        <h3>Queen Elizabeth Wildlife Safari</h3>
+
+        <ul>
+          <li>Early morning game drive.</li>
+          <li>Breakfast at the lodge.</li>
+          <li>Lunch and relaxation.</li>
+          <li>Kazinga Channel boat cruise.</li>
+          <li>Optional evening game drive.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 5</div>
+
+      <div>
+        <h3>Queen Elizabeth → Entebbe/Kampala</h3>
+
+        <ul>
+          <li>Breakfast.</li>
+          <li>Begin return journey.</li>
+          <li>Lunch en route.</li>
+          <li>Optional Equator stop.</li>
+          <li>Airport or hotel transfer.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="info-grid">
+
+      <div class="info-box">
+        <h3>Accommodation</h3>
+        <ul>
+          <li>Kibale Forest Camp</li>
+          <li>Primate Lodge Kibale</li>
+          <li>Buffalo Safari Lodge</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>Included</h3>
+        <ul>
+          <li>Chimpanzee permit</li>
+          <li>Park fees</li>
+          <li>Game drives</li>
+          <li>Private 4x4 vehicle</li>
+          <li>Professional guide</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="booking-footer">
+
+    <div>
+      <h3>Ready for your adventure?</h3>
+      <p>Book your 5-day Uganda primate safari.</p>
+    </div>
+
+    <a
+      class="book-button"
+      href="https://wa.me/256762584996?text=Hello%20Brendava%20Safaris%2C%20I%20would%20like%20to%20book%20the%205-Day%20Uganda%20Wildlife%20%26%20Primate%20Safari%20for%20%242%2C600."
+      target="_blank"
+      rel="noopener">
+      <span class="whatsapp-icon">☏</span>
+      Book on WhatsApp
+    </a>
+
+  </div>
+
+</article>
+
+
+<!-- =========================================================
+     6 DAY SAFARI
+========================================================= -->
+
+<article class="itinerary">
+
+  <div class="itinerary-header">
+
+    <div>
+      <div class="day-number">6 Days / 5 Nights</div>
+
+      <h2>Uganda Wildlife & Gorilla Safari</h2>
+
+      <div class="itinerary-subtitle">
+        Kibale • Queen Elizabeth • Bwindi • Gorillas
+      </div>
+    </div>
+
+    <div class="price-box">
+      <small>Total Safari</small>
+      <div class="price">$3,120</div>
+      <div class="per-day">$520 per day</div>
+    </div>
+
+  </div>
+
+
+  <div class="highlights">
+    <span class="highlight">Chimpanzee Trekking</span>
+    <span class="highlight">Queen Elizabeth</span>
+    <span class="highlight">Bwindi</span>
+    <span class="highlight">Mountain Gorillas</span>
+  </div>
+
+
+  <div class="itinerary-body">
+
+    <div class="day">
+      <div class="day-label">Day 1</div>
+
+      <div>
+        <h3>Entebbe/Kampala → Kibale Forest</h3>
+        <p>
+          Scenic journey west toward Kibale Forest National Park.
+          Lunch en route, arrival and evening relaxation.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 2</div>
+
+      <div>
+        <h3>Chimpanzee Trekking</h3>
+        <p>
+          Early morning chimpanzee trekking followed by lunch.
+          Optional Bigodi Wetland and community experience.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 3</div>
+
+      <div>
+        <h3>Kibale → Queen Elizabeth</h3>
+        <p>
+          Scenic transfer to Queen Elizabeth National Park,
+          followed by an afternoon game drive.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 4</div>
+
+      <div>
+        <h3>Queen Elizabeth → Bwindi</h3>
+        <p>
+          Morning game drive followed by a scenic journey through
+          southwestern Uganda toward Bwindi Impenetrable Forest.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 5</div>
+
+      <div>
+        <h3>Gorilla Trekking in Bwindi</h3>
+        <p>
+          Early breakfast, gorilla trekking briefing and mountain
+          gorilla trekking. Packed lunch and afternoon relaxation.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 6</div>
+
+      <div>
+        <h3>Bwindi → Entebbe/Kampala</h3>
+        <p>
+          Breakfast and return journey toward Kampala/Entebbe.
+          Lunch en route and optional Equator stop.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="info-grid">
+
+      <div class="info-box">
+        <h3>Accommodation</h3>
+        <ul>
+          <li>Kibale Forest Camp</li>
+          <li>Buffalo Safari Lodge</li>
+          <li>Ichumbi Gorilla Lodge</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>Included</h3>
+        <ul>
+          <li>Chimpanzee trekking permit</li>
+          <li>Gorilla trekking permit</li>
+          <li>Park fees</li>
+          <li>Game drives</li>
+          <li>Private safari vehicle</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="booking-footer">
+
+    <div>
+      <h3>Experience the mountain gorillas</h3>
+      <p>Reserve your 6-day Uganda adventure.</p>
+    </div>
+
+    <a
+      class="book-button"
+      href="https://wa.me/256762584996?text=Hello%20Brendava%20Safaris%2C%20I%20would%20like%20to%20book%20the%206-Day%20Uganda%20Wildlife%20%26%20Gorilla%20Safari%20for%20%243%2C120."
+      target="_blank"
+      rel="noopener">
+      <span class="whatsapp-icon">☏</span>
+      Book on WhatsApp
+    </a>
+
+  </div>
+
+</article>
+
+
+<!-- =========================================================
+     7 DAY SAFARI
+========================================================= -->
+
+<article class="itinerary">
+
+  <div class="itinerary-header">
+
+    <div>
+      <div class="day-number">7 Days / 6 Nights</div>
+
+      <h2>Uganda Wildlife & Primate Safari</h2>
+
+      <div class="itinerary-subtitle">
+        Murchison Falls • Kibale • Queen Elizabeth • Bwindi
+      </div>
+    </div>
+
+    <div class="price-box">
+      <small>Total Safari</small>
+      <div class="price">$3,640</div>
+      <div class="per-day">$520 per day</div>
+    </div>
+
+  </div>
+
+
+  <div class="highlights">
+    <span class="highlight">Murchison Falls</span>
+    <span class="highlight">Chimpanzees</span>
+    <span class="highlight">Queen Elizabeth</span>
+    <span class="highlight">Gorilla Trekking</span>
+    <span class="highlight">Bwindi</span>
+  </div>
+
+
+  <div class="itinerary-body">
+
+    <div class="day">
+      <div class="day-label">Day 1</div>
+
+      <div>
+        <h3>Entebbe/Kampala → Murchison Falls</h3>
+        <ul>
+          <li>Pickup from Entebbe/Kampala.</li>
+          <li>Optional Ziwa Rhino Sanctuary visit.</li>
+          <li>Lunch en route.</li>
+          <li>Continue to Murchison Falls.</li>
+          <li>Afternoon game drive, time permitting.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 2</div>
+
+      <div>
+        <h3>Murchison Falls National Park</h3>
+        <ul>
+          <li>Early morning game drive.</li>
+          <li>Breakfast and relaxation.</li>
+          <li>Victoria Nile boat cruise.</li>
+          <li>Visit the Top of Murchison Falls.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 3</div>
+
+      <div>
+        <h3>Murchison Falls → Kibale Forest</h3>
+        <ul>
+          <li>Early breakfast and departure.</li>
+          <li>Scenic transfer toward Kibale.</li>
+          <li>Lunch en route.</li>
+          <li>Arrival and lodge check-in.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 4</div>
+
+      <div>
+        <h3>Chimpanzee Trekking → Queen Elizabeth</h3>
+        <ul>
+          <li>Chimpanzee trekking in Kibale Forest.</li>
+          <li>Return for lunch.</li>
+          <li>Transfer to Queen Elizabeth National Park.</li>
+          <li>Scenic countryside drive.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 5</div>
+
+      <div>
+        <h3>Queen Elizabeth → Bwindi</h3>
+        <ul>
+          <li>Early morning game drive in Kasenyi Plains.</li>
+          <li>Breakfast.</li>
+          <li>Continue toward Bwindi.</li>
+          <li>Lunch en route.</li>
+          <li>Prepare for gorilla trekking.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 6</div>
+
+      <div>
+        <h3>Mountain Gorilla Trekking</h3>
+        <ul>
+          <li>Early breakfast.</li>
+          <li>Gorilla trekking briefing.</li>
+          <li>Mountain gorilla trekking.</li>
+          <li>Packed lunch.</li>
+          <li>Afternoon relaxation.</li>
+          <li>Optional Batwa cultural experience.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="day">
+      <div class="day-label">Day 7</div>
+
+      <div>
+        <h3>Bwindi → Entebbe/Kampala</h3>
+        <ul>
+          <li>Breakfast.</li>
+          <li>Journey back toward Entebbe/Kampala.</li>
+          <li>Lunch en route.</li>
+          <li>Optional Equator stop.</li>
+          <li>Airport or hotel transfer.</li>
+        </ul>
+      </div>
+    </div>
+
+
+    <div class="info-grid">
+
+      <div class="info-box">
+        <h3>Accommodation</h3>
+        <ul>
+          <li>Pakuba Safari Lodge</li>
+          <li>Kibale Forest Camp</li>
+          <li>Buffalo Safari Lodge</li>
+          <li>Ichumbi Gorilla Lodge</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>Included</h3>
+        <ul>
+          <li>6 nights accommodation</li>
+          <li>Park entry fees</li>
+          <li>Chimpanzee permit</li>
+          <li>Gorilla permit</li>
+          <li>Boat cruise</li>
+          <li>Private 4x4 vehicle</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="booking-footer">
+
+    <div>
+      <h3>Ready for Uganda?</h3>
+      <p>Book the complete 7-day wildlife and primate safari.</p>
+    </div>
+
+    <a
+      class="book-button"
+      href="https://wa.me/256762584996?text=Hello%20Brendava%20Safaris%2C%20I%20would%20like%20to%20book%20the%207-Day%20Uganda%20Wildlife%20%26%20Primate%20Safari%20for%20%243%2C640."
+      target="_blank"
+      rel="noopener">
+      <span class="whatsapp-icon">☏</span>
+      Book on WhatsApp
+    </a>
+
+  </div>
+
+</article>
+
+
+<!-- =========================================================
+     10 DAY SAFARI
+========================================================= -->
+
+<article class="itinerary">
+
+  <div class="itinerary-header">
+
+    <div>
+      <div class="day-number">10 Days / 9 Nights</div>
+
+      <h2>Uganda–Rwanda Wildlife & Primate Safari</h2>
+
+      <div class="itinerary-subtitle">
+        Murchison • Kibale • Bwindi • Volcanoes • Kigali
+      </div>
+    </div>
+
+    <div class="price-box">
+      <small>Total Safari</small>
+      <div class="price">$5,200</div>
+      <div class="per-day">$520 per day</div>
+    </div>
+
+  </div>
+
+
+  <div class="highlights">
+    <span class="highlight">Uganda</span>
+    <span class="highlight">Rwanda</span>
+    <span class="highlight">Chimpanzees</span>
+    <span class="highlight">Gorillas</span>
+    <span class="highlight">Golden Monkeys</span>
+    <span class="highlight">Kigali</span>
+  </div>
+
+
+  <div class="itinerary-body">
+
+    <div class="day">
+      <div class="day-label">Day 1</div>
+      <div>
+        <h3>Entebbe/Kampala → Murchison Falls</h3>
+        <p>
+          Drive to Murchison Falls via Ziwa Rhino Sanctuary.
+          Rhino tracking, lunch and arrival at the lodge.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 2</div>
+      <div>
+        <h3>Murchison Falls</h3>
+        <p>
+          Morning game drive, Nile boat cruise and visit to the
+          Top of Murchison Falls.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 3</div>
+      <div>
+        <h3>Murchison → Kibale Forest</h3>
+        <p>
+          Scenic transfer to Kibale Forest with lunch en route
+          and evening relaxation.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 4</div>
+      <div>
+        <h3>Chimpanzee Trekking & Bigodi</h3>
+        <p>
+          Chimpanzee trekking followed by lunch and a Bigodi
+          Wetland/community experience.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 5</div>
+      <div>
+        <h3>Kibale → Bwindi</h3>
+        <p>
+          Scenic journey through southwestern Uganda toward
+          Bwindi Impenetrable Forest.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 6</div>
+      <div>
+        <h3>Mountain Gorilla Trekking</h3>
+        <p>
+          Gorilla trekking in Bwindi followed by packed lunch
+          and afternoon relaxation.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 7</div>
+      <div>
+        <h3>Bwindi → Rwanda / Volcanoes National Park</h3>
+        <p>
+          Cross the Uganda–Rwanda border and continue to Musanze.
+          Enjoy a cultural experience depending on timing.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 8</div>
+      <div>
+        <h3>Golden Monkey Trekking & Iby'Iwacu</h3>
+        <p>
+          Golden monkey trekking followed by lunch and the
+          Iby'Iwacu cultural experience.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 9</div>
+      <div>
+        <h3>Volcanoes → Kigali</h3>
+        <p>
+          Drive to Kigali followed by a city tour including
+          the Genocide Memorial and local markets.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 10</div>
+      <div>
+        <h3>Kigali → Airport</h3>
+        <p>
+          Breakfast, free time depending on flight schedule
+          and transfer to Kigali International Airport.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="info-grid">
+
+      <div class="info-box">
+        <h3>Accommodation</h3>
+        <ul>
+          <li>Pakuba Safari Lodge</li>
+          <li>Kibale Forest Camp</li>
+          <li>Ichumbi Gorilla Lodge</li>
+          <li>Five Volcanoes Boutique Hotel</li>
+          <li>Four Points by Sheraton Kigali</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>Included</h3>
+        <ul>
+          <li>Uganda & Rwanda park fees</li>
+          <li>Chimpanzee permit</li>
+          <li>Uganda gorilla permit</li>
+          <li>Golden monkey trekking</li>
+          <li>Game drives</li>
+          <li>Nile boat cruise</li>
+          <li>Border assistance</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="booking-footer">
+
+    <div>
+      <h3>Uganda meets Rwanda</h3>
+      <p>Reserve this unforgettable 10-day East African adventure.</p>
+    </div>
+
+    <a
+      class="book-button"
+      href="https://wa.me/256762584996?text=Hello%20Brendava%20Safaris%2C%20I%20would%20like%20to%20book%20the%2010-Day%20Uganda-Rwanda%20Wildlife%20%26%20Primate%20Safari%20for%20%245%2C200."
+      target="_blank"
+      rel="noopener">
+      <span class="whatsapp-icon">☏</span>
+      Book on WhatsApp
+    </a>
+
+  </div>
+
+</article>
+
+
+<!-- =========================================================
+     14 DAY SAFARI
+========================================================= -->
+
+<article class="itinerary">
+
+  <div class="itinerary-header">
+
+    <div>
+      <div class="day-number">14 Days / 13 Nights</div>
+
+      <h2>Uganda–Rwanda Wildlife, Primate & Cultural Safari</h2>
+
+      <div class="itinerary-subtitle">
+        Kibale • Queen Elizabeth • Lake Mburo • Bwindi • Rwanda
+      </div>
+    </div>
+
+    <div class="price-box">
+      <small>Total Safari</small>
+      <div class="price">$7,280</div>
+      <div class="per-day">$520 per day</div>
+    </div>
+
+  </div>
+
+
+  <div class="highlights">
+    <span class="highlight">Chimpanzees</span>
+    <span class="highlight">Queen Elizabeth</span>
+    <span class="highlight">Lake Mburo</span>
+    <span class="highlight">Gorillas</span>
+    <span class="highlight">Golden Monkeys</span>
+    <span class="highlight">Rwanda</span>
+    <span class="highlight">Culture</span>
+  </div>
+
+
+  <div class="itinerary-body">
+
+    <div class="day">
+      <div class="day-label">Day 1</div>
+      <div>
+        <h3>Entebbe/Kampala → Kibale Forest</h3>
+        <p>
+          Early pickup and scenic journey toward Kibale Forest.
+          Lunch en route and evening relaxation.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 2</div>
+      <div>
+        <h3>Chimpanzee Trekking & Bigodi</h3>
+        <p>
+          Chimpanzee trekking followed by a Bigodi Wetland and
+          community experience.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 3</div>
+      <div>
+        <h3>Kibale → Queen Elizabeth</h3>
+        <p>
+          Scenic drive toward Queen Elizabeth, Equator stop and
+          afternoon game drive.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 4</div>
+      <div>
+        <h3>Queen Elizabeth National Park</h3>
+        <p>
+          Morning game drive in Kasenyi Plains and afternoon
+          Kazinga Channel boat cruise.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 5</div>
+      <div>
+        <h3>Queen Elizabeth → Ishasha → Lake Mburo</h3>
+        <p>
+          Optional Ishasha game drive to search for tree-climbing
+          lions, followed by transfer to Lake Mburo.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 6</div>
+      <div>
+        <h3>Lake Mburo Wildlife & Ankole Culture</h3>
+        <p>
+          Morning wildlife activity, optional horseback safari and
+          Ankole cultural experience.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 7</div>
+      <div>
+        <h3>Lake Mburo → Bwindi</h3>
+        <p>
+          Travel through the Kigezi highlands toward Bwindi.
+          Evening preparation for gorilla trekking.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 8</div>
+      <div>
+        <h3>Mountain Gorilla Trekking</h3>
+        <p>
+          Gorilla trekking in Bwindi Impenetrable Forest followed
+          by packed lunch and optional cultural experience.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 9</div>
+      <div>
+        <h3>Bwindi → Lake Bunyonyi → Rwanda</h3>
+        <p>
+          Visit Lake Bunyonyi, optional boat/canoe experience,
+          border crossing and onward journey to Musanze.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 10</div>
+      <div>
+        <h3>Golden Monkey Trekking & Iby'Iwacu</h3>
+        <p>
+          Golden monkey trekking and afternoon visit to the
+          Iby'Iwacu cultural village.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 11</div>
+      <div>
+        <h3>Volcanoes Culture & Community</h3>
+        <p>
+          Explore communities around Musanze, local artisans,
+          traditional crafts and optional cooking experience.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 12</div>
+      <div>
+        <h3>Volcanoes → Kigali</h3>
+        <p>
+          Scenic drive to Kigali followed by a Kigali city tour
+          and Genocide Memorial visit.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 13</div>
+      <div>
+        <h3>Kigali Cultural Experience</h3>
+        <p>
+          City and cultural exploration, artisan markets,
+          coffee or tea experience and farewell dinner.
+        </p>
+      </div>
+    </div>
+
+    <div class="day">
+      <div class="day-label">Day 14</div>
+      <div>
+        <h3>Kigali → Airport</h3>
+        <p>
+          Breakfast, free time depending on flight schedule and
+          transfer to Kigali International Airport.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="info-grid">
+
+      <div class="info-box">
+        <h3>Accommodation</h3>
+        <ul>
+          <li>Kibale Forest Camp</li>
+          <li>Buffalo Safari Lodge</li>
+          <li>Mihingo Lodge</li>
+          <li>Ichumbi Gorilla Lodge</li>
+          <li>Five Volcanoes Boutique Hotel</li>
+          <li>Four Points by Sheraton Kigali</li>
+        </ul>
+      </div>
+
+      <div class="info-box">
+        <h3>Included</h3>
+        <ul>
+          <li>13 nights accommodation</li>
+          <li>Chimpanzee permit</li>
+          <li>Gorilla trekking permit</li>
+          <li>Golden monkey trekking</li>
+          <li>Game drives</li>
+          <li>Kazinga Channel cruise</li>
+          <li>Lake Bunyonyi experience</li>
+          <li>Cultural activities</li>
+          <li>Border assistance</li>
+          <li>Kigali city tour</li>
+        </ul>
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div class="booking-footer">
+
+    <div>
+      <h3>The ultimate East African adventure</h3>
+      <p>Book your 14-day Uganda–Rwanda safari.</p>
+    </div>
+
+    <a
+      class="book-button"
+      href="https://wa.me/256762584996?text=Hello%20Brendava%20Safaris%2C%20I%20would%20like%20to%20book%20the%2014-Day%20Uganda-Rwanda%20Wildlife%2C%20Primate%20%26%20Cultural%20Safari%20for%20%247%2C280."
+      target="_blank"
+      rel="noopener">
+      <span class="whatsapp-icon">☏</span>
+      Book on WhatsApp
+    </a>
+
+  </div>
+
+</article>
+
 
 </div>
 
 
 <!-- =========================
-     SAFARI PACKAGES
+     PRICING NOTE
 ========================= -->
 
-<section class="section" id="safaris">
-
-    <div class="heading">
-
-        <div class="eyebrow">
-            Brendava Safari Collection
-        </div>
-
-        <h2>
-            Choose Your Perfect Safari
-        </h2>
-
-        <p>
-            Select from short wildlife escapes to our complete
-            Uganda and Rwanda adventure.
-        </p>
-
-    </div>
-
-
-    <div class="filters">
-
-        <button class="filter active" data-filter="all">
-            All
-        </button>
-
-        <button class="filter" data-filter="4">
-            4 Days
-        </button>
-
-        <button class="filter" data-filter="5">
-            5 Days
-        </button>
-
-        <button class="filter" data-filter="6">
-            6 Days
-        </button>
-
-        <button class="filter" data-filter="7">
-            7 Days
-        </button>
-
-        <button class="filter" data-filter="10">
-            10 Days
-        </button>
-
-        <button class="filter" data-filter="14">
-            14 Days
-        </button>
-
-    </div>
-
-
-    <div class="safari-grid">
-
-
-        <!-- 4 DAYS -->
-
-        <article class="safari-card" data-days="4">
-
-            <div class="safari-image">
-
-                <img
-                    src="https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=1000&q=80"
-                    alt="Uganda wildlife"
-                >
-
-                <span class="duration">
-                    4 DAYS / 3 NIGHTS
-                </span>
-
-                <div class="price-tag">
-                    <small>Total Safari</small>
-                    <strong>$2,080</strong>
-                </div>
-
-            </div>
-
-
-            <div class="safari-content">
-
-                <h3>
-                    4-Day Uganda Wildlife Escape
-                </h3>
-
-                <p class="safari-description">
-                    A short and exciting Uganda wildlife experience
-                    featuring Queen Elizabeth National Park.
-                </p>
-
-                <ul class="features">
-                    <li>Queen Elizabeth National Park</li>
-                    <li>Kasenyi Plains game drive</li>
-                    <li>Kazinga Channel boat cruise</li>
-                    <li>Private 4x4 safari</li>
-                </ul>
-
-                <div class="price-box">
-                    <div class="per-day">
-                        Safari rate: $520 × 4 days
-                    </div>
-
-                    <div class="total">
-                        Total:
-                        <span>$2,080</span>
-                    </div>
-                </div>
-
-                <div class="card-actions">
-
-                    <button
-                        class="btn btn-gold"
-                        onclick="scrollToItinerary('itinerary-4')"
-                    >
-                        View Itinerary
-                    </button>
-
-                    <button
-                        class="btn btn-orange"
-                        onclick="openBooking(
-                        '4-Day Uganda Wildlife Escape',
-                        4,
-                        2080
-                        )"
-                    >
-                        Book Now
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- 5 DAYS -->
-
-        <article class="safari-card" data-days="5">
-
-            <div class="safari-image">
-
-                <img
-                    src="https://images.unsplash.com/photo-1535338454770-8be927b5a00b?auto=format&fit=crop&w=1000&q=80"
-                    alt="Chimpanzee trekking"
-                >
-
-                <span class="duration">
-                    5 DAYS / 4 NIGHTS
-                </span>
-
-                <div class="price-tag">
-                    <small>Total Safari</small>
-                    <strong>$2,600</strong>
-                </div>
-
-            </div>
-
-
-            <div class="safari-content">
-
-                <h3>
-                    5-Day Uganda Wildlife & Primate Safari
-                </h3>
-
-                <p class="safari-description">
-                    Explore Kibale Forest chimpanzees and the
-                    spectacular wildlife of Queen Elizabeth.
-                </p>
-
-                <ul class="features">
-                    <li>Kibale Forest</li>
-                    <li>Chimpanzee trekking</li>
-                    <li>Bigodi Wetland experience</li>
-                    <li>Queen Elizabeth wildlife</li>
-                    <li>Kazinga Channel cruise</li>
-                </ul>
-
-                <div class="price-box">
-                    <div class="per-day">
-                        Safari rate: $520 × 5 days
-                    </div>
-
-                    <div class="total">
-                        Total:
-                        <span>$2,600</span>
-                    </div>
-                </div>
-
-                <div class="card-actions">
-
-                    <button
-                        class="btn btn-gold"
-                        onclick="scrollToItinerary('itinerary-5')"
-                    >
-                        View Itinerary
-                    </button>
-
-                    <button
-                        class="btn btn-orange"
-                        onclick="openBooking(
-                        '5-Day Uganda Wildlife & Primate Safari',
-                        5,
-                        2600
-                        )"
-                    >
-                        Book Now
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- 6 DAYS -->
-
-        <article class="safari-card" data-days="6">
-
-            <div class="safari-image">
-
-                <img
-                    src="https://images.unsplash.com/photo-1523805009345-7448845a9e53?auto=format&fit=crop&w=1000&q=80"
-                    alt="Mountain gorilla Uganda"
-                >
-
-                <span class="duration">
-                    6 DAYS / 5 NIGHTS
-                </span>
-
-                <div class="price-tag">
-                    <small>Total Safari</small>
-                    <strong>$3,120</strong>
-                </div>
-
-            </div>
-
-
-            <div class="safari-content">
-
-                <h3>
-                    6-Day Uganda Gorilla & Wildlife Safari
-                </h3>
-
-                <p class="safari-description">
-                    Combine chimpanzee trekking, savannah wildlife
-                    and the unforgettable mountain gorillas.
-                </p>
-
-                <ul class="features">
-                    <li>Chimpanzee trekking</li>
-                    <li>Queen Elizabeth National Park</li>
-                    <li>Kazinga Channel</li>
-                    <li>Bwindi Impenetrable Forest</li>
-                    <li>Mountain gorilla trekking</li>
-                </ul>
-
-                <div class="price-box">
-                    <div class="per-day">
-                        Safari rate: $520 × 6 days
-                    </div>
-
-                    <div class="total">
-                        Total:
-                        <span>$3,120</span>
-                    </div>
-                </div>
-
-                <div class="card-actions">
-
-                    <button
-                        class="btn btn-gold"
-                        onclick="scrollToItinerary('itinerary-6')"
-                    >
-                        View Itinerary
-                    </button>
-
-                    <button
-                        class="btn btn-orange"
-                        onclick="openBooking(
-                        '6-Day Uganda Gorilla & Wildlife Safari',
-                        6,
-                        3120
-                        )"
-                    >
-                        Book Now
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- 7 DAYS -->
-
-        <article class="safari-card" data-days="7">
-
-            <div class="safari-image">
-
-                <img
-                    src="https://images.unsplash.com/photo-1534177616072-ef7dc120449d?auto=format&fit=crop&w=1000&q=80"
-                    alt="Murchison Falls"
-                >
-
-                <span class="duration">
-                    7 DAYS / 6 NIGHTS
-                </span>
-
-                <div class="price-tag">
-                    <small>Total Safari</small>
-                    <strong>$3,640</strong>
-                </div>
-
-            </div>
-
-
-            <div class="safari-content">
-
-                <h3>
-                    7-Day Uganda Wildlife & Primate Safari
-                </h3>
-
-                <p class="safari-description">
-                    Murchison Falls, Kibale, Queen Elizabeth and
-                    Bwindi combined into one spectacular journey.
-                </p>
-
-                <ul class="features">
-                    <li>Murchison Falls</li>
-                    <li>Nile boat cruise</li>
-                    <li>Chimpanzee trekking</li>
-                    <li>Queen Elizabeth game drive</li>
-                    <li>Gorilla trekking</li>
-                </ul>
-
-                <div class="price-box">
-                    <div class="per-day">
-                        Safari rate: $520 × 7 days
-                    </div>
-
-                    <div class="total">
-                        Total:
-                        <span>$3,640</span>
-                    </div>
-                </div>
-
-                <div class="card-actions">
-
-                    <button
-                        class="btn btn-gold"
-                        onclick="scrollToItinerary('itinerary-7')"
-                    >
-                        View Itinerary
-                    </button>
-
-                    <button
-                        class="btn btn-orange"
-                        onclick="openBooking(
-                        '7-Day Uganda Wildlife & Primate Safari',
-                        7,
-                        3640
-                        )"
-                    >
-                        Book Now
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- 10 DAYS -->
-
-        <article class="safari-card" data-days="10">
-
-            <div class="safari-image">
-
-                <img
-                    src="https://images.unsplash.com/photo-1516026672322-bc52d61a55d5?auto=format&fit=crop&w=1000&q=80"
-                    alt="Rwanda safari"
-                >
-
-                <span class="duration">
-                    10 DAYS / 9 NIGHTS
-                </span>
-
-                <div class="price-tag">
-                    <small>Total Safari</small>
-                    <strong>$5,200</strong>
-                </div>
-
-            </div>
-
-
-            <div class="safari-content">
-
-                <h3>
-                    10-Day Uganda–Rwanda Safari
-                </h3>
-
-                <p class="safari-description">
-                    Cross from Uganda into Rwanda for gorillas,
-                    golden monkeys, culture and Kigali.
-                </p>
-
-                <ul class="features">
-                    <li>Murchison Falls</li>
-                    <li>Kibale chimpanzees</li>
-                    <li>Bwindi gorillas</li>
-                    <li>Golden monkey trekking</li>
-                    <li>Iby'Iwacu experience</li>
-                    <li>Kigali city tour</li>
-                </ul>
-
-                <div class="price-box">
-                    <div class="per-day">
-                        Safari rate: $520 × 10 days
-                    </div>
-
-                    <div class="total">
-                        Total:
-                        <span>$5,200</span>
-                    </div>
-                </div>
-
-                <div class="card-actions">
-
-                    <button
-                        class="btn btn-gold"
-                        onclick="scrollToItinerary('itinerary-10')"
-                    >
-                        View Itinerary
-                    </button>
-
-                    <button
-                        class="btn btn-orange"
-                        onclick="openBooking(
-                        '10-Day Uganda-Rwanda Wildlife & Primate Safari',
-                        10,
-                        5200
-                        )"
-                    >
-                        Book Now
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-
-        <!-- 14 DAYS -->
-
-        <article class="safari-card" data-days="14">
-
-            <div class="safari-image">
-
-                <img
-                    src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1000&q=80"
-                    alt="East Africa safari"
-                >
-
-                <span class="duration">
-                    14 DAYS / 13 NIGHTS
-                </span>
-
-                <div class="price-tag">
-                    <small>Total Safari</small>
-                    <strong>$7,280</strong>
-                </div>
-
-            </div>
-
-
-            <div class="safari-content">
-
-                <h3>
-                    14-Day Uganda–Rwanda Grand Safari
-                </h3>
-
-                <p class="safari-description">
-                    Our complete Uganda and Rwanda experience,
-                    combining wildlife, primates, gorillas and culture.
-                </p>
-
-                <ul class="features">
-                    <li>Kibale chimpanzees</li>
-                    <li>Queen Elizabeth</li>
-                    <li>Ishasha & Lake Mburo</li>
-                    <li>Bwindi gorillas</li>
-                    <li>Lake Bunyonyi</li>
-                    <li>Golden monkeys</li>
-                    <li>Kigali culture</li>
-                </ul>
-
-                <div class="price-box">
-                    <div class="per-day">
-                        Safari rate: $520 × 14 days
-                    </div>
-
-                    <div class="total">
-                        Total:
-                        <span>$7,280</span>
-                    </div>
-                </div>
-
-                <div class="card-actions">
-
-                    <button
-                        class="btn btn-gold"
-                        onclick="scrollToItinerary('itinerary-14')"
-                    >
-                        View Itinerary
-                    </button>
-
-                    <button
-                        class="btn btn-orange"
-                        onclick="openBooking(
-                        '14-Day Uganda-Rwanda Grand Safari',
-                        14,
-                        7280
-                        )"
-                    >
-                        Book Now
-                    </button>
-
-                </div>
-
-            </div>
-
-        </article>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     ITINERARIES
-========================= -->
-
-<section class="section itineraries" id="itineraries">
-
-    <div class="heading">
-
-        <div class="eyebrow">
-            Explore Every Day
-        </div>
-
-        <h2>
-            Beautifully Planned Safari Itineraries
-        </h2>
-
-        <p>
-            Explore each journey day by day and book directly
-            from your preferred safari.
-        </p>
-
-    </div>
-
-
-    <!-- =====================
-         4 DAY ITINERARY
-    ====================== -->
-
-    <div class="itinerary-section" id="itinerary-4">
-
-        <div class="itinerary-hero">
-
-            <div class="itinerary-title">
-
-                <div class="label">
-                    4 Days / 3 Nights
-                </div>
-
-                <h3>
-                    Uganda Wildlife Escape
-                </h3>
-
-                <p>
-                    Queen Elizabeth National Park and the
-                    magnificent Kazinga Channel.
-                </p>
-
-            </div>
-
-            <div class="itinerary-price">
-                <small>FROM</small>
-                <strong>$2,080</strong>
-            </div>
-
-        </div>
-
-
-        <div class="days">
-
-            <div class="day">
-
-                <button class="day-button">
-
-                    <div class="day-number">DAY 1</div>
-
-                    <div class="day-info">
-                        <strong>
-                            Entebbe/Kampala → Queen Elizabeth
-                        </strong>
-
-                        <span>
-                            Scenic journey and arrival
-                        </span>
-                    </div>
-
-                    <div class="day-plus">+</div>
-
-                </button>
-
-                <div class="day-content">
-
-                    <div class="day-inner">
-
-                        <ul>
-                            <li>Early morning pickup from Entebbe/Kampala.</li>
-                            <li>Drive southwest toward Queen Elizabeth National Park.</li>
-                            <li>Lunch en route.</li>
-                            <li>Check in at the lodge.</li>
-                            <li>Optional afternoon game drive.</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="day">
-
-                <button class="day-button">
-
-                    <div class="day-number">DAY 2</div>
-
-                    <div class="day-info">
-                        <strong>
-                            Queen Elizabeth National Park
-                        </strong>
-
-                        <span>
-                            Game drive & Kazinga Channel
-                        </span>
-                    </div>
-
-                    <div class="day-plus">+</div>
-
-                </button>
-
-                <div class="day-content">
-
-                    <div class="day-inner">
-
-                        <ul>
-                            <li>Early morning game drive.</li>
-                            <li>Search for lions, elephants, buffalo and Uganda kob.</li>
-                            <li>Breakfast at the lodge.</li>
-                            <li>Lunch and relaxation.</li>
-                            <li>Afternoon Kazinga Channel boat cruise.</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="day">
-
-                <button class="day-button">
-
-                    <div class="day-number">DAY 3</div>
-
-                    <div class="day-info">
-                        <strong>
-                            Queen Elizabeth Wildlife Experience
-                        </strong>
-
-                        <span>
-                            Additional wildlife exploration
-                        </span>
-                    </div>
-
-                    <div class="day-plus">+</div>
-
-                </button>
-
-                <div class="day-content">
-
-                    <div class="day-inner">
-
-                        <ul>
-                            <li>Morning game drive.</li>
-                            <li>Breakfast at the lodge.</li>
-                            <li>Optional community experience.</li>
-                            <li>Relaxation and scenic exploration.</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="day">
-
-                <button class="day-button">
-
-                    <div class="day-number">DAY 4</div>
-
-                    <div class="day-info">
-                        <strong>
-                            Queen Elizabeth → Entebbe/Kampala
-                        </strong>
-
-                        <span>
-                            Return journey
-                        </span>
-                    </div>
-
-                    <div class="day-plus">+</div>
-
-                </button>
-
-                <div class="day-content">
-
-                    <div class="day-inner">
-
-                        <ul>
-                            <li>Breakfast.</li>
-                            <li>Begin journey back to Kampala/Entebbe.</li>
-                            <li>Lunch en route.</li>
-                            <li>Optional Equator stop.</li>
-                            <li>Airport or hotel transfer.</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="itinerary-bottom">
-
-            <div>
-                <h4>
-                    Ready for this adventure?
-                </h4>
-
-                <p>
-                    4 days × $520 = $2,080 total.
-                </p>
-            </div>
-
-            <div>
-
-                <span class="booking-price">
-                    $2,080
-                </span>
-
-                <button
-                    class="btn btn-orange"
-                    onclick="openBooking(
-                    '4-Day Uganda Wildlife Escape',
-                    4,
-                    2080
-                    )"
-                >
-                    Book This Safari
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================
-         5 DAY ITINERARY
-    ====================== -->
-
-    <div class="itinerary-section" id="itinerary-5">
-
-        <div class="itinerary-hero">
-
-            <div class="itinerary-title">
-
-                <div class="label">
-                    5 Days / 4 Nights
-                </div>
-
-                <h3>
-                    Uganda Wildlife & Primate Safari
-                </h3>
-
-                <p>
-                    Chimpanzees, forests, wildlife and
-                    the Kazinga Channel.
-                </p>
-
-            </div>
-
-            <div class="itinerary-price">
-                <small>FROM</small>
-                <strong>$2,600</strong>
-            </div>
-
-        </div>
-
-
-        <div class="days">
-
-            <div class="day">
-
-                <button class="day-button">
-
-                    <div class="day-number">DAY 1</div>
-
-                    <div class="day-info">
-                        <strong>
-                            Entebbe/Kampala → Kibale
-                        </strong>
-
-                        <span>
-                            Journey to Uganda's primate capital
-                        </span>
-                    </div>
-
-                    <div class="day-plus">+</div>
-
-                </button>
-
-                <div class="day-content">
-
-                    <div class="day-inner">
-
-                        <ul>
-                            <li>Early morning pickup.</li>
-                            <li>Scenic journey toward Kibale Forest.</li>
-                            <li>Lunch en route.</li>
-                            <li>Check in at the lodge.</li>
-                            <li>Evening relaxation.</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="day">
-
-                <button class="day-button">
-
-                    <div class="day-number">DAY 2</div>
-
-                    <div class="day-info">
-                        <strong>
-                            Chimpanzee Trekking & Bigodi
-                        </strong>
-
-                        <span>
-                            Primates and community experience
-                        </span>
-                    </div>
-
-                    <div class="day-plus">+</div>
-
-                </button>
-
-                <div class="day-content">
-
-                    <div class="day-inner">
-
-                        <ul>
-                            <li>Early breakfast.</li>
-                            <li>Chimpanzee trekking briefing.</li>
-                            <li>Chimpanzee trekking in Kibale Forest.</li>
-                            <li>Return for lunch.</li>
-                            <li>Bigodi Wetland and community experience.</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="day">
-
-                <button class="day-button">
-
-                    <div class="day-number">DAY 3</div>
-
-                    <div class="day-info">
-                        <strong>
-                            Kibale → Queen Elizabeth
-                        </strong>
-
-                        <span>
-                            Forest to savannah
-                        </span>
-                    </div>
-
-                    <div class="day-plus">+</div>
-
-                </button>
-
-                <div class="day-content">
-
-                    <div class="day-inner">
-
-                        <ul>
-                            <li>Breakfast and departure.</li>
-                            <li>Scenic drive to Queen Elizabeth.</li>
-                            <li>Lunch.</li>
-                            <li>Afternoon game drive.</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="day">
-
-                <button class="day-button">
-
-                    <div class="day-number">DAY 4</div>
-
-                    <div class="day-info">
-                        <strong>
-                            Queen Elizabeth National Park
-                        </strong>
-
-                        <span>
-                            Game drive and Kazinga Channel
-                        </span>
-                    </div>
-
-                    <div class="day-plus">+</div>
-
-                </button>
-
-                <div class="day-content">
-
-                    <div class="day-inner">
-
-                        <ul>
-                            <li>Early morning game drive.</li>
-                            <li>Breakfast.</li>
-                            <li>Relaxation and lunch.</li>
-                            <li>Afternoon Kazinga Channel cruise.</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="day">
-
-                <button class="day-button">
-
-                    <div class="day-number">DAY 5</div>
-
-                    <div class="day-info">
-                        <strong>
-                            Queen Elizabeth → Entebbe/Kampala
-                        </strong>
-
-                        <span>
-                            Journey home
-                        </span>
-                    </div>
-
-                    <div class="day-plus">+</div>
-
-                </button>
-
-                <div class="day-content">
-
-                    <div class="day-inner">
-
-                        <ul>
-                            <li>Breakfast.</li>
-                            <li>Optional morning game drive.</li>
-                            <li>Drive toward Kampala/Entebbe.</li>
-                            <li>Lunch en route.</li>
-                            <li>Airport or hotel transfer.</li>
-                        </ul>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-        <div class="itinerary-bottom">
-
-            <div>
-                <h4>
-                    Book the 5-Day Safari
-                </h4>
-
-                <p>
-                    5 days × $520 = $2,600 total.
-                </p>
-            </div>
-
-            <div>
-
-                <span class="booking-price">
-                    $2,600
-                </span>
-
-                <button
-                    class="btn btn-orange"
-                    onclick="openBooking(
-                    '5-Day Uganda Wildlife & Primate Safari',
-                    5,
-                    2600
-                    )"
-                >
-                    Book This Safari
-                </button>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================
-         6 DAY ITINERARY
-    ====================== -->
-
-    <div class="itinerary-section" id="itinerary-6">
-
-        <div class="itinerary-hero">
-
-            <div class="itinerary-title">
-
-                <div class="label">
-                    6 Days / 5 Nights
-                </div>
-
-                <h3>
-                    Uganda Gorilla & Wildlife Safari
-                </h3>
-
-                <p>
-                    Chimpanzees, savannah wildlife and
-                    mountain gorillas.
-                </p>
-
-            </div>
-
-            <div class="itinerary-price">
-                <small>FROM</small>
-                <strong>$3,120</strong>
-            </div>
-
-        </div>
-
-
-        <div class="days">
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 1</div>
-                    <div class="day-info">
-                        <strong>Entebbe/Kampala → Kibale</strong>
-                        <span>Scenic journey to Kibale Forest</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Early morning pickup.</li>
-                            <li>Drive toward Kibale Forest.</li>
-                            <li>Lunch en route.</li>
-                            <li>Check in and relax.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 2</div>
-                    <div class="day-info">
-                        <strong>Chimpanzee Trekking</strong>
-                        <span>Kibale Forest and Bigodi</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Chimpanzee trekking briefing.</li>
-                            <li>Trek through Kibale Forest.</li>
-                            <li>Return for lunch.</li>
-                            <li>Optional Bigodi community experience.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 3</div>
-                    <div class="day-info">
-                        <strong>Kibale → Queen Elizabeth</strong>
-                        <span>Wildlife safari</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast and departure.</li>
-                            <li>Drive toward Queen Elizabeth.</li>
-                            <li>Lunch.</li>
-                            <li>Afternoon game drive.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 4</div>
-                    <div class="day-info">
-                        <strong>Queen Elizabeth → Bwindi</strong>
-                        <span>Southwestern highlands</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Morning wildlife experience.</li>
-                            <li>Breakfast.</li>
-                            <li>Continue toward Bwindi.</li>
-                            <li>Lunch en route.</li>
-                            <li>Prepare for gorilla trekking.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 5</div>
-                    <div class="day-info">
-                        <strong>Mountain Gorilla Trekking</strong>
-                        <span>Bwindi Impenetrable Forest</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Early breakfast.</li>
-                            <li>Gorilla trekking briefing.</li>
-                            <li>Mountain gorilla trekking.</li>
-                            <li>Observe a habituated gorilla family.</li>
-                            <li>Packed lunch.</li>
-                            <li>Optional Batwa cultural experience.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 6</div>
-                    <div class="day-info">
-                        <strong>Bwindi → Entebbe/Kampala</strong>
-                        <span>Return journey</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast.</li>
-                            <li>Journey toward Entebbe/Kampala.</li>
-                            <li>Lunch en route.</li>
-                            <li>Optional Equator stop.</li>
-                            <li>Airport or hotel transfer.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="itinerary-bottom">
-
-            <div>
-                <h4>Book the 6-Day Safari</h4>
-                <p>6 days × $520 = $3,120 total.</p>
-            </div>
-
-            <div>
-                <span class="booking-price">$3,120</span>
-
-                <button
-                    class="btn btn-orange"
-                    onclick="openBooking(
-                    '6-Day Uganda Gorilla & Wildlife Safari',
-                    6,
-                    3120
-                    )"
-                >
-                    Book This Safari
-                </button>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================
-         7 DAY ITINERARY
-    ====================== -->
-
-    <div class="itinerary-section" id="itinerary-7">
-
-        <div class="itinerary-hero">
-
-            <div class="itinerary-title">
-
-                <div class="label">
-                    7 Days / 6 Nights
-                </div>
-
-                <h3>
-                    Uganda Wildlife & Primate Safari
-                </h3>
-
-                <p>
-                    Murchison Falls, Kibale, Queen Elizabeth
-                    and Bwindi.
-                </p>
-
-            </div>
-
-            <div class="itinerary-price">
-                <small>FROM</small>
-                <strong>$3,640</strong>
-            </div>
-
-        </div>
-
-
-        <div class="days">
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 1</div>
-                    <div class="day-info">
-                        <strong>Entebbe/Kampala → Murchison Falls</strong>
-                        <span>Ziwa Rhino Sanctuary option</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Pickup from Entebbe/Kampala.</li>
-                            <li>Optional Ziwa Rhino Sanctuary visit.</li>
-                            <li>Rhino tracking if selected.</li>
-                            <li>Lunch en route.</li>
-                            <li>Arrival at Murchison Falls.</li>
-                            <li>Optional afternoon game drive.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 2</div>
-                    <div class="day-info">
-                        <strong>Murchison Falls National Park</strong>
-                        <span>Game drive & Nile boat cruise</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Early morning game drive.</li>
-                            <li>Breakfast at the lodge.</li>
-                            <li>Lunch and relaxation.</li>
-                            <li>Victoria Nile boat cruise.</li>
-                            <li>Visit the Top of Murchison Falls.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 3</div>
-                    <div class="day-info">
-                        <strong>Murchison Falls → Kibale</strong>
-                        <span>Scenic transfer</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Early breakfast.</li>
-                            <li>Departure for Kibale.</li>
-                            <li>Lunch en route.</li>
-                            <li>Arrival and relaxation.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 4</div>
-                    <div class="day-info">
-                        <strong>Chimpanzee Trekking → Queen Elizabeth</strong>
-                        <span>Primates to savannah</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Early breakfast.</li>
-                            <li>Chimpanzee trekking.</li>
-                            <li>Return for lunch.</li>
-                            <li>Transfer to Queen Elizabeth.</li>
-                            <li>Scenic countryside drive.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 5</div>
-                    <div class="day-info">
-                        <strong>Queen Elizabeth → Bwindi</strong>
-                        <span>Wildlife and mountain scenery</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Morning game drive in Kasenyi Plains.</li>
-                            <li>Breakfast.</li>
-                            <li>Continue toward Bwindi.</li>
-                            <li>Lunch en route.</li>
-                            <li>Prepare for gorilla trekking.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 6</div>
-                    <div class="day-info">
-                        <strong>Mountain Gorilla Trekking</strong>
-                        <span>Bwindi Impenetrable Forest</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Early breakfast.</li>
-                            <li>Gorilla trekking briefing.</li>
-                            <li>Mountain gorilla trekking.</li>
-                            <li>Allocated gorilla observation time.</li>
-                            <li>Packed lunch.</li>
-                            <li>Optional Batwa cultural experience.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 7</div>
-                    <div class="day-info">
-                        <strong>Bwindi → Entebbe/Kampala</strong>
-                        <span>Return journey</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast.</li>
-                            <li>Begin journey back to Entebbe/Kampala.</li>
-                            <li>Lunch en route.</li>
-                            <li>Optional Equator stop.</li>
-                            <li>Airport or hotel transfer.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="itinerary-bottom">
-
-            <div>
-                <h4>Book the 7-Day Safari</h4>
-                <p>7 days × $520 = $3,640 total.</p>
-            </div>
-
-            <div>
-                <span class="booking-price">$3,640</span>
-
-                <button
-                    class="btn btn-orange"
-                    onclick="openBooking(
-                    '7-Day Uganda Wildlife & Primate Safari',
-                    7,
-                    3640
-                    )"
-                >
-                    Book This Safari
-                </button>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================
-         10 DAY ITINERARY
-    ====================== -->
-
-    <div class="itinerary-section" id="itinerary-10">
-
-        <div class="itinerary-hero">
-
-            <div class="itinerary-title">
-
-                <div class="label">
-                    10 Days / 9 Nights
-                </div>
-
-                <h3>
-                    Uganda–Rwanda Wildlife & Primate Safari
-                </h3>
-
-                <p>
-                    An extraordinary cross-border journey through
-                    Uganda and Rwanda.
-                </p>
-
-            </div>
-
-            <div class="itinerary-price">
-                <small>FROM</small>
-                <strong>$5,200</strong>
-            </div>
-
-        </div>
-
-
-        <div class="days">
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 1</div>
-                    <div class="day-info">
-                        <strong>Entebbe/Kampala → Murchison Falls</strong>
-                        <span>Ziwa Rhino Sanctuary option</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Pickup at approximately 06:30.</li>
-                            <li>Drive toward Murchison Falls.</li>
-                            <li>Optional Ziwa Rhino Sanctuary visit.</li>
-                            <li>Lunch en route.</li>
-                            <li>Check in at the lodge.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 2</div>
-                    <div class="day-info">
-                        <strong>Murchison Falls</strong>
-                        <span>Game drive and Nile cruise</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Morning game drive.</li>
-                            <li>Nile boat cruise.</li>
-                            <li>Visit the Top of Murchison Falls.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 3</div>
-                    <div class="day-info">
-                        <strong>Murchison → Kibale</strong>
-                        <span>Scenic transfer</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast and departure.</li>
-                            <li>Scenic journey toward Kibale.</li>
-                            <li>Lunch en route.</li>
-                            <li>Evening relaxation.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 4</div>
-                    <div class="day-info">
-                        <strong>Chimpanzee Trekking & Bigodi</strong>
-                        <span>Primate and cultural experience</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Chimpanzee trekking.</li>
-                            <li>Lunch.</li>
-                            <li>Bigodi Wetland experience.</li>
-                            <li>Community and cultural activities.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 5</div>
-                    <div class="day-info">
-                        <strong>Kibale → Bwindi</strong>
-                        <span>Southwestern Uganda</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast and departure.</li>
-                            <li>Scenic journey through southwestern Uganda.</li>
-                            <li>Lunch en route.</li>
-                            <li>Arrival at Bwindi.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 6</div>
-                    <div class="day-info">
-                        <strong>Gorilla Trekking in Bwindi</strong>
-                        <span>Mountain gorilla experience</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Early breakfast.</li>
-                            <li>Gorilla trekking briefing.</li>
-                            <li>Mountain gorilla trekking.</li>
-                            <li>Packed lunch.</li>
-                            <li>Afternoon relaxation.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 7</div>
-                    <div class="day-info">
-                        <strong>Bwindi → Rwanda / Volcanoes</strong>
-                        <span>Uganda–Rwanda border</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast and departure.</li>
-                            <li>Cross the Uganda–Rwanda border.</li>
-                            <li>Drive to Musanze.</li>
-                            <li>Cultural experience.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 8</div>
-                    <div class="day-info">
-                        <strong>Golden Monkey Trekking</strong>
-                        <span>Volcanoes & Iby'Iwacu</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Early breakfast.</li>
-                            <li>Golden monkey trekking.</li>
-                            <li>Lunch.</li>
-                            <li>Iby'Iwacu cultural experience.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 9</div>
-                    <div class="day-info">
-                        <strong>Volcanoes → Kigali</strong>
-                        <span>Kigali city experience</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast and departure.</li>
-                            <li>Drive to Kigali.</li>
-                            <li>Visit Kigali Genocide Memorial.</li>
-                            <li>Explore local markets.</li>
-                            <li>Optional coffee experience.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 10</div>
-                    <div class="day-info">
-                        <strong>Kigali → Airport</strong>
-                        <span>Departure</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast.</li>
-                            <li>Free time depending on flight schedule.</li>
-                            <li>Airport transfer.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="itinerary-bottom">
-
-            <div>
-                <h4>Book the 10-Day Safari</h4>
-                <p>10 days × $520 = $5,200 total.</p>
-            </div>
-
-            <div>
-                <span class="booking-price">$5,200</span>
-
-                <button
-                    class="btn btn-orange"
-                    onclick="openBooking(
-                    '10-Day Uganda-Rwanda Wildlife & Primate Safari',
-                    10,
-                    5200
-                    )"
-                >
-                    Book This Safari
-                </button>
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- =====================
-         14 DAY ITINERARY
-    ====================== -->
-
-    <div class="itinerary-section" id="itinerary-14">
-
-        <div class="itinerary-hero">
-
-            <div class="itinerary-title">
-
-                <div class="label">
-                    14 Days / 13 Nights
-                </div>
-
-                <h3>
-                    Uganda–Rwanda Grand Safari
-                </h3>
-
-                <p>
-                    The ultimate Brendava wildlife, primate,
-                    gorilla and cultural adventure.
-                </p>
-
-            </div>
-
-            <div class="itinerary-price">
-                <small>FROM</small>
-                <strong>$7,280</strong>
-            </div>
-
-        </div>
-
-
-        <div class="days">
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 1</div>
-                    <div class="day-info">
-                        <strong>Entebbe/Kampala → Kibale</strong>
-                        <span>Journey to Kibale Forest</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Early morning pickup.</li>
-                            <li>Drive west toward Kibale Forest.</li>
-                            <li>Lunch en route.</li>
-                            <li>Check in and evening relaxation.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 2</div>
-                    <div class="day-info">
-                        <strong>Chimpanzee Trekking & Bigodi</strong>
-                        <span>Primate and community experience</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Chimpanzee trekking.</li>
-                            <li>Return for lunch.</li>
-                            <li>Bigodi Wetland experience.</li>
-                            <li>Traditional livelihoods and community conservation.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 3</div>
-                    <div class="day-info">
-                        <strong>Kibale → Queen Elizabeth</strong>
-                        <span>Forest to savannah</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast and departure.</li>
-                            <li>Equator stop.</li>
-                            <li>Lunch.</li>
-                            <li>Afternoon game drive.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 4</div>
-                    <div class="day-info">
-                        <strong>Queen Elizabeth National Park</strong>
-                        <span>Kasenyi Plains & Kazinga Channel</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Early morning game drive.</li>
-                            <li>Breakfast.</li>
-                            <li>Lunch and relaxation.</li>
-                            <li>Afternoon Kazinga Channel boat cruise.</li>
-                            <li>Optional evening game drive.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 5</div>
-                    <div class="day-info">
-                        <strong>Queen Elizabeth → Ishasha → Lake Mburo</strong>
-                        <span>Tree-climbing lions & wildlife</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Early breakfast.</li>
-                            <li>Optional Ishasha game drive.</li>
-                            <li>Search for tree-climbing lions.</li>
-                            <li>Continue toward Lake Mburo.</li>
-                            <li>Lunch en route.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 6</div>
-                    <div class="day-info">
-                        <strong>Lake Mburo</strong>
-                        <span>Wildlife & Ankole culture</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Morning game drive or walking safari.</li>
-                            <li>Optional horseback safari.</li>
-                            <li>Visit an Ankole community.</li>
-                            <li>Learn about traditional cattle keeping.</li>
-                            <li>Traditional music and dance option.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 7</div>
-                    <div class="day-info">
-                        <strong>Lake Mburo → Bwindi</strong>
-                        <span>Kigezi highlands</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast and departure.</li>
-                            <li>Scenic drive through southwestern Uganda.</li>
-                            <li>Lunch en route.</li>
-                            <li>Arrival at Bwindi.</li>
-                            <li>Prepare for gorilla trekking.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 8</div>
-                    <div class="day-info">
-                        <strong>Mountain Gorilla Trekking</strong>
-                        <span>Bwindi Impenetrable Forest</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Early breakfast.</li>
-                            <li>Gorilla trekking briefing.</li>
-                            <li>Begin gorilla trekking.</li>
-                            <li>Observe the gorillas in their natural habitat.</li>
-                            <li>Packed lunch.</li>
-                            <li>Optional Batwa cultural experience.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 9</div>
-                    <div class="day-info">
-                        <strong>Bwindi → Lake Bunyonyi → Rwanda</strong>
-                        <span>Lake and border crossing</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast and departure.</li>
-                            <li>Stop at Lake Bunyonyi.</li>
-                            <li>Optional boat or canoe experience.</li>
-                            <li>Lunch.</li>
-                            <li>Uganda–Rwanda border crossing.</li>
-                            <li>Drive to Musanze.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 10</div>
-                    <div class="day-info">
-                        <strong>Golden Monkey Trekking</strong>
-                        <span>Volcanoes & Iby'Iwacu</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Early breakfast.</li>
-                            <li>Golden monkey trekking.</li>
-                            <li>Lunch.</li>
-                            <li>Iby'Iwacu cultural village.</li>
-                            <li>Traditional music, dance, food and crafts.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 11</div>
-                    <div class="day-info">
-                        <strong>Volcanoes National Park</strong>
-                        <span>Culture & community</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast.</li>
-                            <li>Explore communities around Musanze.</li>
-                            <li>Visit local artisans.</li>
-                            <li>Optional traditional cooking experience.</li>
-                            <li>Afternoon at leisure.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 12</div>
-                    <div class="day-info">
-                        <strong>Volcanoes → Kigali</strong>
-                        <span>City and cultural tour</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast and departure.</li>
-                            <li>Scenic drive to Kigali.</li>
-                            <li>Visit Kigali Genocide Memorial.</li>
-                            <li>Explore markets and artisan centres.</li>
-                            <li>Optional coffee experience.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 13</div>
-                    <div class="day-info">
-                        <strong>Kigali Cultural Experience</strong>
-                        <span>Shopping, culture & farewell</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Kigali city exploration.</li>
-                            <li>Artisan and craft markets.</li>
-                            <li>Coffee or tea experience.</li>
-                            <li>Optional cooking experience.</li>
-                            <li>Afternoon leisure.</li>
-                            <li>Farewell dinner.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="day">
-                <button class="day-button">
-                    <div class="day-number">DAY 14</div>
-                    <div class="day-info">
-                        <strong>Kigali → Airport</strong>
-                        <span>Departure</span>
-                    </div>
-                    <div class="day-plus">+</div>
-                </button>
-                <div class="day-content">
-                    <div class="day-inner">
-                        <ul>
-                            <li>Breakfast.</li>
-                            <li>Free time depending on flight schedule.</li>
-                            <li>Optional last-minute shopping.</li>
-                            <li>Transfer to Kigali International Airport.</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="itinerary-bottom">
-
-            <div>
-                <h4>Book the 14-Day Grand Safari</h4>
-                <p>14 days × $520 = $7,280 total.</p>
-            </div>
-
-            <div>
-                <span class="booking-price">$7,280</span>
-
-                <button
-                    class="btn btn-orange"
-                    onclick="openBooking(
-                    '14-Day Uganda-Rwanda Grand Safari',
-                    14,
-                    7280
-                    )"
-                >
-                    Book This Safari
-                </button>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     INCLUDED
-========================= -->
-
-<section class="section">
-
-    <div class="heading">
-
-        <div class="eyebrow">
-            Your Safari Includes
-        </div>
-
-        <h2>
-            Travel With Confidence
-        </h2>
-
-        <p>
-            Our standard safari rate covers the core services
-            required for a comfortable private safari.
-        </p>
-
-    </div>
-
-
-    <div class="container">
-
-        <div class="inclusions">
-
-            <div class="info-box includes">
-
-                <h3>
-                    ✓ Package Includes
-                </h3>
-
-                <ul>
-                    <li>Accommodation as specified.</li>
-                    <li>Meals as indicated.</li>
-                    <li>Private 4x4 safari vehicle.</li>
-                    <li>Professional English-speaking driver-guide.</li>
-                    <li>Applicable national park entry fees.</li>
-                    <li>Game drives listed in the itinerary.</li>
-                    <li>Boat cruises listed in the itinerary.</li>
-                    <li>Chimpanzee trekking where included.</li>
-                    <li>Gorilla trekking where included.</li>
-                    <li>Cultural activities specified.</li>
-                    <li>Airport transfers as specified.</li>
-                    <li>Bottled drinking water.</li>
-                </ul>
-
-            </div>
-
-
-            <div class="info-box excludes">
-
-                <h3>
-                    × Package Excludes
-                </h3>
-
-                <ul>
-                    <li>International flights.</li>
-                    <li>Domestic flights unless specified.</li>
-                    <li>Visa fees where applicable.</li>
-                    <li>Travel and medical insurance.</li>
-                    <li>Personal expenses.</li>
-                    <li>Alcoholic beverages.</li>
-                    <li>Laundry.</li>
-                    <li>Tips and gratuities.</li>
-                    <li>Optional activities not listed.</li>
-                    <li>Services not expressly mentioned.</li>
-                </ul>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     WHY BRENDAVA
-========================= -->
-
-<section class="section why" id="why">
-
-    <div class="heading">
-
-        <div class="eyebrow" style="color:var(--gold-light)">
-            Why Brendava
-        </div>
-
-        <h2>
-            More Than a Safari
-        </h2>
-
-        <p>
-            We create meaningful journeys that connect travellers
-            with Uganda, Rwanda, wildlife and local communities.
-        </p>
-
-    </div>
-
-
-    <div class="container">
-
-        <div class="why-grid">
-
-            <div class="why-card">
-                <div class="why-icon">🦍</div>
-                <h3>Gorillas</h3>
-                <p>
-                    Unforgettable mountain gorilla experiences
-                    in Uganda's ancient forests.
-                </p>
-            </div>
-
-            <div class="why-card">
-                <div class="why-icon">🦁</div>
-                <h3>Wildlife</h3>
-                <p>
-                    Explore Uganda's national parks and
-                    spectacular wildlife.
-                </p>
-            </div>
-
-            <div class="why-card">
-                <div class="why-icon">🌿</div>
-                <h3>Primates</h3>
-                <p>
-                    Meet chimpanzees and other fascinating
-                    forest primates.
-                </p>
-            </div>
-
-            <div class="why-card">
-                <div class="why-icon">🌍</div>
-                <h3>Culture</h3>
-                <p>
-                    Experience authentic communities,
-                    traditions and local hospitality.
-                </p>
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     CTA
-========================= -->
-
-<section class="cta" id="contact">
-
-    <div class="container">
-
-        <div class="eyebrow">
-            Start Your Adventure
-        </div>
-
-        <h2>
-            Ready to Book Your Safari?
-        </h2>
-
-        <p>
-            Choose your adventure and send Brendava your
-            travel details. We'll help you prepare for your
-            journey through Uganda and Rwanda.
-        </p>
-
-        <button
-            class="btn btn-orange"
-            onclick="openBooking(
-            'Safari Booking Request',
-            '',
-            ''
-            )"
-        >
-            Book Your Safari
-        </button>
-
-    </div>
-
-</section>
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-    <div class="footer-grid">
-
-        <div class="footer-brand">
-
-            <div class="footer-logo">
-                BRENDAVA<span>.</span>
-            </div>
-
-            <p>
-                Uganda and Rwanda wildlife, primate, gorilla
-                and cultural safari experiences.
-            </p>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h4>Safari Packages</h4>
-
-            <a href="#itinerary-4">4-Day Safari</a>
-            <a href="#itinerary-5">5-Day Safari</a>
-            <a href="#itinerary-6">6-Day Safari</a>
-            <a href="#itinerary-7">7-Day Safari</a>
-            <a href="#itinerary-10">10-Day Safari</a>
-            <a href="#itinerary-14">14-Day Safari</a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-            <h4>Contact</h4>
-
-            <a href="#contact">Book a Safari</a>
-            <a href="#">WhatsApp</a>
-            <a href="#">Email</a>
-            <a href="#">About Brendava</a>
-
-        </div>
-
-    </div>
-
-
-    <div class="copyright">
-        © 2026 Brendava Safaris. All Rights Reserved.
-    </div>
-
-</footer>
-
-
-<!-- =========================
-     BOOKING MODAL
-========================= -->
-
-<div class="modal" id="bookingModal">
-
-    <div class="modal-box">
-
-        <button
-            class="close"
-            onclick="closeBooking()"
-        >
-            ×
-        </button>
-
-
-        <div class="modal-top">
-
-            <h2>
-                Book Your Safari
-            </h2>
-
-            <p>
-                Complete the form below and Brendava
-                will contact you about your safari.
-            </p>
-
-        </div>
-
-
-        <div class="booking-summary">
-
-            <small>
-                Selected Safari
-            </small>
-
-            <div id="selectedSafari">
-                Safari Booking
-            </div>
-
-            <strong id="selectedPrice">
-                —
-            </strong>
-
-        </div>
-
-
-        <form
-            class="booking-form"
-            id="bookingForm"
-        >
-
-            <input
-                type="hidden"
-                id="bookingSafari"
-                name="safari"
-            >
-
-            <input
-                type="hidden"
-                id="bookingPrice"
-                name="price"
-            >
-
-
-            <div class="form-group">
-
-                <label>
-                    Full Name
-                </label>
-
-                <input
-                    type="text"
-                    name="name"
-                    placeholder="Your full name"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Email Address
-                </label>
-
-                <input
-                    type="email"
-                    name="email"
-                    placeholder="you@example.com"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    WhatsApp / Phone
-                </label>
-
-                <input
-                    type="tel"
-                    name="phone"
-                    placeholder="+256..."
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Number of Travellers
-                </label>
-
-                <select name="travellers">
-
-                    <option value="1">1 Traveller</option>
-                    <option value="2">2 Travellers</option>
-                    <option value="3">3 Travellers</option>
-                    <option value="4">4 Travellers</option>
-                    <option value="5">5 Travellers</option>
-                    <option value="6">6 Travellers</option>
-                    <option value="7+">7+ Travellers</option>
-
-                </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Preferred Travel Date
-                </label>
-
-                <input
-                    type="date"
-                    name="travel_date"
-                    required
-                >
-
-            </div>
-
-
-            <div class="form-group">
-
-                <label>
-                    Additional Information
-                </label>
-
-                <textarea
-                    name="message"
-                    placeholder="Tell us anything else about your trip..."
-                ></textarea>
-
-            </div>
-
-
-            <button
-                type="submit"
-                class="booking-submit"
-            >
-                Send Booking Request
-            </button>
-
-        </form>
-
-    </div>
+<div class="pricing-note">
+
+  <p>
+    <strong>Safari rate:</strong> $520 per day.
+    Total prices are calculated according to the number of safari days.
+    Final quotations may vary depending on accommodation category,
+    permits, seasonal rates, group size and optional activities.
+  </p>
 
 </div>
 
-
-<script>
-
-/* =========================
-   SAFARI FILTER
-========================= */
-
-const filters =
-document.querySelectorAll(".filter");
-
-const cards =
-document.querySelectorAll(".safari-card");
-
-filters.forEach(filter => {
-
-    filter.addEventListener("click", () => {
-
-        filters.forEach(item =>
-            item.classList.remove("active")
-        );
-
-        filter.classList.add("active");
-
-        const value =
-            filter.dataset.filter;
-
-        cards.forEach(card => {
-
-            if(
-                value === "all" ||
-                card.dataset.days === value
-            ){
-
-                card.style.display = "";
-
-            }else{
-
-                card.style.display = "none";
-
-            }
-
-        });
-
-    });
-
-});
-
-
-/* =========================
-   ITINERARY SCROLL
-========================= */
-
-function scrollToItinerary(id){
-
-    const section =
-        document.getElementById(id);
-
-    if(!section) return;
-
-    section.scrollIntoView({
-        behavior:"smooth",
-        block:"start"
-    });
-
-}
-
-
-/* =========================
-   ACCORDION
-========================= */
-
-document
-.querySelectorAll(".day-button")
-.forEach(button => {
-
-    button.addEventListener("click", () => {
-
-        const day =
-            button.closest(".day");
-
-        const content =
-            day.querySelector(".day-content");
-
-        const currentlyOpen =
-            day.classList.contains("open");
-
-
-        document
-        .querySelectorAll(".day.open")
-        .forEach(openDay => {
-
-            if(openDay !== day){
-
-                openDay.classList.remove("open");
-
-                openDay
-                .querySelector(".day-content")
-                .style.maxHeight = null;
-
-            }
-
-        });
-
-
-        if(!currentlyOpen){
-
-            day.classList.add("open");
-
-            content.style.maxHeight =
-                content.scrollHeight + "px";
-
-        }else{
-
-            day.classList.remove("open");
-
-            content.style.maxHeight = null;
-
-        }
-
-    });
-
-});
-
-
-/* =========================
-   BOOKING MODAL
-========================= */
-
-const modal =
-document.getElementById("bookingModal");
-
-const selectedSafari =
-document.getElementById("selectedSafari");
-
-const selectedPrice =
-document.getElementById("selectedPrice");
-
-const bookingSafari =
-document.getElementById("bookingSafari");
-
-const bookingPrice =
-document.getElementById("bookingPrice");
-
-
-function openBooking(
-    safari,
-    days,
-    price
-){
-
-    modal.classList.add("show");
-
-    document.body.style.overflow =
-        "hidden";
-
-
-    selectedSafari.textContent =
-        safari;
-
-
-    if(price){
-
-        selectedPrice.textContent =
-            "$" +
-            Number(price).toLocaleString();
-
-    }else{
-
-        selectedPrice.textContent =
-            "Custom Quote";
-
-    }
-
-
-    bookingSafari.value =
-        safari;
-
-    bookingPrice.value =
-        price || "";
-
-}
-
-
-function closeBooking(){
-
-    modal.classList.remove("show");
-
-    document.body.style.overflow =
-        "";
-
-}
-
-
-modal.addEventListener(
-    "click",
-    event => {
-
-        if(event.target === modal){
-
-            closeBooking();
-
-        }
-
-    }
-);
-
-
-document.addEventListener(
-    "keydown",
-    event => {
-
-        if(event.key === "Escape"){
-
-            closeBooking();
-
-        }
-
-    }
-);
-
-
-/* =========================
-   BOOKING FORM
-========================= */
-
-document
-.getElementById("bookingForm")
-.addEventListener(
-    "submit",
-    function(event){
-
-        event.preventDefault();
-
-
-        const formData =
-            new FormData(this);
-
-
-        const name =
-            formData.get("name");
-
-        const safari =
-            formData.get("safari");
-
-        const price =
-            formData.get("price");
-
-        const phone =
-            formData.get("phone");
-
-
-        /*
-           This is where you connect your
-           real booking system, email API,
-           WhatsApp or backend.
-        */
-
-
-        alert(
-            "Thank you " +
-            name +
-            "!\n\n" +
-            "Safari: " +
-            safari +
-            "\n" +
-            "Safari Total: $" +
-            Number(price).toLocaleString() +
-            "\n\n" +
-            "Brendava will contact you on " +
-            phone +
-            "."
-        );
-
-
-        this.reset();
-
-        closeBooking();
-
-    }
-);
-
-</script>
 
 </body>
 </html>
