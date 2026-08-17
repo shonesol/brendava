@@ -1117,7 +1117,6 @@ footer {
 
   <div class="destination-slider-wrap">
     <div class="destination-track" id="destTrack">
-      <!-- slides remain the same – you can add data-lang later if needed -->
       <div class="destination-slide">
         <img src="IMG_3108.jpeg" alt="Mountain gorilla trekking in Bwindi Impenetrable National Park Uganda">
         <div class="destination-info">
@@ -1206,25 +1205,12 @@ footer {
 
   <div class="review-slider-wrap">
     <div class="review-track" id="reviewTrack">
+      <!-- Reviews will be loaded dynamically from Firebase. Fallback content shown until loaded. -->
       <div class="review-slide">
         <div class="review-card">
           <div class="stars">★★★★★</div>
-          <h4>Sarah M.</h4>
-          <p>“Incredible gorilla trek in Bwindi. The team organised everything perfectly and our guide was outstanding. Highly recommend Brendava!”</p>
-        </div>
-      </div>
-      <div class="review-slide">
-        <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <h4>James & Lisa</h4>
-          <p>“We did a combined Uganda–Rwanda itinerary. Brenda and the team were professional, responsive and truly passionate about the destinations.”</p>
-        </div>
-      </div>
-      <div class="review-slide">
-        <div class="review-card">
-          <div class="stars">★★★★★</div>
-          <h4>Thomas K.</h4>
-          <p>“Murchison Falls and Queen Elizabeth exceeded all expectations. Clear communication from booking to the last day. Will travel with them again.”</p>
+          <h4>Loading reviews...</h4>
+          <p>Please wait a moment.</p>
         </div>
       </div>
     </div>
@@ -1382,12 +1368,13 @@ footer {
 
 <!-- SCRIPTS -->
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
   import { getFirestore, collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
   const firebaseConfig = {
-    apiKey: "", // ← add your real Firebase API key
+    apiKey: "YOUR_REAL_FIREBASE_API_KEY",   // ← PASTE YOUR REAL API KEY HERE
     authDomain: "brendava-tours-and-travel.firebaseapp.com",
     projectId: "brendava-tours-and-travel",
     storageBucket: "brendava-tours-and-travel.firebasestorage.app",
@@ -1399,52 +1386,171 @@ footer {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
+  function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  window.loadReviews = async function () {
+    const track = document.getElementById("reviewTrack");
+    if (!track) return;
+
+    try {
+      const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
+      const snapshot = await getDocs(q);
+
+      track.innerHTML = "";
+
+      if (snapshot.empty) {
+        track.innerHTML = `
+          <div class="review-slide">
+            <div class="review-card">
+              <div class="stars">★★★★★</div>
+              <h4>Be the first to review!</h4>
+              <p>Share your gorilla trek or safari experience with Brendava.</p>
+            </div>
+          </div>`;
+      } else {
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const rating = Math.min(5, Math.max(1, data.rating || 5));
+          const stars = "★".repeat(rating) + "☆".repeat(5 - rating);
+
+          const slide = document.createElement("div");
+          slide.className = "review-slide";
+          slide.innerHTML = `
+            <div class="review-card">
+              <div class="stars">${stars}</div>
+              <h4>${escapeHtml(data.name || "Guest")}</h4>
+              <p>“${escapeHtml(data.comment || "")}”</p>
+            </div>`;
+          track.appendChild(slide);
+        });
+      }
+
+      if (typeof window.resetReviewSlider === "function") {
+        window.resetReviewSlider();
+      }
+    } catch (err) {
+      console.error("Failed to load reviews:", err);
+      track.innerHTML = `
+        <div class="review-slide">
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <h4>Sarah M.</h4>
+            <p>“Incredible gorilla trek in Bwindi. The team organised everything perfectly and our guide was outstanding. Highly recommend Brendava!”</p>
+          </div>
+        </div>
+        <div class="review-slide">
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <h4>James & Lisa</h4>
+            <p>“We did a combined Uganda–Rwanda itinerary. Brenda and the team were professional, responsive and truly passionate about the destinations.”</p>
+          </div>
+        </div>
+        <div class="review-slide">
+          <div class="review-card">
+            <div class="stars">★★★★★</div>
+            <h4>Thomas K.</h4>
+            <p>“Murchison Falls and Queen Elizabeth exceeded all expectations. Clear communication from booking to the last day. Will travel with them again.”</p>
+          </div>
+        </div>`;
+      if (typeof window.resetReviewSlider === "function") {
+        window.resetReviewSlider();
+      }
+    }
+  };
+
   window.submitReview = async function () {
-    const name = document.getElementById("reviewName").value.trim();
-    const rating = parseInt(document.getElementById("reviewRating").value || 0);
-    const comment = document.getElementById("reviewComment").value.trim();
+    const nameEl = document.getElementById("reviewName");
+    const ratingEl = document.getElementById("reviewRating");
+    const commentEl = document.getElementById("reviewComment");
+    const btn = document.querySelector(".review-form .btn");
+
+    const name = nameEl.value.trim();
+    const rating = parseInt(ratingEl.value || "0");
+    const comment = commentEl.value.trim();
+
     if (!name || !comment || !rating) {
       alert("Please fill in all fields.");
       return;
     }
+
+    if (btn) {
+      btn.disabled = true;
+      btn.textContent = "Submitting...";
+    }
+
     try {
-      await addDoc(collection(db, "reviews"), { name, rating, comment, createdAt: Date.now() });
-      document.getElementById("reviewName").value = "";
-      document.getElementById("reviewComment").value = "";
+      await addDoc(collection(db, "reviews"), {
+        name,
+        rating,
+        comment,
+        createdAt: Date.now()
+      });
+
+      nameEl.value = "";
+      commentEl.value = "";
+      ratingEl.value = "5";
+
       alert("Thank you! Your review has been submitted.");
+      await window.loadReviews();
     } catch (err) {
       console.error(err);
-      alert("Could not submit review. Please try again or contact us directly.");
+      alert("Could not submit review. Please try again or contact us on WhatsApp.");
+    } finally {
+      if (btn) {
+        btn.disabled = false;
+        btn.textContent = "Submit Review";
+      }
     }
   };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    window.loadReviews();
+  });
 </script>
 
 <script>
   // EmailJS
   emailjs.init({ publicKey: "pA1qeAlZDgevk8-It" });
+
   document.addEventListener("DOMContentLoaded", () => {
     const form = document.getElementById("bookingForm");
-    if (!form) return;
-    form.addEventListener("submit", function (e) {
-      e.preventDefault();
-      const btn = this.querySelector("button");
-      btn.disabled = true;
-      btn.textContent = "Sending...";
-      emailjs.sendForm("service_1hlp5ii", "template_vs01t7d", this)
-        .then(() => {
-          alert("Booking request sent successfully! We will reply shortly.");
-          form.reset();
-          window.open("https://wa.me/256789336441?text=New%20Safari%20Booking%20received%20from%20the%20website.", "_blank");
-        })
-        .catch(err => {
-          console.error(err);
-          alert("Failed to send. Please try WhatsApp or email us directly.");
-        })
-        .finally(() => {
-          btn.disabled = false;
-          btn.textContent = "Send Booking Request";
-        });
-    });
+    if (form) {
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        const btn = this.querySelector("button[type='submit']");
+        const originalText = btn ? btn.textContent : "Send Booking Request";
+
+        if (btn) {
+          btn.disabled = true;
+          btn.textContent = "Sending...";
+        }
+
+        emailjs.sendForm("service_1hlp5ii", "template_vs01t7d", this)
+          .then(() => {
+            alert("Booking request sent successfully! We will reply shortly.");
+            form.reset();
+            window.open(
+              "https://wa.me/256789336441?text=" +
+              encodeURIComponent("Hello Brendava Tours, I just submitted a safari booking request from the website."),
+              "_blank"
+            );
+          })
+          .catch(err => {
+            console.error(err);
+            alert("Failed to send. Please try WhatsApp or email us directly: brendavatoursandtravel@gmail.com");
+          })
+          .finally(() => {
+            if (btn) {
+              btn.disabled = false;
+              btn.textContent = originalText;
+            }
+          });
+      });
+    }
   });
 
   // Mobile menu
@@ -1459,6 +1565,7 @@ footer {
   const totalDest = destSlides.length;
 
   function updateDest() {
+    if (!destTrack) return;
     destTrack.style.transform = `translateX(-${destIndex * 100}%)`;
     document.querySelectorAll("#destDots .dot").forEach((d, i) => {
       d.classList.toggle("active", i === destIndex);
@@ -1472,32 +1579,42 @@ footer {
 
   // Create dots
   const dotsContainer = document.getElementById("destDots");
-  for (let i = 0; i < totalDest; i++) {
-    const dot = document.createElement("span");
-    dot.className = "dot" + (i === 0 ? " active" : "");
-    dot.onclick = () => { destIndex = i; updateDest(); };
-    dotsContainer.appendChild(dot);
+  if (dotsContainer && totalDest > 0) {
+    for (let i = 0; i < totalDest; i++) {
+      const dot = document.createElement("span");
+      dot.className = "dot" + (i === 0 ? " active" : "");
+      dot.onclick = () => { destIndex = i; updateDest(); };
+      dotsContainer.appendChild(dot);
+    }
   }
 
-  // Auto-advance destinations
   setInterval(() => moveDest(1), 7000);
 
   // ========== REVIEW SLIDER ==========
   let reviewIndex = 0;
-  const reviewTrack = document.getElementById("reviewTrack");
-  const reviewSlides = document.querySelectorAll(".review-slide");
-  const totalReviews = reviewSlides.length;
+
+  window.resetReviewSlider = function () {
+    reviewIndex = 0;
+    updateReview();
+  };
 
   function updateReview() {
-    reviewTrack.style.transform = `translateX(-${reviewIndex * 100}%)`;
+    const track = document.getElementById("reviewTrack");
+    if (!track) return;
+    const slides = track.querySelectorAll(".review-slide");
+    const total = slides.length || 1;
+    reviewIndex = ((reviewIndex % total) + total) % total;
+    track.style.transform = `translateX(-${reviewIndex * 100}%)`;
   }
 
   function moveReview(dir) {
-    reviewIndex = (reviewIndex + dir + totalReviews) % totalReviews;
+    const track = document.getElementById("reviewTrack");
+    if (!track) return;
+    const total = track.querySelectorAll(".review-slide").length || 1;
+    reviewIndex = (reviewIndex + dir + total) % total;
     updateReview();
   }
 
-  // Auto-advance reviews
   setInterval(() => moveReview(1), 5500);
 
   // ==================== LANGUAGE TRANSLATION ====================
@@ -2416,7 +2533,6 @@ footer {
   };
 
   function applyLanguage(lang) {
-    // Fallback to English if language not found
     const dict = translations[lang] || translations.en;
     
     document.querySelectorAll("[data-lang]").forEach(el => {
@@ -2426,10 +2542,8 @@ footer {
       }
     });
 
-    // Update html lang attribute
     document.documentElement.lang = lang;
     
-    // Handle RTL for Arabic
     if (lang === "ar") {
       document.documentElement.dir = "rtl";
     } else {
@@ -2444,7 +2558,6 @@ footer {
     applyLanguage(lang);
   }
 
-  // Initialize on load
   window.addEventListener("DOMContentLoaded", () => {
     const saved = localStorage.getItem("brendava_lang") || "en";
     const select = document.getElementById("languageSelect");
