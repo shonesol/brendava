@@ -85,162 +85,227 @@ body {
 
 /* ========== BEAUTIFUL STICKY HEADER ========== */
 /* ========== STICKY HEADER – does not block content ========== */
+/* ========== PROFESSIONAL STICKY HEADER ========== */
 body {
-  /* remove the old padding-top: 90px;  ← DELETE THIS LINE */
   padding-top: 0;
 }
 
 .site-header {
-  position: sticky;          /* changed from fixed */
+  position: sticky;
   top: 0;
   z-index: 1000;
-  background: rgba(255, 255, 255, 0.98);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 12px rgba(0,0,0,.06);
-  transition: box-shadow 0.25s ease;
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(15, 118, 110, 0.08);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.3s ease;
 }
 
-.header-inner {
+.header-top {
+  background: #0f766e;
+  color: white;
+  font-size: 0.8rem;
+  padding: 6px 0;
+}
+
+.header-top-inner {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 10px 18px;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.header-top a {
+  color: white;
+  text-decoration: none;
+  opacity: 0.95;
+  transition: opacity 0.2s;
+}
+
+.header-top a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+
+.header-top .licence {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.header-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 24px;
+}
+
+/* Logo */
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+  flex-shrink: 0;
 }
 
 .header-logo {
-  width: 46px;
-  height: 46px;
+  width: 52px;
+  height: 52px;
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid var(--gold);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .logo-text h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 1.15rem;
+  font-size: 1.25rem;
   color: var(--primary);
   font-weight: 700;
-  line-height: 1.1;
+  line-height: 1.15;
   margin: 0;
+  letter-spacing: -0.2px;
 }
 
 .logo-text p {
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   color: var(--muted);
-  margin: 1px 0 0;
+  margin: 2px 0 0;
+  font-weight: 400;
+  letter-spacing: 0.2px;
 }
 
-.logo-text .licence {
-  font-size: 0.65rem;
-  color: var(--primary);
-  font-weight: 600;
-}
-
-.header-actions {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.language-switcher select {
-  padding: 6px 10px;
-  border-radius: 7px;
-  border: 1px solid #d1d5db;
-  background: var(--primary);
-  color: white;
-  font-size: 0.82rem;
-  cursor: pointer;
-}
-
-.menu-toggle {
-  background: var(--primary);
-  color: white;
-  border: none;
-  padding: 8px 14px;
-  border-radius: 7px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  display: none;
-  align-items: center;
-  gap: 5px;
-}
-
-/* Compact desktop navigation */
+/* Desktop Navigation */
 .desktop-nav {
   display: flex;
+  align-items: center;
+  gap: 6px;
   flex-wrap: wrap;
-  gap: 5px;
-  justify-content: center;
-  padding: 6px 12px 10px;
-  background: #f7faf9;
-  border-top: 1px solid #e5e7eb;
+  justify-content: flex-end;
 }
 
 .desktop-nav a {
-  background: var(--primary);
-  color: white;
-  padding: 6px 11px;
-  border-radius: 6px;
+  color: #1a1a1a;
   text-decoration: none;
-  font-size: 0.78rem;
+  font-size: 0.875rem;
   font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  transition: 0.2s;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
   white-space: nowrap;
 }
 
 .desktop-nav a:hover {
+  color: var(--primary);
+  background: rgba(15, 118, 110, 0.07);
+}
+
+.desktop-nav a.nav-cta {
+  background: var(--primary);
+  color: white;
+  padding: 8px 16px;
+  margin-left: 4px;
+}
+
+.desktop-nav a.nav-cta:hover {
   background: var(--primary-dark);
-  transform: translateY(-1px);
+  color: white;
 }
 
 .desktop-nav a.whatsapp-btn {
   background: #25D366;
-}
-.desktop-nav a.whatsapp-btn:hover {
-  background: #1da851;
+  color: white;
+  padding: 8px 14px;
 }
 
-/* Mobile menu */
+.desktop-nav a.whatsapp-btn:hover {
+  background: #1da851;
+  color: white;
+}
+
+/* Right side actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.language-switcher select {
+  padding: 7px 10px;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background: white;
+  color: #333;
+  font-size: 0.82rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.menu-toggle {
+  display: none;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 9px 14px;
+  border-radius: 7px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Mobile Menu */
 .mobile-menu {
   display: none;
   background: white;
   border-top: 1px solid #eee;
-  max-height: 75vh;
+  max-height: 80vh;
   overflow-y: auto;
 }
+
 .mobile-menu.show {
   display: block;
 }
+
 .mobile-menu a {
-  display: block;
-  padding: 12px 18px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 22px;
   text-decoration: none;
-  color: var(--text);
-  border-bottom: 1px solid #f0f0f0;
-  font-size: 0.93rem;
+  color: #1a1a1a;
+  border-bottom: 1px solid #f3f4f6;
+  font-size: 0.95rem;
+  font-weight: 500;
 }
+
 .mobile-menu a:hover {
-  background: var(--primary);
-  color: white;
+  background: #f0f7f6;
+  color: var(--primary);
 }
+
 .mobile-menu .menu-group-title {
-  padding: 9px 18px 3px;
-  font-size: 0.72rem;
+  padding: 14px 22px 6px;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.4px;
+  letter-spacing: 0.6px;
   color: var(--primary);
   font-weight: 700;
-  background: #f0f7f6;
+  background: #f8faf9;
 }
 
 /* Responsive */
-@media (max-width: 900px) {
+@media (max-width: 1100px) {
   .desktop-nav {
     display: none;
   }
@@ -249,6 +314,22 @@ body {
   }
 }
 
+@media (max-width: 640px) {
+  .header-top {
+    font-size: 0.75rem;
+    text-align: center;
+  }
+  .header-top-inner {
+    justify-content: center;
+  }
+  .logo-text h1 {
+    font-size: 1.1rem;
+  }
+  .header-logo {
+    width: 46px;
+    height: 46px;
+  }
+}
 /* Hero */
 .hero {
   min-height: 82vh;
