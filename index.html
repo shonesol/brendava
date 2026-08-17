@@ -17,7 +17,6 @@
 <meta name="geo.position" content="0.3476;32.5825">
 <meta name="ICBM" content="0.3476, 32.5825">
 
-<!-- Open Graph -->
 <meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="Brendava Tours & Travel">
 <meta property="og:title" content="Brendava Tours & Travel | Uganda Gorilla Trekking & East Africa Safaris">
@@ -26,13 +25,11 @@
 <meta property="og:url" content="https://www.brendavatoursandtravel.com/">
 <meta property="og:image" content="https://www.brendavatoursandtravel.com/images/logo.jpg">
 
-<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Brendava Tours & Travel | Uganda Safari Experts">
 <meta name="twitter:description" content="Gorilla Trekking • Wildlife Safaris • Multi-country East Africa Tours • Licensed & Trusted">
 <meta name="twitter:image" content="https://www.brendavatoursandtravel.com/images/logo.jpg">
 
-<!-- Schema -->
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -71,8 +68,8 @@
   --text: #1a1a1a;
   --muted: #555;
   --white: #ffffff;
-  --radius: 12px;
-  --shadow: 0 8px 30px rgba(0,0,0,.08);
+  --radius: 14px;
+  --shadow: 0 10px 35px rgba(0,0,0,.09);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -83,49 +80,77 @@ body {
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
+  padding-top: 90px; /* prevents sticky header from covering content */
 }
 
-/* Header */
-header {
-  background: var(--white);
+/* ========== BEAUTIFUL STICKY HEADER ========== */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 20px rgba(0,0,0,.07);
+  transition: all 0.3s ease;
+}
+.header-inner {
+  max-width: 1280px;
+  margin: 0 auto;
   padding: 12px 20px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 12px;
-  box-shadow: 0 2px 12px rgba(0,0,0,.06);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
+  gap: 16px;
 }
-.logo-container {
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+}
+.header-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid var(--gold);
+  box-shadow: 0 2px 8px rgba(0,0,0,.12);
+}
+.logo-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: var(--primary);
+  font-weight: 700;
+  line-height: 1.15;
+  margin: 0;
+}
+.logo-text p {
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 1px 0 0;
+}
+.logo-text .licence {
+  font-size: 0.68rem;
+  color: var(--primary);
+  font-weight: 600;
+}
+
+.header-actions {
   display: flex;
   align-items: center;
   gap: 12px;
 }
-.header-logo {
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid var(--gold);
-}
-.header-text h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.35rem;
-  color: var(--primary);
-  font-weight: 700;
-  line-height: 1.2;
-}
-.header-text p {
-  font-size: 0.78rem;
-  color: var(--muted);
-}
-.header-text .licence {
-  font-size: 0.7rem;
-  color: var(--primary);
-  font-weight: 600;
+.language-switcher select {
+  padding: 7px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  background: var(--primary);
+  color: white;
+  font-size: 0.85rem;
+  cursor: pointer;
 }
 .menu-toggle {
   background: var(--primary);
@@ -136,101 +161,136 @@ header {
   cursor: pointer;
   font-size: 0.95rem;
   display: none;
+  align-items: center;
+  gap: 6px;
 }
-.language-switcher select {
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
-  background: var(--primary);
-  color: white;
-  font-size: 0.85rem;
-}
+.menu-toggle:hover { background: var(--primary-dark); }
 
-/* Mobile menu */
-.header-menu {
-  display: none;
-  width: 100%;
-  background: white;
-  border-radius: 10px;
-  box-shadow: var(--shadow);
-  margin-top: 8px;
-  overflow: hidden;
-}
-.header-menu.show { display: block; }
-.header-menu a {
-  display: block;
-  padding: 12px 18px;
-  text-decoration: none;
-  color: var(--text);
-  border-bottom: 1px solid #eee;
-  font-size: 0.95rem;
-}
-.header-menu a:hover { background: var(--primary); color: white; }
-
-/* Nav */
-.navbar {
-  background: var(--white);
-  padding: 10px 20px;
+/* Desktop Nav */
+.desktop-nav {
   display: flex;
-  justify-content: center;
   flex-wrap: wrap;
-  gap: 10px;
-  border-bottom: 1px solid #e5e5e5;
+  gap: 6px;
+  justify-content: center;
+  padding: 8px 16px 12px;
+  background: #f8faf9;
+  border-top: 1px solid #e5e7eb;
 }
-.navbar .btn {
+.desktop-nav a {
   background: var(--primary);
   color: white;
-  padding: 10px 18px;
+  padding: 8px 14px;
   border-radius: 8px;
   text-decoration: none;
-  font-size: 0.9rem;
+  font-size: 0.82rem;
   font-weight: 500;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  transition: .25s;
+  gap: 5px;
+  transition: 0.2s;
+  white-space: nowrap;
 }
-.navbar .btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+.desktop-nav a:hover {
+  background: var(--primary-dark);
+  transform: translateY(-1px);
+}
+.desktop-nav a.whatsapp-btn { background: #25D366; }
+.desktop-nav a.whatsapp-btn:hover { background: #1da851; }
+
+/* Mobile Menu */
+.mobile-menu {
+  display: none;
+  background: white;
+  border-top: 1px solid #eee;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.mobile-menu.show { display: block; }
+.mobile-menu a {
+  display: block;
+  padding: 13px 20px;
+  text-decoration: none;
+  color: var(--text);
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 0.95rem;
+}
+.mobile-menu a:hover,
+.mobile-menu a:focus {
+  background: var(--primary);
+  color: white;
+}
+.mobile-menu .menu-group-title {
+  padding: 10px 20px 4px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--primary);
+  font-weight: 700;
+  background: #f0f7f6;
+}
 
 /* Hero */
 .hero {
-  min-height: 85vh;
-  background: linear-gradient(rgba(0,0,0,.5), rgba(0,0,0,.45)),
+  min-height: 82vh;
+  background: linear-gradient(rgba(0,0,0,.52), rgba(0,0,0,.48)),
               url('e41f3c80-4431-44a8-bae2-1b7edfdc10a4.jpeg') center/cover no-repeat;
   display: flex;
   align-items: center;
   justify-content: center;
   text-align: center;
   color: white;
-  padding: 40px 20px;
+  padding: 60px 20px;
 }
 .hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(2.4rem, 6vw, 3.8rem);
+  font-size: clamp(2.3rem, 6vw, 3.6rem);
   margin-bottom: 12px;
-  text-shadow: 0 3px 12px rgba(0,0,0,.4);
+  text-shadow: 0 3px 14px rgba(0,0,0,.45);
 }
 .hero p {
-  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
-  margin-bottom: 28px;
+  font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+  margin-bottom: 10px;
   opacity: .95;
+}
+.hero .sub {
+  font-size: 1.05rem;
+  max-width: 560px;
+  margin: 0 auto 28px;
+  opacity: .9;
 }
 .btn {
   display: inline-block;
   background: var(--primary);
   color: white;
-  padding: 14px 28px;
-  border-radius: 8px;
+  padding: 13px 26px;
+  border-radius: 9px;
   text-decoration: none;
   font-weight: 600;
   border: none;
   cursor: pointer;
   transition: .25s;
-  font-size: 1rem;
+  font-size: 0.98rem;
 }
 .btn:hover { background: var(--primary-dark); transform: translateY(-2px); }
 .btn.whatsapp { background: #25D366; }
 .btn.whatsapp:hover { background: #1da851; }
+
+/* Trust strip */
+.trust-strip {
+  background: var(--primary);
+  color: white;
+  padding: 26px 20px;
+  text-align: center;
+}
+.trust-strip .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 18px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.trust-item i { font-size: 1.5rem; color: var(--gold); margin-bottom: 6px; }
+.trust-item strong { display: block; font-size: 1rem; }
 
 /* Sections */
 section {
@@ -240,92 +300,214 @@ section {
 }
 section h2 {
   font-family: 'Playfair Display', serif;
-  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  font-size: clamp(1.75rem, 4vw, 2.35rem);
   color: var(--primary);
   text-align: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 .section-sub {
   text-align: center;
   color: var(--muted);
   max-width: 680px;
-  margin: 0 auto 40px;
-  font-size: 1.05rem;
+  margin: 0 auto 36px;
+  font-size: 1.02rem;
 }
 
-/* Trust strip */
-.trust-strip {
+/* ========== DESTINATION SLIDER ========== */
+.destination-slider-wrap {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  background: white;
+}
+.destination-track {
+  display: flex;
+  transition: transform 0.55s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+.destination-slide {
+  min-width: 100%;
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 0;
+}
+.destination-slide img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+.destination-info {
+  padding: 36px 32px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.destination-info h3 {
+  font-size: 1.55rem;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+.destination-info p {
+  color: var(--muted);
+  margin-bottom: 18px;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+.slider-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 22px;
+}
+.slider-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  background: white;
+  color: var(--primary);
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+.slider-btn:hover {
   background: var(--primary);
   color: white;
-  padding: 28px 20px;
-  text-align: center;
 }
-.trust-strip .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  max-width: 1000px;
-  margin: 0 auto;
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
 }
-.trust-item i { font-size: 1.6rem; color: var(--gold); margin-bottom: 8px; }
-.trust-item strong { display: block; font-size: 1.05rem; }
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #cbd5e1;
+  cursor: pointer;
+  transition: 0.25s;
+}
+.dot.active { background: var(--primary); transform: scale(1.25); }
 
-/* Destinations */
-.gallery {
+/* ========== STAFF / TEAM SECTION ========== */
+.staff-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
 }
-.gallery-item {
+.staff-card {
   background: white;
   border-radius: var(--radius);
   overflow: hidden;
   box-shadow: var(--shadow);
-  transition: .3s;
+  text-align: center;
+  transition: 0.3s;
 }
-.gallery-item:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(0,0,0,.12); }
-.gallery-item img {
+.staff-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(0,0,0,.12); }
+.staff-photo {
   width: 100%;
-  height: 220px;
+  height: 260px;
   object-fit: cover;
-  display: block;
+  background: #e5e7eb;
 }
-.gallery-item .content { padding: 20px; }
-.gallery-item h3 {
-  font-size: 1.25rem;
+.staff-info {
+  padding: 22px 18px 26px;
+}
+.staff-info h3 {
+  font-size: 1.2rem;
+  color: var(--primary);
+  margin-bottom: 4px;
+}
+.staff-role {
+  font-size: 0.9rem;
+  color: var(--gold);
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.staff-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+.staff-contact a {
+  color: var(--text);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 7px 12px;
+  border-radius: 8px;
+  background: #f0f7f6;
+  transition: 0.2s;
+}
+.staff-contact a:hover {
+  background: var(--primary);
+  color: white;
+}
+.staff-contact .wa { background: #e8f8ef; color: #128C7E; }
+.staff-contact .wa:hover { background: #25D366; color: white; }
+
+/* ========== REVIEW SLIDER ========== */
+.review-slider-wrap {
+  position: relative;
+  max-width: 720px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+.review-track {
+  display: flex;
+  transition: transform 0.5s ease;
+}
+.review-slide {
+  min-width: 100%;
+  padding: 8px;
+}
+.review-card {
+  background: white;
+  padding: 32px 28px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  text-align: center;
+  min-height: 210px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.review-card .stars {
+  color: #f59e0b;
+  font-size: 1.35rem;
+  margin-bottom: 12px;
+  letter-spacing: 2px;
+}
+.review-card h4 {
   color: var(--primary);
   margin-bottom: 8px;
+  font-size: 1.15rem;
 }
-.gallery-item p { color: var(--muted); font-size: 0.95rem; margin-bottom: 12px; }
-.more-content {
-  display: none;
-  margin: 12px 0;
-  font-size: 0.92rem;
-  color: #333;
+.review-card p {
+  color: #444;
+  font-size: 1rem;
   line-height: 1.55;
+  font-style: italic;
 }
-.explore-btn {
-  background: transparent;
-  border: 1.5px solid var(--primary);
-  color: var(--primary);
-  padding: 8px 16px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.9rem;
-  margin-top: 8px;
-  transition: .2s;
+.review-nav {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 20px;
 }
-.explore-btn:hover { background: var(--primary); color: white; }
 
-/* Reviews */
-#reviews-section {
-  background: #f0f7f6;
-  border-radius: var(--radius);
-  padding: 50px 30px;
-}
+/* Review form */
 .review-form {
   max-width: 520px;
-  margin: 0 auto 40px;
+  margin: 40px auto 0;
   display: grid;
   gap: 12px;
 }
@@ -340,17 +522,6 @@ section h2 {
   font-family: inherit;
 }
 .review-form textarea { min-height: 110px; resize: vertical; }
-#reviewsContainer { max-width: 640px; margin: 0 auto; }
-.review-card {
-  background: white;
-  padding: 24px;
-  border-radius: var(--radius);
-  box-shadow: var(--shadow);
-  text-align: center;
-  margin-bottom: 16px;
-}
-.review-card h4 { color: var(--primary); margin-bottom: 6px; }
-.review-card .stars { color: #f59e0b; font-size: 1.2rem; margin-bottom: 8px; }
 
 /* Booking */
 #booking {
@@ -376,7 +547,7 @@ section h2 {
 }
 #booking textarea { min-height: 140px; resize: vertical; }
 
-/* Payment – FIXED */
+/* Payment */
 #payment {
   background: #f0f7f6;
   border-radius: var(--radius);
@@ -516,70 +687,113 @@ footer {
 }
 
 /* Responsive */
+@media (max-width: 900px) {
+  .destination-slide {
+    grid-template-columns: 1fr;
+  }
+  .destination-slide img {
+    height: 280px;
+  }
+}
 @media (max-width: 768px) {
-  .menu-toggle { display: inline-flex; align-items: center; gap: 6px; }
-  .navbar { display: none; }
-  header { flex-direction: column; align-items: flex-start; }
+  body { padding-top: 80px; }
+  .menu-toggle { display: inline-flex; }
+  .desktop-nav { display: none; }
+  .header-inner { flex-wrap: wrap; }
   .hero { min-height: 70vh; }
   section { padding: 50px 4%; }
+  .destination-info { padding: 24px 20px; }
 }
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="logo-container">
-    <img src="bd90b2a7-58b4-4d31-8566-4058dac1bc50.jpeg" alt="Brendava Tours & Travel Logo" class="header-logo">
-    <div class="header-text">
-      <h1>BRENDAVA TOURS & TRAVEL</h1>
-      <p>“Where your dreams meet reality”</p>
-      <p class="licence">URSB Licence: 80034588624947</p>
+<!-- ========== BEAUTIFUL FIXED HEADER ========== -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-area">
+      <img src="bd90b2a7-58b4-4d31-8566-4058dac1bc50.jpeg" alt="Brendava Tours & Travel Logo" class="header-logo">
+      <div class="logo-text">
+        <h1>BRENDAVA TOURS & TRAVEL</h1>
+        <p>“Where your dreams meet reality”</p>
+        <p class="licence">URSB Licence: 80034588624947</p>
+      </div>
+    </a>
+
+    <div class="header-actions">
+      <div class="language-switcher">
+        <select id="languageSelect" onchange="changeLanguage()">
+          <option value="en">English</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="de">Deutsch</option>
+          <option value="it">Italiano</option>
+        </select>
+      </div>
+      <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
+        <i class="fas fa-bars"></i> Menu
+      </button>
     </div>
   </div>
-  <div style="display:flex; align-items:center; gap:12px;">
-    <div class="language-switcher">
-      <select id="languageSelect" onchange="changeLanguage()">
-        <option value="en">English</option>
-        <option value="fr">Français</option>
-        <option value="es">Español</option>
-        <option value="de">Deutsch</option>
-        <option value="it">Italiano</option>
-      </select>
-    </div>
-    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open menu">
-      <i class="fas fa-bars"></i> Menu
-    </button>
-  </div>
-  <div id="headerMenu" class="header-menu">
-    <a href="#destinations">Destinations</a>
-    <a href="#reviews-section">Reviews</a>
+
+  <!-- Desktop Navigation -->
+  <nav class="desktop-nav">
+    <a href="#team"><i class="fas fa-users"></i> Our Team</a>
+    <a href="about.html">About</a>
+    <a href="destination.html">Destinations</a>
+    <a href="featuredtrips.html">Featured Trips</a>
+    <a href="Itineraries.html">Itineraries</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="photos.html">Photos</a>
+    <a href="lodge.html">Parks & Lodges</a>
+    <a href="get-started.html">Get Started</a>
+    <a href="services.html">Services</a>
+    <a href="Stories.html">Stories</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="location.html">Location</a>
+    <a href="#booking"><i class="fas fa-calendar-check"></i> Book Now</a>
+    <a href="https://wa.me/256789336441" class="whatsapp-btn" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="mobile-menu">
+    <div class="menu-group-title">Meet Our Team</div>
+    <a href="#team"><i class="fas fa-users"></i> Our Staff</a>
+
+    <div class="menu-group-title">Explore</div>
+    <a href="about.html">About Us</a>
+    <a href="destination.html">Destinations</a>
+    <a href="featuredtrips.html">Featured Trips</a>
+    <a href="Itineraries.html">Itineraries</a>
+    <a href="gallery.html">Gallery</a>
+    <a href="photos.html">Photos</a>
+    <a href="lodge.html">Parks & Lodges</a>
+    <a href="get-started.html">Get Started</a>
+    <a href="services.html">Services</a>
+    <a href="Stories.html">Stories</a>
+    <a href="testimonials.html">Testimonials</a>
+    <a href="location.html">Location</a>
+
+    <div class="menu-group-title">Book & Contact</div>
     <a href="#booking">Book a Safari</a>
     <a href="#payment">Payment & Policy</a>
-    <a href="#contact">Contact</a>
+    <a href="#reviews-section">Guest Reviews</a>
     <a href="tel:+256789336441">Call Us</a>
     <a href="mailto:brendavatoursandtravel@gmail.com">Email Us</a>
     <a href="https://wa.me/256789336441" target="_blank">WhatsApp</a>
+
+    <div class="menu-group-title">Legal</div>
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms & Conditions</a>
   </div>
 </header>
 
-<!-- DESKTOP NAV -->
-<nav class="navbar">
-  <a href="#destinations" class="btn"><i class="fas fa-map-marked-alt"></i> Destinations</a>
-  <a href="#reviews-section" class="btn"><i class="fas fa-star"></i> Reviews</a>
-  <a href="#booking" class="btn"><i class="fas fa-calendar-check"></i> Book Now</a>
-  <a href="#payment" class="btn"><i class="fas fa-shield-alt"></i> Secure Payment</a>
-  <a href="https://wa.me/256789336441" class="btn whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
-</nav>
-
 <!-- HERO -->
-<section class="hero" style="max-width:none; padding:0;">
+<section class="hero" style="max-width:none; padding:60px 20px;">
   <div>
     <h1 data-lang="hero_title">Discover East Africa</h1>
     <p data-lang="hero_subtitle">Uganda • Rwanda • Kenya • Tanzania</p>
-    <p style="font-size:1.05rem; max-width:560px; margin:0 auto 28px; opacity:.9;">
-      Licensed gorilla trekking, wildlife safaris & tailor-made multi-country adventures
-    </p>
+    <p class="sub">Licensed gorilla trekking, wildlife safaris & tailor-made multi-country adventures with our expert team</p>
     <a href="#booking" class="btn" data-lang="plan_safari">Plan Your Safari</a>
   </div>
 </section>
@@ -610,131 +824,189 @@ footer {
   </div>
 </div>
 
-<!-- DESTINATIONS -->
-<section id="destinations">
-  <h2>Top Destinations</h2>
-  <p class="section-sub">Gorilla trekking in Bwindi & Volcanoes, Big Five safaris, the Great Migration and authentic cultural encounters — all under one experienced operator.</p>
+<!-- ========== OUR TEAM / STAFF ========== -->
+<section id="team">
+  <h2>Meet Our Team</h2>
+  <p class="section-sub">The people who will plan, guide and support your East Africa adventure. Reach any of us directly.</p>
 
-  <div class="gallery">
-    <!-- Bwindi -->
-    <div class="gallery-item">
-      <img src="IMG_3108.jpeg" alt="Mountain gorilla trekking in Bwindi Impenetrable National Park Uganda" loading="lazy">
-      <div class="content">
-        <h3>Bwindi Impenetrable NP</h3>
-        <p>World-famous mountain gorilla trekking in Uganda’s misty rainforest.</p>
-        <div class="more-content" id="bwindi">
-          Bwindi is home to roughly half of the world’s remaining mountain gorillas. Treks last 2–8 hours depending on the group. Combine with Batwa cultural experiences and birding. Perfect for 1–3 day extensions or full Uganda itineraries.
+  <div class="staff-grid">
+    <!-- Brenda Nabachwa - Managing Director -->
+    <div class="staff-card">
+      <img src="staff-brenda.jpg" alt="Brenda Nabachwa - Managing Director" class="staff-photo"
+           onerror="this.src='https://ui-avatars.com/api/?name=Brenda+Nabachwa&size=400&background=0f766e&color=fff&bold=true'">
+      <div class="staff-info">
+        <h3>Brenda Nabachwa</h3>
+        <div class="staff-role">Managing Director</div>
+        <div class="staff-contact">
+          <a href="mailto:brendavatoursandtravel@gmail.com"><i class="fas fa-envelope"></i> brendavatoursandtravel@gmail.com</a>
+          <a href="https://wa.me/256789336441" class="wa" target="_blank"><i class="fab fa-whatsapp"></i> +256 789 336 441</a>
         </div>
-        <button class="explore-btn" onclick="toggle('bwindi', this)">Explore More</button>
-        <br><a href="#booking" class="btn" style="margin-top:12px; padding:10px 18px; font-size:0.9rem;">Enquire</a>
       </div>
     </div>
 
-    <!-- Murchison -->
-    <div class="gallery-item">
-      <img src="3b9198fe-0483-40fa-8c7d-fb7706cdde46.jpeg" alt="Murchison Falls National Park safari Uganda" loading="lazy">
-      <div class="content">
-        <h3>Murchison Falls NP</h3>
-        <p>Big Five, powerful Nile waterfall and classic game drives.</p>
-        <div class="more-content" id="murchison">
-          Uganda’s largest national park. Boat cruise to the base of the falls, game drives for lions, elephants, giraffes and the rare shoebill. Ideal 2–4 day safari stop.
+    <!-- Andrew Kasozi - Assistant Manager -->
+    <div class="staff-card">
+      <img src="staff-andrew.jpg" alt="Andrew Kasozi - Assistant Manager" class="staff-photo"
+           onerror="this.src='https://ui-avatars.com/api/?name=Andrew+Kasozi&size=400&background=0d5f58&color=fff&bold=true'">
+      <div class="staff-info">
+        <h3>Andrew Kasozi</h3>
+        <div class="staff-role">Assistant Manager</div>
+        <div class="staff-contact">
+          <a href="mailto:brendavatoursandtravel@gmail.com"><i class="fas fa-envelope"></i> brendavatoursandtravel@gmail.com</a>
+          <a href="https://wa.me/256770462422" class="wa" target="_blank"><i class="fab fa-whatsapp"></i> +256 770 462 422</a>
         </div>
-        <button class="explore-btn" onclick="toggle('murchison', this)">Explore More</button>
-        <br><a href="#booking" class="btn" style="margin-top:12px; padding:10px 18px; font-size:0.9rem;">Enquire</a>
       </div>
     </div>
 
-    <!-- Queen Elizabeth -->
-    <div class="gallery-item">
-      <img src="6e35e3f3-a5ce-486c-a499-331cbdd00a0a.jpeg" alt="Queen Elizabeth National Park tree-climbing lions" loading="lazy">
-      <div class="content">
-        <h3>Queen Elizabeth NP</h3>
-        <p>Tree-climbing lions, Kazinga Channel boat cruise & crater lakes.</p>
-        <div class="more-content" id="queen">
-          Famous for tree-climbing lions in Ishasha sector, hippos, elephants and excellent birding. Combine easily with Bwindi or Kibale.
+    <!-- Tamale Shone - Reservations Officer -->
+    <div class="staff-card">
+      <img src="staff-tamale.jpg" alt="Tamale Shone - Reservations Officer" class="staff-photo"
+           onerror="this.src='https://ui-avatars.com/api/?name=Tamale+Shone&size=400&background=115e59&color=fff&bold=true'">
+      <div class="staff-info">
+        <h3>Tamale Shone</h3>
+        <div class="staff-role">Reservations Officer</div>
+        <div class="staff-contact">
+          <a href="mailto:brendavatoursandtravel@gmail.com"><i class="fas fa-envelope"></i> brendavatoursandtravel@gmail.com</a>
+          <a href="https://wa.me/256762584996" class="wa" target="_blank"><i class="fab fa-whatsapp"></i> +256 762 584 996</a>
         </div>
-        <button class="explore-btn" onclick="toggle('queen', this)">Explore More</button>
-        <br><a href="#booking" class="btn" style="margin-top:12px; padding:10px 18px; font-size:0.9rem;">Enquire</a>
-      </div>
-    </div>
-
-    <!-- Kidepo -->
-    <div class="gallery-item">
-      <img src="IMG_3141.jpeg" alt="Kidepo Valley National Park remote wilderness Uganda" loading="lazy">
-      <div class="content">
-        <h3>Kidepo Valley NP</h3>
-        <p>Remote wilderness, cheetahs, ostriches and dramatic landscapes.</p>
-        <div class="more-content" id="kidepo">
-          One of Africa’s most pristine parks. Excellent for photography and exclusive game viewing with very few other vehicles.
-        </div>
-        <button class="explore-btn" onclick="toggle('kidepo', this)">Explore More</button>
-        <br><a href="#booking" class="btn" style="margin-top:12px; padding:10px 18px; font-size:0.9rem;">Enquire</a>
-      </div>
-    </div>
-
-    <!-- Serengeti -->
-    <div class="gallery-item">
-      <img src="IMG_3135.jpeg" alt="Serengeti National Park Great Migration Tanzania" loading="lazy">
-      <div class="content">
-        <h3>Serengeti NP</h3>
-        <p>The Great Migration and endless plains of Tanzania.</p>
-        <div class="more-content" id="serengeti">
-          Witness over a million wildebeest, zebra and predators. Combine with Ngorongoro or a multi-country itinerary including Uganda or Kenya.
-        </div>
-        <button class="explore-btn" onclick="toggle('serengeti', this)">Explore More</button>
-        <br><a href="#booking" class="btn" style="margin-top:12px; padding:10px 18px; font-size:0.9rem;">Enquire</a>
-      </div>
-    </div>
-
-    <!-- Ngorongoro -->
-    <div class="gallery-item">
-      <img src="IMG_3139.jpeg" alt="Ngorongoro Crater Tanzania wildlife" loading="lazy">
-      <div class="content">
-        <h3>Ngorongoro Crater</h3>
-        <p>World’s largest intact volcanic caldera packed with wildlife.</p>
-        <div class="more-content" id="ngorongoro">
-          Dense concentrations of lions, rhinos, elephants and flamingos inside a natural amphitheatre. A must on any northern Tanzania circuit.
-        </div>
-        <button class="explore-btn" onclick="toggle('ngorongoro', this)">Explore More</button>
-        <br><a href="#booking" class="btn" style="margin-top:12px; padding:10px 18px; font-size:0.9rem;">Enquire</a>
-      </div>
-    </div>
-
-    <!-- Masai Mara -->
-    <div class="gallery-item">
-      <img src="IMG_3138.jpeg" alt="Masai Mara National Reserve Kenya big cats" loading="lazy">
-      <div class="content">
-        <h3>Masai Mara</h3>
-        <p>Big cats and the famous Mara River crossings.</p>
-        <div class="more-content" id="maasai">
-          Kenya’s premier reserve for lion, leopard and cheetah sightings. Peak migration season July–October. Excellent for photography and family safaris.
-        </div>
-        <button class="explore-btn" onclick="toggle('maasai', this)">Explore More</button>
-        <br><a href="#booking" class="btn" style="margin-top:12px; padding:10px 18px; font-size:0.9rem;">Enquire</a>
-      </div>
-    </div>
-
-    <!-- Volcanoes -->
-    <div class="gallery-item">
-      <img src="IMG_3109.jpeg" alt="Volcanoes National Park Rwanda gorilla trekking" loading="lazy">
-      <div class="content">
-        <h3>Volcanoes NP (Rwanda)</h3>
-        <p>Gorilla trekking and golden monkey walks in Rwanda.</p>
-        <div class="more-content" id="volcanoes">
-          High-altitude gorilla encounters with excellent infrastructure. Combine with Uganda’s Bwindi for a dual-country gorilla experience.
-        </div>
-        <button class="explore-btn" onclick="toggle('volcanoes', this)">Explore More</button>
-        <br><a href="#booking" class="btn" style="margin-top:12px; padding:10px 18px; font-size:0.9rem;">Enquire</a>
       </div>
     </div>
   </div>
 </section>
 
-<!-- REVIEWS -->
+<!-- ========== DESTINATION SLIDER ========== -->
+<section id="destinations">
+  <h2>Top Destinations</h2>
+  <p class="section-sub">Swipe or use the arrows to explore our most popular parks and experiences.</p>
+
+  <div class="destination-slider-wrap">
+    <div class="destination-track" id="destTrack">
+      <!-- Slide 1 - Bwindi -->
+      <div class="destination-slide">
+        <img src="IMG_3108.jpeg" alt="Mountain gorilla trekking in Bwindi Impenetrable National Park Uganda">
+        <div class="destination-info">
+          <h3>Bwindi Impenetrable NP</h3>
+          <p>World-famous mountain gorilla trekking in Uganda’s misty rainforest. Home to roughly half of the world’s remaining mountain gorillas. Treks last 2–8 hours. Combine with Batwa cultural experiences and birding.</p>
+          <a href="#booking" class="btn">Enquire about Bwindi</a>
+        </div>
+      </div>
+
+      <!-- Slide 2 - Murchison -->
+      <div class="destination-slide">
+        <img src="3b9198fe-0483-40fa-8c7d-fb7706cdde46.jpeg" alt="Murchison Falls National Park safari Uganda">
+        <div class="destination-info">
+          <h3>Murchison Falls NP</h3>
+          <p>Uganda’s largest national park. Powerful Nile waterfall, Big Five game drives, boat cruise to the base of the falls, and excellent birding including the rare shoebill.</p>
+          <a href="#booking" class="btn">Enquire about Murchison</a>
+        </div>
+      </div>
+
+      <!-- Slide 3 - Queen Elizabeth -->
+      <div class="destination-slide">
+        <img src="6e35e3f3-a5ce-486c-a499-331cbdd00a0a.jpeg" alt="Queen Elizabeth National Park tree-climbing lions">
+        <div class="destination-info">
+          <h3>Queen Elizabeth NP</h3>
+          <p>Famous for tree-climbing lions in the Ishasha sector, the Kazinga Channel boat cruise, hippos, elephants and crater lakes. Easy to combine with Bwindi or Kibale.</p>
+          <a href="#booking" class="btn">Enquire about Queen Elizabeth</a>
+        </div>
+      </div>
+
+      <!-- Slide 4 - Kidepo -->
+      <div class="destination-slide">
+        <img src="IMG_3141.jpeg" alt="Kidepo Valley National Park remote wilderness Uganda">
+        <div class="destination-info">
+          <h3>Kidepo Valley NP</h3>
+          <p>One of Africa’s most pristine and remote parks. Dramatic landscapes, cheetahs, ostriches, lions and very few other vehicles — perfect for exclusive game viewing.</p>
+          <a href="#booking" class="btn">Enquire about Kidepo</a>
+        </div>
+      </div>
+
+      <!-- Slide 5 - Serengeti -->
+      <div class="destination-slide">
+        <img src="IMG_3135.jpeg" alt="Serengeti National Park Great Migration Tanzania">
+        <div class="destination-info">
+          <h3>Serengeti NP</h3>
+          <p>Witness the Great Migration of over a million wildebeest and zebra across the endless plains of Tanzania. Combine with Ngorongoro or a multi-country itinerary.</p>
+          <a href="#booking" class="btn">Enquire about Serengeti</a>
+        </div>
+      </div>
+
+      <!-- Slide 6 - Ngorongoro -->
+      <div class="destination-slide">
+        <img src="IMG_3139.jpeg" alt="Ngorongoro Crater Tanzania wildlife">
+        <div class="destination-info">
+          <h3>Ngorongoro Crater</h3>
+          <p>The world’s largest intact volcanic caldera — a natural amphitheatre packed with lions, rhinos, elephants and flamingos. A must on any northern Tanzania circuit.</p>
+          <a href="#booking" class="btn">Enquire about Ngorongoro</a>
+        </div>
+      </div>
+
+      <!-- Slide 7 - Masai Mara -->
+      <div class="destination-slide">
+        <img src="IMG_3138.jpeg" alt="Masai Mara National Reserve Kenya big cats">
+        <div class="destination-info">
+          <h3>Masai Mara</h3>
+          <p>Kenya’s premier reserve for big cats and the famous Mara River crossings. Peak migration season July–October. Excellent for photography and family safaris.</p>
+          <a href="#booking" class="btn">Enquire about Masai Mara</a>
+        </div>
+      </div>
+
+      <!-- Slide 8 - Volcanoes -->
+      <div class="destination-slide">
+        <img src="IMG_3109.jpeg" alt="Volcanoes National Park Rwanda gorilla trekking">
+        <div class="destination-info">
+          <h3>Volcanoes NP (Rwanda)</h3>
+          <p>High-altitude gorilla encounters with excellent infrastructure. Combine with Uganda’s Bwindi for a dual-country gorilla experience. Golden monkey walks also available.</p>
+          <a href="#booking" class="btn">Enquire about Volcanoes</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="slider-controls">
+    <button class="slider-btn" onclick="moveDest(-1)" aria-label="Previous destination"><i class="fas fa-chevron-left"></i></button>
+    <button class="slider-btn" onclick="moveDest(1)" aria-label="Next destination"><i class="fas fa-chevron-right"></i></button>
+  </div>
+  <div class="slider-dots" id="destDots"></div>
+</section>
+
+<!-- ========== REVIEW SLIDER ========== -->
 <section id="reviews-section">
   <h2 data-lang="reviews_title">Guest Reviews</h2>
-  <p class="section-sub">Real feedback from travellers who have experienced our gorilla treks and safaris. We actively invite every guest to share their experience.</p>
+  <p class="section-sub">What our travellers say about their gorilla treks and safaris with Brendava.</p>
 
+  <div class="review-slider-wrap">
+    <div class="review-track" id="reviewTrack">
+      <!-- Reviews will be injected here by JS, or fall back to static ones -->
+      <div class="review-slide">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <h4>Sarah M.</h4>
+          <p>“Incredible gorilla trek in Bwindi. The team organised everything perfectly and our guide was outstanding. Highly recommend Brendava!”</p>
+        </div>
+      </div>
+      <div class="review-slide">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <h4>James & Lisa</h4>
+          <p>“We did a combined Uganda–Rwanda itinerary. Brenda and the team were professional, responsive and truly passionate about the destinations.”</p>
+        </div>
+      </div>
+      <div class="review-slide">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <h4>Thomas K.</h4>
+          <p>“Murchison Falls and Queen Elizabeth exceeded all expectations. Clear communication from booking to the last day. Will travel with them again.”</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="review-nav">
+    <button class="slider-btn" onclick="moveReview(-1)"><i class="fas fa-chevron-left"></i></button>
+    <button class="slider-btn" onclick="moveReview(1)"><i class="fas fa-chevron-right"></i></button>
+  </div>
+
+  <!-- Review submission form -->
   <div class="review-form">
     <input type="text" id="reviewName" placeholder="Your name" required>
     <select id="reviewRating">
@@ -746,10 +1018,6 @@ footer {
     </select>
     <textarea id="reviewComment" placeholder="Tell us about your safari or gorilla trek..." required></textarea>
     <button class="btn" onclick="submitReview()">Submit Review</button>
-  </div>
-
-  <div id="reviewsContainer">
-    <p style="text-align:center; color:#666;">Loading reviews...</p>
   </div>
 </section>
 
@@ -768,7 +1036,7 @@ footer {
   </form>
 </section>
 
-<!-- PAYMENT – FIXED FOR TRUST -->
+<!-- PAYMENT -->
 <section id="payment">
   <h2>Secure Deposit & Payment</h2>
   <p class="section-sub">We understand international travellers need clarity and reassurance before transferring funds for a multi-thousand-dollar safari.</p>
@@ -804,7 +1072,7 @@ footer {
         </a>
       </div>
       <p style="margin-top:18px; font-size:0.9rem; color:#555;">
-        We confirm receipt and issue your official booking confirmation within 24 hours. For any questions before paying, simply message or call us — we are happy to clarify.
+        We confirm receipt and issue your official booking confirmation within 24 hours. For any questions before paying, simply message or call us.
       </p>
     </div>
   </div>
@@ -833,10 +1101,13 @@ footer {
     <div class="footer-box">
       <h3>Quick Links</h3>
       <ul>
-        <li><a href="#destinations">Destinations</a></li>
-        <li><a href="#reviews-section">Reviews</a></li>
+        <li><a href="#team">Our Team</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="destination.html">Destinations</a></li>
+        <li><a href="featuredtrips.html">Featured Trips</a></li>
+        <li><a href="Itineraries.html">Itineraries</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
         <li><a href="#booking">Book a Safari</a></li>
-        <li><a href="#payment">Payment & Policy</a></li>
       </ul>
     </div>
 
@@ -857,7 +1128,7 @@ footer {
       <h3>Contact</h3>
       <p><i class="fas fa-phone"></i> +256 789 336 441 (Director)</p>
       <p><i class="fas fa-phone"></i> +256 762 584 996 (Reservations)</p>
-      <p><i class="fas fa-phone"></i> +256 770 462 422</p>
+      <p><i class="fas fa-phone"></i> +256 770 462 422 (Assistant Manager)</p>
       <p><i class="fas fa-envelope"></i> brendavatoursandtravel@gmail.com</p>
       <p><i class="fas fa-map-marker-alt"></i> Mukalazi Road, Bukoto, Kampala</p>
       <p><i class="fas fa-clock"></i> Mon–Fri 8:00–17:00 · Sat–Sun 9:00–13:00</p>
@@ -913,47 +1184,13 @@ footer {
       await addDoc(collection(db, "reviews"), { name, rating, comment, createdAt: Date.now() });
       document.getElementById("reviewName").value = "";
       document.getElementById("reviewComment").value = "";
-      loadReviews();
       alert("Thank you! Your review has been submitted.");
+      // Optionally reload reviews
     } catch (err) {
       console.error(err);
       alert("Could not submit review. Please try again or contact us directly.");
     }
   };
-
-  async function loadReviews() {
-    const container = document.getElementById("reviewsContainer");
-    try {
-      const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
-      const snapshot = await getDocs(q);
-      const reviews = [];
-      snapshot.forEach(doc => reviews.push(doc.data()));
-
-      if (reviews.length === 0) {
-        container.innerHTML = "<p style='text-align:center;color:#666;'>No public reviews yet — be the first to share your experience after your safari!</p>";
-        return;
-      }
-
-      let current = 0;
-      function show() {
-        const r = reviews[current];
-        const stars = "★".repeat(r.rating || 0) + "☆".repeat(5 - (r.rating || 0));
-        container.innerHTML = `
-          <div class="review-card">
-            <h4>${r.name}</h4>
-            <div class="stars">${stars}</div>
-            <p>${r.comment}</p>
-          </div>`;
-        current = (current + 1) % reviews.length;
-      }
-      show();
-      setInterval(show, 6000);
-    } catch (err) {
-      console.error(err);
-      container.innerHTML = "<p style='text-align:center;color:#666;'>Reviews temporarily unavailable. Please check Google or Tripadvisor, or contact us for recent guest feedback.</p>";
-    }
-  }
-  loadReviews();
 </script>
 
 <script>
@@ -986,21 +1223,56 @@ footer {
 
   // Mobile menu
   function toggleMenu() {
-    document.getElementById("headerMenu").classList.toggle("show");
+    document.getElementById("mobileMenu").classList.toggle("show");
   }
 
-  // Explore more
-  function toggle(id, btn) {
-    const el = document.getElementById(id);
-    if (!el) return;
-    if (el.style.display === "block") {
-      el.style.display = "none";
-      btn.textContent = "Explore More";
-    } else {
-      el.style.display = "block";
-      btn.textContent = "Show Less";
-    }
+  // ========== DESTINATION SLIDER ==========
+  let destIndex = 0;
+  const destTrack = document.getElementById("destTrack");
+  const destSlides = document.querySelectorAll(".destination-slide");
+  const totalDest = destSlides.length;
+
+  function updateDest() {
+    destTrack.style.transform = `translateX(-${destIndex * 100}%)`;
+    document.querySelectorAll("#destDots .dot").forEach((d, i) => {
+      d.classList.toggle("active", i === destIndex);
+    });
   }
+
+  function moveDest(dir) {
+    destIndex = (destIndex + dir + totalDest) % totalDest;
+    updateDest();
+  }
+
+  // Create dots
+  const dotsContainer = document.getElementById("destDots");
+  for (let i = 0; i < totalDest; i++) {
+    const dot = document.createElement("span");
+    dot.className = "dot" + (i === 0 ? " active" : "");
+    dot.onclick = () => { destIndex = i; updateDest(); };
+    dotsContainer.appendChild(dot);
+  }
+
+  // Auto-advance destinations
+  setInterval(() => moveDest(1), 7000);
+
+  // ========== REVIEW SLIDER ==========
+  let reviewIndex = 0;
+  const reviewTrack = document.getElementById("reviewTrack");
+  const reviewSlides = document.querySelectorAll(".review-slide");
+  const totalReviews = reviewSlides.length;
+
+  function updateReview() {
+    reviewTrack.style.transform = `translateX(-${reviewIndex * 100}%)`;
+  }
+
+  function moveReview(dir) {
+    reviewIndex = (reviewIndex + dir + totalReviews) % totalReviews;
+    updateReview();
+  }
+
+  // Auto-advance reviews
+  setInterval(() => moveReview(1), 5500);
 
   // Language
   const translations = {
