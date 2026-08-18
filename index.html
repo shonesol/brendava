@@ -88,7 +88,7 @@ body {
 
 /* ========== BEAUTIFUL STICKY HEADER ========== */
 .site-header {
-  position: sticky;
+  position: static;
   top: 0;
   z-index: 1000;
   background: rgba(255, 255, 255, 0.96);
@@ -96,6 +96,9 @@ body {
   -webkit-backdrop-filter: blur(14px);
   border-bottom: 1px solid rgba(15, 118, 110, 0.1);
   box-shadow: 0 2px 24px rgba(0, 0, 0, 0.05);
+  transform: translateY(-100%);
+
+}
 }
 
 /* Thin elegant top bar */
