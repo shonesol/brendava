@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brendava Tours & Travel - Safari Video Gallery</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(rgba(0,0,0,.7), rgba(0,0,0,.75)),
+    url('https://images.unsplash.com/photo-1516426122078-c23e76319801?q=80&w=1600');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    color: white;
+    min-height: 100vh;
+}
+header{
+    text-align: center;
+    padding: 40px 20px 20px;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(8px);
+}
+header h1{
+    font-size: 2.4rem;
+    color: #FFD700;
+    letter-spacing: 1px;
+}
+header p{
+    margin-top: 10px;
+    color: #e0e0e0;
+    font-size: 1.1rem;
+}
+.back-btn{
+    display: inline-block;
+    margin: 25px auto;
+    padding: 12px 28px;
+    background: #0f766e;
+    color: white;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: 0.3s;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+.back-btn:hover{
+    background: #14b8a6;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+}
+.intro{
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 20px;
+    padding: 0 20px;
+    color: #ddd;
+    font-size: 1.05rem;
+    line-height: 1.6;
+}
+.gallery{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+    gap: 30px;
+    padding: 20px 30px 50px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.video-card{
+    background: rgba(255,255,255,0.09);
+    border-radius: 20px;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    box-shadow: 0 12px 35px rgba(0,0,0,.45);
+    transition: 0.35s ease;
+    display: flex;
+    flex-direction: column;
+}
+.video-card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 18px 45px rgba(0,0,0,.55);
+    border: 1px solid rgba(255,215,0,0.3);
+}
+.video-card video{
+    width: 100%;
+    display: block;
+    background: #111;
+    border-bottom: 3px solid #FFD700;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+}
+.guide-section{
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 18px 18px 10px;
+    background: rgba(0,0,0,0.25);
+}
+.guide-photo{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #FFD700;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.guide-info h4{
+    color: #FFD700;
+    font-size: 1.05rem;
+    margin-bottom: 2px;
+}
+.guide-info .role{
+    color: #14b8a6;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+.video-info{
+    padding: 12px 18px 20px;
+    flex-grow: 1;
+}
+.video-info h3{
+    color: #FFD700;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+}
+.video-info .spoken{
+    color: #e8e8e8;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    font-style: italic;
+}
+.video-info .spoken::before{
+    content: '"';
+    color: #FFD700;
+    font-size: 1.4rem;
+    margin-right: 2px;
+}
+.video-info .spoken::after{
+    content: '"';
+    color: #FFD700;
+    font-size: 1.4rem;
+    margin-left: 2px;
+}
+.footer-note{
+    text-align: center;
+    padding: 30px 20px;
+    color: #aaa;
+    font-size: 0.9rem;
+}
+@media(max-width: 768px){
+    .gallery{
+        grid-template-columns: 1fr;
+        padding: 15px;
+        gap: 22px;
+    }
+    header h1{
+        font-size: 1.9rem;
+    }
+    .guide-section{
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+</style>
+</head>
+<body>
+<header>
+    <h1>🎥 Brendava Tours & Travel</h1>
+    <p>Experience Uganda Through Our Safari Adventures</p>
+</header>
+
+<div style="text-align:center;">
+    <a href="index.html" class="back-btn">← Back Home</a>
+</div>
+
+<p class="intro">
+    Meet our experienced local guides — Chichi Blackman, Kasozi, and Ibra Hassan. 
+    They know these parks like the back of their hands and will make your safari unforgettable.
+</p>
+
+<div class="gallery">
+
+    <!-- Video 1: Tree climbing lions -->
+    <div class="video-card">
+        <video controls preload="metadata" playsinline>
+            <source src="08e4b388-afb9-4fa2-a5d7-78433779b536.mov" type="video/mp4">
+            Your browser does not support video playback.
+        </video>
+        <div class="guide-section">
+            <img src="guide.jpg" alt="Guide Chichi Blackman" class="guide-photo">
+            <div class="guide-info">
+                <h4>Chichi Blackman</h4>
+                <div class="role">Senior Safari Guide</div>
+            </div>
+        </div>
+        <div class="video-info">
+            <h3>Tree-Climbing Lions of Ishasha</h3>
+            <p class="spoken">Hey everyone, Chichi Blackman here. One of the coolest things you’ll see on safari in Uganda is the tree-climbing lions in the Ishasha sector of Queen Elizabeth National Park. These lions don’t just stay on the ground like most others — they climb up into the big fig and acacia trees. Why? To escape the heat, get away from biting flies, watch for prey like Uganda kob and buffalo, and simply rest on those strong branches. You’ll often find them up there late morning or in the afternoon. It’s a sight that never gets old, and I love showing it to my guests.</p>
+        </div>
+    </div>
+
+    <!-- Video 2: Elephants -->
+    <div class="video-card">
+        <video controls preload="metadata" playsinline>
+            <source src="03dca837-6912-4135-8a0d-689c8e542619.mov">
+            Your browser does not support video playback.
+        </video>
+        <div class="guide-section">
+            <img src="guide.jpg" alt="Guide Kasozi" class="guide-photo">
+            <div class="guide-info">
+                <h4>Kasozi</h4>
+                <div class="role">Wildlife Specialist</div>
+            </div>
+        </div>
+        <div class="video-info">
+            <h3>Let’s Talk About Elephants</h3>
+            <p class="spoken">Jambo, I’m Kasozi. When people come on safari, elephants are always one of the animals they most want to see — and for good reason. Africa has the bigger, stronger African elephants. In Uganda we mostly see the savanna elephants in places like Murchison Falls and Queen Elizabeth. They live in tight family groups led by a wise old matriarch. They communicate with deep rumbles you can sometimes feel more than hear, and they really care for their young. Watching a herd walk past your vehicle with the babies protected in the middle is pure magic. These gentle giants shape the landscape and bring a lot of tourism income that helps protect them.</p>
+        </div>
+    </div>
+
+    <!-- Video 3: Wildlife Safari -->
+    <div class="video-card">
+        <video controls preload="metadata" playsinline>
+            <source src="65bc35d3-9548-4faf-ae99-1f01a47f3517.mov" type="video/mp4">
+            Your browser does not support video playback.
+        </video>
+        <div class="guide-section">
+            <img src="guide.jpg" alt="Guide Ibra Hassan" class="guide-photo">
+            <div class="guide-info">
+                <h4>Ibra Hassan</h4>
+                <div class="role">Experienced Tour Guide</div>
+            </div>
+        </div>
+        <div class="video-info">
+            <h3>Wildlife Safari Experience</h3>
+            <p class="spoken">Hello friends, Ibra Hassan speaking. Uganda is truly the Pearl of Africa, and once you come on a game drive with us you’ll understand why. From the open plains of Queen Elizabeth to the river banks of Murchison Falls, every day brings something new — elephants, buffalo, antelope, birds, and if you’re lucky, the big cats. I always tell my guests to keep their cameras ready and their eyes open, because nature doesn’t follow a schedule. That’s the beauty of a real safari.</p>
+        </div>
+    </div>
+
+    <!-- Video 4: Safari Experience -->
+    <div class="video-card">
+        <video controls preload="metadata" playsinline>
+            <source src="bea8202b-983a-4e67-9439-f7beea4521d7.mov" type="video/mp4">
+            Your browser does not support video playback.
+        </video>
+        <div class="guide-section">
+            <img src="guide.jpg" alt="Guide Chichi Blackman" class="guide-photo">
+            <div class="guide-info">
+                <h4>Chichi Blackman</h4>
+                <div class="role">Senior Safari Guide</div>
+            </div>
+        </div>
+        <div class="video-info">
+            <h3>Safari Experience</h3>
+            <p class="spoken">This is Chichi again. Every safari is different, but the feeling is always the same — that mix of excitement and peace when you’re out in the wild. Whether we’re tracking tracks in the dust or just sitting quietly watching a herd of buffalo, I make sure my guests feel safe and learn something real about the animals and the land. Come with an open mind and you’ll leave with stories for life.</p>
+        </div>
+    </div>
+
+    <!-- Video 5: Game Drive / Gorilla -->
+    <div class="video-card">
+        <video controls preload="metadata" playsinline>
+            <source src="4c1a713e-92b8-45cc-85f8-e6d7f8e99b75.mov" type="video/mp4">
+            Your browser does not support video playback.
+        </video>
+        <div class="guide-section">
+            <img src="guide.jpg" alt="Guide Kasozi" class="guide-photo">
+            <div class="guide-info">
+                <h4>Kasozi</h4>
+                <div class="role">Wildlife Specialist</div>
+            </div>
+        </div>
+        <div class="video-info">
+            <h3>Gorilla Trekking Adventure</h3>
+            <p class="spoken">Hi, Kasozi here. Gorilla trekking in Bwindi or Mgahinga is one of the most powerful experiences you can have in Africa. We hike through the thick forest with our porters and trackers until we find a family of mountain gorillas. Then you get one precious hour with them — watching the silverback, the mothers with babies, the youngsters playing. It’s quiet, respectful, and unforgettable. Uganda is one of the best places in the world to do this safely, and I’m proud to guide people on that journey.</p>
+        </div>
+    </div>
+
+    <!-- Video 6: Wildlife again -->
+    <div class="video-card">
+        <video controls preload="metadata" playsinline>
+            <source src="8ed3dd9a-b12e-4c19-8f5c-c2ec76c614c7.mp4">
+            Your browser does not support video playback.
+        </video>
+        <div class="guide-section">
+            <img src="guide.jpg" alt="Guide Ibra Hassan" class="guide-photo">
+            <div class="guide-info">
+                <h4>Ibra Hassan</h4>
+                <div class="role">Experienced Tour Guide</div>
+            </div>
+        </div>
+        <div class="video-info">
+            <h3>Wildlife Safari Experience</h3>
+            <p class="spoken">Ibra Hassan again. The landscapes here in Uganda change so quickly — from thick forest to open savanna to the mighty Nile. On a good day we can see lions, elephants, hippos, crocodiles and hundreds of birds. I love sharing the little details too: why a bird is calling that way, or how elephants use their trunks. Guests always leave knowing more about this beautiful country than when they arrived.</p>
+        </div>
+    </div>
+
+    <!-- Video 7: Rothschild’s giraffe -->
+    <div class="video-card">
+        <video controls preload="metadata" playsinline>
+            <source src="699fcbe8-8465-4745-a641-ddc0854f4f53.mov" type="video/mp4">
+            Your browser does not support video playback.
+        </video>
+        <div class="guide-section">
+            <img src="guide.jpg" alt="Guide Chichi Blackman" class="guide-photo">
+            <div class="guide-info">
+                <h4>Chichi Blackman</h4>
+                <div class="role">Senior Safari Guide</div>
+            </div>
+        </div>
+        <div class="video-info">
+            <h3>The Rothschild’s Giraffe in Uganda</h3>
+            <p class="spoken">Chichi here. One animal I’m always happy to point out is the Rothschild’s giraffe. They’re special — tall and elegant, with cream coats and light brown patches, and you can tell them by their white “stockings” on the lower legs with no markings. Uganda has one of the largest remaining wild populations, especially in Murchison Falls National Park. They feed on acacia with those long tongues, live in loose groups called towers, and the males sometimes neck-wrestle. Thanks to protection efforts, their numbers are recovering. Seeing them against the Nile is pure Uganda magic.</p>
+        </div>
+    </div>
+
+    <!-- Video 8: Why lions climb trees -->
+    <div class="video-card">
+        <video controls preload="metadata" playsinline>
+            <source src="b5d8c621-9200-4f56-991d-7672b4cbefd9.mov" type="video/mp4">
+            Your browser does not support video playback.
+        </video>
+        <div class="guide-section">
+            <img src="guide.jpg" alt="Guide Kasozi" class="guide-photo">
+            <div class="guide-info">
+                <h4>Kasozi</h4>
+                <div class="role">Wildlife Specialist</div>
+            </div>
+        </div>
+        <div class="video-info">
+            <h3>Why Lions Climb Trees</h3>
+            <p class="spoken">Kasozi speaking. People always ask me why the lions in Ishasha climb trees. It’s simple once you spend time with them. The ground gets hot, the tsetse flies are annoying, and from a high branch they get a great view of any prey or other pride members. The big fig and acacia trees have strong horizontal branches perfect for lounging. You’ll see them up there mostly from late morning into the afternoon, sometimes the whole pride including cubs. In the evening they come down to hunt. Ishasha is one of the few places in East Africa where this happens regularly — it’s a real highlight of our southern Queen Elizabeth trips.</p>
+        </div>
+    </div>
+
+    <!-- Video 9: Lions on roads -->
+    <div class="video-card">
+        <video controls preload="metadata" playsinline>
+            <source src="f334ad22-fe8a-44dc-a1c5-7d632da6444c.mov" type="video/mp4">
+            Your browser does not support video playback.
+        </video>
+        <div class="guide-section">
+            <img src="guide.jpg" alt="Guide Ibra Hassan" class="guide-photo">
+            <div class="guide-info">
+                <h4>Ibra Hassan</h4>
+                <div class="role">Experienced Tour Guide</div>
+            </div>
+        </div>
+        <div class="video-info">
+            <h3>Lions Resting on the Roads</h3>
+            <p class="spoken">Ibra here. You’ll often find lions lying right on the road in Murchison Falls or Queen Elizabeth, and guests get so excited. It’s completely natural. The road surface holds the sun’s heat, so it’s warm and comfortable, especially morning and evening. It’s also open, so they can see far, watch for prey or danger, and avoid the thick grass and insects. Lions sleep a lot — sometimes 16 to 20 hours a day — and the road is just a good place to do it. When we come across them we keep a respectful distance, switch off the engine, and enjoy the moment. That’s real safari life.</p>
+        </div>
+    </div>
+
+</div>
+
+<div class="footer-note">
+    All experiences guided by our trusted local team • Chichi Blackman • Kasozi • Ibra Hassan<br>
+    Brendava Tours & Travel — Your home in the wild
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    document.querySelectorAll(".gallery video").forEach(video => {
+        video.muted = true;
+        // Keep controls visible so users can unmute and interact
+        video.controls = true;
+        video.playsInline = true;
+        // Optional gentle autoplay attempt (many browsers block it)
+        video.play().catch(() => {});
+    });
+});
+</script>
+</body>
+</html>
