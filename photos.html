@@ -1,371 +1,523 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Brendava Tours & Travel</title>
-
-<style>
-
-/* SLIDESHOW */
-.slideshow-container{
-    position:relative;
-    width:100%;
-    height:100vh;
-    overflow:hidden;
-    background:beige;
-} 
-
-.slide{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    opacity:0;
-    transform:scale(1.1);
-    transition:
-        opacity 2s ease-in-out,
-        transform 8s ease-in-out;
-}
-
-/* ACTIVE IMAGE */
-.slide.active{
-    opacity:1;
-    transform:scale(1);
-}
-
-
-/* DARK OVERLAY */
-.overlay{
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.35);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    color:white;
-    z-index:10;
-}
-
-.overlay h1{
-    font-size:60px;
-    animation:fadeUp 2s ease;
-}
-
-.overlay p{
-    font-size:24px;
-    margin:20px;
-    animation:fadeUp 3s ease;
-}
-
-
-@keyframes fadeUp{
-
-from{
-    opacity:0;
-    transform:translateY(40px);
-}
-
-to{
-    opacity:1;
-    transform:translateY(0);
-}
-
-}
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 10px;
-    padding: 10px;
-}
-
-.gallery img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-.gallery img:hover {
-    transform: scale(1.05);
-}
-
-/* ===== PREMIUM LIGHTBOX ===== */
-
-#lightbox{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.95);
-    backdrop-filter:blur(8px);
-    display:none;
-    justify-content:center;
-    align-items:center;
-    z-index:99999;
-    animation:fadeIn .4s ease;
-}
-
-#lightbox img{
-    max-width:90%;
-    max-height:85%;
-    border-radius:18px;
-    box-shadow:0 25px 70px rgba(0,0,0,.6);
-    animation:zoom .4s ease;
-}
-
-#lightbox .close{
-    position:absolute;
-    top:25px;
-    right:35px;
-    color:#fff;
-    font-size:45px;
-    cursor:pointer;
-    transition:.3s;
-}
-
-#lightbox .close:hover{
-    color:#D4AF37;
-    transform:rotate(90deg);
-}
-
-.lightbox-btn{
-    position:absolute;
-    top:50%;
-    transform:translateY(-50%);
-    width:65px;
-    height:65px;
-    border:none;
-    border-radius:50%;
-    background:rgba(255,255,255,.15);
-    color:#fff;
-    font-size:34px;
-    cursor:pointer;
-    transition:.3s;
-    backdrop-filter:blur(10px);
-}
-
-.lightbox-btn:hover{
-    background:#D4AF37;
-    color:#111;
-}
-
-.prev{
-    left:25px;
-}
-
-.next{
-    right:25px;
-}
-
-#counter{
-    position:absolute;
-    bottom:25px;
-    left:50%;
-    transform:translateX(-50%);
-    background:rgba(255,255,255,.15);
-    color:#fff;
-    padding:10px 22px;
-    border-radius:30px;
-    font-size:16px;
-    backdrop-filter:blur(10px);
-}
-
-@keyframes fadeIn{
-    from{opacity:0;}
-    to{opacity:1;}
-}
-
-@keyframes zoom{
-    from{
-        transform:scale(.85);
-        opacity:0;
-    }
-    to{
-        transform:scale(1);
-        opacity:1;
-    }
-}
-
-@media(max-width:768px){
-
-    .lightbox-btn{
-        width:50px;
-        height:50px;
-        font-size:24px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brendava Tours & Travel</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --green: #0B7A41;
+      --green-dark: #085A31;
+      --orange: #F28C28;
+      --gold: #D4AF37;
+      --beige: #F5F0E6;
+      --black: #111;
+      --white: #ffffff;
+      --text: #222;
     }
 
-    #lightbox img{
-        max-width:95%;
-        max-height:75%;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--beige);
+      color: var(--text);
+      line-height: 1.6;
     }
 
-    #counter{
-        font-size:14px;
+    /* ===== TOP CTA ===== */
+    .top-bar {
+      background: var(--green);
+      text-align: center;
+      padding: 12px;
     }
-}
-    .cta {
-    text-align: center;
-    margin: 30px 0;
-}
-
-.cta a {
-    display: inline-block;
-    background: #28a745; /* Green */
-    color: #fff;
-    text-decoration: none;
-    padding: 14px 30px;
-    font-size: 16px;
-    font-weight: 600;
-    border-radius: 50px;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3);
-}
-
-.cta a:hover {
-    background: #218838; /* Darker green */
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.5);
-}
-
-.cta a:active {
-    transform: translateY(0);
-}
-    /* ===========================
-   PREMIUM FOOTER
-=========================== */
-
-footer{
-    background:linear-gradient(135deg,#0B7A41,#085A31);
-    color:#fff;
-    text-align:center;
-    padding:60px 20px 25px;
-    margin-top:60px;
-    position:relative;
-    overflow:hidden;
-    border-top:4px solid #D4AF37;
-}
-
-footer::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    height:4px;
-    background:linear-gradient(90deg,#D4AF37,#F28C28,#D4AF37);
-}
-
-footer p{
-    margin:12px 0;
-    font-size:16px;
-    color:#F8F8F8;
-    letter-spacing:.5px;
-    transition:.3s;
-}
-
-footer p:hover{
-    color:#D4AF37;
-    transform:translateY(-2px);
-}
-
-footer a{
-    color:#fff;
-    text-decoration:none;
-    transition:.3s;
-}
-
-footer a:hover{
-    color:#D4AF37;
-}
-
-.footer-social{
-    display:flex;
-    justify-content:center;
-    gap:15px;
-    margin:25px 0;
-}
-
-.footer-social a{
-    width:48px;
-    height:48px;
-    border-radius:50%;
-    background:rgba(255,255,255,.12);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:#fff;
-    font-size:22px;
-    transition:.35s;
-}
-
-.footer-social a:hover{
-    background:#D4AF37;
-    color:#0B7A41;
-    transform:translateY(-5px) scale(1.08);
-}
-
-.footer-bottom{
-    margin-top:25px;
-    padding-top:20px;
-    border-top:1px solid rgba(255,255,255,.2);
-    font-size:14px;
-    color:#EAEAEA;
-}
-
-@media(max-width:768px){
-
-    footer{
-        padding:50px 15px 20px;
+    .top-bar a {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      text-decoration: none;
+      padding: 10px 26px;
+      font-weight: 600;
+      border-radius: 50px;
+      transition: 0.3s;
+    }
+    .top-bar a:hover {
+      background: var(--orange);
+      transform: translateY(-2px);
     }
 
-    footer p{
-        font-size:15px;
+    /* ===== SLIDESHOW ===== */
+    .slideshow-container {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
+      background: var(--black);
+    }
+    .slide {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transform: scale(1.08);
+      transition: opacity 2s ease-in-out, transform 8s ease-in-out;
+    }
+    .slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+    .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: var(--white);
+      z-index: 10;
+      padding: 20px;
+    }
+    .overlay h1 {
+      font-size: clamp(2rem, 6vw, 3.8rem);
+      margin-bottom: 12px;
+      animation: fadeUp 1.8s ease;
+    }
+    .overlay p {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      margin-bottom: 28px;
+      color: #f0e6d0;
+      animation: fadeUp 2.4s ease;
+    }
+    .overlay .btn {
+      display: inline-block;
+      background: var(--gold);
+      color: var(--black);
+      padding: 14px 32px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+    .overlay .btn:hover {
+      background: var(--orange);
+      transform: translateY(-3px);
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
-    .footer-social{
-        gap:10px;
+    /* ===== SECTIONS ===== */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    .section-title {
+      text-align: center;
+      font-size: 1.9rem;
+      color: var(--green);
+      margin-bottom: 8px;
+      position: relative;
+    }
+    .section-title::after {
+      content: "";
+      display: block;
+      width: 70px;
+      height: 3px;
+      background: var(--gold);
+      margin: 10px auto 30px;
     }
 
-    .footer-social a{
-        width:42px;
-        height:42px;
-        font-size:18px;
+    /* ===== ADMIN BAR ===== */
+    .admin-bar {
+      background: var(--black);
+      color: var(--white);
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
     }
-}
-</style>
+    .admin-bar span { font-size: 0.9rem; color: #ccc; }
+    .admin-btn {
+      background: transparent;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      padding: 8px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: 0.25s;
+    }
+    .admin-btn:hover, .admin-btn.active {
+      background: var(--gold);
+      color: var(--black);
+    }
+
+    /* ===== UPLOAD PANEL (admin only) ===== */
+    #adminPanel {
+      display: none;
+      background: #1a1a1a;
+      padding: 30px 20px;
+      border-bottom: 3px solid var(--gold);
+    }
+    #adminPanel.visible { display: block; }
+
+    .upload-box {
+      max-width: 700px;
+      margin: 0 auto;
+      border: 2px dashed #444;
+      border-radius: 14px;
+      padding: 36px 20px;
+      text-align: center;
+      background: #222;
+      transition: 0.25s;
+    }
+    .upload-box.dragover {
+      border-color: var(--gold);
+      background: #2a2a2a;
+    }
+    .upload-box p { color: #bbb; margin-bottom: 6px; }
+    .upload-box .hint { font-size: 0.85rem; color: #777; margin-bottom: 18px; }
+    #fileInput { display: none; }
+    .upload-btn {
+      background: var(--green);
+      color: white;
+      border: none;
+      padding: 12px 28px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.25s;
+    }
+    .upload-btn:hover:not(:disabled) { background: var(--green-dark); }
+    .upload-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+    #status {
+      margin-top: 14px;
+      min-height: 24px;
+      font-size: 0.95rem;
+    }
+    .status-success { color: #4ade80; }
+    .status-error { color: #f87171; }
+    .status-info { color: #aaa; }
+
+    /* ===== GALLERIES ===== */
+    .gallery-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .gallery-header h3 {
+      font-size: 1.35rem;
+      color: var(--green);
+    }
+    .count {
+      font-size: 0.9rem;
+      color: #666;
+    }
+    .clear-btn {
+      background: transparent;
+      border: 1px solid #999;
+      color: #666;
+      padding: 5px 12px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      cursor: pointer;
+      display: none;
+    }
+    .clear-btn.visible { display: inline-block; }
+    .clear-btn:hover { border-color: #c00; color: #c00; }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      background: #ddd;
+      cursor: pointer;
+      aspect-ratio: 1;
+      border: 2px solid transparent;
+      transition: 0.3s;
+    }
+    .gallery-item:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    .gallery-item img,
+    .gallery-item video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Videos should NOT have the scale/fade hover of photos */
+    .gallery-item.video-item:hover img {
+      transform: none;
+    }
+    .video-badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.75);
+      color: white;
+      font-size: 0.72rem;
+      padding: 4px 9px;
+      border-radius: 4px;
+    }
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 50px 20px;
+      color: #888;
+      border: 1px dashed #ccc;
+      border-radius: 12px;
+      background: #f9f6f0;
+    }
+
+    /* ===== LIGHTBOX / VIEWER ===== */
+    #lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.95);
+      backdrop-filter: blur(8px);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 99999;
+      flex-direction: column;
+      padding: 20px;
+    }
+    #lightbox.open { display: flex; }
+
+    #lightbox-media {
+      max-width: 92vw;
+      max-height: 78vh;
+      border-radius: 14px;
+      box-shadow: 0 25px 70px rgba(0,0,0,0.6);
+    }
+    #lightbox-media img,
+    #lightbox-media video {
+      max-width: 92vw;
+      max-height: 78vh;
+      border-radius: 14px;
+      object-fit: contain;
+    }
+
+    .lightbox-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 58px;
+      height: 58px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      color: white;
+      font-size: 28px;
+      cursor: pointer;
+      transition: 0.3s;
+      backdrop-filter: blur(8px);
+    }
+    .lightbox-btn:hover {
+      background: var(--gold);
+      color: var(--black);
+    }
+    .prev { left: 20px; }
+    .next { right: 20px; }
+
+    .close {
+      position: absolute;
+      top: 20px;
+      right: 28px;
+      color: white;
+      font-size: 40px;
+      cursor: pointer;
+      transition: 0.3s;
+      line-height: 1;
+    }
+    .close:hover {
+      color: var(--gold);
+      transform: rotate(90deg);
+    }
+
+    #counter {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.12);
+      color: white;
+      padding: 8px 20px;
+      border-radius: 30px;
+      font-size: 0.95rem;
+    }
+
+    /* ===== ABOUT ===== */
+    .about {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 40px 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+      text-align: center;
+    }
+    .about h2 {
+      color: var(--green);
+      margin-bottom: 18px;
+      font-size: 1.8rem;
+    }
+    .about p {
+      max-width: 800px;
+      margin: 0 auto;
+      color: #444;
+      font-size: 1.05rem;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: linear-gradient(135deg, var(--green), var(--green-dark));
+      color: var(--white);
+      text-align: center;
+      padding: 55px 20px 25px;
+      margin-top: 60px;
+      position: relative;
+      border-top: 4px solid var(--gold);
+    }
+    footer::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 4px;
+      background: linear-gradient(90deg, var(--gold), var(--orange), var(--gold));
+    }
+    footer p {
+      margin: 10px 0;
+      font-size: 1rem;
+      color: #f0f0f0;
+    }
+    footer a { color: white; text-decoration: none; transition: 0.3s; }
+    footer a:hover { color: var(--gold); }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      margin: 22px 0;
+    }
+    .footer-social a {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+      transition: 0.35s;
+    }
+    .footer-social a:hover {
+      background: var(--gold);
+      color: var(--green-dark);
+      transform: translateY(-5px) scale(1.08);
+    }
+    .footer-bottom {
+      margin-top: 22px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      font-size: 0.9rem;
+      color: #e0e0e0;
+    }
+
+    /* ===== LOGIN MODAL ===== */
+    #loginModal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100000;
+    }
+    #loginModal.open { display: flex; }
+    .login-box {
+      background: var(--beige);
+      border-radius: 14px;
+      padding: 32px;
+      width: 90%;
+      max-width: 360px;
+      text-align: center;
+      border: 2px solid var(--gold);
+    }
+    .login-box h2 { color: var(--green); margin-bottom: 8px; }
+    .login-box p { color: #666; margin-bottom: 18px; font-size: 0.95rem; }
+    .login-box input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      margin-bottom: 16px;
+      outline: none;
+    }
+    .login-box input:focus { border-color: var(--green); }
+    .login-actions { display: flex; gap: 10px; }
+    .login-actions button {
+      flex: 1;
+      padding: 11px;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary { background: var(--green); color: white; }
+    .btn-primary:hover { background: var(--green-dark); }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid #999 !important;
+      color: #555;
+    }
+
+    @media (max-width: 768px) {
+      .slideshow-container { height: 70vh; }
+      .gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+      .lightbox-btn { width: 46px; height: 46px; font-size: 22px; }
+      .prev { left: 8px; }
+      .next { right: 8px; }
+    }
+  </style>
 </head>
-
 <body>
-     <div class="cta">
-        <a href="index.html">Back to Home</a>
-    </div>
 
-<!-- PHOTO SLIDESHOW -->
-<div class="slideshow-container">
+  <!-- Top navigation -->
+  <div class="top-bar">
+    <a href="index.html">← Back to Home</a>
+  </div>
 
-    <img class="slide" src="b977c291-7f69-4eed-9030-2ba699e3433f.jpeg" alt="Safari">
+  <!-- SLIDESHOW (your original images) -->
+  <div class="slideshow-container" id="slideshow">
+    <img class="slide active" src="b977c291-7f69-4eed-9030-2ba699e3433f.jpeg" alt="Safari">
     <img class="slide" src="IMG_0571.jpeg" alt="Safari">
     <img class="slide" src="IMG_0566.jpeg" alt="Safari">
     <img class="slide" src="IMG_0605.jpeg" alt="Safari">
     <img class="slide" src="07abd0b2-85af-4dbf-abe9-93353c71af38.jpeg" alt="Safari">
-    <img class="slide" src="IMG_0566.jpeg" alt="Safari">
-    <img class="slide" src="IMG_0571.jpeg" alt="Safari">
-    <img class="slide" src="IMG_0605.jpeg" alt="Safari">
     <img class="slide" src="IMG_0964.jpeg" alt="Safari">
     <img class="slide" src="IMG_1037.jpeg" alt="Safari">
     <img class="slide" src="IMG_2520.jpeg" alt="Safari">
     <img class="slide" src="IMG_3105.jpeg" alt="Safari">
-    <img class="slide"src="IMG_3106.jpeg" alt="Safari">
+    <img class="slide" src="IMG_3106.jpeg" alt="Safari">
     <img class="slide" src="IMG_3108.jpeg" alt="Safari">
-  <img class="slide" src="IMG_3109.jpeg" alt="Safari">
+    <img class="slide" src="IMG_3109.jpeg" alt="Safari">
     <img class="slide" src="IMG_3134.jpeg" alt="Safari">
     <img class="slide" src="IMG_3135.jpeg" alt="Safari">
     <img class="slide" src="IMG_3136.jpeg" alt="Safari">
@@ -373,205 +525,439 @@ footer a:hover{
     <img class="slide" src="IMG_3139.jpeg" alt="Safari">
     <img class="slide" src="IMG_3144.jpeg" alt="Safari">
     <img class="slide" src="IMG_3146.jpeg" alt="Safari">
+
     <div class="overlay">
-        <h1>Brendava Tours & Travel</h1>
-        <p>“Where your dreams meet reality “</p>
-        <a href="#about" class="btn">Explore More</a>
+      <h1>Brendava Tours & Travel</h1>
+      <p>“Where your dreams meet reality”</p>
+      <a href="#about" class="btn">Explore More</a>
     </div>
+  </div>
 
-</div>
-        <div class="gallery">
-            <img src="4c8da19f-925f-46fe-9f28-7eaeb8eeebad.jpeg" onclick="openImage(this)">
-    <img src="8127a0e2-223f-4eba-a8d0-48394e1e0b11.jpeg" onclick="openImage(this)">
-    <img src="f333076f-5861-49b1-b2c1-e8835cb85718.jpeg" onclick="openImage(this)">
-    <img src="d109a856-88e3-4cf9-9eba-7063e8e07168.jpeg" onclick="openImage(this)">
-    <img src="b5a6b749-d8bf-4acc-9f50-0b91a17f588a.jpeg" onclick="openImage(this)">
-    <img src="89d63307-0080-4fa8-a80c-2370349f508d.jpeg" onclick="openImage(this)">
-    <img src="IMG_2007.jpeg" onclick="openImage(this)">
-    <img src="IMG_3135.jpeg" onclick="openImage(this)">
-    <img src="IMG_3134.jpeg" onclick="openImage(this)">
-  <img src="IMG_3587.jpeg" onclick="openImage(this)">
-    <img src="IMG_3081.jpeg" onclick="openImage(this)">
-    <img src="IMG_0817.jpeg" onclick="openImage(this)">
-    <img src="IMG_0811.jpeg" onclick="openImage(this)">
-    <img src="9ee7b284-61fd-44e5-8325-19b9bc5e6023.jpeg" onclick="openImage(this)">
-    <img src="0613e5ba-2d0b-420c-a474-59cc6baefefb.jpeg" onclick="openImage(this)">
-    <img src="1b4213ef-b664-4946-85ea-57d950d450dd.jpeg" onclick="openImage(this)">
-    <img src="22ffe1af-d054-4436-918d-4a5e5fe72c65.jpeg" onclick="openImage(this)">
-    <img src="224d819c-99bc-45bb-bfe2-17aba26b9a3d.mov" onclick="openImage(this)">
-    <img src="3782bd45-14e9-492e-95d6-e95e70c59865.jpeg" onclick="openImage(this)">
-    <img src="55e5426b-3da1-484c-be20-119315f6deda.jpeg" onclick="openImage(this)">
-    <img src="41f45450-2b7b-4592-a2e1-db68285537fc.jpeg" onclick="openImage(this)">
-    <img src="55e5426b-3da1-484c-be20-119315f6deda.jpeg" onclick="openImage(this)">
-    <img src="5e4c4f98-d6bf-4cd5-8b42-f50131c1e3a5.jpeg" onclick="openImage(this)">
-  <img src="86f8a95a-48fb-42fd-9a2d-5ad239fd81e5.jpeg" onclick="openImage(this)">
-    <img src="84919ebe-14a6-44e7-83c2-f55ff8e9e6bf.jpeg" onclick="openImage(this)">
-    <img src="7c5561e5-f8ea-4243-81e9-0eeb292cc771.jpeg" onclick="openImage(this)">
-    <img src="bac1cb24-3956-45d7-86da-d957f93e4345.jpeg" onclick="openImage(this)">
-    <img src="b977c291-7f69-4eed-9030-2ba699e3433f.jpeg" onclick="openImage(this)">
-    <img src="IMG_0571.jpeg" onclick="openImage(this)">
-    <img src="IMG_0566.jpeg" onclick="openImage(this)">
-    <img src="IMG_0605.jpeg" onclick="openImage(this)">
-    <img src="IMG_0566.jpeg" onclick="openImage(this)">
-        <img src="IMG_3136.jpeg" onclick="openImage(this)">
-    <img src="d131b966-fbe9-4b09-b36a-6681562a6c0e.jpeg" onclick="openImage(this)">
-    <img src="f9671cc2-b1af-4ea8-b7b5-a74d2db02a91.jpeg" onclick="openImage(this)">
-    <img src="fcaff3ab-c5fd-4f0a-b15c-930946967d89.jpeg" onclick="openImage(this)">
-<img  src="b977c291-7f69-4eed-9030-2ba699e3433f.jpeg" onclick="openImage(this)">
-    <img  src="07abd0b2-85af-4dbf-abe9-93353c71af38.jpeg" onclick="openImage(this)">
-    <img src="IMG_0964.jpeg" onclick="openImage(this)">
-    <img  src="IMG_1037.jpeg" onclick="openImage(this)">
-    <img src="IMG_2520.jpeg" onclick="openImage(this)">
-    <img  src="IMG_3105.jpeg" onclick="openImage(this)">
-    <img src="IMG_3106.jpeg" onclick="openImage(this)">
-    <img  src="IMG_3108.jpeg" onclick="openImage(this)">
-  <img src="IMG_3109.jpeg" onclick="openImage(this)">
-    <img  src="IMG_3134.jpeg" onclick="openImage(this)">
-    <img  src="IMG_3135.jpeg" onclick="openImage(this)">
-    <img  src="IMG_3136.jpeg" onclick="openImage(this)">
-    <img src="IMG_3138.jpeg" onclick="openImage(this)">
-    <img  src="IMG_3139.jpeg" onclick="openImage(this)">
-    <img src="IMG_3144.jpeg" onclick="openImage(this)">
-    <img  src="IMG_3146.jpeg" onclick="openImage(this)">
-        </div>
+  <!-- ADMIN BAR -->
+  <div class="admin-bar">
+    <span>Media Gallery · Only admin can upload</span>
+    <button class="admin-btn" id="adminToggle">Admin Login</button>
+  </div>
 
-<!-- Zoom overlay -->
-<div id="lightbox">
+  <!-- ADMIN UPLOAD PANEL -->
+  <div id="adminPanel">
+    <div class="upload-box" id="uploadBox">
+      <p><strong style="color:#D4AF37">Admin Upload</strong></p>
+      <p>Drag & drop photos or videos here</p>
+      <p class="hint">JPG, PNG, WEBP, GIF, MP4, MOV, WEBM</p>
+      <input type="file" id="fileInput" accept="image/*,video/*" multiple>
+      <button class="upload-btn" id="uploadBtn">Choose Files</button>
+      <div id="status" class="status-info"></div>
+    </div>
+  </div>
 
-    <span class="close" onclick="closeImage()">&times;</span>
+  <!-- PHOTOS -->
+  <section class="section">
+    <div class="gallery-header">
+      <h3>📷 Photos</h3>
+      <div>
+        <span class="count" id="photoCount">0 photos</span>
+        <button class="clear-btn" id="clearPhotosBtn">Clear</button>
+      </div>
+    </div>
+    <div class="gallery" id="photoGallery">
+      <div class="empty-state" id="photoEmpty">No photos uploaded yet.</div>
+    </div>
+  </section>
 
-    <button class="lightbox-btn prev" onclick="previousImage()">&#10094;</button>
+  <!-- VIDEOS -->
+  <section class="section" style="padding-top:0">
+    <div class="gallery-header">
+      <h3>🎬 Videos</h3>
+      <div>
+        <span class="count" id="videoCount">0 videos</span>
+        <button class="clear-btn" id="clearVideosBtn">Clear</button>
+      </div>
+    </div>
+    <div class="gallery" id="videoGallery">
+      <div class="empty-state" id="videoEmpty">No videos uploaded yet.</div>
+    </div>
+  </section>
 
-    <img id="lightbox-img">
-
-    <button class="lightbox-btn next" onclick="nextImage()">&#10095;</button>
-
-    <div id="counter"></div>
-
-</div>
-
-
-<!-- ABOUT SECTION -->
-<section id="about" class="about">
-    <h2>Welcome to Brendava Tours & Travel</h2>
-
-    <p>
+  <!-- ABOUT -->
+  <section class="section" id="about">
+    <div class="about">
+      <h2>Welcome to Brendava Tours & Travel</h2>
+      <p>
         Brendava Tours & Travel is your trusted safari partner for unforgettable adventures across Uganda, Kenya, Tanzania, and Rwanda. We specialize in gorilla trekking, wildlife safaris, bird watching, cultural tours, mountain hiking, and customized holiday packages. Our mission is to provide exceptional travel experiences while showcasing the beauty of East Africa's wildlife, landscapes, and cultures.
-    </p>
-</section>
+      </p>
+    </div>
+  </section>
 
-<!-- FOOTER -->
-<footer>
-    <p>📞 +256789336441</p>
+  <!-- FOOTER -->
+  <footer>
+    <p>📞 +256 789 336 441</p>
     <p>📧 brendavatoursandtravel@gmail.com</p>
     <p>📍 Kampala, Uganda</p>
-       <div class="footer-social">
 
-        <a href="https://www.facebook.com/brendavatoursandtravel"><i class="fab fa-facebook-f"></i></a>
-
-        <a href="https://www.instagram.com/brendavatoursandtravel"><i class="fab fa-instagram"></i></a>
-
-        <a href="https://www.tiktok.com/@brendava.tours.andtravel"><i class="fab fa-tiktok"></i></a>
-
-        <a href="https://www.youtube.com/@brendavatoursandtravel"><i class="fab fa-youtube"></i></a>
-
+    <div class="footer-social">
+      <a href="https://www.facebook.com/brendavatoursandtravel" target="_blank" rel="noopener"><i class="fab fa-facebook-f"></i></a>
+      <a href="https://www.instagram.com/brendavatoursandtravel" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.tiktok.com/@brendava.tours.andtravel" target="_blank" rel="noopener"><i class="fab fa-tiktok"></i></a>
+      <a href="https://www.youtube.com/@brendavatoursandtravel" target="_blank" rel="noopener"><i class="fab fa-youtube"></i></a>
     </div>
 
     <div class="footer-bottom">
-
-        © 2026 Brendava Tours & Travel • Where Your Dreams Meet Reality
-
+      © 2026 Brendava Tours & Travel • Where Your Dreams Meet Reality
     </div>
+  </footer>
 
-</footer>
+  <!-- LIGHTBOX -->
+  <div id="lightbox">
+    <span class="close" id="lightboxClose">&times;</span>
+    <button class="lightbox-btn prev" id="prevBtn">&#10094;</button>
+    <div id="lightbox-media"></div>
+    <button class="lightbox-btn next" id="nextBtn">&#10095;</button>
+    <div id="counter"></div>
+  </div>
 
-<script>
+  <!-- LOGIN MODAL -->
+  <div id="loginModal">
+    <div class="login-box">
+      <h2>Admin Access</h2>
+      <p>Enter password to unlock uploading</p>
+      <input type="password" id="adminPassword" placeholder="Password" autocomplete="off">
+      <div class="login-actions">
+        <button class="btn-secondary" id="loginCancel">Cancel</button>
+        <button class="btn-primary" id="loginSubmit">Unlock</button>
+      </div>
+    </div>
+  </div>
 
-const galleryImages = document.querySelectorAll(".gallery img");
+  <script>
+    // ========================================
+    // CONFIG – CHANGE THESE
+    // ========================================
+    const CLOUD_NAME     = "ziudh5iv";
+    const UPLOAD_PRESET  = "viatrix_gallery";
+    const ADMIN_PASSWORD = "admin123";          // ← change this!
+    const PHOTO_KEY      = "brendava_photos";
+    const VIDEO_KEY      = "brendava_videos";
 
-let currentImage = 0;
+    // ========================================
+    // Elements
+    // ========================================
+    const adminToggle    = document.getElementById("adminToggle");
+    const adminPanel     = document.getElementById("adminPanel");
+    const loginModal     = document.getElementById("loginModal");
+    const adminPassword  = document.getElementById("adminPassword");
+    const loginSubmit    = document.getElementById("loginSubmit");
+    const loginCancel    = document.getElementById("loginCancel");
 
-function openImage(img){
+    const fileInput      = document.getElementById("fileInput");
+    const uploadBtn      = document.getElementById("uploadBtn");
+    const uploadBox      = document.getElementById("uploadBox");
+    const statusEl       = document.getElementById("status");
 
-    currentImage = Array.from(galleryImages).indexOf(img);
+    const photoGallery   = document.getElementById("photoGallery");
+    const videoGallery   = document.getElementById("videoGallery");
+    const photoEmpty     = document.getElementById("photoEmpty");
+    const videoEmpty     = document.getElementById("videoEmpty");
+    const photoCountEl   = document.getElementById("photoCount");
+    const videoCountEl   = document.getElementById("videoCount");
+    const clearPhotosBtn = document.getElementById("clearPhotosBtn");
+    const clearVideosBtn = document.getElementById("clearVideosBtn");
 
-    showImage();
+    const lightbox       = document.getElementById("lightbox");
+    const lightboxMedia  = document.getElementById("lightbox-media");
+    const counterEl      = document.getElementById("counter");
+    const closeBtn       = document.getElementById("lightboxClose");
+    const prevBtn        = document.getElementById("prevBtn");
+    const nextBtn        = document.getElementById("nextBtn");
 
-    document.getElementById("lightbox").style.display="flex";
+    let isAdmin = false;
+    let currentList = [];
+    let currentIndex = 0;
+    let currentType = "photo";
 
-}
-
-function showImage(){
-
-    document.getElementById("lightbox-img").src =
-    galleryImages[currentImage].src;
-
-    document.getElementById("counter").innerHTML =
-    (currentImage+1)+" / "+galleryImages.length;
-
-}
-
-function nextImage(){
-
-    currentImage++;
-
-    if(currentImage>=galleryImages.length){
-
-        currentImage=0;
-
+    // ========================================
+    // Storage
+    // ========================================
+    function loadList(key) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : [];
+      } catch { return []; }
+    }
+    function saveList(key, list) {
+      localStorage.setItem(key, JSON.stringify(list));
+    }
+    function addItem(key, item) {
+      const list = loadList(key);
+      if (list.some(i => i.url === item.url)) return;
+      list.unshift(item);
+      saveList(key, list);
     }
 
-    showImage();
-
-}
-
-function previousImage(){
-
-    currentImage--;
-
-    if(currentImage<0){
-
-        currentImage=galleryImages.length-1;
-
+    // ========================================
+    // Admin
+    // ========================================
+    function setAdmin(loggedIn) {
+      isAdmin = loggedIn;
+      adminPanel.classList.toggle("visible", loggedIn);
+      adminToggle.textContent = loggedIn ? "Logout Admin" : "Admin Login";
+      adminToggle.classList.toggle("active", loggedIn);
+      clearPhotosBtn.classList.toggle("visible", loggedIn);
+      clearVideosBtn.classList.toggle("visible", loggedIn);
     }
 
-    showImage();
+    adminToggle.addEventListener("click", () => {
+      if (isAdmin) {
+        setAdmin(false);
+        setStatus("Admin logged out", "info");
+      } else {
+        loginModal.classList.add("open");
+        adminPassword.value = "";
+        adminPassword.focus();
+      }
+    });
 
-}
+    loginCancel.addEventListener("click", () => loginModal.classList.remove("open"));
+    loginSubmit.addEventListener("click", () => {
+      if (adminPassword.value === ADMIN_PASSWORD) {
+        setAdmin(true);
+        loginModal.classList.remove("open");
+        setStatus("Admin unlocked – you can upload", "success");
+      } else {
+        alert("Incorrect password");
+      }
+    });
+    adminPassword.addEventListener("keydown", e => {
+      if (e.key === "Enter") loginSubmit.click();
+    });
 
-function closeImage(){
-
-    document.getElementById("lightbox").style.display="none";
-
-}
-
-document.addEventListener("keydown",function(e){
-
-    const lightbox=document.getElementById("lightbox");
-
-    if(lightbox.style.display==="flex"){
-
-        if(e.key==="ArrowRight"){
-
-            nextImage();
-
-        }
-
-        if(e.key==="ArrowLeft"){
-
-            previousImage();
-
-        }
-
-        if(e.key==="Escape"){
-
-            closeImage();
-
-        }
-
+    // ========================================
+    // Helpers
+    // ========================================
+    function setStatus(msg, type = "info") {
+      statusEl.className = "status-" + type;
+      statusEl.textContent = msg;
     }
 
-});
-</script>
+    function thumbUrl(url, isVideo) {
+      if (isVideo) {
+        return url.replace("/upload/", "/upload/so_0,w_400,h_400,c_fill,q_auto,f_jpg/");
+      }
+      return url.replace("/upload/", "/upload/c_fill,w_400,h_400,q_auto,f_auto/");
+    }
+
+    // ========================================
+    // Render
+    // ========================================
+    function createItem(item, type) {
+      const el = document.createElement("div");
+      el.className = "gallery-item" + (type === "video" ? " video-item" : "");
+      const isVideo = type === "video";
+
+      el.innerHTML = `
+        <img src="${thumbUrl(item.url, isVideo)}" alt="${item.title || ""}" loading="lazy">
+        ${isVideo ? '<div class="video-badge">▶ Video</div>' : ""}
+      `;
+      el.addEventListener("click", () => openViewer(type, item.url));
+      return el;
+    }
+
+    function renderPhotos() {
+      const list = loadList(PHOTO_KEY);
+      photoGallery.querySelectorAll(".gallery-item").forEach(e => e.remove());
+      list.forEach(item => photoGallery.appendChild(createItem(item, "photo")));
+      photoCountEl.textContent = list.length + " photo" + (list.length !== 1 ? "s" : "");
+      photoEmpty.style.display = list.length ? "none" : "block";
+    }
+
+    function renderVideos() {
+      const list = loadList(VIDEO_KEY);
+      videoGallery.querySelectorAll(".gallery-item").forEach(e => e.remove());
+      list.forEach(item => videoGallery.appendChild(createItem(item, "video")));
+      videoCountEl.textContent = list.length + " video" + (list.length !== 1 ? "s" : "");
+      videoEmpty.style.display = list.length ? "none" : "block";
+    }
+
+    function renderAll() {
+      renderPhotos();
+      renderVideos();
+    }
+
+    // ========================================
+    // Upload
+    // ========================================
+    async function uploadFile(file) {
+      const isVideo = file.type.startsWith("video/");
+      const isImage = file.type.startsWith("image/");
+      if (!isImage && !isVideo) {
+        setStatus("Only images and videos allowed", "error");
+        return;
+      }
+
+      setStatus("Uploading " + file.name + "…", "info");
+      uploadBtn.disabled = true;
+
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+
+      const resource = isVideo ? "video" : "image";
+
+      try {
+        const res = await fetch(
+          `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resource}/upload`,
+          { method: "POST", body: formData }
+        );
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error?.message || "Upload failed");
+
+        const item = { url: data.secure_url, title: file.name, addedAt: Date.now() };
+
+        if (isVideo) {
+          addItem(VIDEO_KEY, item);
+          renderVideos();
+        } else {
+          addItem(PHOTO_KEY, item);
+          renderPhotos();
+        }
+        setStatus("Uploaded successfully!", "success");
+      } catch (err) {
+        console.error(err);
+        setStatus("Error: " + err.message, "error");
+      } finally {
+        uploadBtn.disabled = false;
+        fileInput.value = "";
+      }
+    }
+
+    async function handleFiles(files) {
+      const valid = Array.from(files).filter(f =>
+        f.type.startsWith("image/") || f.type.startsWith("video/")
+      );
+      if (!valid.length) {
+        setStatus("No valid files selected", "error");
+        return;
+      }
+      for (const f of valid) await uploadFile(f);
+    }
+
+    // ========================================
+    // Viewer (Next / Prev)
+    // ========================================
+    function openViewer(type, url) {
+      currentType = type;
+      currentList = type === "video" ? loadList(VIDEO_KEY) : loadList(PHOTO_KEY);
+      currentIndex = currentList.findIndex(i => i.url === url);
+      if (currentIndex < 0) currentIndex = 0;
+      showCurrent();
+      lightbox.classList.add("open");
+      document.body.style.overflow = "hidden";
+    }
+
+    function showCurrent() {
+      if (!currentList.length) return;
+      const item = currentList[currentIndex];
+      const isVideo = currentType === "video";
+
+      lightboxMedia.innerHTML = "";
+      if (isVideo) {
+        const video = document.createElement("video");
+        video.src = item.url;
+        video.controls = true;
+        video.autoplay = true;
+        video.playsInline = true;
+        lightboxMedia.appendChild(video);
+      } else {
+        const img = document.createElement("img");
+        img.src = item.url;
+        img.alt = item.title || "";
+        lightboxMedia.appendChild(img);
+      }
+      counterEl.textContent = (currentIndex + 1) + " / " + currentList.length;
+    }
+
+    function nextItem() {
+      if (!currentList.length) return;
+      currentIndex = (currentIndex + 1) % currentList.length;
+      showCurrent();
+    }
+    function prevItem() {
+      if (!currentList.length) return;
+      currentIndex = (currentIndex - 1 + currentList.length) % currentList.length;
+      showCurrent();
+    }
+    function closeViewer() {
+      lightbox.classList.remove("open");
+      document.body.style.overflow = "";
+      const v = lightboxMedia.querySelector("video");
+      if (v) v.pause();
+    }
+
+    closeBtn.addEventListener("click", closeViewer);
+    nextBtn.addEventListener("click", nextItem);
+    prevBtn.addEventListener("click", prevItem);
+    lightbox.addEventListener("click", e => {
+      if (e.target === lightbox) closeViewer();
+    });
+    document.addEventListener("keydown", e => {
+      if (!lightbox.classList.contains("open")) return;
+      if (e.key === "Escape") closeViewer();
+      if (e.key === "ArrowRight") nextItem();
+      if (e.key === "ArrowLeft") prevItem();
+    });
+
+    // ========================================
+    // Clear (admin)
+    // ========================================
+    clearPhotosBtn.addEventListener("click", () => {
+      if (confirm("Clear all photos from gallery?\n(Files stay on Cloudinary)")) {
+        localStorage.removeItem(PHOTO_KEY);
+        renderPhotos();
+      }
+    });
+    clearVideosBtn.addEventListener("click", () => {
+      if (confirm("Clear all videos from gallery?\n(Files stay on Cloudinary)")) {
+        localStorage.removeItem(VIDEO_KEY);
+        renderVideos();
+      }
+    });
+
+    // ========================================
+    // Upload events
+    // ========================================
+    uploadBtn.addEventListener("click", () => fileInput.click());
+    fileInput.addEventListener("change", () => {
+      if (fileInput.files.length) handleFiles(fileInput.files);
+    });
+
+    ["dragenter","dragover","dragleave","drop"].forEach(evt => {
+      uploadBox.addEventListener(evt, e => {
+        e.preventDefault();
+        e.stopPropagation();
+      });
+    });
+    uploadBox.addEventListener("dragover", () => uploadBox.classList.add("dragover"));
+    uploadBox.addEventListener("dragleave", () => uploadBox.classList.remove("dragover"));
+    uploadBox.addEventListener("drop", e => {
+      uploadBox.classList.remove("dragover");
+      if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+    });
+
+    // ========================================
+    // Slideshow
+    // ========================================
+    (function() {
+      const slides = document.querySelectorAll(".slide");
+      let idx = 0;
+      setInterval(() => {
+        slides[idx].classList.remove("active");
+        idx = (idx + 1) % slides.length;
+        slides[idx].classList.add("active");
+      }, 5000);
+    })();
+
+    // Init
+    renderAll();
+  </script>
 </body>
 </html>
