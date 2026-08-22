@@ -743,12 +743,15 @@
   // ========================================
   // Thumbnails
   // ========================================
-  function thumbUrl(url, isVideo) {
-    if (isVideo) {
-      return url.replace("/upload/", "/upload/so_0,w_400,h_400,c_fill,q_auto,f_jpg/");
-    }
-    return url.replace("/upload/", "/upload/c_fill,w_400,h_400,q_auto,f_auto/");
+function thumbUrl(url, isVideo) {
+  if (isVideo) {
+    // Create a nice poster frame from the video
+    return url
+      .replace("/upload/", "/upload/so_0,w_400,h_400,c_fill,q_auto,f_jpg/")
+      .replace(/\.(mp4|mov|webm|avi)$/i, ".jpg");
   }
+  return url.replace("/upload/", "/upload/c_fill,w_400,h_400,q_auto,f_auto/");
+}
 
   // ========================================
   // Create gallery item
@@ -781,16 +784,16 @@
   }
 
   async function renderVideos() {
-    const list = await fetchList(VIDEO_TAG, "video");
-    videoGallery.innerHTML = "";
-    videoCountEl.textContent = list.length + (list.length === 1 ? " video" : " videos");
+  const list = await fetchList(VIDEO_TAG, "video");
+  videoGallery.innerHTML = "";
+  videoCountEl.textContent = list.length + (list.length === 1 ? " video" : " videos");
 
-    if (list.length === 0) {
-      videoGallery.innerHTML = '<div class="empty-state">No videos uploaded yet.</div>';
-      return;
-    }
-    list.forEach(item => videoGallery.appendChild(createItem(item, "video")));
+  if (list.length === 0) {
+    videoGallery.innerHTML = '<div class="empty-state">No videos uploaded yet.</div>';
+    return;
   }
+  list.forEach(item => videoGallery.appendChild(createItem(item, "video")));
+}
 
   // ========================================
   // Upload
