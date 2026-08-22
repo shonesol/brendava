@@ -629,7 +629,7 @@
     </div>
   </div>
 
- <script>
+<script>
   // ========================================
   // CONFIG
   // ========================================
@@ -674,7 +674,7 @@
   let currentType = "photo";
 
   // ========================================
-  // Fetch from Cloudinary
+  // Fetch lists from Cloudinary
   // ========================================
   async function fetchList(tag, resourceType) {
     const url = `https://res.cloudinary.com/${CLOUD_NAME}/${resourceType}/list/${tag}.json?_=${Date.now()}`;
@@ -769,38 +769,28 @@
   // Render
   // ========================================
   async function renderPhotos() {
-  const list = await fetchList(PHOTO_TAG, "image");
-  console.log("Photos found:", list.length);   // for debugging
+    const list = await fetchList(PHOTO_TAG, "image");
+    photoGallery.innerHTML = "";
+    photoCountEl.textContent = list.length + (list.length === 1 ? " photo" : " photos");
 
-  photoGallery.innerHTML = "";                 // clear everything
-  photoCountEl.textContent = list.length + (list.length === 1 ? " photo" : " photos");
-
-  if (list.length === 0) {
-    photoGallery.innerHTML = '<div class="empty-state">No photos uploaded yet.</div>';
-    return;
+    if (list.length === 0) {
+      photoGallery.innerHTML = '<div class="empty-state">No photos uploaded yet.</div>';
+      return;
+    }
+    list.forEach(item => photoGallery.appendChild(createItem(item, "photo")));
   }
 
-  list.forEach(item => {
-    photoGallery.appendChild(createItem(item, "photo"));
-  });
-}
+  async function renderVideos() {
+    const list = await fetchList(VIDEO_TAG, "video");
+    videoGallery.innerHTML = "";
+    videoCountEl.textContent = list.length + (list.length === 1 ? " video" : " videos");
 
-async function renderVideos() {
-  const list = await fetchList(VIDEO_TAG, "video");
-  console.log("Videos found:", list.length);
-
-  videoGallery.innerHTML = "";
-  videoCountEl.textContent = list.length + (list.length === 1 ? " video" : " videos");
-
-  if (list.length === 0) {
-    videoGallery.innerHTML = '<div class="empty-state">No videos uploaded yet.</div>';
-    return;
+    if (list.length === 0) {
+      videoGallery.innerHTML = '<div class="empty-state">No videos uploaded yet.</div>';
+      return;
+    }
+    list.forEach(item => videoGallery.appendChild(createItem(item, "video")));
   }
-
-  list.forEach(item => {
-    videoGallery.appendChild(createItem(item, "video"));
-  });
-}
 
   // ========================================
   // Upload
@@ -855,7 +845,7 @@ async function renderVideos() {
   }
 
   // ========================================
-  // Lightbox
+  // Lightbox / Viewer
   // ========================================
   function openViewer(type, url) {
     currentType = type;
@@ -911,7 +901,9 @@ async function renderVideos() {
   closeBtn.addEventListener("click", closeViewer);
   nextBtn.addEventListener("click", nextItem);
   prevBtn.addEventListener("click", prevItem);
-  lightbox.addEventListener("click", e => { if (e.target === lightbox) closeViewer(); });
+  lightbox.addEventListener("click", e => {
+    if (e.target === lightbox) closeViewer();
+  });
   document.addEventListener("keydown", e => {
     if (!lightbox.classList.contains("open")) return;
     if (e.key === "Escape") closeViewer();
@@ -919,30 +911,37 @@ async function renderVideos() {
     if (e.key === "ArrowLeft") prevItem();
   });
 
+  // ========================================
   // Clear buttons
+  // ========================================
   if (clearPhotosBtn) {
     clearPhotosBtn.addEventListener("click", () => {
-      if (confirm("This only refreshes the view.\nDelete files permanently in Cloudinary Media Library.")) {
+      if (confirm("This only refreshes the view.\nTo permanently delete photos, use the Cloudinary Media Library.")) {
         renderPhotos();
       }
     });
   }
   if (clearVideosBtn) {
     clearVideosBtn.addEventListener("click", () => {
-      if (confirm("This only refreshes the view.\nDelete files permanently in Cloudinary Media Library.")) {
+      if (confirm("This only refreshes the view.\nTo permanently delete videos, use the Cloudinary Media Library.")) {
         renderVideos();
       }
     });
   }
 
+  // ========================================
   // Upload events
+  // ========================================
   uploadBtn.addEventListener("click", () => fileInput.click());
   fileInput.addEventListener("change", () => {
     if (fileInput.files.length) handleFiles(fileInput.files);
   });
 
   ["dragenter","dragover","dragleave","drop"].forEach(evt => {
-    uploadBox.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); });
+    uploadBox.addEventListener(evt, e => {
+      e.preventDefault();
+      e.stopPropagation();
+    });
   });
   uploadBox.addEventListener("dragover", () => uploadBox.classList.add("dragover"));
   uploadBox.addEventListener("dragleave", () => uploadBox.classList.remove("dragover"));
@@ -951,7 +950,9 @@ async function renderVideos() {
     if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
   });
 
+  // ========================================
   // Slideshow
+  // ========================================
   (function() {
     const slides = document.querySelectorAll(".slide");
     if (!slides.length) return;
@@ -963,7 +964,9 @@ async function renderVideos() {
     }, 5000);
   })();
 
+  // ========================================
   // Start
+  // ========================================
   renderPhotos();
   renderVideos();
 </script>
