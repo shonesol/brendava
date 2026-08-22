@@ -630,14 +630,52 @@
   </div>
 
  <script>
+  // ========================================
+  // CONFIG
+  // ========================================
   const CLOUD_NAME     = "ziudh5iv";
   const UPLOAD_PRESET  = "brendava_gallery";
   const ADMIN_PASSWORD = "namarisha";
   const PHOTO_TAG      = "brendava_photos";
   const VIDEO_TAG      = "brendava_videos";
 
-  // ... (keep all the element variables the same) ...
+  // ========================================
+  // Elements
+  // ========================================
+  const adminToggle    = document.getElementById("adminToggle");
+  const adminPanel     = document.getElementById("adminPanel");
+  const loginModal     = document.getElementById("loginModal");
+  const adminPassword  = document.getElementById("adminPassword");
+  const loginSubmit    = document.getElementById("loginSubmit");
+  const loginCancel    = document.getElementById("loginCancel");
 
+  const fileInput      = document.getElementById("fileInput");
+  const uploadBtn      = document.getElementById("uploadBtn");
+  const uploadBox      = document.getElementById("uploadBox");
+  const statusEl       = document.getElementById("status");
+
+  const photoGallery   = document.getElementById("photoGallery");
+  const videoGallery   = document.getElementById("videoGallery");
+  const photoCountEl   = document.getElementById("photoCount");
+  const videoCountEl   = document.getElementById("videoCount");
+  const clearPhotosBtn = document.getElementById("clearPhotosBtn");
+  const clearVideosBtn = document.getElementById("clearVideosBtn");
+
+  const lightbox       = document.getElementById("lightbox");
+  const lightboxMedia  = document.getElementById("lightbox-media");
+  const counterEl      = document.getElementById("counter");
+  const closeBtn       = document.getElementById("lightboxClose");
+  const prevBtn        = document.getElementById("prevBtn");
+  const nextBtn        = document.getElementById("nextBtn");
+
+  let isAdmin = false;
+  let currentList = [];
+  let currentIndex = 0;
+  let currentType = "photo";
+
+  // ========================================
+  // Fetch from Cloudinary
+  // ========================================
   async function fetchList(tag, resourceType) {
     const url = `https://res.cloudinary.com/${CLOUD_NAME}/${resourceType}/list/${tag}.json?_=${Date.now()}`;
     try {
@@ -650,33 +688,96 @@
         const version = r.version ? `v${r.version}/` : "";
         return {
           url: `https://res.cloudinary.com/${CLOUD_NAME}/${resourceType}/upload/${version}${r.public_id}.${format}`,
-          title: r.public_id,
+          title: r.public_id || "",
           addedAt: new Date(r.created_at).getTime()
         };
-      }).sort((a,b) => b.addedAt - a.addedAt);
-    } catch (e) {
-      console.error(e);
+      }).sort((a, b) => b.addedAt - a.addedAt);
+    } catch (err) {
+      console.error("List fetch failed:", err);
       return [];
     }
   }
 
+  // ========================================
+  // Admin
+  // ========================================
+  function setAdmin(loggedIn) {
+    isAdmin = loggedIn;
+    adminPanel.classList.toggle("visible", loggedIn);
+    adminToggle.textContent = loggedIn ? "Logout Admin" : "Admin Login";
+    adminToggle.classList.toggle("active", loggedIn);
+    if (clearPhotosBtn) clearPhotosBtn.classList.toggle("visible", loggedIn);
+    if (clearVideosBtn) clearVideosBtn.classList.toggle("visible", loggedIn);
+  }
+
+  adminToggle.addEventListener("click", () => {
+    if (isAdmin) {
+      setAdmin(false);
+      setStatus("Admin logged out", "info");
+    } else {
+      loginModal.classList.add("open");
+      adminPassword.value = "";
+      adminPassword.focus();
+    }
+  });
+
+  loginCancel.addEventListener("click", () => loginModal.classList.remove("open"));
+  loginSubmit.addEventListener("click", () => {
+    if (adminPassword.value === ADMIN_PASSWORD) {
+      setAdmin(true);
+      loginModal.classList.remove("open");
+      setStatus("Admin unlocked – you can upload", "success");
+    } else {
+      alert("Incorrect password");
+    }
+  });
+  adminPassword.addEventListener("keydown", e => {
+    if (e.key === "Enter") loginSubmit.click();
+  });
+
+  function setStatus(msg, type = "info") {
+    statusEl.className = "status-" + type;
+    statusEl.textContent = msg;
+  }
+
+  // ========================================
+  // Thumbnails
+  // ========================================
+  function thumbUrl(url, isVideo) {
+    if (isVideo) {
+      return url.replace("/upload/", "/upload/so_0,w_400,h_400,c_fill,q_auto,f_jpg/");
+    }
+    return url.replace("/upload/", "/upload/c_fill,w_400,h_400,q_auto,f_auto/");
+  }
+
+  // ========================================
+  // Create gallery item
+  // ========================================
+  function createItem(item, type) {
+    const el = document.createElement("div");
+    el.className = "gallery-item" + (type === "video" ? " video-item" : "");
+    const isVideo = type === "video";
+    el.innerHTML = `
+      <img src="${thumbUrl(item.url, isVideo)}" alt="${item.title || ""}" loading="lazy">
+      ${isVideo ? '<div class="video-badge">▶ Video</div>' : ""}
+    `;
+    el.addEventListener("click", () => openViewer(type, item.url));
+    return el;
+  }
+
+  // ========================================
+  // Render
+  // ========================================
   async function renderPhotos() {
     const list = await fetchList(PHOTO_TAG, "image");
     photoGallery.innerHTML = "";
     photoCountEl.textContent = list.length + " photo" + (list.length !== 1 ? "s" : "");
 
     if (list.length === 0) {
-      photoGallery.innerHTML = `<div class="empty-state">No photos yet.<br><small>List returned 0 items</small></div>`;
+      photoGallery.innerHTML = `<div class="empty-state">No photos uploaded yet.</div>`;
       return;
     }
-
-    list.forEach(item => {
-      const el = document.createElement("div");
-      el.className = "gallery-item";
-      el.innerHTML = `<img src="${item.url.replace('/upload/','/upload/c_fill,w_400,h_400,q_auto,f_auto/')}" loading="lazy">`;
-      el.onclick = () => openViewer("photo", item.url);
-      photoGallery.appendChild(el);
-    });
+    list.forEach(item => photoGallery.appendChild(createItem(item, "photo")));
   }
 
   async function renderVideos() {
@@ -685,25 +786,174 @@
     videoCountEl.textContent = list.length + " video" + (list.length !== 1 ? "s" : "");
 
     if (list.length === 0) {
-      videoGallery.innerHTML = `<div class="empty-state">No videos yet.</div>`;
+      videoGallery.innerHTML = `<div class="empty-state">No videos uploaded yet.</div>`;
+      return;
+    }
+    list.forEach(item => videoGallery.appendChild(createItem(item, "video")));
+  }
+
+  // ========================================
+  // Upload
+  // ========================================
+  async function uploadFile(file) {
+    const isVideo = file.type.startsWith("video/");
+    const isImage = file.type.startsWith("image/");
+    if (!isImage && !isVideo) {
+      setStatus("Only images and videos allowed", "error");
       return;
     }
 
-    list.forEach(item => {
-      const el = document.createElement("div");
-      el.className = "gallery-item video-item";
-      el.innerHTML = `
-        <img src="${item.url.replace('/upload/','/upload/so_0,w_400,h_400,c_fill,q_auto,f_jpg/')}" loading="lazy">
-        <div class="video-badge">▶ Video</div>`;
-      el.onclick = () => openViewer("video", item.url);
-      videoGallery.appendChild(el);
+    setStatus("Uploading " + file.name + "…", "info");
+    uploadBtn.disabled = true;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+    formData.append("tags", isVideo ? VIDEO_TAG : PHOTO_TAG);
+
+    const resource = isVideo ? "video" : "image";
+
+    try {
+      const res = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resource}/upload`,
+        { method: "POST", body: formData }
+      );
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error?.message || "Upload failed");
+
+      if (isVideo) await renderVideos();
+      else await renderPhotos();
+      setStatus("Uploaded successfully!", "success");
+    } catch (err) {
+      console.error(err);
+      setStatus("Error: " + err.message, "error");
+    } finally {
+      uploadBtn.disabled = false;
+      fileInput.value = "";
+    }
+  }
+
+  async function handleFiles(files) {
+    const valid = Array.from(files).filter(f =>
+      f.type.startsWith("image/") || f.type.startsWith("video/")
+    );
+    if (!valid.length) {
+      setStatus("No valid files selected", "error");
+      return;
+    }
+    for (const f of valid) await uploadFile(f);
+  }
+
+  // ========================================
+  // Lightbox
+  // ========================================
+  function openViewer(type, url) {
+    currentType = type;
+    const load = type === "video" ? fetchList(VIDEO_TAG, "video") : fetchList(PHOTO_TAG, "image");
+    load.then(list => {
+      currentList = list;
+      currentIndex = currentList.findIndex(i => i.url === url);
+      if (currentIndex < 0) currentIndex = 0;
+      showCurrent();
+      lightbox.classList.add("open");
+      document.body.style.overflow = "hidden";
     });
   }
 
-  // Keep the rest of your admin, upload, lightbox, slideshow code exactly the same
-  // ...
+  function showCurrent() {
+    if (!currentList.length) return;
+    const item = currentList[currentIndex];
+    const isVideo = currentType === "video";
+    lightboxMedia.innerHTML = "";
+    if (isVideo) {
+      const video = document.createElement("video");
+      video.src = item.url;
+      video.controls = true;
+      video.autoplay = true;
+      video.playsInline = true;
+      lightboxMedia.appendChild(video);
+    } else {
+      const img = document.createElement("img");
+      img.src = item.url;
+      img.alt = item.title || "";
+      lightboxMedia.appendChild(img);
+    }
+    counterEl.textContent = (currentIndex + 1) + " / " + currentList.length;
+  }
 
-  // At the very end:
+  function nextItem() {
+    if (!currentList.length) return;
+    currentIndex = (currentIndex + 1) % currentList.length;
+    showCurrent();
+  }
+  function prevItem() {
+    if (!currentList.length) return;
+    currentIndex = (currentIndex - 1 + currentList.length) % currentList.length;
+    showCurrent();
+  }
+  function closeViewer() {
+    lightbox.classList.remove("open");
+    document.body.style.overflow = "";
+    const v = lightboxMedia.querySelector("video");
+    if (v) v.pause();
+  }
+
+  closeBtn.addEventListener("click", closeViewer);
+  nextBtn.addEventListener("click", nextItem);
+  prevBtn.addEventListener("click", prevItem);
+  lightbox.addEventListener("click", e => { if (e.target === lightbox) closeViewer(); });
+  document.addEventListener("keydown", e => {
+    if (!lightbox.classList.contains("open")) return;
+    if (e.key === "Escape") closeViewer();
+    if (e.key === "ArrowRight") nextItem();
+    if (e.key === "ArrowLeft") prevItem();
+  });
+
+  // Clear buttons
+  if (clearPhotosBtn) {
+    clearPhotosBtn.addEventListener("click", () => {
+      if (confirm("This only refreshes the view.\nDelete files permanently in Cloudinary Media Library.")) {
+        renderPhotos();
+      }
+    });
+  }
+  if (clearVideosBtn) {
+    clearVideosBtn.addEventListener("click", () => {
+      if (confirm("This only refreshes the view.\nDelete files permanently in Cloudinary Media Library.")) {
+        renderVideos();
+      }
+    });
+  }
+
+  // Upload events
+  uploadBtn.addEventListener("click", () => fileInput.click());
+  fileInput.addEventListener("change", () => {
+    if (fileInput.files.length) handleFiles(fileInput.files);
+  });
+
+  ["dragenter","dragover","dragleave","drop"].forEach(evt => {
+    uploadBox.addEventListener(evt, e => { e.preventDefault(); e.stopPropagation(); });
+  });
+  uploadBox.addEventListener("dragover", () => uploadBox.classList.add("dragover"));
+  uploadBox.addEventListener("dragleave", () => uploadBox.classList.remove("dragover"));
+  uploadBox.addEventListener("drop", e => {
+    uploadBox.classList.remove("dragover");
+    if (e.dataTransfer.files.length) handleFiles(e.dataTransfer.files);
+  });
+
+  // Slideshow
+  (function() {
+    const slides = document.querySelectorAll(".slide");
+    if (!slides.length) return;
+    let idx = 0;
+    setInterval(() => {
+      slides[idx].classList.remove("active");
+      idx = (idx + 1) % slides.length;
+      slides[idx].classList.add("active");
+    }, 5000);
+  })();
+
+  // Start
   renderPhotos();
   renderVideos();
 </script>
