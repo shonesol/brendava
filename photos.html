@@ -1,442 +1,81 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Brendava Tours & Travel</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <style>
-    :root {
-      --green: #0B7A41;
-      --green-dark: #085A31;
-      --orange: #F28C28;
-      --gold: #D4AF37;
-      --beige: #F5F0E6;
-      --black: #111;
-      --white: #ffffff;
-      --text: #222;
+<script>
+  const CLOUD_NAME     = "ziudh5iv";
+  const UPLOAD_PRESET  = "brendava_gallery";
+  const ADMIN_PASSWORD = "namarisha";
+  const PHOTO_TAG      = "brendava_photos";
+  const VIDEO_TAG      = "brendava_videos";
+
+  // ... (keep all the element variables the same) ...
+
+  async function fetchList(tag, resourceType) {
+    const url = `https://res.cloudinary.com/${CLOUD_NAME}/${resourceType}/list/${tag}.json?_=${Date.now()}`;
+    try {
+      const res = await fetch(url);
+      if (res.status === 404) return [];
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();
+      return (data.resources || []).map(r => {
+        const format = r.format || (resourceType === "video" ? "mp4" : "jpg");
+        const version = r.version ? `v${r.version}/` : "";
+        return {
+          url: `https://res.cloudinary.com/${CLOUD_NAME}/${resourceType}/upload/${version}${r.public_id}.${format}`,
+          title: r.public_id,
+          addedAt: new Date(r.created_at).getTime()
+        };
+      }).sort((a,b) => b.addedAt - a.addedAt);
+    } catch (e) {
+      console.error(e);
+      return [];
+    }
+  }
+
+  async function renderPhotos() {
+    const list = await fetchList(PHOTO_TAG, "image");
+    photoGallery.innerHTML = "";
+    photoCountEl.textContent = list.length + " photo" + (list.length !== 1 ? "s" : "");
+
+    if (list.length === 0) {
+      photoGallery.innerHTML = `<div class="empty-state">No photos yet.<br><small>List returned 0 items</small></div>`;
+      return;
     }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    list.forEach(item => {
+      const el = document.createElement("div");
+      el.className = "gallery-item";
+      el.innerHTML = `<img src="${item.url.replace('/upload/','/upload/c_fill,w_400,h_400,q_auto,f_auto/')}" loading="lazy">`;
+      el.onclick = () => openViewer("photo", item.url);
+      photoGallery.appendChild(el);
+    });
+  }
 
-    body {
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--beige);
-      color: var(--text);
-      line-height: 1.6;
-    }
+  async function renderVideos() {
+    const list = await fetchList(VIDEO_TAG, "video");
+    videoGallery.innerHTML = "";
+    videoCountEl.textContent = list.length + " video" + (list.length !== 1 ? "s" : "");
 
-    /* ===== TOP CTA ===== */
-    .top-bar {
-      background: var(--green);
-      text-align: center;
-      padding: 12px;
-    }
-    .top-bar a {
-      display: inline-block;
-      background: var(--gold);
-      color: var(--black);
-      text-decoration: none;
-      padding: 10px 26px;
-      font-weight: 600;
-      border-radius: 50px;
-      transition: 0.3s;
-    }
-    .top-bar a:hover {
-      background: var(--orange);
-      transform: translateY(-2px);
+    if (list.length === 0) {
+      videoGallery.innerHTML = `<div class="empty-state">No videos yet.</div>`;
+      return;
     }
 
-    /* ===== SLIDESHOW ===== */
-    .slideshow-container {
-      position: relative;
-      width: 100%;
-      height: 100vh;
-      overflow: hidden;
-      background: var(--black);
-    }
-    .slide {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transform: scale(1.08);
-      transition: opacity 2s ease-in-out, transform 8s ease-in-out;
-    }
-    .slide.active {
-      opacity: 1;
-      transform: scale(1);
-    }
-    .overlay {
-      position: absolute;
-      inset: 0;
-      background: rgba(0,0,0,0.4);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      color: var(--white);
-      z-index: 10;
-      padding: 20px;
-    }
-    .overlay h1 {
-      font-size: clamp(2rem, 6vw, 3.8rem);
-      margin-bottom: 12px;
-      animation: fadeUp 1.8s ease;
-    }
-    .overlay p {
-      font-size: clamp(1.1rem, 3vw, 1.5rem);
-      margin-bottom: 28px;
-      color: #f0e6d0;
-      animation: fadeUp 2.4s ease;
-    }
-    .overlay .btn {
-      display: inline-block;
-      background: var(--gold);
-      color: var(--black);
-      padding: 14px 32px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-    .overlay .btn:hover {
-      background: var(--orange);
-      transform: translateY(-3px);
-    }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    list.forEach(item => {
+      const el = document.createElement("div");
+      el.className = "gallery-item video-item";
+      el.innerHTML = `
+        <img src="${item.url.replace('/upload/','/upload/so_0,w_400,h_400,c_fill,q_auto,f_jpg/')}" loading="lazy">
+        <div class="video-badge">▶ Video</div>`;
+      el.onclick = () => openViewer("video", item.url);
+      videoGallery.appendChild(el);
+    });
+  }
 
-    /* ===== SECTIONS ===== */
-    .section {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 20px;
-    }
-    .section-title {
-      text-align: center;
-      font-size: 1.9rem;
-      color: var(--green);
-      margin-bottom: 8px;
-      position: relative;
-    }
-    .section-title::after {
-      content: "";
-      display: block;
-      width: 70px;
-      height: 3px;
-      background: var(--gold);
-      margin: 10px auto 30px;
-    }
+  // Keep the rest of your admin, upload, lightbox, slideshow code exactly the same
+  // ...
 
-    /* ===== ADMIN BAR ===== */
-    .admin-bar {
-      background: var(--black);
-      color: var(--white);
-      padding: 14px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .admin-bar span { font-size: 0.9rem; color: #ccc; }
-    .admin-btn {
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold);
-      padding: 8px 18px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.9rem;
-      transition: 0.25s;
-    }
-    .admin-btn:hover, .admin-btn.active {
-      background: var(--gold);
-      color: var(--black);
-    }
-
-    /* ===== UPLOAD PANEL (admin only) ===== */
-    #adminPanel {
-      display: none;
-      background: #1a1a1a;
-      padding: 30px 20px;
-      border-bottom: 3px solid var(--gold);
-    }
-    #adminPanel.visible { display: block; }
-
-    .upload-box {
-      max-width: 700px;
-      margin: 0 auto;
-      border: 2px dashed #444;
-      border-radius: 14px;
-      padding: 36px 20px;
-      text-align: center;
-      background: #222;
-      transition: 0.25s;
-    }
-    .upload-box.dragover {
-      border-color: var(--gold);
-      background: #2a2a2a;
-    }
-    .upload-box p { color: #bbb; margin-bottom: 6px; }
-    .upload-box .hint { font-size: 0.85rem; color: #777; margin-bottom: 18px; }
-    #fileInput { display: none; }
-    .upload-btn {
-      background: var(--green);
-      color: white;
-      border: none;
-      padding: 12px 28px;
-      border-radius: 8px;
-      font-size: 1rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.25s;
-    }
-    .upload-btn:hover:not(:disabled) { background: var(--green-dark); }
-    .upload-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-    #status {
-      margin-top: 14px;
-      min-height: 24px;
-      font-size: 0.95rem;
-    }
-    .status-success { color: #4ade80; }
-    .status-error { color: #f87171; }
-    .status-info { color: #aaa; }
-
-    /* ===== GALLERIES ===== */
-    .gallery-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .gallery-header h3 {
-      font-size: 1.35rem;
-      color: var(--green);
-    }
-    .count {
-      font-size: 0.9rem;
-      color: #666;
-    }
-    .clear-btn {
-      background: transparent;
-      border: 1px solid #999;
-      color: #666;
-      padding: 5px 12px;
-      border-radius: 5px;
-      font-size: 0.8rem;
-      cursor: pointer;
-      display: none;
-    }
-    .clear-btn.visible { display: inline-block; }
-    .clear-btn:hover { border-color: #c00; color: #c00; }
-
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 14px;
-    }
-    .gallery-item {
-      position: relative;
-      border-radius: 12px;
-      overflow: hidden;
-      background: #ddd;
-      cursor: pointer;
-      aspect-ratio: 1;
-      border: 2px solid transparent;
-      transition: 0.3s;
-    }
-    .gallery-item:hover {
-      transform: translateY(-4px);
-      border-color: var(--gold);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    }
-    .gallery-item img,
-    .gallery-item video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-    /* Videos should NOT have the scale/fade hover of photos */
-    .gallery-item.video-item:hover img {
-      transform: none;
-    }
-    .video-badge {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      background: rgba(0,0,0,0.75);
-      color: white;
-      font-size: 0.72rem;
-      padding: 4px 9px;
-      border-radius: 4px;
-    }
-    .empty-state {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 50px 20px;
-      color: #888;
-      border: 1px dashed #ccc;
-      border-radius: 12px;
-      background: #f9f6f0;
-    }
-
-    /* ===== LIGHTBOX / VIEWER ===== */
-    #lightbox {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.95);
-      backdrop-filter: blur(8px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 99999;
-      flex-direction: column;
-      padding: 20px;
-    }
-    #lightbox.open { display: flex; }
-
-    #lightbox-media {
-      max-width: 92vw;
-      max-height: 78vh;
-      border-radius: 14px;
-      box-shadow: 0 25px 70px rgba(0,0,0,0.6);
-    }
-    #lightbox-media img,
-    #lightbox-media video {
-      max-width: 92vw;
-      max-height: 78vh;
-      border-radius: 14px;
-      object-fit: contain;
-    }
-
-    .lightbox-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 58px;
-      height: 58px;
-      border: none;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.12);
-      color: white;
-      font-size: 28px;
-      cursor: pointer;
-      transition: 0.3s;
-      backdrop-filter: blur(8px);
-    }
-    .lightbox-btn:hover {
-      background: var(--gold);
-      color: var(--black);
-    }
-    .prev { left: 20px; }
-    .next { right: 20px; }
-
-    .close {
-      position: absolute;
-      top: 20px;
-      right: 28px;
-      color: white;
-      font-size: 40px;
-      cursor: pointer;
-      transition: 0.3s;
-      line-height: 1;
-    }
-    .close:hover {
-      color: var(--gold);
-      transform: rotate(90deg);
-    }
-
-    #counter {
-      margin-top: 16px;
-      background: rgba(255,255,255,0.12);
-      color: white;
-      padding: 8px 20px;
-      border-radius: 30px;
-      font-size: 0.95rem;
-    }
-
-    /* ===== ABOUT ===== */
-    .about {
-      background: var(--white);
-      border-radius: 16px;
-      padding: 40px 30px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.06);
-      text-align: center;
-    }
-    .about h2 {
-      color: var(--green);
-      margin-bottom: 18px;
-      font-size: 1.8rem;
-    }
-    .about p {
-      max-width: 800px;
-      margin: 0 auto;
-      color: #444;
-      font-size: 1.05rem;
-    }
-
-    /* ===== FOOTER ===== */
-    footer {
-      background: linear-gradient(135deg, var(--green), var(--green-dark));
-      color: var(--white);
-      text-align: center;
-      padding: 55px 20px 25px;
-      margin-top: 60px;
-      position: relative;
-      border-top: 4px solid var(--gold);
-    }
-    footer::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 4px;
-      background: linear-gradient(90deg, var(--gold), var(--orange), var(--gold));
-    }
-    footer p {
-      margin: 10px 0;
-      font-size: 1rem;
-      color: #f0f0f0;
-    }
-    footer a { color: white; text-decoration: none; transition: 0.3s; }
-    footer a:hover { color: var(--gold); }
-
-    .footer-social {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      margin: 22px 0;
-    }
-    .footer-social a {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.12);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-size: 20px;
-      transition: 0.35s;
-    }
-    .footer-social a:hover {
-      background: var(--gold);
-      color: var(--green-dark);
-      transform: translateY(-5px) scale(1.08);
-    }
-    .footer-bottom {
-      margin-top: 22px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,0.2);
-      font-size: 0.9rem;
-      color: #e0e0e0;
+  // At the very end:
+  renderPhotos();
+  renderVideos();
+</script>
     }
 
     /* ===== LOGIN MODAL ===== */
