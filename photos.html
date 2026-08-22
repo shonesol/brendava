@@ -769,28 +769,38 @@
   // Render
   // ========================================
   async function renderPhotos() {
-    const list = await fetchList(PHOTO_TAG, "image");
-    photoGallery.innerHTML = "";
-    photoCountEl.textContent = list.length + " photo" + (list.length !== 1 ? "s" : "");
+  const list = await fetchList(PHOTO_TAG, "image");
+  console.log("Photos found:", list.length);   // for debugging
 
-    if (list.length === 0) {
-      photoGallery.innerHTML = `<div class="empty-state">No photos uploaded yet.</div>`;
-      return;
-    }
-    list.forEach(item => photoGallery.appendChild(createItem(item, "photo")));
+  photoGallery.innerHTML = "";                 // clear everything
+  photoCountEl.textContent = list.length + (list.length === 1 ? " photo" : " photos");
+
+  if (list.length === 0) {
+    photoGallery.innerHTML = '<div class="empty-state">No photos uploaded yet.</div>';
+    return;
   }
 
-  async function renderVideos() {
-    const list = await fetchList(VIDEO_TAG, "video");
-    videoGallery.innerHTML = "";
-    videoCountEl.textContent = list.length + " video" + (list.length !== 1 ? "s" : "");
+  list.forEach(item => {
+    photoGallery.appendChild(createItem(item, "photo"));
+  });
+}
 
-    if (list.length === 0) {
-      videoGallery.innerHTML = `<div class="empty-state">No videos uploaded yet.</div>`;
-      return;
-    }
-    list.forEach(item => videoGallery.appendChild(createItem(item, "video")));
+async function renderVideos() {
+  const list = await fetchList(VIDEO_TAG, "video");
+  console.log("Videos found:", list.length);
+
+  videoGallery.innerHTML = "";
+  videoCountEl.textContent = list.length + (list.length === 1 ? " video" : " videos");
+
+  if (list.length === 0) {
+    videoGallery.innerHTML = '<div class="empty-state">No videos uploaded yet.</div>';
+    return;
   }
+
+  list.forEach(item => {
+    videoGallery.appendChild(createItem(item, "video"));
+  });
+}
 
   // ========================================
   // Upload
