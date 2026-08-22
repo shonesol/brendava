@@ -679,31 +679,42 @@
   // Fetch lists from Cloudinary (works everywhere)
   // ========================================
   async function fetchList(tag, resourceType) {
-  // resourceType = "image" or "video"
   const url = `https://res.cloudinary.com/${CLOUD_NAME}/${resourceType}/list/${tag}.json`;
+  console.log("Fetching:", url);
+
   try {
-    const res = await fetch(url + "?_=" + Date.now()); // cache-bust
+    const res = await fetch(url + "?_=" + Date.now());
+    console.log("Status:", res.status);
+
     if (!res.ok) {
-      // 404 is normal when there are zero items with that tag
-      if (res.status === 404) return [];
+      if (res.status === 404) {
+        console.log("No items with this tag yet");
+        return [];
+      }
       throw new Error("Could not load list (" + res.status + ")");
     }
-    const data = await res.json();
 
-    return (data.resources || []).map(r => {
-      // Build the full delivery URL yourself (list JSON does not give secure_url)
+    const data = await res.json();
+    console.log("Raw data:", data);
+
+    const list = (data.resources || []).map(r => {
       const format = r.format || (resourceType === "video" ? "mp4" : "jpg");
       const version = r.version ? `v${r.version}/` : "";
-      const url = `https://res.cloudinary.com/${CLOUD_NAME}/${resourceType}/upload/${version}${r.public_id}.${format}`;
+      const fullUrl = `https://res.cloudinary.com/${CLOUD_NAME}/${resourceType}/upload/${version}${r.public_id}.${format}`;
+
+      console.log("Built URL:", fullUrl);
 
       return {
-        url: url,
+        url: fullUrl,
         title: r.public_id || "",
         addedAt: new Date(r.created_at).getTime()
       };
-    }).sort((a, b) => b.addedAt - a.addedAt); // newest first
+    }).sort((a, b) => b.addedAt - a.addedAt);
+
+    console.log("Final list length:", list.length);
+    return list;
   } catch (err) {
-    console.warn("List fetch failed:", err);
+    console.error("List fetch failed:", err);
     return [];
   }
 }
@@ -776,26 +787,36 @@
     return el;
   }
 
-  async function renderPhotos() {
-    const list = await fetchList(PHOTO_TAG, "image");
-    photoGallery.querySelectorAll(".gallery-item").forEach(e => e.remove());
-    list.forEach(item => photoGallery.appendChild(createItem(item, "photo")));
-    photoCountEl.textContent = list.length + " photo" + (list.length !== 1 ? "s" : "");
-    photoEmpty.style.display = list.length ? "none" : "block";
+async function renderPhotos() {
+  const list = await fetchList(PHOTO_TAG, "image");
+
+  // Clear everything
+  photoGallery.innerHTML = "";
+
+  if (list.length === 0) {
+    photoGallery.innerHTML = `<div class="empty-state" id="photoEmpty">No photos uploaded yet.</div>`;
+    photoCountEl.textContent = "0 photos";
+    return;
   }
 
-  async function renderVideos() {
-    const list = await fetchList(VIDEO_TAG, "video");
-    videoGallery.querySelectorAll(".gallery-item").forEach(e => e.remove());
-    list.forEach(item => videoGallery.appendChild(createItem(item, "video")));
-    videoCountEl.textContent = list.length + " video" + (list.length !== 1 ? "s" : "");
-    videoEmpty.style.display = list.length ? "none" : "block";
+  list.forEach(item => photoGallery.appendChild(createItem(item, "photo")));
+  photoCountEl.textContent = list.length + " photo" + (list.length !== 1 ? "s" : "");
+}
+
+async function renderVideos() {
+  const list = await fetchList(VIDEO_TAG, "video");
+
+  videoGallery.innerHTML = "";
+
+  if (list.length === 0) {
+    videoGallery.innerHTML = `<div class="empty-state" id="videoEmpty">No videos uploaded yet.</div>`;
+    videoCountEl.textContent = "0 videos";
+    return;
   }
 
-  function renderAll() {
-    renderPhotos();
-    renderVideos();
-  }
+  list.forEach(item => videoGallery.appendChild(createItem(item, "video")));
+  videoCountEl.textContent = list.length + " video" + (list.length !== 1 ? "s" : "");
+}
 
   // ========================================
   // Upload – now adds the tag
