@@ -679,23 +679,34 @@
   // Fetch lists from Cloudinary (works everywhere)
   // ========================================
   async function fetchList(tag, resourceType) {
-    // resourceType = "image" or "video"
-    const url = `https://res.cloudinary.com/${CLOUD_NAME}/${resourceType}/list/${tag}.json`;
-    try {
-      const res = await fetch(url + "?_=" + Date.now()); // cache-bust
-      if (!res.ok) throw new Error("Could not load list");
-      const data = await res.json();
-      // Convert Cloudinary format → our simple {url, title, addedAt}
-      return (data.resources || []).map(r => ({
-        url: r.secure_url,
+  // resourceType = "image" or "video"
+  const url = `https://res.cloudinary.com/${CLOUD_NAME}/${resourceType}/list/${tag}.json`;
+  try {
+    const res = await fetch(url + "?_=" + Date.now()); // cache-bust
+    if (!res.ok) {
+      // 404 is normal when there are zero items with that tag
+      if (res.status === 404) return [];
+      throw new Error("Could not load list (" + res.status + ")");
+    }
+    const data = await res.json();
+
+    return (data.resources || []).map(r => {
+      // Build the full delivery URL yourself (list JSON does not give secure_url)
+      const format = r.format || (resourceType === "video" ? "mp4" : "jpg");
+      const version = r.version ? `v${r.version}/` : "";
+      const url = `https://res.cloudinary.com/${CLOUD_NAME}/${resourceType}/upload/${version}${r.public_id}.${format}`;
+
+      return {
+        url: url,
         title: r.public_id || "",
         addedAt: new Date(r.created_at).getTime()
-      })).sort((a, b) => b.addedAt - a.addedAt); // newest first
-    } catch (err) {
-      console.warn("List fetch failed:", err);
-      return [];
-    }
+      };
+    }).sort((a, b) => b.addedAt - a.addedAt); // newest first
+  } catch (err) {
+    console.warn("List fetch failed:", err);
+    return [];
   }
+}
 
   // ========================================
   // Admin (unchanged)
