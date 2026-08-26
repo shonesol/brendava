@@ -1,1481 +1,1042 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Travel Stories | Blendava Tours & Travel</title>
+<title>Travel Stories | Brendava Tours & Travel</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-<link rel="stylesheet"
-href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <style>
-
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
 }
 
-html{
-scroll-behavior:smooth;
-}
+html{scroll-behavior:smooth;}
 
 body{
-
-background:#F8F4EC;
-color:#222;
-overflow-x:hidden;
-
+  background:#F8F4EC;
+  color:#222;
+  overflow-x:hidden;
 }
 
-/*==========================
-HEADER
-===========================*/
-
-/* Hide and show header on scroll */
-
+/* HEADER */
 header{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-z-index:1000;
-transition:transform 0.4s ease;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  z-index:1000;
+  background:rgba(255,255,255,0.95);
+  backdrop-filter:blur(10px);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:18px 6%;
+  box-shadow:0 4px 20px rgba(0,0,0,0.06);
+  transition:transform 0.4s ease;
 }
 
 header.hide{
-transform:translateY(-120%);
+  transform:translateY(-120%);
 }
 
 .logo{
-
-font-size:30px;
-font-weight:800;
-color:#0B7A41;
-
+  font-size:28px;
+  font-weight:800;
+  color:#0B7A41;
 }
 
-.logo span{
-
-color:#D4AF37;
-
-}
+.logo span{color:#D4AF37;}
 
 nav{
-
-display:flex;
-gap:35px;
-
+  display:flex;
+  gap:30px;
 }
 
 nav a{
-
-text-decoration:none;
-color:#333;
-font-weight:600;
-transition:.3s;
-
+  text-decoration:none;
+  color:#333;
+  font-weight:600;
+  transition:.3s;
 }
 
-nav a:hover{
-
-color:#0B7A41;
-
-}
+nav a:hover{color:#0B7A41;}
 
 .watch-btn{
-
-background:#0B7A41;
-padding:12px 28px;
-border-radius:40px;
-color:white;
-text-decoration:none;
-font-weight:700;
-transition:.4s;
-
+  background:#0B7A41;
+  padding:12px 26px;
+  border-radius:40px;
+  color:white;
+  text-decoration:none;
+  font-weight:700;
+  transition:.4s;
 }
 
 .watch-btn:hover{
-
-background:#D4AF37;
-color:#111;
-
+  background:#D4AF37;
+  color:#111;
 }
 
-/*==========================
-HERO
-===========================*/
-
+/* HERO */
 .hero{
-
-margin-top:95px;
-height:90vh;
-
-background:
-
-linear-gradient(rgba(0,0,0,.45),
-rgba(0,0,0,.45)),
-
-url("0cc6ff0c-29d9-4d0a-8f1f-f91b107a92ad.jpeg");
-
-background-size:cover;
-background-position:center;
-
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-padding:40px;
-
+  margin-top:90px;
+  height:85vh;
+  background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+             url("0cc6ff0c-29d9-4d0a-8f1f-f91b107a92ad.jpeg");
+  background-size:cover;
+  background-position:center;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:40px;
 }
 
-.hero-content{
-
-max-width:900px;
-
-}
+.hero-content{max-width:900px;}
 
 .hero h1{
-
-font-size:70px;
-color:white;
-margin-bottom:20px;
-
+  font-size:clamp(36px,6vw,68px);
+  color:white;
+  margin-bottom:20px;
+  line-height:1.15;
 }
 
 .hero p{
-
-color:#fff;
-font-size:20px;
-line-height:1.9;
-margin-bottom:40px;
-
+  color:#fff;
+  font-size:clamp(16px,2.2vw,20px);
+  line-height:1.8;
+  margin-bottom:40px;
+  max-width:700px;
+  margin-left:auto;
+  margin-right:auto;
 }
 
 .hero-buttons{
-
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-
+  display:flex;
+  justify-content:center;
+  gap:18px;
+  flex-wrap:wrap;
 }
 
 .hero-buttons a{
-
-padding:16px 35px;
-border-radius:40px;
-text-decoration:none;
-font-weight:700;
-transition:.4s;
-
+  padding:15px 32px;
+  border-radius:40px;
+  text-decoration:none;
+  font-weight:700;
+  transition:.4s;
 }
 
-.primary{
+.primary{background:#0B7A41;color:white;}
+.primary:hover{background:#D4AF37;color:#111;}
+.secondary{background:white;color:#0B7A41;}
+.secondary:hover{background:#0B7A41;color:white;}
 
-background:#0B7A41;
-color:white;
-
-}
-
-.primary:hover{
-
-background:#D4AF37;
-color:#111;
-
-}
-
-.secondary{
-
-background:white;
-color:#0B7A41;
-
-}
-
-.secondary:hover{
-
-background:#0B7A41;
-color:white;
-
-}
-
-/*==========================
-SECTION TITLE
-===========================*/
-
+/* SECTION TITLE */
 .section-title{
-
-text-align:center;
-padding-top:90px;
-
+  text-align:center;
+  padding-top:80px;
+  padding-bottom:10px;
 }
 
 .section-title small{
-
-color:#D4AF37;
-font-weight:700;
-letter-spacing:2px;
-
+  color:#D4AF37;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  font-size:13px;
 }
 
 .section-title h2{
-
-font-size:48px;
-margin:15px 0;
-color:#0B7A41;
-
+  font-size:clamp(32px,4vw,46px);
+  margin:12px 0 18px;
+  color:#0B7A41;
 }
 
 .section-title p{
-
-max-width:850px;
-margin:auto;
-color:#666;
-font-size:18px;
-line-height:1.8;
-
+  max-width:800px;
+  margin:auto;
+  color:#666;
+  font-size:17px;
+  line-height:1.8;
 }
 
-/*==========================
-CATEGORY BUTTONS
-===========================*/
-
+/* CATEGORY BUTTONS */
 .story-categories{
-
-display:flex;
-justify-content:center;
-gap:20px;
-flex-wrap:wrap;
-margin:60px auto;
-
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  margin:50px auto 30px;
+  padding:0 5%;
 }
 
 .story-categories button{
-
-padding:15px 30px;
-border:none;
-background:white;
-border-radius:40px;
-cursor:pointer;
-font-size:16px;
-font-weight:700;
-box-shadow:0 10px 25px rgba(0,0,0,.08);
-transition:.4s;
-
+  padding:12px 24px;
+  border:none;
+  background:white;
+  border-radius:40px;
+  cursor:pointer;
+  font-size:15px;
+  font-weight:600;
+  box-shadow:0 8px 20px rgba(0,0,0,.07);
+  transition:.3s;
 }
 
-.story-categories button:hover{
-
-background:#0B7A41;
-color:white;
-
-}
-
+.story-categories button:hover,
 .story-categories .active{
-
-background:#0B7A41;
-color:white;
-
+  background:#0B7A41;
+  color:white;
 }
-  /* ==========================================
-STORIES GRID
-========================================== */
 
+/* STORIES GRID */
 .stories-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(360px,1fr));
-gap:35px;
-padding:60px 8%;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+  gap:32px;
+  padding:40px 6% 80px;
 }
 
-/* ==========================================
-STORY CARD
-========================================== */
-
+/* STORY CARD */
 .story-card{
-background:#fff;
-border-radius:25px;
-overflow:hidden;
-box-shadow:0 20px 40px rgba(0,0,0,.12);
-transition:.4s;
+  background:#fff;
+  border-radius:22px;
+  overflow:hidden;
+  box-shadow:0 15px 35px rgba(0,0,0,.1);
+  transition:.4s;
 }
 
 .story-card:hover{
-transform:translateY(-12px);
-box-shadow:0 25px 50px rgba(0,0,0,.18);
+  transform:translateY(-10px);
+  box-shadow:0 22px 45px rgba(0,0,0,.15);
 }
 
 .video-container{
-position:relative;
+  position:relative;
 }
 
-.video-container video{
-width:100%;
-height:260px;
-object-fit:cover;
-display:block;
+.video-container video,
+.video-container img.story-photo{
+  width:100%;
+  height:250px;
+  object-fit:cover;
+  display:block;
 }
 
 .live-badge{
-position:absolute;
-top:18px;
-left:18px;
-background:#0B7A41;
-color:#fff;
-padding:8px 18px;
-border-radius:30px;
-font-size:13px;
-font-weight:700;
+  position:absolute;
+  top:16px;
+  left:16px;
+  background:#0B7A41;
+  color:#fff;
+  padding:7px 16px;
+  border-radius:30px;
+  font-size:12px;
+  font-weight:700;
 }
 
-.story-content{
-padding:28px;
-}
+.story-content{padding:26px;}
 
 .profile{
-display:flex;
-align-items:center;
-gap:15px;
-margin-bottom:18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:16px;
 }
 
 .profile img{
-width:65px;
-height:65px;
-border-radius:50%;
-object-fit:cover;
-border:3px solid #D4AF37;
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #D4AF37;
 }
 
 .profile h3{
-color:#0B7A41;
-margin-bottom:4px;
+  color:#0B7A41;
+  font-size:17px;
+  margin-bottom:2px;
 }
 
 .profile span{
-font-size:14px;
-color:#777;
+  font-size:13px;
+  color:#777;
 }
 
 .story-content h4{
-font-size:24px;
-color:#0B7A41;
-margin-bottom:15px;
+  font-size:20px;
+  color:#0B7A41;
+  margin-bottom:12px;
+  line-height:1.35;
 }
 
 .story-content p{
-line-height:1.8;
-color:#555;
+  line-height:1.75;
+  color:#555;
+  font-size:15px;
 }
 
-.story-footer{
-display:flex;
-justify-content:space-between;
-margin-top:25px;
-padding-top:20px;
-border-top:1px solid #eee;
-font-weight:600;
-color:#D4AF37;
-}
-
-/* ==========================================
-GUIDE STORIES
-========================================== */
-
+/* GUIDE SECTION */
 #guides{
-padding:90px 8%;
-background:#ffffff;
+  padding:70px 6% 90px;
+  background:#ffffff;
 }
-
-#guides h2{
-font-size:42px;
-color:#0B7A41;
-margin-bottom:20px;
-}
-
-#guides p{
-font-size:17px;
-line-height:1.9;
-color:#555;
-margin-bottom:35px;
-}
-/* ==========================================
-Footer
-========================================== */
-
-.footer{
-    width:100%;
-    background:#111;
-    color:#fff;
-    padding:80px 8% 30px;
-    clear:both;
-}
-
-.footer-container{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-    gap:40px;
-    width:100%;
-}
-
-.footer h3,
-.footer h4{
-    color:#D4AF37;
-    margin-bottom:20px;
-}
-
-.footer p,
-.footer a{
-    color:#ffffff;
-    text-decoration:none;
-    line-height:2;
-    font-size:16px;
-    display:block;
-}
-
-.footer a:hover{
-    color:#D4AF37;
-    padding-left:8px;
-}
-
-.footer-social a{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:45px;
-    height:45px;
-    background:#0B7A41;
-    color:#fff;
-    border-radius:50%;
-    margin:8px 10px 0 0;
-    font-size:18px;
-    transition:.3s;
-}
-
-.footer-social a:hover{
-    background:#D4AF37;
-    color:#111;
-}
-
-.footer hr{
-    margin:40px 0 20px;
-    border:none;
-    height:1px;
-    background:  #F5F5DC;
-}
-
-.copyright{
-    text-align:center;
-    color:#ddd;
-    font-size:15px;
-}
-/* ==========================================
-SCROLLBAR
-========================================== */
-
-::-webkit-scrollbar{
-width:10px;
-}
-
-::-webkit-scrollbar-thumb{
-background:#0B7A41;
-border-radius:20px;
-}
-
-::-webkit-scrollbar-track{
-background:#eee;
-}
-
-/* ==========================================
-RESPONSIVE
-========================================== */
-
-@media(max-width:991px){
-
-header{
-flex-direction:column;
-gap:20px;
-}
-
-nav{
-flex-wrap:wrap;
-justify-content:center;
-}
-
-.hero h1{
-font-size:48px;
-}
-
-.hero p{
-font-size:18px;
-}
-
-.section-title h2{
-font-size:36px;
-}
-
-.share-content h2{
-font-size:36px;
-}
-
-}
-
-@media(max-width:768px){
-
-.stories-grid{
-grid-template-columns:1fr;
-}
-
-.hero{
-height:75vh;
-}
-
-.hero h1{
-font-size:38px;
-}
-
-.hero-buttons{
-flex-direction:column;
-}
-
-.story-footer{
-flex-direction:column;
-gap:10px;
-}
-
-}
-  /* Guide Profile */
 
 .guide-profile{
-    display:flex;
-    align-items:center;
-    gap:25px;
-    background:#fff;
-    padding:25px;
-    border-radius:20px;
-    margin:40px auto 25px;
-    box-shadow:0 15px 35px rgba(0,0,0,.12);
-    max-width:900px;
+  display:flex;
+  align-items:center;
+  gap:25px;
+  background:#fff;
+  padding:25px;
+  border-radius:20px;
+  margin:40px auto 25px;
+  box-shadow:0 12px 30px rgba(0,0,0,.1);
+  max-width:900px;
 }
 
 .guide-profile img{
-    width:170px;
-    height:170px;
-    object-fit:cover;
-    border-radius:50%;
-    border:6px solid #D4AF37;
-    box-shadow:0 10px 25px rgba(0,0,0,.15);
+  width:150px;
+  height:150px;
+  object-fit:cover;
+  border-radius:50%;
+  border:5px solid #D4AF37;
 }
 
 .guide-info h3{
-    font-size:32px;
-    color:#0B7A41;
-    margin-bottom:8px;
+  font-size:28px;
+  color:#0B7A41;
+  margin-bottom:6px;
 }
 
 .guide-info span{
-    color:#D4AF37;
-    font-weight:700;
-    font-size:18px;
+  color:#D4AF37;
+  font-weight:700;
+  font-size:16px;
 }
 
+.guide-story{
+  max-width:900px;
+  margin:0 auto 50px;
+  background:#f9f7f2;
+  padding:30px;
+  border-radius:18px;
+  line-height:1.85;
+  color:#444;
+}
+
+.guide-story strong{color:#0B7A41;}
+.guide-story em{color:#555;display:block;margin-top:15px;}
+
+/* ========== SHARE YOUR STORY FORM ========== */
+#share-story{
+  padding:80px 6%;
+  background:linear-gradient(180deg,#f0f7f4 0%,#e8f4ef 100%);
+}
+
+.share-box{
+  max-width:680px;
+  margin:0 auto;
+  background:white;
+  border-radius:22px;
+  padding:40px 35px;
+  box-shadow:0 20px 45px rgba(0,0,0,.1);
+}
+
+.share-box h2{
+  text-align:center;
+  color:#0B7A41;
+  font-size:32px;
+  margin-bottom:10px;
+}
+
+.share-box > p{
+  text-align:center;
+  color:#666;
+  margin-bottom:30px;
+  font-size:16px;
+}
+
+.form-group{
+  margin-bottom:20px;
+}
+
+.form-group label{
+  display:block;
+  font-weight:600;
+  margin-bottom:8px;
+  color:#333;
+  font-size:14px;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select{
+  width:100%;
+  padding:14px 16px;
+  border:1.5px solid #ddd;
+  border-radius:12px;
+  font-size:15px;
+  font-family:inherit;
+  transition:.25s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+  outline:none;
+  border-color:#0B7A41;
+  box-shadow:0 0 0 3px rgba(11,122,65,0.12);
+}
+
+.form-group textarea{
+  min-height:130px;
+  resize:vertical;
+}
+
+.photo-upload{
+  border:2px dashed #0B7A41;
+  border-radius:14px;
+  padding:30px 20px;
+  text-align:center;
+  cursor:pointer;
+  transition:.3s;
+  background:#f8fdf9;
+}
+
+.photo-upload:hover{
+  background:#eef8f1;
+}
+
+.photo-upload i{
+  font-size:32px;
+  color:#0B7A41;
+  margin-bottom:10px;
+}
+
+.photo-upload p{
+  color:#555;
+  font-size:14px;
+}
+
+.photo-preview{
+  margin-top:15px;
+  display:none;
+}
+
+.photo-preview img{
+  max-width:180px;
+  border-radius:12px;
+  box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.submit-btn{
+  width:100%;
+  padding:16px;
+  background:linear-gradient(135deg,#0B7A41,#086033);
+  color:white;
+  border:none;
+  border-radius:12px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.3s;
+  margin-top:10px;
+}
+
+.submit-btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 22px rgba(11,122,65,0.35);
+}
+
+.submit-btn:disabled{
+  opacity:0.65;
+  cursor:not-allowed;
+  transform:none;
+}
+
+.form-message{
+  margin-top:18px;
+  padding:14px;
+  border-radius:10px;
+  text-align:center;
+  font-weight:600;
+  display:none;
+}
+
+.form-message.success{
+  background:#e6f7ed;
+  color:#0B7A41;
+  display:block;
+}
+
+.form-message.error{
+  background:#fde8e8;
+  color:#c0392b;
+  display:block;
+}
+
+/* FOOTER */
+.footer{
+  width:100%;
+  background:#111;
+  color:#fff;
+  padding:70px 6% 25px;
+}
+
+.footer-container{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+  gap:35px;
+}
+
+.footer h3,.footer h4{
+  color:#D4AF37;
+  margin-bottom:18px;
+}
+
+.footer p,.footer a{
+  color:#ffffff;
+  text-decoration:none;
+  line-height:1.9;
+  font-size:15px;
+  display:block;
+}
+
+.footer a:hover{color:#D4AF37;}
+
+.footer-social a{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:42px;
+  height:42px;
+  background:#0B7A41;
+  color:#fff;
+  border-radius:50%;
+  margin:6px 8px 0 0;
+  font-size:17px;
+  transition:.3s;
+}
+
+.footer-social a:hover{
+  background:#D4AF37;
+  color:#111;
+}
+
+.footer hr{
+  margin:35px 0 18px;
+  border:none;
+  height:1px;
+  background:#333;
+}
+
+.copyright{
+  text-align:center;
+  color:#aaa;
+  font-size:14px;
+}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:9px;}
+::-webkit-scrollbar-thumb{background:#0B7A41;border-radius:20px;}
+::-webkit-scrollbar-track{background:#eee;}
+
+/* RESPONSIVE */
 @media(max-width:768px){
-    .guide-profile{
-        flex-direction:column;
-        text-align:center;
-    }
-
-    .guide-profile img{
-        width:140px;
-        height:140px;
-    }
-
-    .guide-info h3{
-        font-size:26px;
-    }
+  header{padding:14px 4%;}
+  nav{display:none;}
+  .hero{height:70vh;}
+  .stories-grid{grid-template-columns:1fr;padding:30px 4% 60px;}
+  .guide-profile{flex-direction:column;text-align:center;}
+  .guide-profile img{width:130px;height:130px;}
+  .share-box{padding:28px 20px;}
 }
-  </style>
-
+</style>
 </head>
-
 <body>
 
-<!--==========================
-HEADER
-===========================-->
-
+<!-- HEADER -->
 <header>
-
-    <div class="logo">
-        Blendava<span>Tours</span>
-    </div>
-
-    <nav>
-
-        <a href="index.html">Home</a>
-      
-
-    </nav>
-
-    <a href="#featured-stories" class="watch-btn">
-        <i class="fas fa-play-circle"></i> Watch Stories
-    </a>
-
+  <div class="logo">Brendava<span>Tours</span></div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="#featured-stories">Stories</a>
+    <a href="#guides">Guides</a>
+    <a href="#share-story">Share Yours</a>
+  </nav>
+  <a href="#share-story" class="watch-btn">
+    <i class="fas fa-pen"></i> Share Your Story
+  </a>
 </header>
 
-<!--==========================
-HERO SECTION
-===========================-->
-
+<!-- HERO -->
 <section class="hero">
-
-    <div class="hero-content">
-
-        <h1>Every Safari Has A Story</h1>
-
-        <p>
-
-            Experience unforgettable adventures through the eyes of our happy
-            travelers and professional safari guides. Watch real journeys,
-            authentic wildlife encounters, breathtaking gorilla trekking,
-            exciting game drives and beautiful moments across Uganda.
-
-        </p>
-
-        <div class="hero-buttons">
-
-            <a href="#featured-stories" class="primary">
-                <i class="fas fa-play"></i>
-                Start Watching
-            </a>
-
-            <a href="#guides" class="secondary">
-                <i class="fas fa-users"></i>
-                Meet Our Guides
-            </a>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!--==========================
-SECTION TITLE
-===========================-->
-
-<section id="featured-stories">
-
-    <div class="section-title">
-
-        <small>WATCH • DISCOVER • EXPERIENCE</small>
-
-        <h2>Featured Safari Stories</h2>
-
-        <p>
-
-            Every video tells a unique adventure. From the misty forests of
-            Bwindi to the vast plains of Queen Elizabeth National Park,
-            discover why thousands of travelers choose Blendava Tours &
-            Travel for unforgettable African safaris.
-
-        </p>
-
-    </div>
-
-    <!--==========================
-    STORY FILTERS
-    ===========================-->
-
-    <div class="story-categories">
-
-        <button class="active">
-            All Stories
-        </button>
-
-        <button>
-            Gorilla Trekking
-        </button>
-
-        <button>
-            Wildlife Safari
-        </button>
-
-        <button>
-            Boat Cruises
-        </button>
-
-        <button>
-            Bird Watching
-        </button>
-
-        <button>
-            Cultural Tours
-        </button>
-
-        <button>
-            Luxury Safaris
-        </button>
-
-    </div>
-
-    <!--==========================
-    STORIES GRID
-    ===========================-->
-
-    <div class="stories-grid">
-
-        <!-- Story 1 -->
-
-        <div class="story-card">
-
-            <div class="video-container">
-
-                <video controls poster="IMG_4480.jpeg">
-
-                    <source src="videos/gorilla-story.mp4"
-                            type="video/mp4">
-
-                </video>
-
-                <div class="live-badge">
-
-                    <i class="fas fa-play"></i>
-
-                    Featured
-
-                </div>
-
-            </div>
-
-            <div class="story-content">
-
-                <div class="profile">
-
-                    <img src="IMG_4480.jpeg" alt="Traveler">
-
-                    <div>
-
-                        <h3>Emily Watson</h3>
-
-                        <span>
-                            🇬🇧 United Kingdom
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <h4>
-                    My First Gorilla Trek
-                </h4>
-
-                <p>
-
-                    I had waited years for this moment. Seeing mountain
-                    gorillas in Bwindi was emotional, unforgettable and
-                    beautifully organized by Blendava Tours & Travel.
-
-                </p>
-
-                <div class="story-footer">
-
-                    <span>
-                        ❤️ 3.8K
-                    </span>
-
-                    <span>
-                        💬 548
-                    </span>
-
-                    <span>
-                        ▶ 28K Views
-                    </span>
-
-                </div>
-
-            </div>
-
-        </div>
-                <!-- Story 2 -->
-
-        <div class="story-card">
-
-            <div class="video-container">
-
-                <video controls poster="IMG_4477.jpeg">
-
-                    <source src="videos/game-drive.mp4" type="video/mp4">
-
-                </video>
-
-                <div class="live-badge">
-
-                    <i class="fas fa-camera"></i>
-
-                    Trending
-
-                </div>
-
-            </div>
-
-            <div class="story-content">
-
-                <div class="profile">
-
-                    <img src="IMG_4478.jpeg" alt="Traveler">
-
-                    <div>
-
-                        <h3>Jenifer Anderson</h3>
-
-                        <span>🇺🇸 United States</span>
-
-                    </div>
-
-                </div>
-
-                <h4>Big Five Safari Experience</h4>
-
-                <p>
-
-                    Our guide knew exactly where to find wildlife. We watched
-                    lions, elephants, buffaloes, giraffes and countless antelopes.
-                    Every minute of the game drive was unforgettable.
-
-                </p>
-
-                <div class="story-footer">
-
-                    <span>❤️ 4.5K</span>
-
-                    <span>💬 682</span>
-
-                    <span>▶ 36K Views</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Story 3 -->
-
-        <div class="story-card">
-
-            <div class="video-container">
-
-                <video controls poster="797df0c7-794f-4e89-8dd0-891d6f1025e0.jpeg">
-
-                    <source src="videos/boat-cruise.mp4" type="video/mp4">
-
-                </video>
-
-                <div class="live-badge">
-
-                    <i class="fas fa-water"></i>
-
-                    Popular
-
-                </div>
-
-            </div>
-
-            <div class="story-content">
-
-                <div class="profile">
-
-                    <img src="797df0c7-794f-4e89-8dd0-891d6f1025e0.jpeg" alt="Traveler">
-
-                    <div>
-
-                        <h3>cate morgan</h3>
-
-                        <span>🇨🇦 Canada</span>
-
-                    </div>
-
-                </div>
-
-                <h4>Boat Cruise on the Nile</h4>
-
-                <p>
-
-                    Watching elephants drinking from the river while hippos
-                    surrounded our boat was one of the greatest wildlife
-                    experiences I've ever had.
-
-                </p>
-
-                <div class="story-footer">
-
-                    <span>❤️ 3.9K</span>
-
-                    <span>💬 491</span>
-
-                    <span>▶ 31K Views</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Story 4 -->
-
-        <div class="story-card">
-
-            <div class="video-container">
-
-                <video controls poster="IMG_2423.jpeg">
-
-                    <source src="videos/cultural-tour.mp4" type="video/mp4">
-
-                </video>
-
-                <div class="live-badge">
-
-                    <i class="fas fa-star"></i>
-
-                    New
-
-                </div>
-
-            </div>
-
-            <div class="story-content">
-
-                <div class="profile">
-
-                    <img src="IMG_1792.jpeg" alt="Traveler">
-
-                    <div>
-
-                        <h3>Sophie Williams</h3>
-
-                        <span>🇦🇺 Australia</span>
-
-                    </div>
-
-                </div>
-
-                <h4>Ugandan Cultural Experience</h4>
-
-                <p>
-
-                    Beyond wildlife, I discovered Uganda's welcoming people,
-                    traditional dances, delicious local cuisine and rich culture.
-                    Blendava created memories that will last forever.I mostly enjoyed hiking at sipi fall 
-
-                </p>
-
-                <div class="story-footer">
-
-                    <span>❤️ 2.8K</span>
-
-                    <span>💬 337</span>
-
-                    <span>▶ 22K Views</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!--==========================
-SAFARI GUIDES SECTION
-===========================-->
-
-<section id="guides">
-
-    <div class="section-title">
-
-        <small>MEET OUR PROFESSIONALS</small>
-
-        <h2>Stories From Our Safari Guides</h2>
-
-        <p>
-
-            Our experienced guides know Uganda better than anyone.
-            Hear their inspiring stories, conservation efforts and
-            unforgettable wildlife encounters.
-
-        </p>
-
-    </div>
-
-    <div class="stories-grid">
-              <!-- Story 2 -->
-
-        <div class="story-card">
-
-            <div class="video-container">
-
-                <video controls poster="IMG_4478.jpeg">
-
-                    <source src="videos/game-drive.mp4" type="video/mp4">
-
-                </video>
-
-                <div class="live-badge">
-
-                    <i class="fas fa-camera"></i>
-
-                    Trending
-
-                </div>
-
-            </div>
-
-            <div class="story-content">
-
-                <div class="profile">
-
-                    <img src="IMG_4478.jpeg" alt="Traveler">
-
-                    <div>
-
-                        <h3>Michael Anderson</h3>
-
-                        <span>🇺🇸 United States</span>
-
-                    </div>
-
-                </div>
-
-                <h4>Big Five Safari Experience</h4>
-
-                <p>
-
-                    Our guide knew exactly where to find wildlife. We watched
-                    lions, elephants, buffaloes, giraffes and countless antelopes.
-                    Every minute of the game drive was unforgettable.
-
-                </p>
-
-                <div class="story-footer">
-
-                    <span>❤️ 4.5K</span>
-
-                    <span>💬 682</span>
-
-                    <span>▶ 36K Views</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Story 3 -->
-
-        <div class="story-card">
-
-            <div class="video-container">
-
-                <video controls poster="IMG_2419.jpeg">
-
-                    <source src="videos/boat-cruise.mp4" type="video/mp4">
-
-                </video>
-
-                <div class="live-badge">
-
-                    <i class="fas fa-water"></i>
-
-                    Popular
-
-                </div>
-
-            </div>
-
-            <div class="story-content">
-
-                <div class="profile">
-
-                    <img src="IMG_2419.jpeg" alt="Traveler">
-
-                    <div>
-
-                        <h3>Anna Brown</h3>
-
-                        <span>🇨🇦 Canada</span>
-
-                    </div>
-
-                </div>
-
-                <h4>Boat Cruise on the Nile</h4>
-
-                <p>
-
-                    Watching elephants drinking from the river while hippos
-                    surrounded our boat was one of the greatest wildlife
-                    experiences I've ever had.
-
-                </p>
-
-                <div class="story-footer">
-
-                    <span>❤️ 3.9K</span>
-
-                    <span>💬 491</span>
-
-                    <span>▶ 31K Views</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        <!-- Story 4 -->
-
-        <div class="story-card">
-
-            <div class="video-container">
-
-                <video controls poster="images/story4.jpg">
-
-                    <source src="videos/cultural-tour.mp4" type="video/mp4">
-
-                </video>
-
-                <div class="live-badge">
-
-                    <i class="fas fa-star"></i>
-
-                    New
-
-                </div>
-
-            </div>
-
-            <div class="story-content">
-
-                <div class="profile">
-
-                    <img src="images/client4.jpg" alt="Traveler">
-
-                    <div>
-
-                        <h3>alina Williams</h3>
-
-                        <span>🇦🇺 Australia</span>
-
-                    </div>
-
-                </div>
-
-                <h4>Ugandan Cultural Experience</h4>
-
-                <p>
-
-                    Beyond wildlife, I discovered Uganda's welcoming people,
-                    traditional dances, delicious local cuisine and rich culture.
-                    Blendava created memories that will last forever.
-
-                </p>
-
-                <div class="story-footer">
-
-                    <span>❤️ 2.8K</span>
-
-                    <span>💬 337</span>
-
-                    <span>▶ 22K Views</span>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!--==========================
-SAFARI GUIDES SECTION
-===========================-->
-
-<section id="guides">
-    <div class="section-title">
-
-        <small>MEET OUR PROFESSIONALS</small>
-<div class="guide-profile">
-    <img src="41f45450-2b7b-4592-a2e1-db68285537fc.jpeg" alt="Brenda - Safari Guide">
-    <div class="guide-info">
-        <h3>Brenda</h3>
-        <span>Professional Safari Guide</span>
-    </div>
-</div>
-       
-      <h2>Brenda's story</h2>
-
-      <p>
-
-<strong>Meet Brenda – Professional Safari Guide</strong><br><br>
-
-Born and raised in Entebbe, Uganda, Brenda is a dedicated and passionate safari guide with over five years of professional experience in the tourism industry. She holds a <strong>Bachelor's Degree in Tourism and Hospitality Management</strong>, which has equipped her with extensive knowledge of Uganda's wildlife, conservation, culture, and sustainable tourism.
-
-Brenda has traveled to <strong>Kenya, Tanzania, Ethiopia, Qatar, Dubai (United Arab Emirates), the United Kingdom, and Switzerland</strong>, gaining valuable international experience and a deeper understanding of different cultures and global tourism standards. These journeys have strengthened her ability to provide exceptional service to travelers from all over the world.
-
-As a professional safari guide, Brenda leads exciting game drives, gorilla trekking expeditions, chimpanzee tracking adventures, bird-watching tours, nature walks, cultural experiences, and customized luxury safaris across Uganda and East Africa. She also assists guests with travel planning, wildlife interpretation, photography opportunities, safety briefings, and ensuring every safari runs smoothly from beginning to end.
-
-Known for her warm hospitality, patience, professionalism, and friendly personality, Brenda is passionate about wildlife conservation and enjoys sharing fascinating stories about Uganda's national parks, animals, birds, and local communities. Her goal is to create unforgettable experiences that leave every traveler with lifelong memories.
-
-<strong>Brenda says:</strong><br><br>
-
-<em>"Seeing the excitement on a traveler's face when they spot a lion for the first time or come face-to-face with mountain gorillas reminds me why I love being a safari guide. Every adventure is unique, every guest has a different story, and it is my privilege to help people discover the incredible beauty, wildlife, and culture of Uganda."</em>
-
-</p>
-      <div class="guide-profile">
-    <img src="IMG_4558.jpeg" alt="Andy - Safari Guide">
-    <div class="guide-info">
-        <h3>Andy</h3>
-        <span>Professional Safari Guide</span>
-    </div>
-</div>
-<h2>Andy's story</h2>
-        <p>
-          Meet Andy – Professional Safari Guide
-
-Born and raised in Entebbe, Uganda, Andy developed a deep appreciation for nature, wildlife, and tourism from an early age. where his interest in Uganda’s rich biodiversity and cultural heritage began to grow.
-
-For the past five years, Andy has worked as a professional safari guide with a passion for creating unforgettable travel experiences. His friendly personality, professionalism, and extensive knowledge of Uganda’s wildlife make every journey both educational and exciting.
-
-Over the years, Andy has broadened his global perspective by traveling to Kenya, Tanzania, Dubai, Ethiopia, Qatar, the United Kingdom, and Switzerland. These international experiences have strengthened his understanding of different cultures and enhanced the quality of service he offers to travelers from around the world.
-
-Whether guiding guests through the breathtaking forests of Bwindi during gorilla trekking, leading thrilling game drives across Uganda’s national parks, or sharing fascinating stories about wildlife, birds, landscapes, and local communities, Andy is dedicated to ensuring every safari is safe, memorable, and inspiring.
-
-Professional Skills
-
-* Professional Safari Guiding
-* Wildlife Identification and Interpretation
-* Gorilla Trekking Guide
-* Game Drive Leadership
-* Bird Watching Tours
-* Nature and Conservation Education
-* Customer Care and Hospitality
-* Tour Planning and Coordination
-* Photography Assistance for Travelers
-* First Aid and Visitor Safety
-* Cross-Cultural Communication
-* Leadership and Teamwork
-* Excellent English Communication
-* Problem Solving and Emergency Response
-
-Andy’s Motto
-
-“The greatest reward is seeing a guest smile after experiencing Uganda’s incredible wildlife. Every safari is a new story, every journey is an adventure, and every traveler leaves with unforgettable memories.”
-        </p>
-      <div class="guide-profile">
-    <img src="IMG-20241219-WA0012.jpeg" alt="Shone - Tour Operator">
-    <div class="guide-info">
-        <h3>Shone</h3>
-        <span>Tour Operator • Safari Guide • Software Programmer</span>
-    </div>
-</div>
-      <h2>shone's story</h2>
-        <p>Meet Shone – Tour Operator, Safari Guide & Software Programmer
-
-Shone is a passionate tourism professional and technology enthusiast dedicated to creating exceptional travel experiences across Uganda and East Africa. 
-
-With expertise in both tourism and technology, Shone serves as a professional tour operator, experienced safari guide, and software programmer. His unique combination of technical skills and extensive travel experience enables him to deliver innovative travel solutions while ensuring every guest enjoys a safe, memorable, and well-organized safari.
-
-Over the years, Shone has traveled to Uganda, Ethiopia, the United Kingdom, Dubai (United Arab Emirates), Norway, Germany, Tanzania, Kenya, the Democratic Republic of the Congo, and South Africa. These international experiences have broadened his understanding of different cultures, destinations, and world-class tourism standards, allowing him to provide outstanding service to travelers from around the globe.
-
-Whether planning customized safari itineraries, guiding guests through Uganda’s spectacular national parks, developing modern tourism technology, or coordinating luxury travel experiences, Shone is committed to delivering excellence, professionalism, and unforgettable adventures.
-
-What Shone Does
-
-* Designs and manages customized safari packages
-* Leads wildlife safaris and gorilla trekking tours
-* Coordinates travel logistics and tour operations
-* Develops tourism websites and digital booking systems
-* Advises travelers on destinations, visas, and travel planning
-* Promotes sustainable and responsible tourism
-* Works closely with hotels, lodges, airlines, and local partners
-* Provides exceptional customer service before, during, and after every trip
-
-Professional Skills
-
-* Tour Operations Management
-* Professional Safari Guiding
-* Gorilla Trekking Coordination
-* Wildlife Interpretation
-* Travel Planning and Itinerary Design
-* Customer Care and Hospitality
-* Leadership and Team Management
-* Cross-Cultural Communication
-* Website Design and Development
-* Software Programming
-* Digital Marketing for Tourism
-* Booking System Management
-* Problem Solving and Decision Making
-* Photography and Travel Content Creation
-* Public Speaking and Presentation Skills
-* Excellent English Communication
-* Teamwork and Project Management
-
-Shone’s Motto
-“Travel has the power to connect people, cultures, and nature. My mission is to combine technology, professionalism, and a passion for adventure to create unforgettable journeys that inspire every traveler.”
-        </p>
-    </div>
-      </div> <!-- section-title -->
-</section>
-<!-- ==========================================================
-FOOTER
-========================================================== -->
-<footer class="footer">
-
-    <div class="footer-container">
-
-        <div class="footer-about">
-
-            <h3>Blendava Tours & Travel</h3>
-
-            <p>
-                Creating unforgettable safari experiences across Uganda and East
-                Africa. From gorilla trekking and wildlife safaris to luxury
-                adventures, we help you discover Africa's beauty.
-            </p>
-
-        </div>
-
-    
-        <div class="footer-contact">
-
-            <h4>Contact</h4>
-
-            <p><i class="fas fa-phone"></i> +256762584996</p>
-            <p><i class="fab fa-whatsapp"></i> +256742254321</p>
-            <p><i class="fas fa-envelope"></i> info@blendavatoursandtravel.com</p>
-            <p><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</p>
-
-        </div>
-
-        <div class="footer-social">
-
-            <h4>Follow Us</h4>
-
-
-<a href="<a href="https://www.facebook.com/share/1DRXpH8itv/?mibextid=wwXIfr"><i class="fab fa-facebook"></i></a>
-            <a href="https://www.instagram.com/brendava_tours_and_travel?igsh=MXB4dmtvNWF4MTNndA%3D%3D&utm_source=qr"><i class="fab fa-instagram"></i></a>
-            <a href="https://x.com/shonekizza?s=11"><i class="fab fa-x-twitter"></i></a>
-            <a href="https://www.youtube.com/@brendavatoursandtravel"><i class="fab fa-youtube"></i></a>
-            <a href="www.tiktok.com/@touristpage"><i class="fab fa-tiktok"></i></a>
-
-</a>
-
-<a href="https://www.youtube.com/@BRENDAVATOURSTRAVELCOMPANY" >
-<i class="fab fa-youtube"></i>
-</a>
-        </div>
-
-    </div>
-
-    <hr>
-
-    <p class="copyright">
-        © 2026 Blendava Tours & Travel. All Rights Reserved.
+  <div class="hero-content">
+    <h1>Every Safari Has A Story</h1>
+    <p>
+      Real journeys from real travelers. Watch authentic experiences from gorilla trekking, wildlife safaris, boat cruises and cultural encounters across Uganda and East Africa.
     </p>
+    <div class="hero-buttons">
+      <a href="#featured-stories" class="primary">
+        <i class="fas fa-play"></i> Watch Stories
+      </a>
+      <a href="#share-story" class="secondary">
+        <i class="fas fa-camera"></i> Share Your Story
+      </a>
+    </div>
+  </div>
+</section>
 
+<!-- FEATURED STORIES -->
+<section id="featured-stories">
+  <div class="section-title">
+    <small>WATCH • DISCOVER • EXPERIENCE</small>
+    <h2>Featured Safari Stories</h2>
+    <p>
+      Every video and photo tells a real adventure — from the misty forests of Bwindi to the plains of Queen Elizabeth and the Nile at Murchison Falls.
+    </p>
+  </div>
+
+  <div class="story-categories">
+    <button class="active">All Stories</button>
+    <button>Gorilla Trekking</button>
+    <button>Wildlife Safari</button>
+    <button>Boat Cruises</button>
+    <button>Cultural Tours</button>
+  </div>
+
+  <div class="stories-grid" id="storiesGrid">
+
+    <!-- Static example stories (you can keep or remove later) -->
+    <div class="story-card">
+      <div class="video-container">
+        <video controls poster="IMG_4480.jpeg">
+          <source src="videos/gorilla-story.mp4" type="video/mp4">
+        </video>
+        <div class="live-badge"><i class="fas fa-play"></i> Featured</div>
+      </div>
+      <div class="story-content">
+        <div class="profile">
+          <img src="IMG_4480.jpeg" alt="Emily Watson">
+          <div>
+            <h3>Emily Watson</h3>
+            <span>🇬🇧 United Kingdom</span>
+          </div>
+        </div>
+        <h4>My First Gorilla Trek</h4>
+        <p>
+          I had waited years for this moment. Seeing mountain gorillas in Bwindi was emotional and unforgettable. The team at Brendava organised everything so smoothly — from the permits to our wonderful guide. I will never forget the look in the gorilla’s eyes.
+        </p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="video-container">
+        <video controls poster="IMG_4477.jpeg">
+          <source src="videos/game-drive.mp4" type="video/mp4">
+        </video>
+        <div class="live-badge"><i class="fas fa-camera"></i> Safari</div>
+      </div>
+      <div class="story-content">
+        <div class="profile">
+          <img src="IMG_4478.jpeg" alt="Jenifer Anderson">
+          <div>
+            <h3>Jenifer Anderson</h3>
+            <span>🇺🇸 United States</span>
+          </div>
+        </div>
+        <h4>Big Five Safari Experience</h4>
+        <p>
+          Our guide knew exactly where to find the animals. We watched lions, elephants, buffaloes and giraffes. Every minute of the game drive felt special. Thank you Brendava for an incredible safari.
+        </p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="video-container">
+        <video controls poster="797df0c7-794f-4e89-8dd0-891d6f1025e0.jpeg">
+          <source src="videos/boat-cruise.mp4" type="video/mp4">
+        </video>
+        <div class="live-badge"><i class="fas fa-water"></i> Nile</div>
+      </div>
+      <div class="story-content">
+        <div class="profile">
+          <img src="797df0c7-794f-4e89-8dd0-891d6f1025e0.jpeg" alt="Cate Morgan">
+          <div>
+            <h3>Cate Morgan</h3>
+            <span>🇨🇦 Canada</span>
+          </div>
+        </div>
+        <h4>Boat Cruise on the Nile</h4>
+        <p>
+          Watching elephants drinking from the river while hippos surrounded our boat was one of the greatest wildlife experiences I’ve ever had. Highly recommend this trip with Brendava.
+        </p>
+      </div>
+    </div>
+
+    <div class="story-card">
+      <div class="video-container">
+        <video controls poster="IMG_2423.jpeg">
+          <source src="videos/cultural-tour.mp4" type="video/mp4">
+        </video>
+        <div class="live-badge"><i class="fas fa-star"></i> Culture</div>
+      </div>
+      <div class="story-content">
+        <div class="profile">
+          <img src="IMG_1792.jpeg" alt="Sophie Williams">
+          <div>
+            <h3>Sophie Williams</h3>
+            <span>🇦🇺 Australia</span>
+          </div>
+        </div>
+        <h4>Ugandan Cultural Experience</h4>
+        <p>
+          Beyond the wildlife I discovered Uganda’s welcoming people, traditional dances and delicious local food. Hiking at Sipi Falls was a highlight. Brendava created memories that will last forever.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- GUIDES SECTION -->
+<section id="guides">
+  <div class="section-title">
+    <small>MEET OUR PROFESSIONALS</small>
+    <h2>Stories From Our Team</h2>
+    <p>Our guides and team members share their passion for Uganda’s wildlife and culture.</p>
+  </div>
+
+  <!-- Brenda -->
+  <div class="guide-profile">
+    <img src="41f45450-2b7b-4592-a2e1-db68285537fc.jpeg" alt="Brenda">
+    <div class="guide-info">
+      <h3>Brenda</h3>
+      <span>Managing Director & Safari Specialist</span>
+    </div>
+  </div>
+  <div class="guide-story">
+    <p>
+      <strong>Meet Brenda</strong><br><br>
+      Born and raised in Entebbe, Brenda holds a Bachelor’s Degree in Tourism and Hospitality Management and has over five years of professional experience. She has travelled to Kenya, Tanzania, Ethiopia, Qatar, Dubai, the United Kingdom and Switzerland, giving her a strong understanding of international travellers’ expectations.<br><br>
+      Brenda oversees gorilla permits, itinerary design and community partnerships. She is passionate about wildlife conservation and creating genuine connections between guests and the places they visit.<br><br>
+      <em>“Seeing the excitement on a traveler’s face when they spot a lion for the first time or come face-to-face with mountain gorillas reminds me why I love this work. Every adventure is unique.”</em>
+    </p>
+  </div>
+
+  <!-- Andy -->
+  <div class="guide-profile">
+    <img src="IMG_4558.jpeg" alt="Andy">
+    <div class="guide-info">
+      <h3>Andy</h3>
+      <span>Assistant Manager & Safari Guide</span>
+    </div>
+  </div>
+  <div class="guide-story">
+    <p>
+      <strong>Meet Andy</strong><br><br>
+      Born and raised in Entebbe, Andy has spent the past five years creating unforgettable safari experiences. His friendly personality and deep knowledge of Uganda’s wildlife make every journey both educational and exciting. He has also travelled to Kenya, Tanzania, Dubai, Ethiopia, Qatar, the UK and Switzerland.<br><br>
+      Whether guiding guests through Bwindi or leading game drives, Andy is dedicated to safe, memorable and inspiring safaris.<br><br>
+      <em>“The greatest reward is seeing a guest smile after experiencing Uganda’s incredible wildlife. Every safari is a new story.”</em>
+    </p>
+  </div>
+
+  <!-- Shone -->
+  <div class="guide-profile">
+    <img src="IMG-20241219-WA0012.jpeg" alt="Shone">
+    <div class="guide-info">
+      <h3>Shone</h3>
+      <span>Reservations • Tour Operations • Technology</span>
+    </div>
+  </div>
+  <div class="guide-story">
+    <p>
+      <strong>Meet Shone</strong><br><br>
+      Shone combines tourism expertise with technology. He handles reservations, logistics and digital systems while also guiding and coordinating safaris. He has travelled widely across East Africa, Europe and the Middle East, bringing a practical and guest-focused approach to every booking.<br><br>
+      <em>“Travel has the power to connect people, cultures and nature. My mission is to create unforgettable journeys that inspire every traveler.”</em>
+    </p>
+  </div>
+</section>
+
+<!-- ========== SHARE YOUR STORY ========== -->
+<section id="share-story">
+  <div class="share-box">
+    <h2>Share Your Safari Story</h2>
+    <p>Been on a trip with us? We’d love to hear from you. Upload a photo and tell us about your experience.</p>
+
+    <form id="testimonialForm">
+      <div class="form-group">
+        <label for="guestName">Your Name *</label>
+        <input type="text" id="guestName" required placeholder="e.g. Sarah M.">
+      </div>
+
+      <div class="form-group">
+        <label for="guestCountry">Country</label>
+        <input type="text" id="guestCountry" placeholder="e.g. United Kingdom">
+      </div>
+
+      <div class="form-group">
+        <label for="guestTitle">Story Title</label>
+        <input type="text" id="guestTitle" placeholder="e.g. Unforgettable gorilla trek">
+      </div>
+
+      <div class="form-group">
+        <label for="guestComment">Your Experience *</label>
+        <textarea id="guestComment" required placeholder="Tell us about your safari, what you enjoyed most, and anything you’d like future travellers to know..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>Your Photo</label>
+        <div class="photo-upload" id="photoUploadArea">
+          <i class="fas fa-cloud-upload-alt"></i>
+          <p>Click to upload a photo from your trip<br><small>(JPG, PNG – max 5MB)</small></p>
+          <input type="file" id="photoInput" accept="image/*" style="display:none;">
+        </div>
+        <div class="photo-preview" id="photoPreview">
+          <img id="previewImg" src="" alt="Preview">
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">
+        <i class="fas fa-paper-plane"></i> Submit My Story
+      </button>
+
+      <div class="form-message" id="formMessage"></div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-container">
+    <div>
+      <h3>Brendava Tours & Travel</h3>
+      <p>Creating unforgettable safari experiences across Uganda and East Africa — gorilla trekking, wildlife safaris and tailor-made adventures.</p>
+    </div>
+    <div>
+      <h4>Contact</h4>
+      <p><i class="fas fa-phone"></i> +256 789 336 441</p>
+      <p><i class="fab fa-whatsapp"></i> +256 762 584 996</p>
+      <p><i class="fas fa-envelope"></i> brendavatoursandtravel@gmail.com</p>
+      <p><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</p>
+    </div>
+    <div class="footer-social">
+      <h4>Follow Us</h4>
+      <a href="https://www.instagram.com/brendavatoursandtravel" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="https://www.youtube.com/@BRENDAVATOURSTRAVELCOMPANY" target="_blank"><i class="fab fa-youtube"></i></a>
+      <a href="https://www.tiktok.com/@brendava.tours.andtravel" target="_blank"><i class="fab fa-tiktok"></i></a>
+    </div>
+  </div>
+  <hr>
+  <p class="copyright">© 2026 Brendava Tours & Travel. All Rights Reserved.</p>
 </footer>
 
-<!-- ==========================================================
-JAVASCRIPT
-========================================================== -->
+<!-- Firebase + Cloudinary Scripts -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
 <script>
+  // ========== CONFIG ==========
+  const CLOUD_NAME    = "ziudh5iv";
+  const UPLOAD_PRESET = "brendava_gallery";
 
-// Animate cards when they appear
+  const firebaseConfig = {
+    apiKey: "YOUR_API_KEY_HERE",          // ← replace with your real Firebase API key
+    authDomain: "brendava-tours-and-travel.firebaseapp.com",
+    projectId: "brendava-tours-and-travel",
+    storageBucket: "brendava-tours-and-travel.firebasestorage.app",
+    messagingSenderId: "732703885570",
+    appId: "1:732703885570:web:3011a3989d5fe36eb69a1b",
+    measurementId: "G-ZC356HMW9C"
+  };
 
-const cards = document.querySelectorAll(".story-card");
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.firestore();
 
-const observer = new IntersectionObserver(entries => {
+  // ========== PHOTO PREVIEW ==========
+  const photoInput = document.getElementById("photoInput");
+  const photoUploadArea = document.getElementById("photoUploadArea");
+  const photoPreview = document.getElementById("photoPreview");
+  const previewImg = document.getElementById("previewImg");
 
-    entries.forEach(entry => {
+  photoUploadArea.addEventListener("click", () => photoInput.click());
 
-        if(entry.isIntersecting){
+  photoInput.addEventListener("change", function() {
+    const file = this.files[0];
+    if (file) {
+      if (file.size > 5 * 1024 * 1024) {
+        alert("Please choose a photo smaller than 5MB.");
+        this.value = "";
+        return;
+      }
+      const reader = new FileReader();
+      reader.onload = e => {
+        previewImg.src = e.target.result;
+        photoPreview.style.display = "block";
+      };
+      reader.readAsDataURL(file);
+    }
+  });
 
-            entry.target.style.opacity="1";
-            entry.target.style.transform="translateY(0)";
+  // ========== UPLOAD TO CLOUDINARY ==========
+  async function uploadToCloudinary(file) {
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("upload_preset", UPLOAD_PRESET);
+    formData.append("tags", "brendava_stories");
 
-        }
-
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+      method: "POST",
+      body: formData
     });
 
-});
+    if (!res.ok) throw new Error("Cloudinary upload failed");
+    const data = await res.json();
+    return data.secure_url;
+  }
 
-cards.forEach(card=>{
+  // ========== SUBMIT TESTIMONIAL ==========
+  document.getElementById("testimonialForm").addEventListener("submit", async function(e) {
+    e.preventDefault();
 
-    card.style.opacity="0";
-    card.style.transform="translateY(50px)";
-    card.style.transition="all .8s ease";
+    const name     = document.getElementById("guestName").value.trim();
+    const country  = document.getElementById("guestCountry").value.trim();
+    const title    = document.getElementById("guestTitle").value.trim();
+    const comment  = document.getElementById("guestComment").value.trim();
+    const file     = photoInput.files[0];
+    const btn      = document.getElementById("submitBtn");
+    const msg      = document.getElementById("formMessage");
 
-    observer.observe(card);
-
-});
-
-// Story category active button
-
-const buttons=document.querySelectorAll(".story-categories button");
-
-buttons.forEach(button=>{
-
-button.onclick=function(){
-
-buttons.forEach(btn=>btn.classList.remove("active"));
-
-this.classList.add("active");
-
-}
-
-});
-
-</script>
-<script>
-  // Hide header when scrolling down
-
-let lastScroll = 0;
-const header = document.querySelector("header");
-
-window.addEventListener("scroll", () => {
-
-    let currentScroll = window.pageYOffset;
-
-    if(currentScroll > lastScroll && currentScroll > 100){
-
-        // Scroll down
-        header.classList.add("hide");
-
-    } else {
-
-        // Scroll up
-        header.classList.remove("hide");
-
+    if (!name || !comment) {
+      msg.className = "form-message error";
+      msg.textContent = "Please fill in your name and your experience.";
+      return;
     }
 
-    lastScroll = currentScroll;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+    msg.style.display = "none";
 
-});
+    try {
+      let photoUrl = "";
+
+      if (file) {
+        photoUrl = await uploadToCloudinary(file);
+      }
+
+      await db.collection("stories").add({
+        name,
+        country: country || "",
+        title: title || "My Safari Experience",
+        comment,
+        photoUrl,
+        createdAt: Date.now(),
+        approved: true          // set to false if you want manual approval later
+      });
+
+      msg.className = "form-message success";
+      msg.textContent = "Thank you! Your story has been submitted successfully.";
+      this.reset();
+      photoPreview.style.display = "none";
+      previewImg.src = "";
+
+      // Reload stories so the new one appears
+      loadStories();
+
+    } catch (err) {
+      console.error(err);
+      msg.className = "form-message error";
+      msg.textContent = "Something went wrong. Please try again or contact us on WhatsApp.";
+    } finally {
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit My Story';
+    }
+  });
+
+  // ========== LOAD STORIES FROM FIRESTORE ==========
+  async function loadStories() {
+    const grid = document.getElementById("storiesGrid");
+    if (!grid) return;
+
+    try {
+      const snapshot = await db.collection("stories")
+        .where("approved", "==", true)
+        .orderBy("createdAt", "desc")
+        .limit(20)
+        .get();
+
+      // Keep the existing static cards and add new ones from Firestore
+      // If you want only dynamic ones, clear the grid first:
+      // grid.innerHTML = "";
+
+      snapshot.forEach(doc => {
+        const data = doc.data();
+        const card = document.createElement("div");
+        card.className = "story-card";
+
+        const photo = data.photoUrl
+          ? `<img class="story-photo" src="${data.photoUrl}" alt="${data.name}">`
+          : `<img class="story-photo" src="https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&size=400&background=0B7A41&color=fff" alt="${data.name}">`;
+
+        card.innerHTML = `
+          <div class="video-container">
+            ${photo}
+            <div class="live-badge"><i class="fas fa-heart"></i> Guest Story</div>
+          </div>
+          <div class="story-content">
+            <div class="profile">
+              <img src="${data.photoUrl || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(data.name) + '&size=100&background=0B7A41&color=fff'}" alt="${data.name}">
+              <div>
+                <h3>${escapeHtml(data.name)}</h3>
+                <span>${escapeHtml(data.country || "")}</span>
+              </div>
+            </div>
+            <h4>${escapeHtml(data.title || "My Safari Experience")}</h4>
+            <p>${escapeHtml(data.comment)}</p>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+    } catch (err) {
+      console.error("Failed to load stories:", err);
+    }
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement("div");
+    div.textContent = text || "";
+    return div.innerHTML;
+  }
+
+  // ========== HEADER HIDE ON SCROLL ==========
+  let lastScroll = 0;
+  const header = document.querySelector("header");
+  window.addEventListener("scroll", () => {
+    const current = window.pageYOffset;
+    if (current > lastScroll && current > 100) {
+      header.classList.add("hide");
+    } else {
+      header.classList.remove("hide");
+    }
+    lastScroll = current;
+  });
+
+  // ========== CATEGORY BUTTONS ==========
+  document.querySelectorAll(".story-categories button").forEach(btn => {
+    btn.onclick = function() {
+      document.querySelectorAll(".story-categories button").forEach(b => b.classList.remove("active"));
+      this.classList.add("active");
+    };
+  });
+
+  // Load stories when page opens
+  document.addEventListener("DOMContentLoaded", loadStories);
 </script>
 </body>
-
 </html>
