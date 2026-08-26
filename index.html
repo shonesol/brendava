@@ -939,6 +939,36 @@ a[href="Payments.html"]:hover {
   background-color: #e53935;
   text-decoration: none;
 }
+  /* Stories button – green highlight */
+.stories-btn {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #0f766e, #0d5f58) !important;
+  color: white !important;
+  padding: 12px 20px !important;
+  border-radius: 10px !important;
+  font-weight: 600 !important;
+  font-size: 0.95rem !important;
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(15, 118, 110, 0.3);
+  transition: all 0.25s ease;
+  margin: 8px 24px !important;
+  border: none !important;
+  width: calc(100% - 48px);
+  justify-content: center;
+}
+
+.stories-btn:hover {
+  background: linear-gradient(135deg, #0d5f58, #0a4a44) !important;
+  color: white !important;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.4);
+}
+
+.stories-btn i {
+  font-size: 1rem;
+}
 </style>
 </head>
 <body>
@@ -1161,7 +1191,7 @@ a[href="Payments.html"]:hover {
     </div>
   </div>
 </section>
-    <a href="Stories.html"> cliStories</a>
+    <a href="Stories.html" class="stories-btn"><i class="fas fa-book-open"></i> Stories</a>
 <!-- ========== DESTINATION SLIDER ========== -->
 <section id="destinations">
   <h2 data-lang="dest_title">Top Destinations</h2>
