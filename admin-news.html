@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin – Upload News | Brendava Tours</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
+    body { background:#f4f7f5; color:#222; min-height:100vh; }
+    .container { max-width:720px; margin:40px auto; padding:0 20px; }
+    .card { background:#fff; border-radius:20px; padding:35px; box-shadow:0 15px 40px rgba(0,0,0,.08); }
+    h1 { color:#0B7A41; margin-bottom:8px; font-size:28px; }
+    .subtitle { color:#666; margin-bottom:30px; }
+    .form-group { margin-bottom:20px; }
+    label { display:block; font-weight:600; margin-bottom:7px; font-size:14px; }
+    input, textarea, select {
+      width:100%; padding:13px 15px; border:1.5px solid #ddd; border-radius:12px;
+      font-size:15px; font-family:inherit; transition:.25s;
+    }
+    input:focus, textarea:focus { outline:none; border-color:#0B7A41; box-shadow:0 0 0 3px rgba(11,122,65,.12); }
+    textarea { min-height:130px; resize:vertical; }
+    .upload-box {
+      border:2px dashed #0B7A41; border-radius:14px; padding:30px; text-align:center;
+      cursor:pointer; background:#f8fdf9; transition:.3s;
+    }
+    .upload-box:hover { background:#eef8f1; }
+    .upload-box i { font-size:32px; color:#0B7A41; margin-bottom:10px; }
+    .preview { margin-top:15px; display:none; text-align:center; }
+    .preview img, .preview video { max-width:260px; max-height:180px; border-radius:12px; }
+    .btn {
+      width:100%; padding:15px; background:linear-gradient(135deg,#0B7A41,#086033);
+      color:#fff; border:none; border-radius:12px; font-size:16px; font-weight:700;
+      cursor:pointer; transition:.3s; margin-top:10px;
+    }
+    .btn:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(11,122,65,.3); }
+    .btn:disabled { opacity:.65; cursor:not-allowed; transform:none; }
+    .message { margin-top:18px; padding:14px; border-radius:10px; text-align:center; font-weight:600; display:none; }
+    .message.success { background:#e6f7ed; color:#0B7A41; display:block; }
+    .message.error { background:#fde8e8; color:#c0392b; display:block; }
+    .login-box { max-width:420px; margin:80px auto; }
+    .hidden { display:none !important; }
+    .top-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:25px; }
+    .logout-btn { background:#c0392b; padding:10px 20px; border-radius:30px; color:#fff; border:none; cursor:pointer; font-weight:600; }
+  </style>
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="loginScreen" class="container login-box">
+    <div class="card">
+      <h1>Admin Login</h1>
+      <p class="subtitle">Only administrators can upload news</p>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="adminEmail" placeholder="admin@brendava.com">
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="adminPassword" placeholder="••••••••">
+      </div>
+      <button class="btn" id="loginBtn"><i class="fas fa-lock"></i> Login</button>
+      <div class="message" id="loginMessage"></div>
+    </div>
+  </div>
+
+  <!-- ADMIN PANEL -->
+  <div id="adminPanel" class="container hidden">
+    <div class="top-bar">
+      <h1 style="margin:0;font-size:24px;color:#0B7A41;">Upload News / Newsletter</h1>
+      <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+    </div>
+
+    <div class="card">
+      <form id="newsForm">
+        <div class="form-group">
+          <label>News Title *</label>
+          <input type="text" id="newsTitle" required placeholder="e.g. Turker Marathon 2026 – Registration Open">
+        </div>
+
+        <div class="form-group">
+          <label>Description / Article *</label>
+          <textarea id="newsDescription" required placeholder="Write the full news content or short description..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Photo or Video</label>
+          <div class="upload-box" id="mediaUploadArea">
+            <i class="fas fa-cloud-upload-alt"></i>
+            <p>Click to upload photo or video<br><small>(JPG, PNG, MP4 – max 50MB)</small></p>
+            <input type="file" id="mediaInput" accept="image/*,video/*" style="display:none;">
+          </div>
+          <div class="preview" id="mediaPreview"></div>
+        </div>
+
+        <div class="form-group">
+          <label>
+            <input type="checkbox" id="publishNow" checked style="width:auto;margin-right:8px;">
+            Publish immediately
+          </label>
+        </div>
+
+        <button type="submit" class="btn" id="submitNewsBtn">
+          <i class="fas fa-paper-plane"></i> Publish News
+        </button>
+        <div class="message" id="newsMessage"></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Firebase -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+  <script>
+    const CLOUD_NAME    = "ziudh5iv";
+    const UPLOAD_PRESET = "brendava_gallery";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
+      authDomain: "brendava-tours-and-travel.firebaseapp.com",
+      projectId: "brendava-tours-and-travel",
+      storageBucket: "brendava-tours-and-travel.firebasestorage.app",
+      messagingSenderId: "732703885570",
+      appId: "1:732703885570:web:3011a3989d5fe36eb69a1b",
+      measurementId: "G-ZC356HMW9C"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db   = firebase.firestore();
+
+    // Elements
+    const loginScreen   = document.getElementById("loginScreen");
+    const adminPanel    = document.getElementById("adminPanel");
+    const loginBtn      = document.getElementById("loginBtn");
+    const logoutBtn     = document.getElementById("logoutBtn");
+    const loginMessage  = document.getElementById("loginMessage");
+    const newsForm      = document.getElementById("newsForm");
+    const mediaInput    = document.getElementById("mediaInput");
+    const mediaUploadArea = document.getElementById("mediaUploadArea");
+    const mediaPreview  = document.getElementById("mediaPreview");
+    const submitNewsBtn = document.getElementById("submitNewsBtn");
+    const newsMessage   = document.getElementById("newsMessage");
+
+    // Check if already logged in
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        // Optional: check custom claim admin (if you set it)
+        loginScreen.classList.add("hidden");
+        adminPanel.classList.remove("hidden");
+      } else {
+        loginScreen.classList.remove("hidden");
+        adminPanel.classList.add("hidden");
+      }
+    });
+
+    // Login
+    loginBtn.addEventListener("click", async () => {
+      const email = document.getElementById("adminEmail").value.trim();
+      const password = document.getElementById("adminPassword").value;
+
+      if (!email || !password) {
+        showMsg(loginMessage, "Please enter email and password", "error");
+        return;
+      }
+
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
+
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        showMsg(loginMessage, "Login successful!", "success");
+      } catch (err) {
+        showMsg(loginMessage, err.message, "error");
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = '<i class="fas fa-lock"></i> Login';
+      }
+    });
+
+    // Logout
+    logoutBtn.addEventListener("click", () => auth.signOut());
+
+    // Media preview
+    mediaUploadArea.addEventListener("click", () => mediaInput.click());
+    mediaInput.addEventListener("change", function() {
+      const file = this.files[0];
+      if (!file) return;
+
+      if (file.size > 50 * 1024 * 1024) {
+        alert("File too large (max 50MB)");
+        this.value = "";
+        return;
+      }
+
+      const isVideo = file.type.startsWith("video/");
+      const url = URL.createObjectURL(file);
+      mediaPreview.innerHTML = "";
+      if (isVideo) {
+        const v = document.createElement("video");
+        v.src = url; v.controls = true; v.muted = true;
+        v.style.maxWidth = "260px"; v.style.maxHeight = "180px"; v.style.borderRadius = "12px";
+        mediaPreview.appendChild(v);
+      } else {
+        const img = document.createElement("img");
+        img.src = url;
+        mediaPreview.appendChild(img);
+      }
+      mediaPreview.style.display = "block";
+    });
+
+    // Upload to Cloudinary
+    async function uploadMedia(file) {
+      const isVideo = file.type.startsWith("video/");
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+      formData.append("tags", "brendava_news");
+
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${isVideo ? "video" : "image"}/upload`, {
+        method: "POST",
+        body: formData
+      });
+
+      if (!res.ok) throw new Error("Cloudinary upload failed");
+      const data = await res.json();
+      return { url: data.secure_url, isVideo };
+    }
+
+    // Submit news
+    newsForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const title = document.getElementById("newsTitle").value.trim();
+      const description = document.getElementById("newsDescription").value.trim();
+      const file = mediaInput.files[0];
+      const published = document.getElementById("publishNow").checked;
+
+      if (!title || !description) {
+        showMsg(newsMessage, "Title and description are required", "error");
+        return;
+      }
+
+      submitNewsBtn.disabled = true;
+      submitNewsBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading & Publishing...';
+      newsMessage.style.display = "none";
+
+      try {
+        let mediaUrl = "";
+        let isVideo = false;
+
+        if (file) {
+          const result = await uploadMedia(file);
+          mediaUrl = result.url;
+          isVideo = result.isVideo;
+        }
+
+        await db.collection("news").add({
+          title,
+          description,
+          mediaUrl,
+          isVideo,
+          published,
+          createdAt: Date.now(),
+          createdBy: auth.currentUser.email
+        });
+
+        showMsg(newsMessage, "News published successfully!", "success");
+        newsForm.reset();
+        mediaPreview.style.display = "none";
+        mediaPreview.innerHTML = "";
+        mediaInput.value = "";
+
+      } catch (err) {
+        console.error(err);
+        showMsg(newsMessage, err.message || "Failed to publish. Make sure you are logged in as admin.", "error");
+      } finally {
+        submitNewsBtn.disabled = false;
+        submitNewsBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish News';
+      }
+    });
+
+    function showMsg(el, text, type) {
+      el.className = `message ${type}`;
+      el.textContent = text;
+    }
+  </script>
+</body>
+</html>
