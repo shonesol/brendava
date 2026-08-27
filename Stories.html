@@ -848,7 +848,7 @@ nav a:hover{color:#0B7A41;}
 <script>
   // ========== CONFIG ==========
   const CLOUD_NAME    = "ziudh5iv";
-  const UPLOAD_PRESET = "brendava_gallery";   // MUST be set to "Unsigned" in Cloudinary
+  const UPLOAD_PRESET = "brendava_gallery";   // must be Unsigned
 
   const firebaseConfig = {
     apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
@@ -878,7 +878,6 @@ nav a:hover{color:#0B7A41;}
     const file = this.files[0];
     if (!file) return;
 
-    // 50 MB limit
     if (file.size > 50 * 1024 * 1024) {
       alert("File is too large. Please choose a photo or video smaller than 50 MB.");
       this.value = "";
@@ -909,7 +908,7 @@ nav a:hover{color:#0B7A41;}
     photoPreview.style.display = "block";
   });
 
-  // ========== UPLOAD TO CLOUDINARY (image or video) ==========
+  // ========== UPLOAD TO CLOUDINARY ==========
   async function uploadToCloudinary(file) {
     const isVideo = file.type.startsWith("video/");
     const resourceType = isVideo ? "video" : "image";
@@ -921,23 +920,17 @@ nav a:hover{color:#0B7A41;}
 
     const res = await fetch(
       `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`,
-      {
-        method: "POST",
-        body: formData
-      }
+      { method: "POST", body: formData }
     );
 
     if (!res.ok) {
       const errText = await res.text();
       console.error("Cloudinary error:", errText);
-      throw new Error("Upload failed. Please check your Cloudinary preset (must be Unsigned).");
+      throw new Error("Cloudinary upload failed. Check that the preset is Unsigned.");
     }
 
     const data = await res.json();
-    return {
-      url: data.secure_url,
-      isVideo: isVideo
-    };
+    return { url: data.secure_url, isVideo };
   }
 
   // ========== CREATE STORY CARD ==========
@@ -951,18 +944,16 @@ nav a:hover{color:#0B7A41;}
         mediaHtml = `
           <video controls playsinline>
             <source src="${data.photoUrl}" type="video/mp4">
-            Your browser does not support the video tag.
           </video>`;
       } else {
         mediaHtml = `<img class="story-photo" src="${data.photoUrl}" alt="${escapeHtml(data.name)}">`;
       }
     } else {
-      // fallback avatar
       const avatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&size=400&background=0B7A41&color=fff`;
       mediaHtml = `<img class="story-photo" src="${avatar}" alt="${escapeHtml(data.name)}">`;
     }
 
-    const profilePhoto = hasMedia && !isVideo
+    const profilePhoto = (hasMedia && !isVideo)
       ? data.photoUrl
       : `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&size=100&background=0B7A41&color=fff`;
 
@@ -993,55 +984,59 @@ nav a:hover{color:#0B7A41;}
     return div.innerHTML;
   }
 
-  // ========== LOAD STORIES FROM FIRESTORE ==========
+  // ========== LOAD STORIES (more reliable) ==========
   async function loadStories() {
     const grid = document.getElementById("storiesGrid");
     if (!grid) return;
 
-    // Remove previously loaded guest stories only
+    // Remove only previously loaded guest stories
     grid.querySelectorAll(".story-card[data-id]").forEach(card => card.remove());
 
     try {
-      const snapshot = await db.collection("stories")
-        .where("approved", "==", true)
-        .orderBy("createdAt", "desc")
-        .limit(30)
-        .get();
+      // Try the ordered query first
+      let snapshot;
+      try {
+        snapshot = await db.collection("stories")
+          .where("approved", "==", true)
+          .orderBy("createdAt", "desc")
+          .limit(40)
+          .get();
+      } catch (indexErr) {
+        console.warn("Index missing or query failed, using fallback:", indexErr.message);
+        // Fallback – no orderBy (works without composite index)
+        snapshot = await db.collection("stories")
+          .where("approved", "==", true)
+          .limit(40)
+          .get();
+      }
 
+      const stories = [];
       snapshot.forEach(doc => {
         const data = doc.data();
         data.id = doc.id;
+        stories.push(data);
+      });
+
+      // Sort client-side just in case
+      stories.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+      stories.forEach(data => {
         grid.insertAdjacentHTML("afterbegin", createStoryCard(data));
       });
 
+      console.log(`Loaded ${stories.length} guest stories from Firebase`);
+
     } catch (err) {
-      console.error("Failed to load stories (trying fallback):", err);
-
-      // Fallback if composite index is missing
-      try {
-        const snapshot = await db.collection("stories")
-          .where("approved", "==", true)
-          .limit(30)
-          .get();
-
-        const stories = [];
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          data.id = doc.id;
-          stories.push(data);
-        });
-
-        stories.sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
-        stories.forEach(data => {
-          grid.insertAdjacentHTML("afterbegin", createStoryCard(data));
-        });
-      } catch (err2) {
-        console.error("Fallback also failed:", err2);
-      }
+      console.error("Failed to load stories:", err);
+      // Show a visible warning on the page
+      const warning = document.createElement("div");
+      warning.style.cssText = "grid-column:1/-1;background:#fde8e8;color:#c0392b;padding:20px;border-radius:12px;text-align:center;font-weight:600;";
+      warning.innerHTML = `Could not load stories from Firebase.<br><small>${err.message}</small>`;
+      grid.prepend(warning);
     }
   }
 
-  // ========== SUBMIT TESTIMONIAL ==========
+  // ========== SUBMIT ==========
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
@@ -1058,22 +1053,23 @@ nav a:hover{color:#0B7A41;}
     }
 
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading & Submitting...';
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading & Saving...';
     formMessage.style.display = "none";
 
     try {
       let photoUrl = "";
       let isVideo  = false;
 
-      // Upload media if present
+      // 1. Upload to Cloudinary (if file selected)
       if (file) {
-        const uploadResult = await uploadToCloudinary(file);
-        photoUrl = uploadResult.url;
-        isVideo  = uploadResult.isVideo;
+        const result = await uploadToCloudinary(file);
+        photoUrl = result.url;
+        isVideo  = result.isVideo;
+        console.log("Cloudinary upload successful:", photoUrl);
       }
 
-      // Save to Firestore
-      const docRef = await db.collection("stories").add({
+      // 2. Save to Firestore
+      const storyData = {
         name,
         country: country || "",
         title: title || "My Safari Experience",
@@ -1082,43 +1078,43 @@ nav a:hover{color:#0B7A41;}
         isVideo,
         createdAt: Date.now(),
         approved: true
-      });
-
-      // Immediately show the new story
-      const newStory = {
-        id: docRef.id,
-        name,
-        country,
-        title: title || "My Safari Experience",
-        comment,
-        photoUrl,
-        isVideo
       };
 
-      const grid = document.getElementById("storiesGrid");
-      grid.insertAdjacentHTML("afterbegin", createStoryCard(newStory));
+      console.log("Saving to Firebase:", storyData);
 
-      // SUCCESS MESSAGE
+      const docRef = await db.collection("stories").add(storyData);
+      console.log("Firebase document created with ID:", docRef.id);
+
+      // 3. Show immediately on the page
+      const newStory = { id: docRef.id, ...storyData };
+      document.getElementById("storiesGrid")
+        .insertAdjacentHTML("afterbegin", createStoryCard(newStory));
+
+      // Success message
       formMessage.className = "form-message success";
       formMessage.textContent = file
-        ? "Success! Your photo/video and story have been uploaded and are now visible above."
-        : "Success! Your story has been added and is now visible above.";
+        ? "Success! Photo/video uploaded to Cloudinary and story saved to Firebase. It is now visible above."
+        : "Success! Your story has been saved to Firebase and is now visible above.";
 
-      // Clear ALL fields
+      // Clear form completely
       form.reset();
       photoInput.value = "";
       photoPreview.style.display = "none";
       photoPreview.innerHTML = "";
 
-      // Scroll to stories so user sees their submission
+      // Scroll to the stories section
       setTimeout(() => {
         document.getElementById("featured-stories").scrollIntoView({ behavior: "smooth" });
-      }, 800);
+      }, 700);
 
     } catch (err) {
-      console.error(err);
+      console.error("Full error:", err);
       formMessage.className = "form-message error";
-      formMessage.textContent = err.message || "Something went wrong. Please try again or contact us on WhatsApp.";
+      formMessage.innerHTML = `
+        Something went wrong while saving to Firebase.<br>
+        <small>${err.message || err.code || "Unknown error"}</small><br>
+        <small>Check browser console (F12) for more details.</small>
+      `;
     } finally {
       submitBtn.disabled = false;
       submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit My Story';
@@ -1146,7 +1142,7 @@ nav a:hover{color:#0B7A41;}
     };
   });
 
-  // Load existing guest stories when the page opens
+  // Load stories when page opens
   document.addEventListener("DOMContentLoaded", loadStories);
 </script>
 </body>
