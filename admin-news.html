@@ -128,8 +128,9 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
   <script>
+    // ====================== CONFIG ======================
     const CLOUD_NAME    = "ziudh5iv";
-    const UPLOAD_PRESET = "brendava_gallery";
+    const UPLOAD_PRESET = "brendava_gallery";   // Must be UNSIGNED in Cloudinary dashboard
 
     const firebaseConfig = {
       apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
@@ -145,20 +146,20 @@
     const auth = firebase.auth();
     const db   = firebase.firestore();
 
-    // Elements
-    const loginScreen   = document.getElementById("loginScreen");
-    const adminPanel    = document.getElementById("adminPanel");
-    const loginBtn      = document.getElementById("loginBtn");
-    const logoutBtn     = document.getElementById("logoutBtn");
-    const loginMessage  = document.getElementById("loginMessage");
-    const newsForm      = document.getElementById("newsForm");
-    const mediaInput    = document.getElementById("mediaInput");
+    // ====================== ELEMENTS ======================
+    const loginScreen     = document.getElementById("loginScreen");
+    const adminPanel      = document.getElementById("adminPanel");
+    const loginBtn        = document.getElementById("loginBtn");
+    const logoutBtn       = document.getElementById("logoutBtn");
+    const loginMessage    = document.getElementById("loginMessage");
+    const newsForm        = document.getElementById("newsForm");
+    const mediaInput      = document.getElementById("mediaInput");
     const mediaUploadArea = document.getElementById("mediaUploadArea");
-    const mediaPreview  = document.getElementById("mediaPreview");
-    const submitNewsBtn = document.getElementById("submitNewsBtn");
-    const newsMessage   = document.getElementById("newsMessage");
+    const mediaPreview    = document.getElementById("mediaPreview");
+    const submitNewsBtn   = document.getElementById("submitNewsBtn");
+    const newsMessage     = document.getElementById("newsMessage");
 
-    // Auth state
+    // ====================== AUTH STATE ======================
     auth.onAuthStateChanged(user => {
       if (user) {
         loginScreen.classList.add("hidden");
@@ -169,7 +170,7 @@
       }
     });
 
-    // Login
+    // ====================== LOGIN ======================
     loginBtn.addEventListener("click", async () => {
       const email = document.getElementById("adminEmail").value.trim();
       const password = document.getElementById("adminPassword").value;
@@ -193,28 +194,34 @@
       }
     });
 
-    // Logout
+    // ====================== LOGOUT ======================
     logoutBtn.addEventListener("click", () => auth.signOut());
 
-    // Media preview
+    // ====================== MEDIA PREVIEW ======================
     mediaUploadArea.addEventListener("click", () => mediaInput.click());
-    mediaInput.addEventListener("change", function() {
+
+    mediaInput.addEventListener("change", function () {
       const file = this.files[0];
       if (!file) return;
 
       if (file.size > 50 * 1024 * 1024) {
-        alert("File too large (max 50MB)");
+        alert("File too large (max 50 MB)");
         this.value = "";
         return;
       }
 
       const isVideo = file.type.startsWith("video/");
       const url = URL.createObjectURL(file);
+
       mediaPreview.innerHTML = "";
       if (isVideo) {
         const v = document.createElement("video");
-        v.src = url; v.controls = true; v.muted = true;
-        v.style.maxWidth = "100%"; v.style.maxHeight = "220px"; v.style.borderRadius = "12px";
+        v.src = url;
+        v.controls = true;
+        v.muted = true;
+        v.style.maxWidth = "100%";
+        v.style.maxHeight = "220px";
+        v.style.borderRadius = "12px";
         mediaPreview.appendChild(v);
       } else {
         const img = document.createElement("img");
@@ -224,7 +231,7 @@
       mediaPreview.style.display = "block";
     });
 
-    // Upload to Cloudinary
+    // ====================== UPLOAD TO CLOUDINARY ======================
     async function uploadMedia(file) {
       const isVideo = file.type.startsWith("video/");
       const formData = new FormData();
@@ -232,24 +239,40 @@
       formData.append("upload_preset", UPLOAD_PRESET);
       formData.append("tags", "brendava_news");
 
-      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${isVideo ? "video" : "image"}/upload`, {
+      const endpoint = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${isVideo ? "video" : "image"}/upload`;
+
+      const res = await fetch(endpoint, {
         method: "POST",
         body: formData
       });
 
-      if (!res.ok) throw new Error("Cloudinary upload failed");
       const data = await res.json();
-      return { url: data.secure_url, isVideo };
+
+      if (!res.ok) {
+        console.error("Cloudinary error:", data);
+        throw new Error(data.error?.message || "Cloudinary upload failed");
+      }
+
+      return {
+        url: data.secure_url,
+        isVideo: isVideo
+      };
     }
 
-    // Submit news
+    // ====================== SUBMIT NEWS ======================
     newsForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      const title = document.getElementById("newsTitle").value.trim();
+      // Safety check – must be logged in
+      if (!auth.currentUser) {
+        showMsg(newsMessage, "You are not logged in. Please log in again.", "error");
+        return;
+      }
+
+      const title       = document.getElementById("newsTitle").value.trim();
       const description = document.getElementById("newsDescription").value.trim();
-      const file = mediaInput.files[0];
-      const published = document.getElementById("publishNow").checked;
+      const file        = mediaInput.files[0];
+      const published   = document.getElementById("publishNow").checked;
 
       if (!title || !description) {
         showMsg(newsMessage, "Title and description are required", "error");
@@ -262,14 +285,16 @@
 
       try {
         let mediaUrl = "";
-        let isVideo = false;
+        let isVideo  = false;
 
+        // Upload media if a file was selected
         if (file) {
           const result = await uploadMedia(file);
           mediaUrl = result.url;
-          isVideo = result.isVideo;
+          isVideo  = result.isVideo;
         }
 
+        // Save to Firestore
         await db.collection("news").add({
           title,
           description,
@@ -281,20 +306,23 @@
         });
 
         showMsg(newsMessage, "News published successfully! Users can now see it.", "success");
+
+        // Reset form
         newsForm.reset();
         mediaPreview.style.display = "none";
         mediaPreview.innerHTML = "";
         mediaInput.value = "";
 
       } catch (err) {
-        console.error(err);
-        showMsg(newsMessage, err.message || "Failed to publish. Make sure you are logged in as admin.", "error");
+        console.error("Publish error:", err);
+        showMsg(newsMessage, err.message || "Failed to publish. Check console for details.", "error");
       } finally {
         submitNewsBtn.disabled = false;
         submitNewsBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish News';
       }
     });
 
+    // ====================== HELPER ======================
     function showMsg(el, text, type) {
       el.className = `message ${type}`;
       el.textContent = text;
