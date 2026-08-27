@@ -227,6 +227,7 @@ nav a:hover{color:#0B7A41;}
   height:250px;
   object-fit:cover;
   display:block;
+  background:#111;
 }
 
 .live-badge{
@@ -239,6 +240,7 @@ nav a:hover{color:#0B7A41;}
   border-radius:30px;
   font-size:12px;
   font-weight:700;
+  z-index:2;
 }
 
 .story-content{padding:26px;}
@@ -425,12 +427,16 @@ nav a:hover{color:#0B7A41;}
 .photo-preview{
   margin-top:15px;
   display:none;
+  text-align:center;
 }
 
-.photo-preview img{
-  max-width:180px;
+.photo-preview img,
+.photo-preview video{
+  max-width:220px;
+  max-height:180px;
   border-radius:12px;
   box-shadow:0 8px 20px rgba(0,0,0,.12);
+  object-fit:cover;
 }
 
 .submit-btn{
@@ -766,7 +772,7 @@ nav a:hover{color:#0B7A41;}
 <section id="share-story">
   <div class="share-box">
     <h2>Share Your Safari Story</h2>
-    <p>Been on a trip with us? We’d love to hear from you. Upload a photo and tell us about your experience. Your story will appear with the others above.</p>
+    <p>Been on a trip with us? We’d love to hear from you. Upload a photo or short video and tell us about your experience. Your story will appear with the others above.</p>
 
     <form id="testimonialForm">
       <div class="form-group">
@@ -790,14 +796,14 @@ nav a:hover{color:#0B7A41;}
       </div>
 
       <div class="form-group">
-        <label>Your Photo</label>
+        <label>Your Photo or Video</label>
         <div class="photo-upload" id="photoUploadArea">
           <i class="fas fa-cloud-upload-alt"></i>
-          <p>Click to upload a photo from your trip<br><small>(JPG, PNG – max 5MB)</small></p>
-          <input type="file" id="photoInput" accept="image/*" style="display:none;">
+          <p>Click to upload a photo or short video<br><small>(JPG, PNG, MP4, MOV – max 50MB)</small></p>
+          <input type="file" id="photoInput" accept="image/*,video/*" style="display:none;">
         </div>
         <div class="photo-preview" id="photoPreview">
-          <img id="previewImg" src="" alt="Preview">
+          <!-- preview will be inserted here -->
         </div>
       </div>
 
@@ -842,10 +848,10 @@ nav a:hover{color:#0B7A41;}
 <script>
   // ========== CONFIG ==========
   const CLOUD_NAME    = "ziudh5iv";
-  const UPLOAD_PRESET = "brendava_gallery";
+  const UPLOAD_PRESET = "brendava_gallery";   // MUST be set to "Unsigned" in Cloudinary
 
   const firebaseConfig = {
-    apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",          // ← REPLACE WITH YOUR REAL FIREBASE API KEY
+    apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
     authDomain: "brendava-tours-and-travel.firebaseapp.com",
     projectId: "brendava-tours-and-travel",
     storageBucket: "brendava-tours-and-travel.firebasestorage.app",
@@ -857,63 +863,113 @@ nav a:hover{color:#0B7A41;}
   firebase.initializeApp(firebaseConfig);
   const db = firebase.firestore();
 
-  // ========== PHOTO PREVIEW ==========
+  // ========== ELEMENTS ==========
   const photoInput      = document.getElementById("photoInput");
   const photoUploadArea = document.getElementById("photoUploadArea");
   const photoPreview    = document.getElementById("photoPreview");
-  const previewImg      = document.getElementById("previewImg");
+  const form            = document.getElementById("testimonialForm");
+  const submitBtn       = document.getElementById("submitBtn");
+  const formMessage     = document.getElementById("formMessage");
 
+  // ========== PHOTO / VIDEO PREVIEW ==========
   photoUploadArea.addEventListener("click", () => photoInput.click());
 
   photoInput.addEventListener("change", function () {
     const file = this.files[0];
     if (!file) return;
 
-    if (file.size > 5 * 1024 * 1024) {
-      alert("Please choose a photo smaller than 5MB.");
+    // 50 MB limit
+    if (file.size > 50 * 1024 * 1024) {
+      alert("File is too large. Please choose a photo or video smaller than 50 MB.");
       this.value = "";
+      photoPreview.style.display = "none";
+      photoPreview.innerHTML = "";
       return;
     }
 
-    const reader = new FileReader();
-    reader.onload = e => {
-      previewImg.src = e.target.result;
-      photoPreview.style.display = "block";
-    };
-    reader.readAsDataURL(file);
+    const isVideo = file.type.startsWith("video/");
+    const url = URL.createObjectURL(file);
+
+    photoPreview.innerHTML = "";
+    if (isVideo) {
+      const video = document.createElement("video");
+      video.src = url;
+      video.controls = true;
+      video.muted = true;
+      video.style.maxWidth = "220px";
+      video.style.maxHeight = "180px";
+      video.style.borderRadius = "12px";
+      photoPreview.appendChild(video);
+    } else {
+      const img = document.createElement("img");
+      img.src = url;
+      img.alt = "Preview";
+      photoPreview.appendChild(img);
+    }
+    photoPreview.style.display = "block";
   });
 
-  // ========== UPLOAD TO CLOUDINARY ==========
+  // ========== UPLOAD TO CLOUDINARY (image or video) ==========
   async function uploadToCloudinary(file) {
+    const isVideo = file.type.startsWith("video/");
+    const resourceType = isVideo ? "video" : "image";
+
     const formData = new FormData();
     formData.append("file", file);
     formData.append("upload_preset", UPLOAD_PRESET);
     formData.append("tags", "brendava_stories");
 
-    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
-      method: "POST",
-      body: formData
-    });
+    const res = await fetch(
+      `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`,
+      {
+        method: "POST",
+        body: formData
+      }
+    );
 
-    if (!res.ok) throw new Error("Cloudinary upload failed");
+    if (!res.ok) {
+      const errText = await res.text();
+      console.error("Cloudinary error:", errText);
+      throw new Error("Upload failed. Please check your Cloudinary preset (must be Unsigned).");
+    }
+
     const data = await res.json();
-    return data.secure_url;
+    return {
+      url: data.secure_url,
+      isVideo: isVideo
+    };
   }
 
   // ========== CREATE STORY CARD ==========
   function createStoryCard(data) {
-    const photo = data.photoUrl
-      ? data.photoUrl
-      : `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&size=400&background=0B7A41&color=fff`;
+    const hasMedia = !!data.photoUrl;
+    const isVideo  = data.isVideo === true;
 
-    const profilePhoto = data.photoUrl
+    let mediaHtml = "";
+    if (hasMedia) {
+      if (isVideo) {
+        mediaHtml = `
+          <video controls playsinline>
+            <source src="${data.photoUrl}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>`;
+      } else {
+        mediaHtml = `<img class="story-photo" src="${data.photoUrl}" alt="${escapeHtml(data.name)}">`;
+      }
+    } else {
+      // fallback avatar
+      const avatar = `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&size=400&background=0B7A41&color=fff`;
+      mediaHtml = `<img class="story-photo" src="${avatar}" alt="${escapeHtml(data.name)}">`;
+    }
+
+    const profilePhoto = hasMedia && !isVideo
       ? data.photoUrl
       : `https://ui-avatars.com/api/?name=${encodeURIComponent(data.name)}&size=100&background=0B7A41&color=fff`;
 
     return `
       <div class="story-card" data-id="${data.id || ''}">
         <div class="video-container">
-          <img class="story-photo" src="${photo}" alt="${escapeHtml(data.name)}">
+          ${mediaHtml}
           <div class="live-badge"><i class="fas fa-heart"></i> Guest Story</div>
         </div>
         <div class="story-content">
@@ -959,7 +1015,7 @@ nav a:hover{color:#0B7A41;}
       });
 
     } catch (err) {
-      console.error("Failed to load stories:", err);
+      console.error("Failed to load stories (trying fallback):", err);
 
       // Fallback if composite index is missing
       try {
@@ -986,7 +1042,7 @@ nav a:hover{color:#0B7A41;}
   }
 
   // ========== SUBMIT TESTIMONIAL ==========
-  document.getElementById("testimonialForm").addEventListener("submit", async function (e) {
+  form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
     const name    = document.getElementById("guestName").value.trim();
@@ -994,24 +1050,26 @@ nav a:hover{color:#0B7A41;}
     const title   = document.getElementById("guestTitle").value.trim();
     const comment = document.getElementById("guestComment").value.trim();
     const file    = photoInput.files[0];
-    const btn     = document.getElementById("submitBtn");
-    const msg     = document.getElementById("formMessage");
 
     if (!name || !comment) {
-      msg.className = "form-message error";
-      msg.textContent = "Please fill in your name and your experience.";
+      formMessage.className = "form-message error";
+      formMessage.textContent = "Please fill in your name and your experience.";
       return;
     }
 
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-    msg.style.display = "none";
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading & Submitting...';
+    formMessage.style.display = "none";
 
     try {
       let photoUrl = "";
+      let isVideo  = false;
 
+      // Upload media if present
       if (file) {
-        photoUrl = await uploadToCloudinary(file);
+        const uploadResult = await uploadToCloudinary(file);
+        photoUrl = uploadResult.url;
+        isVideo  = uploadResult.isVideo;
       }
 
       // Save to Firestore
@@ -1021,44 +1079,49 @@ nav a:hover{color:#0B7A41;}
         title: title || "My Safari Experience",
         comment,
         photoUrl,
+        isVideo,
         createdAt: Date.now(),
         approved: true
       });
 
-      // Immediately show the new story at the top of the grid
+      // Immediately show the new story
       const newStory = {
         id: docRef.id,
         name,
         country,
         title: title || "My Safari Experience",
         comment,
-        photoUrl
+        photoUrl,
+        isVideo
       };
 
       const grid = document.getElementById("storiesGrid");
       grid.insertAdjacentHTML("afterbegin", createStoryCard(newStory));
 
-      // Success message
-      msg.className = "form-message success";
-      msg.textContent = "Thank you! Your story has been added and is now visible above with the other stories.";
+      // SUCCESS MESSAGE
+      formMessage.className = "form-message success";
+      formMessage.textContent = file
+        ? "Success! Your photo/video and story have been uploaded and are now visible above."
+        : "Success! Your story has been added and is now visible above.";
 
-      // Reset form
-      this.reset();
+      // Clear ALL fields
+      form.reset();
+      photoInput.value = "";
       photoPreview.style.display = "none";
-      previewImg.src = "";
+      photoPreview.innerHTML = "";
 
-      // Scroll to the stories section so the user sees their story
+      // Scroll to stories so user sees their submission
       setTimeout(() => {
         document.getElementById("featured-stories").scrollIntoView({ behavior: "smooth" });
-      }, 600);
+      }, 800);
 
     } catch (err) {
       console.error(err);
-      msg.className = "form-message error";
-      msg.textContent = "Something went wrong. Please try again or contact us on WhatsApp.";
+      formMessage.className = "form-message error";
+      formMessage.textContent = err.message || "Something went wrong. Please try again or contact us on WhatsApp.";
     } finally {
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit My Story';
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit My Story';
     }
   });
 
