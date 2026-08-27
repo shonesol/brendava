@@ -63,15 +63,14 @@
 
     .news-media {
       width: 100%;
-      max-height: 400px;
+      max-height: 420px;
       object-fit: cover;
       display: block;
       background: #eee;
     }
-    .news-media video {
-      width: 100%;
-      max-height: 400px;
-      display: block;
+    video.news-media {
+      max-height: 420px;
+      background: #000;
     }
 
     .news-content { padding: 26px 28px; }
@@ -374,9 +373,8 @@
     // ====================== AUTH STATE ======================
     auth.onAuthStateChanged(user => {
       if (user) {
-        showAdmin();
-      } else {
-        // stay on whatever view the user is on
+        // Stay on admin only if we are currently in the login flow
+        // Otherwise keep the current view
       }
     });
 
@@ -538,10 +536,29 @@
         </div>`;
 
       try {
-        const snapshot = await db.collection("news")
-          .where("published", "==", true)
-          .orderBy("createdAt", "desc")
-          .get();
+        // Primary efficient query (requires composite index)
+        let snapshot;
+        try {
+          snapshot = await db.collection("news")
+            .where("published", "==", true)
+            .orderBy("createdAt", "desc")
+            .get();
+        } catch (indexError) {
+          // Fallback if composite index is missing
+          console.warn("Composite index missing – using fallback query", indexError);
+          const all = await db.collection("news")
+            .orderBy("createdAt", "desc")
+            .get();
+          
+          // Filter published on client
+          const publishedDocs = [];
+          all.forEach(doc => {
+            if (doc.data().published === true) {
+              publishedDocs.push(doc);
+            }
+          });
+          snapshot = { empty: publishedDocs.length === 0, forEach: (cb) => publishedDocs.forEach(cb) };
+        }
 
         if (snapshot.empty) {
           newsList.innerHTML = `
@@ -563,8 +580,9 @@
           if (data.mediaUrl) {
             if (data.isVideo) {
               mediaHtml = `
-                <video class="news-media" controls muted playsinline>
+                <video class="news-media" controls playsinline preload="metadata">
                   <source src="${data.mediaUrl}" type="video/mp4">
+                  Your browser does not support the video tag.
                 </video>`;
             } else {
               mediaHtml = `<img class="news-media" src="${data.mediaUrl}" alt="${escapeHtml(data.title)}" loading="lazy">`;
@@ -596,7 +614,7 @@
 
     function escapeHtml(text) {
       if (!text) return "";
-      return text
+      return String(text)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
@@ -609,7 +627,7 @@
       el.textContent = text;
     }
 
-    // Start with public news
+    // Start with public news – this is what visitors always see
     showPublic();
   </script>
 </body>
