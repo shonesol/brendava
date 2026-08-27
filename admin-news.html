@@ -3,123 +3,305 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin – Upload News | Brendava Tours</title>
+  <title>News & Updates | Brendava Tours</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <style>
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
     body { background:#f4f7f5; color:#222; min-height:100vh; }
-    .container { max-width:720px; margin:40px auto; padding:0 20px; }
-    .card { background:#fff; border-radius:20px; padding:35px; box-shadow:0 15px 40px rgba(0,0,0,.08); }
-    h1 { color:#0B7A41; margin-bottom:8px; font-size:28px; }
-    .subtitle { color:#666; margin-bottom:30px; }
-    .form-group { margin-bottom:24px; }
-    label { display:block; font-weight:600; margin-bottom:8px; font-size:14px; color:#333; }
-    input[type="text"], textarea, select {
-      width:100%; padding:14px 16px; border:1.5px solid #ddd; border-radius:12px;
-      font-size:15px; font-family:inherit; transition:.25s;
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #0B7A41, #086033);
+      color: white;
+      padding: 28px 20px;
+      text-align: center;
+      position: relative;
     }
-    input:focus, textarea:focus { outline:none; border-color:#0B7A41; box-shadow:0 0 0 3px rgba(11,122,65,.12); }
-    textarea { min-height:140px; resize:vertical; line-height:1.5; }
+    .header h1 { font-size: 28px; margin-bottom: 6px; }
+    .header p { opacity: 0.9; font-size: 15px; }
+    .admin-toggle {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.4);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 30px;
+      font-size: 13px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.25s;
+    }
+    .admin-toggle:hover { background: rgba(255,255,255,0.3); }
+
+    .container {
+      max-width: 860px;
+      margin: 35px auto;
+      padding: 0 20px 70px;
+    }
+
+    /* ========== PUBLIC NEWS ========== */
+    .loading, .empty {
+      text-align: center;
+      padding: 70px 20px;
+      color: #666;
+      font-size: 16px;
+    }
+    .loading i { font-size: 34px; color: #0B7A41; margin-bottom: 14px; display: block; }
+
+    .news-card {
+      background: white;
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.07);
+      margin-bottom: 28px;
+      transition: transform 0.25s;
+    }
+    .news-card:hover { transform: translateY(-3px); }
+
+    .news-media {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      display: block;
+      background: #eee;
+    }
+    .news-media video {
+      width: 100%;
+      max-height: 400px;
+      display: block;
+    }
+
+    .news-content { padding: 26px 28px; }
+    .news-date {
+      font-size: 13px;
+      color: #0B7A41;
+      font-weight: 600;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .news-title {
+      font-size: 22px;
+      color: #222;
+      margin-bottom: 12px;
+      line-height: 1.35;
+    }
+    .news-description {
+      font-size: 15px;
+      color: #444;
+      line-height: 1.7;
+      white-space: pre-wrap;
+    }
+
+    /* ========== ADMIN SECTION ========== */
+    .hidden { display: none !important; }
+
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+      margin-bottom: 30px;
+    }
+    .form-group { margin-bottom: 22px; }
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 7px;
+      font-size: 14px;
+      color: #333;
+    }
+    input[type="text"], input[type="email"], input[type="password"], textarea {
+      width: 100%;
+      padding: 13px 15px;
+      border: 1.5px solid #ddd;
+      border-radius: 11px;
+      font-size: 15px;
+      font-family: inherit;
+      transition: 0.25s;
+    }
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #0B7A41;
+      box-shadow: 0 0 0 3px rgba(11,122,65,0.12);
+    }
+    textarea { min-height: 130px; resize: vertical; line-height: 1.5; }
+
     .upload-box {
-      border:2px dashed #0B7A41; border-radius:14px; padding:32px 20px; text-align:center;
-      cursor:pointer; background:#f8fdf9; transition:.3s;
+      border: 2px dashed #0B7A41;
+      border-radius: 12px;
+      padding: 28px 18px;
+      text-align: center;
+      cursor: pointer;
+      background: #f8fdf9;
+      transition: 0.3s;
     }
-    .upload-box:hover { background:#eef8f1; border-color:#086033; }
-    .upload-box i { font-size:36px; color:#0B7A41; margin-bottom:12px; display:block; }
-    .upload-box p { color:#555; font-size:15px; }
-    .upload-box small { color:#888; font-size:13px; }
-    .preview { margin-top:18px; display:none; text-align:center; }
+    .upload-box:hover { background: #eef8f1; }
+    .upload-box i { font-size: 32px; color: #0B7A41; margin-bottom: 10px; display: block; }
+    .upload-box p { color: #555; font-size: 14px; }
+    .upload-box small { color: #888; font-size: 12px; }
+
+    .preview { margin-top: 16px; display: none; text-align: center; }
     .preview img, .preview video {
-      max-width:100%; max-height:220px; border-radius:12px; box-shadow:0 6px 18px rgba(0,0,0,.1);
+      max-width: 100%;
+      max-height: 200px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     }
+
     .btn {
-      width:100%; padding:16px; background:linear-gradient(135deg,#0B7A41,#086033);
-      color:#fff; border:none; border-radius:12px; font-size:16px; font-weight:700;
-      cursor:pointer; transition:.3s; margin-top:8px;
+      width: 100%;
+      padding: 15px;
+      background: linear-gradient(135deg, #0B7A41, #086033);
+      color: #fff;
+      border: none;
+      border-radius: 11px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.3s;
+      margin-top: 6px;
     }
-    .btn:hover { transform:translateY(-2px); box-shadow:0 8px 22px rgba(11,122,65,.3); }
-    .btn:disabled { opacity:.65; cursor:not-allowed; transform:none; }
-    .message { margin-top:18px; padding:14px; border-radius:10px; text-align:center; font-weight:600; display:none; }
-    .message.success { background:#e6f7ed; color:#0B7A41; display:block; }
-    .message.error { background:#fde8e8; color:#c0392b; display:block; }
-    .login-box { max-width:420px; margin:80px auto; }
-    .hidden { display:none !important; }
-    .top-bar { display:flex; justify-content:space-between; align-items:center; margin-bottom:25px; }
-    .logout-btn { background:#c0392b; padding:10px 20px; border-radius:30px; color:#fff; border:none; cursor:pointer; font-weight:600; }
-    .hint { font-size:13px; color:#777; margin-top:6px; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 7px 20px rgba(11,122,65,0.28); }
+    .btn:disabled { opacity: 0.65; cursor: not-allowed; transform: none; }
+
+    .logout-btn {
+      background: #c0392b;
+      color: white;
+      border: none;
+      padding: 9px 18px;
+      border-radius: 30px;
+      font-weight: 600;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .message {
+      margin-top: 16px;
+      padding: 13px;
+      border-radius: 9px;
+      text-align: center;
+      font-weight: 600;
+      display: none;
+    }
+    .message.success { background: #e6f7ed; color: #0B7A41; display: block; }
+    .message.error { background: #fde8e8; color: #c0392b; display: block; }
+
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 22px;
+    }
+    .hint { font-size: 12.5px; color: #777; margin-top: 5px; }
+
+    .section-title {
+      font-size: 20px;
+      color: #0B7A41;
+      margin-bottom: 18px;
+      font-weight: 700;
+    }
   </style>
 </head>
 <body>
 
-  <!-- LOGIN SCREEN -->
-  <div id="loginScreen" class="container login-box">
-    <div class="card">
-      <h1>Admin Login</h1>
-      <p class="subtitle">Only administrators can upload news</p>
-      <div class="form-group">
-        <label>Email</label>
-        <input type="email" id="adminEmail" placeholder="admin@brendava.com">
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="adminPassword" placeholder="••••••••">
-      </div>
-      <button class="btn" id="loginBtn"><i class="fas fa-lock"></i> Login</button>
-      <div class="message" id="loginMessage"></div>
-    </div>
+  <!-- HEADER -->
+  <div class="header">
+    <h1><i class="fas fa-newspaper"></i> News & Updates</h1>
+    <p>Latest news from Brendava Tours</p>
+    <button class="admin-toggle" id="adminToggleBtn">
+      <i class="fas fa-lock"></i> Admin
+    </button>
   </div>
 
-  <!-- ADMIN PANEL -->
-  <div id="adminPanel" class="container hidden">
-    <div class="top-bar">
-      <h1 style="margin:0;font-size:24px;color:#0B7A41;">Upload News / Updates</h1>
-      <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+  <div class="container">
+
+    <!-- ===================== PUBLIC NEWS LIST ===================== -->
+    <div id="publicSection">
+      <div id="newsList">
+        <div class="loading">
+          <i class="fas fa-spinner fa-spin"></i>
+          Loading latest news...
+        </div>
+      </div>
     </div>
 
-    <div class="card">
-      <form id="newsForm">
+    <!-- ===================== ADMIN LOGIN ===================== -->
+    <div id="loginSection" class="hidden">
+      <div class="card" style="max-width:420px; margin:0 auto;">
+        <h2 class="section-title">Admin Login</h2>
+        <p style="color:#666; margin-bottom:22px; font-size:14px;">Only administrators can upload news</p>
 
-        <!-- TITLE -->
         <div class="form-group">
-          <label>News Title *</label>
-          <input type="text" id="newsTitle" required placeholder="e.g. Turker Marathon 2026 – Registration Open">
+          <label>Email</label>
+          <input type="email" id="adminEmail" placeholder="admin@brendava.com">
         </div>
-
-        <!-- DESCRIPTION -->
         <div class="form-group">
-          <label>Description / Full Article *</label>
-          <textarea id="newsDescription" required placeholder="Write the full news content or a short description that users will see..."></textarea>
-          <p class="hint">This text will be shown to all visitors on the public news page.</p>
+          <label>Password</label>
+          <input type="password" id="adminPassword" placeholder="••••••••">
         </div>
-
-        <!-- MEDIA UPLOAD (Photo or Video) -->
-        <div class="form-group">
-          <label>Photo or Video (optional)</label>
-          <div class="upload-box" id="mediaUploadArea">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p>Click to upload a photo or video</p>
-            <small>JPG, PNG, MP4 • Max 50 MB</small>
-            <input type="file" id="mediaInput" accept="image/*,video/*" style="display:none;">
-          </div>
-          <div class="preview" id="mediaPreview"></div>
-          <p class="hint">Users will see this image or video together with the description.</p>
-        </div>
-
-        <!-- PUBLISH TOGGLE -->
-        <div class="form-group">
-          <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
-            <input type="checkbox" id="publishNow" checked style="width:18px; height:18px;">
-            Publish immediately (visible to all users)
-          </label>
-        </div>
-
-        <button type="submit" class="btn" id="submitNewsBtn">
-          <i class="fas fa-paper-plane"></i> Publish News
+        <button class="btn" id="loginBtn"><i class="fas fa-lock"></i> Login</button>
+        <div class="message" id="loginMessage"></div>
+        <button class="btn" id="backToNewsBtn" style="background:#555; margin-top:12px;">
+          <i class="fas fa-arrow-left"></i> Back to News
         </button>
-        <div class="message" id="newsMessage"></div>
-      </form>
+      </div>
     </div>
+
+    <!-- ===================== ADMIN UPLOAD PANEL ===================== -->
+    <div id="adminSection" class="hidden">
+      <div class="top-bar">
+        <h2 class="section-title" style="margin:0;">Upload News</h2>
+        <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> Logout</button>
+      </div>
+
+      <div class="card">
+        <form id="newsForm">
+          <div class="form-group">
+            <label>News Title *</label>
+            <input type="text" id="newsTitle" required placeholder="e.g. Turker Marathon 2026 – Registration Open">
+          </div>
+
+          <div class="form-group">
+            <label>Description / Full Article *</label>
+            <textarea id="newsDescription" required placeholder="Write the full news content..."></textarea>
+            <p class="hint">This text will be shown to all visitors.</p>
+          </div>
+
+          <div class="form-group">
+            <label>Photo or Video (optional)</label>
+            <div class="upload-box" id="mediaUploadArea">
+              <i class="fas fa-cloud-upload-alt"></i>
+              <p>Click to upload a photo or video</p>
+              <small>JPG, PNG, MP4 • Max 50 MB</small>
+              <input type="file" id="mediaInput" accept="image/*,video/*" style="display:none;">
+            </div>
+            <div class="preview" id="mediaPreview"></div>
+          </div>
+
+          <div class="form-group">
+            <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+              <input type="checkbox" id="publishNow" checked style="width:17px; height:17px;">
+              Publish immediately (visible to all users)
+            </label>
+          </div>
+
+          <button type="submit" class="btn" id="submitNewsBtn">
+            <i class="fas fa-paper-plane"></i> Publish News
+          </button>
+          <div class="message" id="newsMessage"></div>
+        </form>
+      </div>
+
+      <button class="btn" id="viewNewsBtn" style="background:#555; margin-top:10px;">
+        <i class="fas fa-eye"></i> View Public News
+      </button>
+    </div>
+
   </div>
 
   <!-- Firebase -->
@@ -130,7 +312,7 @@
   <script>
     // ====================== CONFIG ======================
     const CLOUD_NAME    = "ziudh5iv";
-    const UPLOAD_PRESET = "brendava_gallery";   // Must be UNSIGNED in Cloudinary dashboard
+    const UPLOAD_PRESET = "brendava_gallery";   // Must be UNSIGNED
 
     const firebaseConfig = {
       apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
@@ -147,10 +329,16 @@
     const db   = firebase.firestore();
 
     // ====================== ELEMENTS ======================
-    const loginScreen     = document.getElementById("loginScreen");
-    const adminPanel      = document.getElementById("adminPanel");
+    const publicSection   = document.getElementById("publicSection");
+    const loginSection    = document.getElementById("loginSection");
+    const adminSection    = document.getElementById("adminSection");
+    const newsList        = document.getElementById("newsList");
+
+    const adminToggleBtn  = document.getElementById("adminToggleBtn");
     const loginBtn        = document.getElementById("loginBtn");
     const logoutBtn       = document.getElementById("logoutBtn");
+    const backToNewsBtn   = document.getElementById("backToNewsBtn");
+    const viewNewsBtn     = document.getElementById("viewNewsBtn");
     const loginMessage    = document.getElementById("loginMessage");
     const newsForm        = document.getElementById("newsForm");
     const mediaInput      = document.getElementById("mediaInput");
@@ -159,14 +347,36 @@
     const submitNewsBtn   = document.getElementById("submitNewsBtn");
     const newsMessage     = document.getElementById("newsMessage");
 
+    // ====================== VIEW SWITCHING ======================
+    function showPublic() {
+      publicSection.classList.remove("hidden");
+      loginSection.classList.add("hidden");
+      adminSection.classList.add("hidden");
+      loadNews();
+    }
+
+    function showLogin() {
+      publicSection.classList.add("hidden");
+      loginSection.classList.remove("hidden");
+      adminSection.classList.add("hidden");
+    }
+
+    function showAdmin() {
+      publicSection.classList.add("hidden");
+      loginSection.classList.add("hidden");
+      adminSection.classList.remove("hidden");
+    }
+
+    adminToggleBtn.addEventListener("click", showLogin);
+    backToNewsBtn.addEventListener("click", showPublic);
+    viewNewsBtn.addEventListener("click", showPublic);
+
     // ====================== AUTH STATE ======================
     auth.onAuthStateChanged(user => {
       if (user) {
-        loginScreen.classList.add("hidden");
-        adminPanel.classList.remove("hidden");
+        showAdmin();
       } else {
-        loginScreen.classList.remove("hidden");
-        adminPanel.classList.add("hidden");
+        // stay on whatever view the user is on
       }
     });
 
@@ -186,6 +396,7 @@
       try {
         await auth.signInWithEmailAndPassword(email, password);
         showMsg(loginMessage, "Login successful!", "success");
+        showAdmin();
       } catch (err) {
         showMsg(loginMessage, err.message, "error");
       } finally {
@@ -195,7 +406,10 @@
     });
 
     // ====================== LOGOUT ======================
-    logoutBtn.addEventListener("click", () => auth.signOut());
+    logoutBtn.addEventListener("click", async () => {
+      await auth.signOut();
+      showPublic();
+    });
 
     // ====================== MEDIA PREVIEW ======================
     mediaUploadArea.addEventListener("click", () => mediaInput.click());
@@ -220,8 +434,8 @@
         v.controls = true;
         v.muted = true;
         v.style.maxWidth = "100%";
-        v.style.maxHeight = "220px";
-        v.style.borderRadius = "12px";
+        v.style.maxHeight = "200px";
+        v.style.borderRadius = "10px";
         mediaPreview.appendChild(v);
       } else {
         const img = document.createElement("img");
@@ -253,17 +467,13 @@
         throw new Error(data.error?.message || "Cloudinary upload failed");
       }
 
-      return {
-        url: data.secure_url,
-        isVideo: isVideo
-      };
+      return { url: data.secure_url, isVideo };
     }
 
     // ====================== SUBMIT NEWS ======================
     newsForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      // Safety check – must be logged in
       if (!auth.currentUser) {
         showMsg(newsMessage, "You are not logged in. Please log in again.", "error");
         return;
@@ -287,14 +497,12 @@
         let mediaUrl = "";
         let isVideo  = false;
 
-        // Upload media if a file was selected
         if (file) {
           const result = await uploadMedia(file);
           mediaUrl = result.url;
           isVideo  = result.isVideo;
         }
 
-        // Save to Firestore
         await db.collection("news").add({
           title,
           description,
@@ -305,9 +513,8 @@
           createdBy: auth.currentUser.email
         });
 
-        showMsg(newsMessage, "News published successfully! Users can now see it.", "success");
+        showMsg(newsMessage, "News published successfully!", "success");
 
-        // Reset form
         newsForm.reset();
         mediaPreview.style.display = "none";
         mediaPreview.innerHTML = "";
@@ -315,18 +522,95 @@
 
       } catch (err) {
         console.error("Publish error:", err);
-        showMsg(newsMessage, err.message || "Failed to publish. Check console for details.", "error");
+        showMsg(newsMessage, err.message || "Failed to publish.", "error");
       } finally {
         submitNewsBtn.disabled = false;
         submitNewsBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish News';
       }
     });
 
-    // ====================== HELPER ======================
+    // ====================== LOAD PUBLIC NEWS ======================
+    async function loadNews() {
+      newsList.innerHTML = `
+        <div class="loading">
+          <i class="fas fa-spinner fa-spin"></i>
+          Loading latest news...
+        </div>`;
+
+      try {
+        const snapshot = await db.collection("news")
+          .where("published", "==", true)
+          .orderBy("createdAt", "desc")
+          .get();
+
+        if (snapshot.empty) {
+          newsList.innerHTML = `
+            <div class="empty">
+              <i class="fas fa-inbox" style="font-size:38px;color:#ccc;margin-bottom:12px;display:block;"></i>
+              No news published yet. Check back soon!
+            </div>`;
+          return;
+        }
+
+        let html = "";
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const date = new Date(data.createdAt).toLocaleDateString("en-US", {
+            year: "numeric", month: "long", day: "numeric"
+          });
+
+          let mediaHtml = "";
+          if (data.mediaUrl) {
+            if (data.isVideo) {
+              mediaHtml = `
+                <video class="news-media" controls muted playsinline>
+                  <source src="${data.mediaUrl}" type="video/mp4">
+                </video>`;
+            } else {
+              mediaHtml = `<img class="news-media" src="${data.mediaUrl}" alt="${escapeHtml(data.title)}" loading="lazy">`;
+            }
+          }
+
+          html += `
+            <article class="news-card">
+              ${mediaHtml}
+              <div class="news-content">
+                <div class="news-date"><i class="far fa-calendar-alt"></i> ${date}</div>
+                <h2 class="news-title">${escapeHtml(data.title)}</h2>
+                <div class="news-description">${escapeHtml(data.description)}</div>
+              </div>
+            </article>`;
+        });
+
+        newsList.innerHTML = html;
+
+      } catch (err) {
+        console.error("Error loading news:", err);
+        newsList.innerHTML = `
+          <div class="empty" style="color:#c0392b;">
+            <i class="fas fa-exclamation-triangle" style="font-size:34px;margin-bottom:10px;display:block;"></i>
+            Failed to load news. Please try again later.
+          </div>`;
+      }
+    }
+
+    function escapeHtml(text) {
+      if (!text) return "";
+      return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
     function showMsg(el, text, type) {
       el.className = `message ${type}`;
       el.textContent = text;
     }
+
+    // Start with public news
+    showPublic();
   </script>
 </body>
 </html>
