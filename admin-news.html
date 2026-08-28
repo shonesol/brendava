@@ -301,325 +301,1457 @@
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
   <script>
-    // ====================== CONFIG ======================
-    const CLOUD_NAME    = "ziudh5iv";
+
+    // =====================================================
+    // CONFIGURATION
+    // =====================================================
+
+    const CLOUD_NAME = "ziudh5iv";
+
     const UPLOAD_PRESET = "brendava_gallery";
 
-    // Simple password for the admin panel UI
-    const ADMIN_PASSWORD = "namarisha";
-
-    // Change this to the real email of an existing Firebase Auth user
-    // whose password is also "namarisha"
-    const ADMIN_EMAIL = "admin@brendava.com";
 
     const firebaseConfig = {
-      apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
-      authDomain: "brendava-tours-and-travel.firebaseapp.com",
-      projectId: "brendava-tours-and-travel",
-      storageBucket: "brendava-tours-and-travel.firebasestorage.app",
-      messagingSenderId: "732703885570",
-      appId: "1:732703885570:web:3011a3989d5fe36eb69a1b",
-      measurementId: "G-ZC356HMW9C"
+
+      apiKey: "AIzaSyAkU02l2kxGUUvgt2-C2UNRB_K6v3pBgiQ",
+
+      authDomain:
+        "brendava-tours-and-travel.firebaseapp.com",
+
+      projectId:
+        "brendava-tours-and-travel",
+
+      storageBucket:
+        "brendava-tours-and-travel.firebasestorage.app",
+
+      messagingSenderId:
+        "732703885570",
+
+      appId:
+        "1:732703885570:web:3011a3989d5fe36eb69a1b",
+
+      measurementId:
+        "G-ZC356HMW9C"
+
     };
 
+
+    // =====================================================
+    // FIREBASE INITIALIZATION
+    // =====================================================
+
     firebase.initializeApp(firebaseConfig);
+
     const auth = firebase.auth();
-    const db   = firebase.firestore();
 
-    // ====================== ELEMENTS ======================
-    const publicSection   = document.getElementById("publicSection");
-    const loginSection    = document.getElementById("loginSection");
-    const adminSection    = document.getElementById("adminSection");
-    const newsList        = document.getElementById("newsList");
+    const db = firebase.firestore();
 
-    const adminToggleBtn  = document.getElementById("adminToggleBtn");
-    const loginBtn        = document.getElementById("loginBtn");
-    const logoutBtn       = document.getElementById("logoutBtn");
-    const backToNewsBtn   = document.getElementById("backToNewsBtn");
-    const viewNewsBtn     = document.getElementById("viewNewsBtn");
-    const loginMessage    = document.getElementById("loginMessage");
-    const newsForm        = document.getElementById("newsForm");
-    const mediaInput      = document.getElementById("mediaInput");
-    const mediaUploadArea = document.getElementById("mediaUploadArea");
-    const mediaPreview    = document.getElementById("mediaPreview");
-    const submitNewsBtn   = document.getElementById("submitNewsBtn");
-    const newsMessage     = document.getElementById("newsMessage");
 
-    // ====================== VIEW SWITCHING ======================
+    // =====================================================
+    // ELEMENTS
+    // =====================================================
+
+    const publicSection =
+      document.getElementById("publicSection");
+
+    const loginSection =
+      document.getElementById("loginSection");
+
+    const adminSection =
+      document.getElementById("adminSection");
+
+    const newsList =
+      document.getElementById("newsList");
+
+    const adminToggleBtn =
+      document.getElementById("adminToggleBtn");
+
+    const loginBtn =
+      document.getElementById("loginBtn");
+
+    const logoutBtn =
+      document.getElementById("logoutBtn");
+
+    const backToNewsBtn =
+      document.getElementById("backToNewsBtn");
+
+    const viewNewsBtn =
+      document.getElementById("viewNewsBtn");
+
+    const loginMessage =
+      document.getElementById("loginMessage");
+
+    const newsForm =
+      document.getElementById("newsForm");
+
+    const mediaInput =
+      document.getElementById("mediaInput");
+
+    const mediaUploadArea =
+      document.getElementById("mediaUploadArea");
+
+    const mediaPreview =
+      document.getElementById("mediaPreview");
+
+    const submitNewsBtn =
+      document.getElementById("submitNewsBtn");
+
+    const newsMessage =
+      document.getElementById("newsMessage");
+
+    const adminUserInfo =
+      document.getElementById("adminUserInfo");
+
+
+    // =====================================================
+    // VIEW SWITCHING
+    // =====================================================
+
     function showPublic() {
+
       publicSection.classList.remove("hidden");
+
       loginSection.classList.add("hidden");
+
       adminSection.classList.add("hidden");
+
       loadNews();
+
     }
+
 
     function showLogin() {
+
       publicSection.classList.add("hidden");
+
       loginSection.classList.remove("hidden");
+
       adminSection.classList.add("hidden");
+
     }
+
 
     function showAdmin() {
+
       publicSection.classList.add("hidden");
+
       loginSection.classList.add("hidden");
+
       adminSection.classList.remove("hidden");
+
+      updateAdminInfo();
+
     }
 
-    adminToggleBtn.addEventListener("click", showLogin);
-    backToNewsBtn.addEventListener("click", showPublic);
-    viewNewsBtn.addEventListener("click", showPublic);
 
-    // ====================== SIMPLE PASSWORD LOGIN ======================
-    loginBtn.addEventListener("click", async () => {
-      const password = document.getElementById("adminPassword").value;
+    adminToggleBtn.addEventListener(
+      "click",
+      showLogin
+    );
 
-      if (!password) {
-        showMsg(loginMessage, "Please enter the password", "error");
-        return;
+
+    backToNewsBtn.addEventListener(
+      "click",
+      showPublic
+    );
+
+
+    viewNewsBtn.addEventListener(
+      "click",
+      showPublic
+    );
+
+
+    // =====================================================
+    // CHECK ADMIN CLAIM
+    // =====================================================
+
+    async function checkAdmin() {
+
+      const user = auth.currentUser;
+
+      if (!user) {
+        return false;
       }
 
-      if (password !== ADMIN_PASSWORD) {
-        showMsg(loginMessage, "Incorrect password", "error");
-        return;
-      }
-
-      loginBtn.disabled = true;
-      loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
 
       try {
-        // Sign in with the real Firebase account so writes are allowed by security rules
-        await auth.signInWithEmailAndPassword(ADMIN_EMAIL, ADMIN_PASSWORD);
-        showMsg(loginMessage, "Login successful!", "success");
-        showAdmin();
-      } catch (err) {
-        console.error(err);
-        // Even if Firebase sign-in fails, still show the admin panel
-        // (you can remove the try/catch if you want strict Firebase auth)
-        showMsg(loginMessage, "Login successful (UI only)", "success");
-        showAdmin();
-      } finally {
-        loginBtn.disabled = false;
-        loginBtn.innerHTML = '<i class="fas fa-lock"></i> Login';
+
+        /*
+         * Force-refresh the Firebase ID token.
+         *
+         * This is important after assigning the custom
+         * admin claim.
+         */
+
+        const tokenResult =
+          await user.getIdTokenResult(true);
+
+
+        console.log(
+          "Firebase custom claims:",
+          tokenResult.claims
+        );
+
+
+        return tokenResult.claims.admin === true;
+
+      } catch (error) {
+
+        console.error(
+          "Could not check admin claim:",
+          error
+        );
+
+        return false;
+
       }
-    });
 
-    // ====================== LOGOUT ======================
-    logoutBtn.addEventListener("click", async () => {
-      try {
-        await auth.signOut();
-      } catch (e) {}
-      document.getElementById("adminPassword").value = "";
-      showPublic();
-    });
+    }
 
-    // ====================== MEDIA PREVIEW ======================
-    mediaUploadArea.addEventListener("click", () => mediaInput.click());
 
-    mediaInput.addEventListener("change", function () {
-      const file = this.files[0];
-      if (!file) return;
+    // =====================================================
+    // ADMIN INFORMATION
+    // =====================================================
 
-      if (file.size > 50 * 1024 * 1024) {
-        alert("File too large (max 50 MB)");
-        this.value = "";
+    async function updateAdminInfo() {
+
+      const user = auth.currentUser;
+
+      if (!user) {
+
+        adminUserInfo.innerHTML =
+          "Not signed in.";
+
         return;
+
       }
 
-      const isVideo = file.type.startsWith("video/");
-      const url = URL.createObjectURL(file);
 
-      mediaPreview.innerHTML = "";
-      if (isVideo) {
-        const v = document.createElement("video");
-        v.src = url;
-        v.controls = true;
-        v.muted = true;
-        v.style.maxWidth = "100%";
-        v.style.maxHeight = "200px";
-        v.style.borderRadius = "10px";
-        mediaPreview.appendChild(v);
+      const isAdmin =
+        await checkAdmin();
+
+
+      if (isAdmin) {
+
+        adminUserInfo.innerHTML = `
+          <i class="fas fa-check-circle"
+             style="color:#0B7A41;"></i>
+
+          Signed in as:
+          <strong>${escapeHtml(user.email || "")}</strong>
+
+          <span class="status-badge published-badge">
+            ADMIN
+          </span>
+        `;
+
       } else {
-        const img = document.createElement("img");
-        img.src = url;
-        mediaPreview.appendChild(img);
-      }
-      mediaPreview.style.display = "block";
-    });
 
-    // ====================== UPLOAD TO CLOUDINARY ======================
-    async function uploadMedia(file) {
-      const isVideo = file.type.startsWith("video/");
-      const formData = new FormData();
-      formData.append("file", file);
-      formData.append("upload_preset", UPLOAD_PRESET);
-      formData.append("tags", "brendava_news");
+        adminUserInfo.innerHTML = `
+          <i class="fas fa-exclamation-triangle"
+             style="color:#c0392b;"></i>
 
-      const endpoint = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${isVideo ? "video" : "image"}/upload`;
+          Account:
+          <strong>${escapeHtml(user.email || "")}</strong>
 
-      const res = await fetch(endpoint, {
-        method: "POST",
-        body: formData
-      });
+          <span class="status-badge draft-badge">
+            NOT ADMIN
+          </span>
+        `;
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        console.error("Cloudinary error:", data);
-        throw new Error(data.error?.message || "Cloudinary upload failed");
       }
 
-      return { url: data.secure_url, isVideo };
     }
 
-    // ====================== SUBMIT NEWS ======================
-    newsForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
 
-      const title       = document.getElementById("newsTitle").value.trim();
-      const description = document.getElementById("newsDescription").value.trim();
-      const file        = mediaInput.files[0];
-      const published   = document.getElementById("publishNow").checked;
+    // =====================================================
+    // LOGIN
+    // =====================================================
 
-      if (!title || !description) {
-        showMsg(newsMessage, "Title and description are required", "error");
-        return;
-      }
+    loginBtn.addEventListener(
+      "click",
+      async () => {
 
-      submitNewsBtn.disabled = true;
-      submitNewsBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading & Publishing...';
-      newsMessage.style.display = "none";
+        const email =
+          document
+            .getElementById("adminEmail")
+            .value
+            .trim();
 
-      try {
-        let mediaUrl = "";
-        let isVideo  = false;
+        const password =
+          document
+            .getElementById("adminPassword")
+            .value;
 
-        if (file) {
-          const result = await uploadMedia(file);
-          mediaUrl = result.url;
-          isVideo  = result.isVideo;
-        }
 
-        await db.collection("news").add({
-          title,
-          description,
-          mediaUrl,
-          isVideo,
-          published,
-          createdAt: Date.now(),
-          createdBy: auth.currentUser ? auth.currentUser.email : "admin"
-        });
+        if (!email || !password) {
 
-        showMsg(newsMessage, "News published successfully!", "success");
+          showMsg(
+            loginMessage,
+            "Please enter your email and password.",
+            "error"
+          );
 
-        newsForm.reset();
-        mediaPreview.style.display = "none";
-        mediaPreview.innerHTML = "";
-        mediaInput.value = "";
-
-      } catch (err) {
-        console.error("Publish error:", err);
-        showMsg(newsMessage, err.message || "Failed to publish. Make sure you are properly authenticated.", "error");
-      } finally {
-        submitNewsBtn.disabled = false;
-        submitNewsBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish News';
-      }
-    });
-
-    // ====================== LOAD PUBLIC NEWS (works without login) ======================
-    async function loadNews() {
-      newsList.innerHTML = `
-        <div class="loading">
-          <i class="fas fa-spinner fa-spin"></i>
-          Loading latest news...
-        </div>`;
-
-      try {
-        // This query only returns published news → matches your security rules
-        const snapshot = await db.collection("news")
-          .where("published", "==", true)
-          .orderBy("createdAt", "desc")
-          .get();
-
-        if (snapshot.empty) {
-          newsList.innerHTML = `
-            <div class="empty">
-              <i class="fas fa-inbox" style="font-size:38px;color:#ccc;margin-bottom:12px;display:block;"></i>
-              No news published yet. Check back soon!
-            </div>`;
           return;
+
         }
 
-        let html = "";
-        snapshot.forEach(doc => {
-          const data = doc.data();
-          const date = new Date(data.createdAt).toLocaleDateString("en-US", {
-            year: "numeric", month: "long", day: "numeric"
-          });
 
-          let mediaHtml = "";
-          if (data.mediaUrl) {
-            if (data.isVideo) {
-              mediaHtml = `
-                <video class="news-media" controls playsinline preload="metadata">
-                  <source src="${data.mediaUrl}" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>`;
-            } else {
-              mediaHtml = `<img class="news-media" src="${data.mediaUrl}" alt="${escapeHtml(data.title)}" loading="lazy">`;
-            }
+        loginBtn.disabled = true;
+
+        loginBtn.innerHTML =
+          '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+
+
+        try {
+
+          /*
+           * Authenticate through Firebase.
+           */
+
+          const credential =
+            await auth.signInWithEmailAndPassword(
+              email,
+              password
+            );
+
+
+          /*
+           * Force refresh so we get the newest
+           * custom claims.
+           */
+
+          const tokenResult =
+            await credential.user.getIdTokenResult(true);
+
+
+          console.log(
+            "Login claims:",
+            tokenResult.claims
+          );
+
+
+          /*
+           * SECURITY CHECK
+           */
+
+          if (tokenResult.claims.admin !== true) {
+
+            await auth.signOut();
+
+            throw new Error(
+              "This account is authenticated but does not have administrator permission."
+            );
+
           }
 
-          html += `
-            <article class="news-card">
-              ${mediaHtml}
-              <div class="news-content">
-                <div class="news-date"><i class="far fa-calendar-alt"></i> ${date}</div>
-                <h2 class="news-title">${escapeHtml(data.title)}</h2>
-                <div class="news-description">${escapeHtml(data.description)}</div>
-              </div>
-            </article>`;
-        });
 
-        newsList.innerHTML = html;
+          showMsg(
+            loginMessage,
+            "Login successful.",
+            "success"
+          );
 
-      } catch (err) {
-        console.error("Error loading news:", err);
 
-        // Helpful message if the composite index is missing
-        if (err.message && err.message.includes("index")) {
-          newsList.innerHTML = `
-            <div class="empty" style="color:#c0392b;">
-              <i class="fas fa-exclamation-triangle" style="font-size:34px;margin-bottom:10px;display:block;"></i>
-              Missing Firestore index.<br>
-              Open the browser console (F12) and click the link to create it.
-            </div>`;
-        } else {
-          newsList.innerHTML = `
-            <div class="empty" style="color:#c0392b;">
-              <i class="fas fa-exclamation-triangle" style="font-size:34px;margin-bottom:10px;display:block;"></i>
-              Failed to load news. Please try again later.
-            </div>`;
+          setTimeout(() => {
+
+            showAdmin();
+
+          }, 400);
+
+
+        } catch (error) {
+
+          console.error(
+            "Admin login error:",
+            error
+          );
+
+
+          let message =
+            "Login failed. Please check your email and password.";
+
+
+          if (
+            error.code ===
+            "auth/user-not-found"
+          ) {
+
+            message =
+              "No Firebase Authentication account exists with this email.";
+
+          } else if (
+            error.code ===
+            "auth/wrong-password"
+          ) {
+
+            message =
+              "Incorrect password.";
+
+          } else if (
+            error.code ===
+            "auth/invalid-credential"
+          ) {
+
+            message =
+              "Invalid email or password.";
+
+          } else if (
+            error.code ===
+            "auth/too-many-requests"
+          ) {
+
+            message =
+              "Too many failed attempts. Please try again later.";
+
+          } else if (error.message) {
+
+            message =
+              error.message;
+
+          }
+
+
+          showMsg(
+            loginMessage,
+            message,
+            "error"
+          );
+
+        } finally {
+
+          loginBtn.disabled = false;
+
+          loginBtn.innerHTML =
+            '<i class="fas fa-sign-in-alt"></i> Sign In';
+
         }
+
       }
+    );
+
+
+    // =====================================================
+    // ENTER KEY LOGIN
+    // =====================================================
+
+    document
+      .getElementById("adminPassword")
+      .addEventListener(
+        "keydown",
+        function(event) {
+
+          if (event.key === "Enter") {
+
+            event.preventDefault();
+
+            loginBtn.click();
+
+          }
+
+        }
+      );
+
+
+    // =====================================================
+    // LOGOUT
+    // =====================================================
+
+    logoutBtn.addEventListener(
+      "click",
+      async () => {
+
+        try {
+
+          await auth.signOut();
+
+          document
+            .getElementById("adminEmail")
+            .value = "";
+
+          document
+            .getElementById("adminPassword")
+            .value = "";
+
+          showPublic();
+
+        } catch (error) {
+
+          console.error(
+            "Logout error:",
+            error
+          );
+
+        }
+
+      }
+    );
+
+
+    // =====================================================
+    // MEDIA PREVIEW
+    // =====================================================
+
+    mediaUploadArea.addEventListener(
+      "click",
+      () => mediaInput.click()
+    );
+
+
+    mediaInput.addEventListener(
+      "change",
+      function() {
+
+        const file =
+          this.files[0];
+
+
+        if (!file) {
+
+          mediaPreview.style.display =
+            "none";
+
+          return;
+
+        }
+
+
+        /*
+         * Maximum file size:
+         * 50 MB
+         */
+
+        if (
+          file.size >
+          50 * 1024 * 1024
+        ) {
+
+          showMsg(
+            newsMessage,
+            "File too large. Maximum size is 50 MB.",
+            "error"
+          );
+
+          this.value = "";
+
+          mediaPreview.style.display =
+            "none";
+
+          return;
+
+        }
+
+
+        const isVideo =
+          file.type.startsWith("video/");
+
+
+        const url =
+          URL.createObjectURL(file);
+
+
+        mediaPreview.innerHTML = "";
+
+
+        if (isVideo) {
+
+          const video =
+            document.createElement("video");
+
+          video.src = url;
+
+          video.controls = true;
+
+          video.muted = true;
+
+          video.playsInline = true;
+
+          mediaPreview.appendChild(video);
+
+        } else {
+
+          const img =
+            document.createElement("img");
+
+          img.src = url;
+
+          img.alt = "Media preview";
+
+          mediaPreview.appendChild(img);
+
+        }
+
+
+        mediaPreview.style.display =
+          "block";
+
+      }
+    );
+
+
+    // =====================================================
+    // CLOUDINARY UPLOAD
+    // =====================================================
+
+    async function uploadMedia(file) {
+
+      if (!file) {
+
+        return {
+          url: "",
+          isVideo: false
+        };
+
+      }
+
+
+      const isVideo =
+        file.type.startsWith("video/");
+
+
+      const formData =
+        new FormData();
+
+
+      formData.append(
+        "file",
+        file
+      );
+
+
+      formData.append(
+        "upload_preset",
+        UPLOAD_PRESET
+      );
+
+
+      formData.append(
+        "tags",
+        "brendava_news"
+      );
+
+
+      const endpoint =
+        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${isVideo ? "video" : "image"}/upload`;
+
+
+      const response =
+        await fetch(
+          endpoint,
+          {
+            method: "POST",
+            body: formData
+          }
+        );
+
+
+      let data = null;
+
+
+      try {
+
+        data =
+          await response.json();
+
+      } catch (error) {
+
+        throw new Error(
+          "Cloudinary returned an invalid response."
+        );
+
+      }
+
+
+      if (!response.ok) {
+
+        console.error(
+          "Cloudinary error:",
+          data
+        );
+
+
+        throw new Error(
+          data?.error?.message ||
+          "Cloudinary upload failed."
+        );
+
+      }
+
+
+      if (!data.secure_url) {
+
+        throw new Error(
+          "Cloudinary did not return a media URL."
+        );
+
+      }
+
+
+      return {
+
+        url: data.secure_url,
+
+        isVideo: isVideo
+
+      };
+
     }
 
-    function escapeHtml(text) {
-      if (!text) return "";
-      return String(text)
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
+
+    // =====================================================
+    // SUBMIT NEWS
+    // =====================================================
+
+    newsForm.addEventListener(
+      "submit",
+      async function(event) {
+
+        event.preventDefault();
+
+
+        /*
+         * Make absolutely sure the user is
+         * still authenticated.
+         */
+
+        const user =
+          auth.currentUser;
+
+
+        if (!user) {
+
+          showMsg(
+            newsMessage,
+            "Your admin session has expired. Please sign in again.",
+            "error"
+          );
+
+          showLogin();
+
+          return;
+
+        }
+
+
+        /*
+         * Verify admin custom claim before
+         * attempting Firestore write.
+         */
+
+        const admin =
+          await checkAdmin();
+
+
+        if (!admin) {
+
+          showMsg(
+            newsMessage,
+            "You are signed in, but your account is not authorized as an administrator.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        const title =
+          document
+            .getElementById("newsTitle")
+            .value
+            .trim();
+
+
+        const description =
+          document
+            .getElementById("newsDescription")
+            .value
+            .trim();
+
+
+        const file =
+          mediaInput.files[0];
+
+
+        const published =
+          document
+            .getElementById("publishNow")
+            .checked;
+
+
+        if (!title) {
+
+          showMsg(
+            newsMessage,
+            "Please enter a news title.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        if (!description) {
+
+          showMsg(
+            newsMessage,
+            "Please enter the news description.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * Validate file size again.
+         */
+
+        if (
+          file &&
+          file.size >
+          50 * 1024 * 1024
+        ) {
+
+          showMsg(
+            newsMessage,
+            "The selected file is larger than 50 MB.",
+            "error"
+          );
+
+          return;
+
+        }
+
+
+        submitNewsBtn.disabled =
+          true;
+
+
+        submitNewsBtn.innerHTML =
+          '<i class="fas fa-spinner fa-spin"></i> Publishing...';
+
+
+        newsMessage.style.display =
+          "none";
+
+
+        try {
+
+          let mediaUrl = "";
+
+          let isVideo = false;
+
+
+          // ---------------------------------------------
+          // Upload media if selected
+          // ---------------------------------------------
+
+          if (file) {
+
+            showMsg(
+              newsMessage,
+              "Uploading media...",
+              "info"
+            );
+
+
+            const result =
+              await uploadMedia(file);
+
+
+            mediaUrl =
+              result.url;
+
+
+            isVideo =
+              result.isVideo;
+
+          }
+
+
+          // ---------------------------------------------
+          // Create Firestore document
+          // ---------------------------------------------
+
+          showMsg(
+            newsMessage,
+            "Saving news article...",
+            "info"
+          );
+
+
+          await db
+            .collection("news")
+            .add({
+
+              title: title,
+
+              description: description,
+
+              mediaUrl: mediaUrl,
+
+              isVideo: isVideo,
+
+              published: published,
+
+              createdAt:
+                firebase.firestore.FieldValue.serverTimestamp(),
+
+              createdBy:
+                user.uid,
+
+              createdByEmail:
+                user.email || ""
+
+            });
+
+
+          showMsg(
+            newsMessage,
+            published
+              ? "News published successfully!"
+              : "News saved as a draft.",
+            "success"
+          );
+
+
+          // ---------------------------------------------
+          // Reset form
+          // ---------------------------------------------
+
+          newsForm.reset();
+
+
+          document
+            .getElementById("publishNow")
+            .checked = true;
+
+
+          mediaPreview.innerHTML =
+            "";
+
+          mediaPreview.style.display =
+            "none";
+
+
+          mediaInput.value =
+            "";
+
+
+        } catch (error) {
+
+          console.error(
+            "Publish error:",
+            error
+          );
+
+
+          let message =
+            "Failed to publish the news.";
+
+
+          if (
+            error.code ===
+            "permission-denied"
+          ) {
+
+            message =
+              "Firestore denied the write. Make sure this Firebase account has the admin custom claim.";
+
+          } else if (
+            error.message
+          ) {
+
+            message =
+              error.message;
+
+          }
+
+
+          showMsg(
+            newsMessage,
+            message,
+            "error"
+          );
+
+        } finally {
+
+          submitNewsBtn.disabled =
+            false;
+
+
+          submitNewsBtn.innerHTML =
+            '<i class="fas fa-paper-plane"></i> Publish News';
+
+        }
+
+      }
+    );
+
+
+    // =====================================================
+    // LOAD PUBLIC NEWS
+    // =====================================================
+
+    async function loadNews() {
+
+      newsList.innerHTML = `
+
+        <div class="loading">
+
+          <i class="fas fa-spinner fa-spin"></i>
+
+          Loading latest news...
+
+        </div>
+
+      `;
+
+
+      try {
+
+        /*
+         * We use a simple query that matches the
+         * Firestore public-read rule.
+         */
+
+        const snapshot =
+          await db
+            .collection("news")
+            .where(
+              "published",
+              "==",
+              true
+            )
+            .orderBy(
+              "createdAt",
+              "desc"
+            )
+            .get();
+
+
+        if (snapshot.empty) {
+
+          newsList.innerHTML = `
+
+            <div class="empty">
+
+              <i
+                class="fas fa-inbox"
+                style="
+                  font-size:38px;
+                  color:#ccc;
+                  margin-bottom:12px;
+                  display:block;
+                "
+              ></i>
+
+              No news published yet.
+              Check back soon!
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        let html = "";
+
+
+        snapshot.forEach(
+          (doc) => {
+
+            const data =
+              doc.data();
+
+
+            /*
+             * Firestore Timestamp handling.
+             */
+
+            let dateText =
+              "Recently";
+
+
+            if (
+              data.createdAt &&
+              typeof data.createdAt.toDate ===
+              "function"
+            ) {
+
+              dateText =
+                data.createdAt
+                  .toDate()
+                  .toLocaleDateString(
+                    "en-US",
+                    {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric"
+                    }
+                  );
+
+            }
+
+
+            let mediaHtml =
+              "";
+
+
+            if (data.mediaUrl) {
+
+              if (data.isVideo) {
+
+                mediaHtml = `
+
+                  <video
+                    class="news-media"
+                    controls
+                    playsinline
+                    preload="metadata"
+                  >
+
+                    <source
+                      src="${escapeHtml(data.mediaUrl)}"
+                    >
+
+                    Your browser does not support
+                    the video tag.
+
+                  </video>
+
+                `;
+
+              } else {
+
+                mediaHtml = `
+
+                  <img
+                    class="news-media"
+                    src="${escapeHtml(data.mediaUrl)}"
+                    alt="${escapeHtml(data.title)}"
+                    loading="lazy"
+                  >
+
+                `;
+
+              }
+
+            }
+
+
+            html += `
+
+              <article class="news-card">
+
+                ${mediaHtml}
+
+                <div class="news-content">
+
+                  <div class="news-date">
+
+                    <i class="far fa-calendar-alt"></i>
+
+                    ${escapeHtml(dateText)}
+
+                  </div>
+
+
+                  <h2 class="news-title">
+
+                    ${escapeHtml(data.title)}
+
+                  </h2>
+
+
+                  <div class="news-description">
+
+                    ${escapeHtml(data.description)}
+
+                  </div>
+
+                </div>
+
+              </article>
+
+            `;
+
+          }
+        );
+
+
+        newsList.innerHTML =
+          html;
+
+
+      } catch (error) {
+
+        console.error(
+          "Error loading news:",
+          error
+        );
+
+
+        /*
+         * Firestore index error.
+         */
+
+        if (
+          error.message &&
+          error.message
+            .toLowerCase()
+            .includes("index")
+        ) {
+
+          newsList.innerHTML = `
+
+            <div
+              class="empty"
+              style="color:#c0392b;"
+            >
+
+              <i
+                class="fas fa-database"
+                style="
+                  font-size:34px;
+                  margin-bottom:10px;
+                  display:block;
+                "
+              ></i>
+
+              <strong>
+                Firestore index required.
+              </strong>
+
+              <br><br>
+
+              Open the browser console
+              and click the Firebase link
+              to create the required index.
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        /*
+         * Permission error.
+         */
+
+        if (
+          error.code ===
+          "permission-denied"
+        ) {
+
+          newsList.innerHTML = `
+
+            <div
+              class="empty"
+              style="color:#c0392b;"
+            >
+
+              <i
+                class="fas fa-lock"
+                style="
+                  font-size:34px;
+                  margin-bottom:10px;
+                  display:block;
+                "
+              ></i>
+
+              Firestore denied access
+              to published news.
+
+            </div>
+
+          `;
+
+          return;
+
+        }
+
+
+        newsList.innerHTML = `
+
+          <div
+            class="empty"
+            style="color:#c0392b;"
+          >
+
+            <i
+              class="fas fa-exclamation-triangle"
+              style="
+                font-size:34px;
+                margin-bottom:10px;
+                display:block;
+              "
+            ></i>
+
+            Failed to load news.
+            Please try again later.
+
+          </div>
+
+        `;
+
+      }
+
     }
 
-    function showMsg(el, text, type) {
-      el.className = `message ${type}`;
-      el.textContent = text;
+
+    // =====================================================
+    // ESCAPE HTML
+    // =====================================================
+
+    function escapeHtml(value) {
+
+      if (value === null ||
+          value === undefined) {
+
+        return "";
+
+      }
+
+
+      return String(value)
+
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+
+        .replace(
+          /</g,
+          "&lt;"
+        )
+
+        .replace(
+          />/g,
+          "&gt;"
+        )
+
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
     }
 
-    // Always start on the public news page
+
+    // =====================================================
+    // MESSAGE
+    // =====================================================
+
+    function showMsg(
+      element,
+      text,
+      type
+    ) {
+
+      element.className =
+        `message ${type}`;
+
+      element.textContent =
+        text;
+
+    }
+
+
+    // =====================================================
+    // AUTH STATE
+    // =====================================================
+
+    auth.onAuthStateChanged(
+      async (user) => {
+
+        if (!user) {
+
+          /*
+           * Always show public news to
+           * logged-out visitors.
+           */
+
+          if (
+            !adminSection.classList.contains(
+              "hidden"
+            )
+          ) {
+
+            showPublic();
+
+          }
+
+          return;
+
+        }
+
+
+        /*
+         * We don't automatically show the
+         * admin panel just because somebody
+         * is authenticated.
+         *
+         * They must have admin:true.
+         */
+
+        try {
+
+          const isAdmin =
+            await checkAdmin();
+
+
+          if (isAdmin) {
+
+            console.log(
+              "Authenticated admin:",
+              user.email
+            );
+
+          } else {
+
+            console.log(
+              "Authenticated user is not an admin:",
+              user.email
+            );
+
+          }
+
+        } catch (error) {
+
+          console.error(
+            "Auth state check failed:",
+            error
+          );
+
+        }
+
+      }
+    );
+
+
+    // =====================================================
+    // START PUBLIC PAGE
+    // =====================================================
+
     showPublic();
+
   </script>
+
 </body>
 </html>
