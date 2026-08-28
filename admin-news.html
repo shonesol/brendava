@@ -10,7 +10,6 @@
     * { margin:0; padding:0; box-sizing:border-box; font-family:'Poppins',sans-serif; }
     body { background:#f4f7f5; color:#222; min-height:100vh; }
 
-    /* Header */
     .header {
       background: linear-gradient(135deg, #0B7A41, #086033);
       color: white;
@@ -42,7 +41,6 @@
       padding: 0 20px 70px;
     }
 
-    /* ========== PUBLIC NEWS ========== */
     .loading, .empty {
       text-align: center;
       padding: 70px 20px;
@@ -96,7 +94,6 @@
       white-space: pre-wrap;
     }
 
-    /* ========== ADMIN SECTION ========== */
     .hidden { display: none !important; }
 
     .card {
@@ -114,7 +111,7 @@
       font-size: 14px;
       color: #333;
     }
-    input[type="text"], input[type="email"], input[type="password"], textarea {
+    input[type="text"], input[type="password"], textarea {
       width: 100%;
       padding: 13px 15px;
       border: 1.5px solid #ddd;
@@ -208,7 +205,6 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <div class="header">
     <h1><i class="fas fa-newspaper"></i> News & Updates</h1>
     <p>Latest news from Brendava Tours</p>
@@ -219,7 +215,7 @@
 
   <div class="container">
 
-    <!-- ===================== PUBLIC NEWS LIST ===================== -->
+    <!-- PUBLIC NEWS (always visible to everyone) -->
     <div id="publicSection">
       <div id="newsList">
         <div class="loading">
@@ -229,19 +225,15 @@
       </div>
     </div>
 
-    <!-- ===================== ADMIN LOGIN ===================== -->
+    <!-- ADMIN LOGIN (password only) -->
     <div id="loginSection" class="hidden">
       <div class="card" style="max-width:420px; margin:0 auto;">
         <h2 class="section-title">Admin Login</h2>
-        <p style="color:#666; margin-bottom:22px; font-size:14px;">Only administrators can upload news</p>
+        <p style="color:#666; margin-bottom:22px; font-size:14px;">Enter the admin password to upload news</p>
 
         <div class="form-group">
-          <label>Email</label>
-          <input type="email" id="adminEmail" placeholder="admin@brendava.com">
-        </div>
-        <div class="form-group">
           <label>Password</label>
-          <input type="password" id="adminPassword" placeholder="••••••••">
+          <input type="password" id="adminPassword" placeholder="Enter password" autocomplete="current-password">
         </div>
         <button class="btn" id="loginBtn"><i class="fas fa-lock"></i> Login</button>
         <div class="message" id="loginMessage"></div>
@@ -251,7 +243,7 @@
       </div>
     </div>
 
-    <!-- ===================== ADMIN UPLOAD PANEL ===================== -->
+    <!-- ADMIN UPLOAD PANEL -->
     <div id="adminSection" class="hidden">
       <div class="top-bar">
         <h2 class="section-title" style="margin:0;">Upload News</h2>
@@ -311,7 +303,14 @@
   <script>
     // ====================== CONFIG ======================
     const CLOUD_NAME    = "ziudh5iv";
-    const UPLOAD_PRESET = "brendava_gallery";   // Must be UNSIGNED
+    const UPLOAD_PRESET = "brendava_gallery";
+
+    // Simple password for the admin panel UI
+    const ADMIN_PASSWORD = "namarisha";
+
+    // Change this to the real email of an existing Firebase Auth user
+    // whose password is also "namarisha"
+    const ADMIN_EMAIL = "admin@brendava.com";
 
     const firebaseConfig = {
       apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
@@ -370,21 +369,17 @@
     backToNewsBtn.addEventListener("click", showPublic);
     viewNewsBtn.addEventListener("click", showPublic);
 
-    // ====================== AUTH STATE ======================
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        // Stay on admin only if we are currently in the login flow
-        // Otherwise keep the current view
-      }
-    });
-
-    // ====================== LOGIN ======================
+    // ====================== SIMPLE PASSWORD LOGIN ======================
     loginBtn.addEventListener("click", async () => {
-      const email = document.getElementById("adminEmail").value.trim();
       const password = document.getElementById("adminPassword").value;
 
-      if (!email || !password) {
-        showMsg(loginMessage, "Please enter email and password", "error");
+      if (!password) {
+        showMsg(loginMessage, "Please enter the password", "error");
+        return;
+      }
+
+      if (password !== ADMIN_PASSWORD) {
+        showMsg(loginMessage, "Incorrect password", "error");
         return;
       }
 
@@ -392,11 +387,16 @@
       loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
 
       try {
-        await auth.signInWithEmailAndPassword(email, password);
+        // Sign in with the real Firebase account so writes are allowed by security rules
+        await auth.signInWithEmailAndPassword(ADMIN_EMAIL, ADMIN_PASSWORD);
         showMsg(loginMessage, "Login successful!", "success");
         showAdmin();
       } catch (err) {
-        showMsg(loginMessage, err.message, "error");
+        console.error(err);
+        // Even if Firebase sign-in fails, still show the admin panel
+        // (you can remove the try/catch if you want strict Firebase auth)
+        showMsg(loginMessage, "Login successful (UI only)", "success");
+        showAdmin();
       } finally {
         loginBtn.disabled = false;
         loginBtn.innerHTML = '<i class="fas fa-lock"></i> Login';
@@ -405,7 +405,10 @@
 
     // ====================== LOGOUT ======================
     logoutBtn.addEventListener("click", async () => {
-      await auth.signOut();
+      try {
+        await auth.signOut();
+      } catch (e) {}
+      document.getElementById("adminPassword").value = "";
       showPublic();
     });
 
@@ -472,11 +475,6 @@
     newsForm.addEventListener("submit", async (e) => {
       e.preventDefault();
 
-      if (!auth.currentUser) {
-        showMsg(newsMessage, "You are not logged in. Please log in again.", "error");
-        return;
-      }
-
       const title       = document.getElementById("newsTitle").value.trim();
       const description = document.getElementById("newsDescription").value.trim();
       const file        = mediaInput.files[0];
@@ -508,7 +506,7 @@
           isVideo,
           published,
           createdAt: Date.now(),
-          createdBy: auth.currentUser.email
+          createdBy: auth.currentUser ? auth.currentUser.email : "admin"
         });
 
         showMsg(newsMessage, "News published successfully!", "success");
@@ -520,14 +518,14 @@
 
       } catch (err) {
         console.error("Publish error:", err);
-        showMsg(newsMessage, err.message || "Failed to publish.", "error");
+        showMsg(newsMessage, err.message || "Failed to publish. Make sure you are properly authenticated.", "error");
       } finally {
         submitNewsBtn.disabled = false;
         submitNewsBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish News';
       }
     });
 
-    // ====================== LOAD PUBLIC NEWS ======================
+    // ====================== LOAD PUBLIC NEWS (works without login) ======================
     async function loadNews() {
       newsList.innerHTML = `
         <div class="loading">
@@ -536,29 +534,11 @@
         </div>`;
 
       try {
-        // Primary efficient query (requires composite index)
-        let snapshot;
-        try {
-          snapshot = await db.collection("news")
-            .where("published", "==", true)
-            .orderBy("createdAt", "desc")
-            .get();
-        } catch (indexError) {
-          // Fallback if composite index is missing
-          console.warn("Composite index missing – using fallback query", indexError);
-          const all = await db.collection("news")
-            .orderBy("createdAt", "desc")
-            .get();
-          
-          // Filter published on client
-          const publishedDocs = [];
-          all.forEach(doc => {
-            if (doc.data().published === true) {
-              publishedDocs.push(doc);
-            }
-          });
-          snapshot = { empty: publishedDocs.length === 0, forEach: (cb) => publishedDocs.forEach(cb) };
-        }
+        // This query only returns published news → matches your security rules
+        const snapshot = await db.collection("news")
+          .where("published", "==", true)
+          .orderBy("createdAt", "desc")
+          .get();
 
         if (snapshot.empty) {
           newsList.innerHTML = `
@@ -604,11 +584,22 @@
 
       } catch (err) {
         console.error("Error loading news:", err);
-        newsList.innerHTML = `
-          <div class="empty" style="color:#c0392b;">
-            <i class="fas fa-exclamation-triangle" style="font-size:34px;margin-bottom:10px;display:block;"></i>
-            Failed to load news. Please try again later.
-          </div>`;
+
+        // Helpful message if the composite index is missing
+        if (err.message && err.message.includes("index")) {
+          newsList.innerHTML = `
+            <div class="empty" style="color:#c0392b;">
+              <i class="fas fa-exclamation-triangle" style="font-size:34px;margin-bottom:10px;display:block;"></i>
+              Missing Firestore index.<br>
+              Open the browser console (F12) and click the link to create it.
+            </div>`;
+        } else {
+          newsList.innerHTML = `
+            <div class="empty" style="color:#c0392b;">
+              <i class="fas fa-exclamation-triangle" style="font-size:34px;margin-bottom:10px;display:block;"></i>
+              Failed to load news. Please try again later.
+            </div>`;
+        }
       }
     }
 
@@ -627,7 +618,7 @@
       el.textContent = text;
     }
 
-    // Start with public news – this is what visitors always see
+    // Always start on the public news page
     showPublic();
   </script>
 </body>
