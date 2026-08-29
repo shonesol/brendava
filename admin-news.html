@@ -1352,10 +1352,13 @@
             tokenResult.claims.admin !== true
           ) {
 
-            showMsg(
-              newsMessage,
-              "Your Firebase account is not an administrator.",
-              "error"
+            // Check admin by email (no custom claim needed)
+const adminEmail = "YOUR_ADMIN_EMAIL@gmail.com";   // ← same email as in rules
+
+if (credential.user.email !== adminEmail) {
+  await auth.signOut();
+  throw new Error("This account is not an administrator.");
+}
             );
 
             await auth.signOut();
