@@ -6,15 +6,8 @@
 
   <title>News & Updates | Brendava Tours</title>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-  >
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
   <style>
     * {
@@ -369,1792 +362,589 @@
 
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================== -->
-
+  <!-- HEADER -->
   <div class="header">
-
-    <h1>
-      <i class="fas fa-newspaper"></i>
-      News & Updates
-    </h1>
-
-    <p>
-      Latest news from Brendava Tours
-    </p>
-
+    <h1><i class="fas fa-newspaper"></i> News & Updates</h1>
+    <p>Latest news from Brendava Tours</p>
     <button class="admin-toggle" id="adminToggleBtn">
-      <i class="fas fa-lock"></i>
-      Admin
+      <i class="fas fa-lock"></i> Admin
     </button>
-
   </div>
-
 
   <div class="container">
 
-    <!-- =========================
-         PUBLIC NEWS
-    ========================== -->
-
+    <!-- PUBLIC NEWS -->
     <div id="publicSection">
-
       <div id="newsList">
-
         <div class="loading">
           <i class="fas fa-spinner fa-spin"></i>
           Loading latest news...
         </div>
-
       </div>
-
     </div>
 
-
-    <!-- =========================
-         ADMIN LOGIN
-    ========================== -->
-
+    <!-- ADMIN LOGIN -->
     <div id="loginSection" class="hidden">
-
-      <div
-        class="card"
-        style="max-width:420px; margin:0 auto;"
-      >
-
-        <h2 class="section-title">
-          Admin Login
-        </h2>
-
-        <p
-          style="color:#666; margin-bottom:22px; font-size:14px;"
-        >
-          Sign in with your authorized Firebase administrator account.
+      <div class="card" style="max-width:420px; margin:0 auto;">
+        <h2 class="section-title">Admin Login</h2>
+        <p style="color:#666; margin-bottom:22px; font-size:14px;">
+          Sign in with your authorized administrator account.
         </p>
 
-
         <div class="form-group">
-
-          <label>
-            Admin Email
-          </label>
-
-          <input
-            type="email"
-            id="adminEmail"
-            placeholder="Admin email"
-            autocomplete="username"
-          >
-
+          <label>Admin Email</label>
+          <input type="email" id="adminEmail" placeholder="Admin email" autocomplete="username">
         </div>
 
-
         <div class="form-group">
-
-          <label>
-            Password
-          </label>
-
-          <input
-            type="password"
-            id="adminPassword"
-            placeholder="Admin password"
-            autocomplete="current-password"
-          >
-
+          <label>Password</label>
+          <input type="password" id="adminPassword" placeholder="Admin password" autocomplete="current-password">
         </div>
 
-
-        <button
-          class="btn"
-          id="loginBtn"
-        >
-          <i class="fas fa-lock"></i>
-          Login
+        <button class="btn" id="loginBtn">
+          <i class="fas fa-lock"></i> Login
         </button>
 
+        <div class="message" id="loginMessage"></div>
 
-        <div
-          class="message"
-          id="loginMessage"
-        ></div>
-
-
-        <button
-          class="btn secondary-btn"
-          id="backToNewsBtn"
-          style="margin-top:12px;"
-        >
-          <i class="fas fa-arrow-left"></i>
-          Back to News
+        <button class="btn secondary-btn" id="backToNewsBtn" style="margin-top:12px;">
+          <i class="fas fa-arrow-left"></i> Back to News
         </button>
-
       </div>
-
     </div>
 
-
-    <!-- =========================
-         ADMIN PANEL
-    ========================== -->
-
-    <div
-      id="adminSection"
-      class="hidden"
-    >
-
+    <!-- ADMIN PANEL -->
+    <div id="adminSection" class="hidden">
       <div class="top-bar">
-
-        <h2
-          class="section-title"
-          style="margin:0;"
-        >
-          Upload News
-        </h2>
-
-        <button
-          class="logout-btn"
-          id="logoutBtn"
-        >
-          <i class="fas fa-sign-out-alt"></i>
-          Logout
+        <h2 class="section-title" style="margin:0;">Upload News</h2>
+        <button class="logout-btn" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i> Logout
         </button>
-
       </div>
 
-
-      <div
-        class="admin-status"
-        id="adminStatus"
-      >
-        <i class="fas fa-shield-alt"></i>
-        Administrator authenticated.
+      <div class="admin-status" id="adminStatus">
+        <i class="fas fa-shield-alt"></i> Administrator authenticated.
       </div>
-
 
       <div class="card">
-
         <form id="newsForm">
-
-          <!-- TITLE -->
-
           <div class="form-group">
-
-            <label>
-              News Title *
-            </label>
-
-            <input
-              type="text"
-              id="newsTitle"
-              required
-              maxlength="200"
-              placeholder="e.g. Turker Marathon 2026 – Registration Open"
-            >
-
+            <label>News Title *</label>
+            <input type="text" id="newsTitle" required maxlength="200" placeholder="e.g. Turker Marathon 2026 – Registration Open">
           </div>
 
-
-          <!-- DESCRIPTION -->
-
           <div class="form-group">
-
-            <label>
-              Description / Full Article *
-            </label>
-
-            <textarea
-              id="newsDescription"
-              required
-              placeholder="Write the full news content..."
-            ></textarea>
-
-            <p class="hint">
-              This text will be shown to all visitors.
-            </p>
-
+            <label>Description / Full Article *</label>
+            <textarea id="newsDescription" required placeholder="Write the full news content..."></textarea>
+            <p class="hint">This text will be shown to all visitors.</p>
           </div>
 
-
-          <!-- MEDIA -->
-
           <div class="form-group">
-
-            <label>
-              Photo or Video (optional)
-            </label>
-
-            <div
-              class="upload-box"
-              id="mediaUploadArea"
-            >
-
+            <label>Photo or Video (optional)</label>
+            <div class="upload-box" id="mediaUploadArea">
               <i class="fas fa-cloud-upload-alt"></i>
-
-              <p>
-                Click to upload a photo or video
-              </p>
-
-              <small>
-                JPG, PNG, WEBP, MP4 • Max 50 MB
-              </small>
-
-              <input
-                type="file"
-                id="mediaInput"
-                accept="image/*,video/*"
-                style="display:none;"
-              >
-
+              <p>Click to upload a photo or video</p>
+              <small>JPG, PNG, WEBP, MP4 • Max 50 MB</small>
+              <input type="file" id="mediaInput" accept="image/*,video/*" style="display:none;">
             </div>
-
-
-            <div
-              class="preview"
-              id="mediaPreview"
-            ></div>
-
+            <div class="preview" id="mediaPreview"></div>
           </div>
-
-
-          <!-- PUBLISH -->
 
           <div class="form-group">
-
-            <label
-              style="
-                display:flex;
-                align-items:center;
-                gap:10px;
-                cursor:pointer;
-              "
-            >
-
-              <input
-                type="checkbox"
-                id="publishNow"
-                checked
-                style="
-                  width:17px;
-                  height:17px;
-                "
-              >
-
+            <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+              <input type="checkbox" id="publishNow" checked style="width:17px; height:17px;">
               Publish immediately
-
             </label>
-
           </div>
 
-
-          <!-- SUBMIT -->
-
-          <button
-            type="submit"
-            class="btn"
-            id="submitNewsBtn"
-          >
-
-            <i class="fas fa-paper-plane"></i>
-            Publish News
-
+          <button type="submit" class="btn" id="submitNewsBtn">
+            <i class="fas fa-paper-plane"></i> Publish News
           </button>
 
-
-          <div
-            class="message"
-            id="newsMessage"
-          ></div>
-
+          <div class="message" id="newsMessage"></div>
         </form>
-
       </div>
 
-
-      <button
-        class="btn secondary-btn"
-        id="viewNewsBtn"
-      >
-
-        <i class="fas fa-eye"></i>
-        View Public News
-
+      <button class="btn secondary-btn" id="viewNewsBtn">
+        <i class="fas fa-eye"></i> View Public News
       </button>
-
     </div>
-
   </div>
 
-
-  <!-- =========================
-       FIREBASE
-  ========================== -->
-
+  <!-- FIREBASE -->
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
-
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
-
   <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
 
-
   <script>
-
     // =====================================================
     // CONFIGURATION
     // =====================================================
-
     const CLOUD_NAME = "ziudh5iv";
-
     const UPLOAD_PRESET = "brendava_gallery";
 
+    // ===== CHANGE THIS TO YOUR REAL ADMIN EMAIL =====
+    const ADMIN_EMAIL = "YOUR_ADMIN_EMAIL@gmail.com";
 
     const firebaseConfig = {
-
-      apiKey:
-        "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
-
-      authDomain:
-        "brendava-tours-and-travel.firebaseapp.com",
-
-      projectId:
-        "brendava-tours-and-travel",
-
-      storageBucket:
-        "brendava-tours-and-travel.firebasestorage.app",
-
-      messagingSenderId:
-        "732703885570",
-
-      appId:
-        "1:732703885570:web:3011a3989d5fe36eb69a1b",
-
-      measurementId:
-        "G-ZC356HMW9C"
-
+      apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
+      authDomain: "brendava-tours-and-travel.firebaseapp.com",
+      projectId: "brendava-tours-and-travel",
+      storageBucket: "brendava-tours-and-travel.firebasestorage.app",
+      messagingSenderId: "732703885570",
+      appId: "1:732703885570:web:3011a3989d5fe36eb69a1b",
+      measurementId: "G-ZC356HMW9C"
     };
 
-
-    // =====================================================
-    // INITIALIZE FIREBASE
-    // =====================================================
-
     firebase.initializeApp(firebaseConfig);
-
     const auth = firebase.auth();
-
     const db = firebase.firestore();
-
 
     // =====================================================
     // ELEMENTS
     // =====================================================
-
-    const publicSection =
-      document.getElementById("publicSection");
-
-    const loginSection =
-      document.getElementById("loginSection");
-
-    const adminSection =
-      document.getElementById("adminSection");
-
-    const newsList =
-      document.getElementById("newsList");
-
-    const adminToggleBtn =
-      document.getElementById("adminToggleBtn");
-
-    const loginBtn =
-      document.getElementById("loginBtn");
-
-    const logoutBtn =
-      document.getElementById("logoutBtn");
-
-    const backToNewsBtn =
-      document.getElementById("backToNewsBtn");
-
-    const viewNewsBtn =
-      document.getElementById("viewNewsBtn");
-
-    const loginMessage =
-      document.getElementById("loginMessage");
-
-    const newsForm =
-      document.getElementById("newsForm");
-
-    const mediaInput =
-      document.getElementById("mediaInput");
-
-    const mediaUploadArea =
-      document.getElementById("mediaUploadArea");
-
-    const mediaPreview =
-      document.getElementById("mediaPreview");
-
-    const submitNewsBtn =
-      document.getElementById("submitNewsBtn");
-
-    const newsMessage =
-      document.getElementById("newsMessage");
-
-    const adminEmailInput =
-      document.getElementById("adminEmail");
-
-    const adminPasswordInput =
-      document.getElementById("adminPassword");
-
-    const adminStatus =
-      document.getElementById("adminStatus");
-
+    const publicSection = document.getElementById("publicSection");
+    const loginSection = document.getElementById("loginSection");
+    const adminSection = document.getElementById("adminSection");
+    const newsList = document.getElementById("newsList");
+    const adminToggleBtn = document.getElementById("adminToggleBtn");
+    const loginBtn = document.getElementById("loginBtn");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const backToNewsBtn = document.getElementById("backToNewsBtn");
+    const viewNewsBtn = document.getElementById("viewNewsBtn");
+    const loginMessage = document.getElementById("loginMessage");
+    const newsForm = document.getElementById("newsForm");
+    const mediaInput = document.getElementById("mediaInput");
+    const mediaUploadArea = document.getElementById("mediaUploadArea");
+    const mediaPreview = document.getElementById("mediaPreview");
+    const submitNewsBtn = document.getElementById("submitNewsBtn");
+    const newsMessage = document.getElementById("newsMessage");
+    const adminEmailInput = document.getElementById("adminEmail");
+    const adminPasswordInput = document.getElementById("adminPassword");
+    const adminStatus = document.getElementById("adminStatus");
 
     // =====================================================
     // VIEW FUNCTIONS
     // =====================================================
-
     function showPublic() {
-
       publicSection.classList.remove("hidden");
-
       loginSection.classList.add("hidden");
-
       adminSection.classList.add("hidden");
-
       loadNews();
     }
 
-
     function showLogin() {
-
       publicSection.classList.add("hidden");
-
       loginSection.classList.remove("hidden");
-
       adminSection.classList.add("hidden");
-
       adminEmailInput.focus();
     }
 
-
     function showAdmin() {
-
       publicSection.classList.add("hidden");
-
       loginSection.classList.add("hidden");
-
       adminSection.classList.remove("hidden");
 
       if (auth.currentUser) {
-
         adminStatus.innerHTML = `
           <i class="fas fa-shield-alt"></i>
-          Administrator authenticated:
-          ${escapeHtml(auth.currentUser.email || "")}
+          Administrator authenticated: ${escapeHtml(auth.currentUser.email || "")}
         `;
-
       }
-
     }
-
 
     // =====================================================
     // NAVIGATION
     // =====================================================
-
-    adminToggleBtn.addEventListener(
-      "click",
-      showLogin
-    );
-
-
-    backToNewsBtn.addEventListener(
-      "click",
-      showPublic
-    );
-
-
-    viewNewsBtn.addEventListener(
-      "click",
-      showPublic
-    );
-
+    adminToggleBtn.addEventListener("click", showLogin);
+    backToNewsBtn.addEventListener("click", showPublic);
+    viewNewsBtn.addEventListener("click", showPublic);
 
     // =====================================================
-    // ADMIN LOGIN
+    // ADMIN LOGIN (Email-based - Free plan friendly)
     // =====================================================
+    loginBtn.addEventListener("click", async function () {
+      const email = adminEmailInput.value.trim();
+      const password = adminPasswordInput.value;
 
-    loginBtn.addEventListener(
-      "click",
-      async function() {
-
-        const email =
-          adminEmailInput.value.trim();
-
-        const password =
-          adminPasswordInput.value;
-
-
-        if (!email || !password) {
-
-          showMsg(
-            loginMessage,
-            "Please enter your email and password.",
-            "error"
-          );
-
-          return;
-        }
-
-
-        loginBtn.disabled = true;
-
-        loginBtn.innerHTML =
-          '<i class="fas fa-spinner fa-spin"></i> Signing in...';
-
-
-        try {
-
-          // IMPORTANT:
-          // Firebase authentication MUST succeed.
-          //
-          // We no longer open the admin panel when
-          // Firebase authentication fails.
-
-          const credential =
-            await auth.signInWithEmailAndPassword(
-              email,
-              password
-            );
-
-
-          // Force-refresh the ID token so the latest
-          // custom claims are available.
-
-          const tokenResult =
-            await credential.user.getIdTokenResult(true);
-
-
-          console.log(
-            "Firebase user:",
-            credential.user.uid
-          );
-
-          console.log(
-            "Custom claims:",
-            tokenResult.claims
-          );
-
-
-          // Check admin custom claim.
-
-          if (
-            tokenResult.claims.admin !== true
-          ) {
-
-            await auth.signOut();
-
-            throw new Error(
-              "This Firebase account is authenticated but is not an administrator. Set the admin custom claim to true."
-            );
-          }
-
-
-          showMsg(
-            loginMessage,
-            "Admin login successful.",
-            "success"
-          );
-
-
-          setTimeout(
-            showAdmin,
-            400
-          );
-
-
-        } catch (err) {
-
-          console.error(
-            "ADMIN LOGIN ERROR:",
-            err
-          );
-
-
-          let message =
-            "Login failed.";
-
-
-          if (
-            err.code ===
-            "auth/invalid-credential"
-          ) {
-
-            message =
-              "Invalid email or password.";
-
-          } else if (
-            err.code ===
-            "auth/user-not-found"
-          ) {
-
-            message =
-              "No Firebase Auth account exists with this email.";
-
-          } else if (
-            err.code ===
-            "auth/wrong-password"
-          ) {
-
-            message =
-              "Incorrect password.";
-
-          } else if (
-            err.code ===
-            "auth/too-many-requests"
-          ) {
-
-            message =
-              "Too many login attempts. Try again later.";
-
-          } else if (err.message) {
-
-            message =
-              err.message;
-
-          }
-
-
-          showMsg(
-            loginMessage,
-            message,
-            "error"
-          );
-
-        } finally {
-
-          loginBtn.disabled = false;
-
-          loginBtn.innerHTML =
-            '<i class="fas fa-lock"></i> Login';
-
-        }
-
+      if (!email || !password) {
+        showMsg(loginMessage, "Please enter your email and password.", "error");
+        return;
       }
-    );
 
+      loginBtn.disabled = true;
+      loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+
+      try {
+        const credential = await auth.signInWithEmailAndPassword(email, password);
+
+        // Check if this is the admin email
+        if (credential.user.email !== ADMIN_EMAIL) {
+          await auth.signOut();
+          throw new Error("This account is not an administrator.");
+        }
+
+        showMsg(loginMessage, "Admin login successful.", "success");
+        setTimeout(showAdmin, 400);
+
+      } catch (err) {
+        console.error("ADMIN LOGIN ERROR:", err);
+
+        let message = "Login failed.";
+
+        if (err.code === "auth/invalid-credential") {
+          message = "Invalid email or password.";
+        } else if (err.code === "auth/user-not-found") {
+          message = "No Firebase Auth account exists with this email.";
+        } else if (err.code === "auth/wrong-password") {
+          message = "Incorrect password.";
+        } else if (err.code === "auth/too-many-requests") {
+          message = "Too many login attempts. Try again later.";
+        } else if (err.message) {
+          message = err.message;
+        }
+
+        showMsg(loginMessage, message, "error");
+      } finally {
+        loginBtn.disabled = false;
+        loginBtn.innerHTML = '<i class="fas fa-lock"></i> Login';
+      }
+    });
 
     // =====================================================
     // LOGOUT
     // =====================================================
-
-    logoutBtn.addEventListener(
-      "click",
-      async function() {
-
-        try {
-
-          await auth.signOut();
-
-        } catch (error) {
-
-          console.error(
-            "Logout error:",
-            error
-          );
-
-        }
-
-        adminEmailInput.value = "";
-
-        adminPasswordInput.value = "";
-
-        newsForm.reset();
-
-        mediaPreview.style.display =
-          "none";
-
-        mediaPreview.innerHTML =
-          "";
-
-        mediaInput.value =
-          "";
-
-        showPublic();
-
+    logoutBtn.addEventListener("click", async function () {
+      try {
+        await auth.signOut();
+      } catch (error) {
+        console.error("Logout error:", error);
       }
-    );
 
+      adminEmailInput.value = "";
+      adminPasswordInput.value = "";
+      newsForm.reset();
+      mediaPreview.style.display = "none";
+      mediaPreview.innerHTML = "";
+      mediaInput.value = "";
+      showPublic();
+    });
 
     // =====================================================
     // MEDIA UPLOAD UI
     // =====================================================
+    mediaUploadArea.addEventListener("click", function () {
+      mediaInput.click();
+    });
 
-    mediaUploadArea.addEventListener(
-      "click",
-      function() {
+    mediaInput.addEventListener("change", function () {
+      const file = this.files[0];
+      if (!file) return;
 
-        mediaInput.click();
-
+      if (file.size > 50 * 1024 * 1024) {
+        showMsg(newsMessage, "File is too large. Maximum size is 50 MB.", "error");
+        this.value = "";
+        return;
       }
-    );
 
+      const isVideo = file.type.startsWith("video/");
+      const url = URL.createObjectURL(file);
 
-    mediaInput.addEventListener(
-      "change",
-      function() {
+      mediaPreview.innerHTML = "";
 
-        const file =
-          this.files[0];
-
-
-        if (!file) {
-
-          return;
-
-        }
-
-
-        // 50 MB maximum.
-
-        if (
-          file.size >
-          50 * 1024 * 1024
-        ) {
-
-          showMsg(
-            newsMessage,
-            "File is too large. Maximum size is 50 MB.",
-            "error"
-          );
-
-          this.value = "";
-
-          return;
-        }
-
-
-        const isVideo =
-          file.type.startsWith(
-            "video/"
-          );
-
-
-        const url =
-          URL.createObjectURL(file);
-
-
-        mediaPreview.innerHTML =
-          "";
-
-
-        if (isVideo) {
-
-          const video =
-            document.createElement(
-              "video"
-            );
-
-          video.src =
-            url;
-
-          video.controls =
-            true;
-
-          video.muted =
-            true;
-
-          video.playsInline =
-            true;
-
-          video.style.maxWidth =
-            "100%";
-
-          video.style.maxHeight =
-            "200px";
-
-          video.style.borderRadius =
-            "10px";
-
-          mediaPreview.appendChild(
-            video
-          );
-
-        } else {
-
-          const img =
-            document.createElement(
-              "img"
-            );
-
-          img.src =
-            url;
-
-          img.alt =
-            "News preview";
-
-          mediaPreview.appendChild(
-            img
-          );
-
-        }
-
-
-        mediaPreview.style.display =
-          "block";
-
+      if (isVideo) {
+        const video = document.createElement("video");
+        video.src = url;
+        video.controls = true;
+        video.muted = true;
+        video.playsInline = true;
+        video.style.maxWidth = "100%";
+        video.style.maxHeight = "200px";
+        video.style.borderRadius = "10px";
+        mediaPreview.appendChild(video);
+      } else {
+        const img = document.createElement("img");
+        img.src = url;
+        img.alt = "News preview";
+        mediaPreview.appendChild(img);
       }
-    );
 
+      mediaPreview.style.display = "block";
+    });
 
     // =====================================================
     // CLOUDINARY UPLOAD
     // =====================================================
-
     async function uploadMedia(file) {
+      const isVideo = file.type.startsWith("video/");
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", UPLOAD_PRESET);
+      formData.append("tags", "brendava_news");
 
-      const isVideo =
-        file.type.startsWith(
-          "video/"
-        );
+      const endpoint = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${isVideo ? "video" : "image"}/upload`;
 
-
-      const formData =
-        new FormData();
-
-
-      formData.append(
-        "file",
-        file
-      );
-
-
-      formData.append(
-        "upload_preset",
-        UPLOAD_PRESET
-      );
-
-
-      formData.append(
-        "tags",
-        "brendava_news"
-      );
-
-
-      const endpoint =
-        `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${isVideo ? "video" : "image"}/upload`;
-
-
-      const response =
-        await fetch(
-          endpoint,
-          {
-            method: "POST",
-            body: formData
-          }
-        );
-
+      const response = await fetch(endpoint, {
+        method: "POST",
+        body: formData
+      });
 
       let data;
-
-
       try {
-
-        data =
-          await response.json();
-
+        data = await response.json();
       } catch (error) {
-
-        throw new Error(
-          "Cloudinary returned an invalid response."
-        );
-
+        throw new Error("Cloudinary returned an invalid response.");
       }
-
 
       if (!response.ok) {
-
-        console.error(
-          "Cloudinary error:",
-          data
-        );
-
-        throw new Error(
-          data.error?.message ||
-          "Cloudinary upload failed."
-        );
-
+        console.error("Cloudinary error:", data);
+        throw new Error(data.error?.message || "Cloudinary upload failed.");
       }
-
 
       if (!data.secure_url) {
-
-        throw new Error(
-          "Cloudinary did not return a media URL."
-        );
-
+        throw new Error("Cloudinary did not return a media URL.");
       }
 
-
       return {
-
-        url:
-          data.secure_url,
-
-        isVideo:
-          isVideo
-
+        url: data.secure_url,
+        isVideo: isVideo
       };
-
     }
-
 
     // =====================================================
     // PUBLISH NEWS
     // =====================================================
-
-    newsForm.addEventListener(
-      "submit",
-      async function(e) {
-
-        e.preventDefault();
-
-
-        // -----------------------------------------------
-        // CHECK AUTHENTICATION FIRST
-        // -----------------------------------------------
-
-        if (!auth.currentUser) {
-
-          showMsg(
-            newsMessage,
-            "You are not authenticated. Please log in again.",
-            "error"
-          );
-
-          showLogin();
-
-          return;
-
-        }
-
-
-        // -----------------------------------------------
-        // CHECK ADMIN CLAIM
-        // -----------------------------------------------
-
-        try {
-
-          const tokenResult =
-            await auth.currentUser.getIdTokenResult(true);
-
-
-          if (
-            tokenResult.claims.admin !== true
-          ) {
-
-            // Check admin by email (no custom claim needed)
-const adminEmail = "YOUR_ADMIN_EMAIL@gmail.com";   // ← same email as in rules
-
-if (credential.user.email !== adminEmail) {
-  await auth.signOut();
-  throw new Error("This account is not an administrator.");
-}
-            );
-
-            await auth.signOut();
-
-            showLogin();
-
-            return;
-
-          }
-
-        } catch (error) {
-
-          console.error(
-            "Admin verification error:",
-            error
-          );
-
-          showMsg(
-            newsMessage,
-            "Could not verify administrator permissions.",
-            "error"
-          );
-
-          return;
-
-        }
-
-
-        // -----------------------------------------------
-        // FORM VALUES
-        // -----------------------------------------------
-
-        const title =
-          document
-            .getElementById("newsTitle")
-            .value
-            .trim();
-
-
-        const description =
-          document
-            .getElementById("newsDescription")
-            .value
-            .trim();
-
-
-        const file =
-          mediaInput.files[0];
-
-
-        const published =
-          document
-            .getElementById("publishNow")
-            .checked;
-
-
-        if (!title || !description) {
-
-          showMsg(
-            newsMessage,
-            "Title and description are required.",
-            "error"
-          );
-
-          return;
-
-        }
-
-
-        // -----------------------------------------------
-        // BUTTON STATE
-        // -----------------------------------------------
-
-        submitNewsBtn.disabled =
-          true;
-
-
-        submitNewsBtn.innerHTML =
-          '<i class="fas fa-spinner fa-spin"></i> Publishing...';
-
-
-        newsMessage.style.display =
-          "none";
-
-
-        try {
-
-          let mediaUrl =
-            "";
-
-          let isVideo =
-            false;
-
-
-          // ---------------------------------------------
-          // CLOUDINARY MEDIA
-          // ---------------------------------------------
-
-          if (file) {
-
-            submitNewsBtn.innerHTML =
-              '<i class="fas fa-spinner fa-spin"></i> Uploading media...';
-
-
-            const result =
-              await uploadMedia(
-                file
-              );
-
-
-            mediaUrl =
-              result.url;
-
-            isVideo =
-              result.isVideo;
-
-          }
-
-
-          // ---------------------------------------------
-          // FIRESTORE
-          // ---------------------------------------------
-
-          submitNewsBtn.innerHTML =
-            '<i class="fas fa-spinner fa-spin"></i> Saving news...';
-
-
-          const newsData = {
-
-            title:
-              title,
-
-            description:
-              description,
-
-            mediaUrl:
-              mediaUrl,
-
-            isVideo:
-              isVideo,
-
-            published:
-              published,
-
-            createdAt:
-              firebase.firestore.FieldValue.serverTimestamp(),
-
-            createdBy:
-              auth.currentUser.uid,
-
-            createdByEmail:
-              auth.currentUser.email || ""
-
-          };
-
-
-          const docRef =
-            await db
-              .collection("news")
-              .add(newsData);
-
-
-          console.log(
-            "NEWS CREATED:",
-            docRef.id
-          );
-
-
-          showMsg(
-            newsMessage,
-            published
-              ? "News published successfully!"
-              : "News saved as a draft.",
-            "success"
-          );
-
-
-          // ---------------------------------------------
-          // RESET FORM
-          // ---------------------------------------------
-
-          newsForm.reset();
-
-          mediaPreview.style.display =
-            "none";
-
-          mediaPreview.innerHTML =
-            "";
-
-          mediaInput.value =
-            "";
-
-
-        } catch (err) {
-
-          console.error(
-            "PUBLISH ERROR:",
-            err
-          );
-
-
-          let message =
-            "Failed to publish news.";
-
-
-          if (
-            err.code ===
-            "permission-denied"
-          ) {
-
-            message =
-              "Firestore denied the write. Your Firebase account does not have the admin permission.";
-
-          } else if (
-            err.message
-          ) {
-
-            message =
-              err.message;
-
-          }
-
-
-          showMsg(
-            newsMessage,
-            message,
-            "error"
-          );
-
-        } finally {
-
-          submitNewsBtn.disabled =
-            false;
-
-          submitNewsBtn.innerHTML =
-            '<i class="fas fa-paper-plane"></i> Publish News';
-
-        }
-
+    newsForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      // Check authentication
+      if (!auth.currentUser) {
+        showMsg(newsMessage, "You are not authenticated. Please log in again.", "error");
+        showLogin();
+        return;
       }
-    );
 
+      // Check admin by email
+      if (auth.currentUser.email !== ADMIN_EMAIL) {
+        showMsg(newsMessage, "You are not an administrator.", "error");
+        await auth.signOut();
+        showLogin();
+        return;
+      }
+
+      const title = document.getElementById("newsTitle").value.trim();
+      const description = document.getElementById("newsDescription").value.trim();
+      const file = mediaInput.files[0];
+      const published = document.getElementById("publishNow").checked;
+
+      if (!title || !description) {
+        showMsg(newsMessage, "Title and description are required.", "error");
+        return;
+      }
+
+      submitNewsBtn.disabled = true;
+      submitNewsBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing...';
+      newsMessage.style.display = "none";
+
+      try {
+        let mediaUrl = "";
+        let isVideo = false;
+
+        if (file) {
+          submitNewsBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading media...';
+          const result = await uploadMedia(file);
+          mediaUrl = result.url;
+          isVideo = result.isVideo;
+        }
+
+        submitNewsBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving news...';
+
+        const newsData = {
+          title: title,
+          description: description,
+          mediaUrl: mediaUrl,
+          isVideo: isVideo,
+          published: published,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          createdBy: auth.currentUser.uid,
+          createdByEmail: auth.currentUser.email || ""
+        };
+
+        const docRef = await db.collection("news").add(newsData);
+        console.log("NEWS CREATED:", docRef.id);
+
+        showMsg(
+          newsMessage,
+          published ? "News published successfully!" : "News saved as a draft.",
+          "success"
+        );
+
+        newsForm.reset();
+        mediaPreview.style.display = "none";
+        mediaPreview.innerHTML = "";
+        mediaInput.value = "";
+
+      } catch (err) {
+        console.error("PUBLISH ERROR:", err);
+
+        let message = "Failed to publish news.";
+
+        if (err.code === "permission-denied") {
+          message = "Firestore denied the write. Check your security rules.";
+        } else if (err.message) {
+          message = err.message;
+        }
+
+        showMsg(newsMessage, message, "error");
+      } finally {
+        submitNewsBtn.disabled = false;
+        submitNewsBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish News';
+      }
+    });
 
     // =====================================================
     // LOAD PUBLIC NEWS
     // =====================================================
-
     async function loadNews() {
-
       newsList.innerHTML = `
-
         <div class="loading">
-
           <i class="fas fa-spinner fa-spin"></i>
-
           Loading latest news...
-
         </div>
-
       `;
 
-
       try {
-
-        /*
-         * IMPORTANT:
-         *
-         * We intentionally do NOT use:
-         *
-         * .where("published", "==", true)
-         * .orderBy("createdAt", "desc")
-         *
-         * together.
-         *
-         * That combination may require a composite Firestore index.
-         *
-         * Instead, we only query published news and sort
-         * the results in JavaScript.
-         */
-
-        const snapshot =
-          await db
-            .collection("news")
-            .where(
-              "published",
-              "==",
-              true
-            )
-            .get();
-
+        const snapshot = await db.collection("news")
+          .where("published", "==", true)
+          .get();
 
         if (snapshot.empty) {
-
           newsList.innerHTML = `
-
             <div class="empty">
-
-              <i
-                class="fas fa-inbox"
-                style="
-                  font-size:38px;
-                  color:#ccc;
-                  margin-bottom:12px;
-                  display:block;
-                "
-              ></i>
-
-              No news published yet.
-              Check back soon!
-
+              <i class="fas fa-inbox" style="font-size:38px; color:#ccc; margin-bottom:12px; display:block;"></i>
+              No news published yet.<br>Check back soon!
             </div>
-
           `;
-
           return;
-
         }
 
+        const newsItems = [];
+        snapshot.forEach(function (doc) {
+          newsItems.push({ id: doc.id, ...doc.data() });
+        });
 
-        // -----------------------------------------------
-        // CONVERT FIRESTORE DOCUMENTS TO ARRAY
-        // -----------------------------------------------
+        newsItems.sort(function (a, b) {
+          return getTimestampMillis(b.createdAt) - getTimestampMillis(a.createdAt);
+        });
 
-        const newsItems =
-          [];
+        let html = "";
 
+        newsItems.forEach(function (data) {
+          let date = "Recently";
+          const timestamp = getTimestampMillis(data.createdAt);
 
-        snapshot.forEach(
-          function(doc) {
-
-            const data =
-              doc.data();
-
-
-            newsItems.push({
-
-              id:
-                doc.id,
-
-              ...data
-
+          if (timestamp) {
+            date = new Date(timestamp).toLocaleDateString("en-US", {
+              year: "numeric",
+              month: "long",
+              day: "numeric"
             });
-
           }
-        );
 
+          let mediaHtml = "";
 
-        // -----------------------------------------------
-        // SORT NEWEST FIRST
-        // -----------------------------------------------
-
-        newsItems.sort(
-          function(a, b) {
-
-            const aTime =
-              getTimestampMillis(
-                a.createdAt
-              );
-
-
-            const bTime =
-              getTimestampMillis(
-                b.createdAt
-              );
-
-
-            return bTime - aTime;
-
+          if (data.mediaUrl) {
+            if (data.isVideo) {
+              mediaHtml = `
+                <video class="news-media" controls playsinline preload="metadata">
+                  <source src="${escapeHtmlAttribute(data.mediaUrl)}" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              `;
+            } else {
+              mediaHtml = `
+                <img class="news-media" src="${escapeHtmlAttribute(data.mediaUrl)}"
+                     alt="${escapeHtmlAttribute(data.title || "News image")}" loading="lazy">
+              `;
+            }
           }
-        );
 
-
-        // -----------------------------------------------
-        // BUILD HTML
-        // -----------------------------------------------
-
-        let html =
-          "";
-
-
-        newsItems.forEach(
-          function(data) {
-
-            let date =
-              "Recently";
-
-
-            const timestamp =
-              getTimestampMillis(
-                data.createdAt
-              );
-
-
-            if (timestamp) {
-
-              date =
-                new Date(
-                  timestamp
-                ).toLocaleDateString(
-                  "en-US",
-                  {
-                    year:
-                      "numeric",
-
-                    month:
-                      "long",
-
-                    day:
-                      "numeric"
-                  }
-                );
-
-            }
-
-
-            let mediaHtml =
-              "";
-
-
-            if (data.mediaUrl) {
-
-              if (data.isVideo) {
-
-                mediaHtml = `
-
-                  <video
-                    class="news-media"
-                    controls
-                    playsinline
-                    preload="metadata"
-                  >
-
-                    <source
-                      src="${escapeHtmlAttribute(data.mediaUrl)}"
-                      type="video/mp4"
-                    >
-
-                    Your browser does not support
-                    the video tag.
-
-                  </video>
-
-                `;
-
-              } else {
-
-                mediaHtml = `
-
-                  <img
-                    class="news-media"
-                    src="${escapeHtmlAttribute(data.mediaUrl)}"
-                    alt="${escapeHtmlAttribute(data.title || "News image")}"
-                    loading="lazy"
-                  >
-
-                `;
-
-              }
-
-            }
-
-
-            html += `
-
-              <article class="news-card">
-
-                ${mediaHtml}
-
-                <div class="news-content">
-
-                  <div class="news-date">
-
-                    <i class="far fa-calendar-alt"></i>
-
-                    ${escapeHtml(date)}
-
-                  </div>
-
-
-                  <h2 class="news-title">
-
-                    ${escapeHtml(data.title)}
-
-                  </h2>
-
-
-                  <div class="news-description">
-
-                    ${escapeHtml(data.description)}
-
-                  </div>
-
+          html += `
+            <article class="news-card">
+              ${mediaHtml}
+              <div class="news-content">
+                <div class="news-date">
+                  <i class="far fa-calendar-alt"></i>
+                  ${escapeHtml(date)}
                 </div>
+                <h2 class="news-title">${escapeHtml(data.title)}</h2>
+                <div class="news-description">${escapeHtml(data.description)}</div>
+              </div>
+            </article>
+          `;
+        });
 
-              </article>
-
-            `;
-
-          }
-        );
-
-
-        newsList.innerHTML =
-          html;
-
+        newsList.innerHTML = html;
 
       } catch (err) {
+        console.error("LOAD NEWS ERROR:", err);
 
-        console.error(
-          "LOAD NEWS ERROR:",
-          err
-        );
-
-
-        if (
-          err.code ===
-          "permission-denied"
-        ) {
-
+        if (err.code === "permission-denied") {
           newsList.innerHTML = `
-
-            <div
-              class="empty"
-              style="color:#c0392b;"
-            >
-
-              <i
-                class="fas fa-lock"
-                style="
-                  font-size:34px;
-                  margin-bottom:10px;
-                  display:block;
-                "
-              ></i>
-
-              Firestore denied access to published news.
-
-              <br><br>
-
+            <div class="empty" style="color:#c0392b;">
+              <i class="fas fa-lock" style="font-size:34px; margin-bottom:10px; display:block;"></i>
+              Firestore denied access to published news.<br><br>
               Check your Firestore security rules.
-
             </div>
-
           `;
-
         } else {
-
           newsList.innerHTML = `
-
-            <div
-              class="empty"
-              style="color:#c0392b;"
-            >
-
-              <i
-                class="fas fa-exclamation-triangle"
-                style="
-                  font-size:34px;
-                  margin-bottom:10px;
-                  display:block;
-                "
-              ></i>
-
-              Failed to load news.
-
-              <br>
-
-              Please try again later.
-
+            <div class="empty" style="color:#c0392b;">
+              <i class="fas fa-exclamation-triangle" style="font-size:34px; margin-bottom:10px; display:block;"></i>
+              Failed to load news.<br>Please try again later.
             </div>
-
           `;
-
         }
-
       }
-
     }
 
-
     // =====================================================
-    // FIRESTORE TIMESTAMP HELPER
+    // HELPERS
     // =====================================================
-
     function getTimestampMillis(value) {
-
-      if (!value) {
-
-        return 0;
-
+      if (!value) return 0;
+      if (typeof value.toMillis === "function") return value.toMillis();
+      if (value instanceof Date) return value.getTime();
+      if (typeof value === "number") return value;
+      if (value.seconds !== undefined) {
+        return value.seconds * 1000 + Math.floor((value.nanoseconds || 0) / 1000000);
       }
-
-
-      // Firestore Timestamp
-
-      if (
-        typeof value.toMillis ===
-        "function"
-      ) {
-
-        return value.toMillis();
-
-      }
-
-
-      // JavaScript Date
-
-      if (
-        value instanceof Date
-      ) {
-
-        return value.getTime();
-
-      }
-
-
-      // Old documents using Date.now()
-
-      if (
-        typeof value ===
-        "number"
-      ) {
-
-        return value;
-
-      }
-
-
-      // Serialized timestamp
-
-      if (
-        value.seconds !== undefined
-      ) {
-
-        return (
-          value.seconds * 1000 +
-          Math.floor(
-            (value.nanoseconds || 0) /
-            1000000
-          )
-        );
-
-      }
-
-
       return 0;
-
     }
-
-
-    // =====================================================
-    // HTML ESCAPING
-    // =====================================================
 
     function escapeHtml(text) {
-
-      if (
-        text === null ||
-        text === undefined
-      ) {
-
-        return "";
-
-      }
-
-
+      if (text === null || text === undefined) return "";
       return String(text)
-
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-
-        .replace(
-          /</g,
-          "&lt;"
-        )
-
-        .replace(
-          />/g,
-          "&gt;"
-        )
-
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-
-        .replace(
-          /'/g,
-          "&#039;"
-        );
-
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
     }
-
 
     function escapeHtmlAttribute(text) {
-
       return escapeHtml(text);
-
     }
 
-
-    // =====================================================
-    // MESSAGE
-    // =====================================================
-
-    function showMsg(
-      element,
-      text,
-      type
-    ) {
-
-      element.className =
-        `message ${type}`;
-
-      element.textContent =
-        text;
-
+    function showMsg(element, text, type) {
+      element.className = `message ${type}`;
+      element.textContent = text;
     }
 
-
     // =====================================================
-    // FIREBASE AUTH STATE
+    // START
     // =====================================================
-
-    auth.onAuthStateChanged(
-      async function(user) {
-
-        console.log(
-          "AUTH STATE:",
-          user
-            ? user.email
-            : "Not signed in"
-        );
-
-
-        if (!user) {
-
-          return;
-
-        }
-
-
-        // Do not automatically show admin panel.
-        // Verify the custom admin claim first.
-
-        try {
-
-          const tokenResult =
-            await user.getIdTokenResult(
-              true
-            );
-
-
-          console.log(
-            "AUTH CLAIMS:",
-            tokenResult.claims
-          );
-
-
-          if (
-            tokenResult.claims.admin === true
-          ) {
-
-            console.log(
-              "Administrator verified."
-            );
-
-          } else {
-
-            console.warn(
-              "User is signed in but has no admin claim."
-            );
-
-          }
-
-        } catch (error) {
-
-          console.error(
-            "Auth claim check failed:",
-            error
-          );
-
-        }
-
-      }
-    );
-
-
-    // =====================================================
-    // START PUBLIC NEWS
-    // =====================================================
-
     showPublic();
-
   </script>
 
 </body>
