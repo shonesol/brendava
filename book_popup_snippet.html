@@ -1,0 +1,247 @@
+<!-- ============================================================
+     BOOK POPUP AD – Until I Became Her
+     Paste this just BEFORE the closing </body> tag
+     Make sure the book cover image is in the same folder
+     (or update the src path below)
+============================================================ -->
+
+<style>
+/* ===== Book Popup Modal ===== */
+.book-popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 30, 28, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+}
+.book-popup-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.book-popup {
+  background: #fdfbf7;
+  border-radius: 16px;
+  max-width: 420px;
+  width: 100%;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+  position: relative;
+  transform: translateY(30px) scale(0.96);
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+  border: 1px solid rgba(212, 175, 55, 0.25);
+}
+.book-popup-overlay.show .book-popup {
+  transform: translateY(0) scale(1);
+}
+
+.book-popup-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.92);
+  border: none;
+  font-size: 1.25rem;
+  color: #333;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 5;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  transition: background 0.2s, transform 0.2s;
+}
+.book-popup-close:hover {
+  background: #fff;
+  transform: scale(1.08);
+}
+
+.book-popup-header {
+  background: linear-gradient(135deg, #0f766e, #0d5f58);
+  color: white;
+  text-align: center;
+  padding: 14px 20px 12px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.book-popup-cover {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  background: #f5f0e8;
+}
+
+.book-popup-body {
+  padding: 20px 22px 24px;
+  text-align: center;
+}
+
+.book-popup-body h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.35rem;
+  color: #0f766e;
+  margin-bottom: 6px;
+  line-height: 1.25;
+}
+
+.book-popup-body .author {
+  font-size: 0.95rem;
+  color: #D4AF37;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.book-popup-body p {
+  font-size: 0.92rem;
+  color: #444;
+  line-height: 1.5;
+  margin-bottom: 18px;
+}
+
+.book-popup-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(135deg, #0f766e, #0d5f58);
+  color: white !important;
+  text-decoration: none !important;
+  padding: 13px 28px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  box-shadow: 0 4px 16px rgba(15, 118, 110, 0.3);
+  transition: all 0.25s ease;
+  border: none;
+  cursor: pointer;
+}
+.book-popup-cta:hover {
+  background: linear-gradient(135deg, #0d5f58, #0a4a44);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(15, 118, 110, 0.4);
+}
+
+.book-popup-footer {
+  font-size: 0.78rem;
+  color: #888;
+  margin-top: 14px;
+}
+
+/* Mobile */
+@media (max-width: 480px) {
+  .book-popup {
+    max-width: 95vw;
+  }
+  .book-popup-cover {
+    max-height: 380px;
+  }
+  .book-popup-body {
+    padding: 16px 16px 20px;
+  }
+  .book-popup-body h3 {
+    font-size: 1.2rem;
+  }
+}
+</style>
+
+<!-- Popup HTML -->
+<div id="bookPopup" class="book-popup-overlay" role="dialog" aria-modal="true" aria-labelledby="bookPopupTitle">
+  <div class="book-popup">
+    <button class="book-popup-close" onclick="closeBookPopup()" aria-label="Close">&times;</button>
+    
+    <div class="book-popup-header">
+      Brendava Tours &amp; Travel · Featured
+    </div>
+    
+    <!-- REAL book cover – do not edit the image -->
+    <img 
+      src="until_i_became_her_cover.jpg" 
+      alt="Until I Became Her by Brenda Nabachwa" 
+      class="book-popup-cover"
+      onerror="this.src='https://via.placeholder.com/400x600?text=Until+I+Became+Her'"
+    >
+    
+    <div class="book-popup-body">
+      <h3 id="bookPopupTitle">Until I Became Her</h3>
+      <div class="author">Brenda Nabachwa</div>
+      <p>
+        A true story of dreams, resilience and becoming the woman you were meant to be.<br>
+        <em>A memoir. A message. A movement.</em>
+      </p>
+      
+      <!-- Change the href below to your real book link (Amazon, WhatsApp, etc.) -->
+      <a href="https://wa.me/256789336441?text=Hello%20Brendava%2C%20I%20am%20interested%20in%20the%20book%20Until%20I%20Became%20Her" 
+         class="book-popup-cta" 
+         target="_blank"
+         rel="noopener">
+        Get Your Copy
+      </a>
+      
+      <div class="book-popup-footer">
+        www.brendavatoursandtravel.com
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Show popup after a short delay (1.2 seconds) when page loads
+  // Only shows once per browser session
+  (function () {
+    const POPUP_KEY = "brendava_book_popup_seen";
+    
+    function showBookPopup() {
+      // Uncomment the next line if you want it to show only once per session:
+      // if (sessionStorage.getItem(POPUP_KEY)) return;
+      
+      const overlay = document.getElementById("bookPopup");
+      if (overlay) {
+        overlay.classList.add("show");
+        document.body.style.overflow = "hidden";
+        sessionStorage.setItem(POPUP_KEY, "1");
+      }
+    }
+    
+    window.closeBookPopup = function () {
+      const overlay = document.getElementById("bookPopup");
+      if (overlay) {
+        overlay.classList.remove("show");
+        document.body.style.overflow = "";
+      }
+    };
+    
+    // Close when clicking outside the popup
+    document.getElementById("bookPopup")?.addEventListener("click", function (e) {
+      if (e.target === this) closeBookPopup();
+    });
+    
+    // Close with Escape key
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeBookPopup();
+    });
+    
+    // Show after page has loaded
+    if (document.readyState === "loading") {
+      document.addEventListener("DOMContentLoaded", function () {
+        setTimeout(showBookPopup, 1200);
+      });
+    } else {
+      setTimeout(showBookPopup, 1200);
+    }
+  })();
+</script>
