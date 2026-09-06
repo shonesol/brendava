@@ -6,258 +6,279 @@
 <title>Get Started - Brendava Tours & Travel</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 
 <style>
 body {
-    margin: 0;
-    font-family: Inter, sans-serif;
-    background: #f5f1e6;
-    color: #333;
+  margin: 0;
+  font-family: Inter, sans-serif;
+  background: #f5f1e6;
+  color: #333;
 }
 
-/* HEADER */
 header {
-    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
-                url('IMG_0566.jpeg');
-    background-size: cover;
-    background-position: center;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    color: white;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+              url('IMG_0566.jpeg');
+  background-size: cover;
+  background-position: center;
+  height: 70vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
 }
 
 nav {
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
 }
 
 .home-btn {
-    background: #25D366;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 700;
+  background: #25D366;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
 }
 
 .get-started {
-    background: #0F766E;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 700;
+  background: #0F766E;
+  color: white;
+  padding: 10px 18px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 700;
 }
 
 .hero {
-    text-align: center;
-    margin-bottom: 60px;
+  text-align: center;
+  margin-bottom: 60px;
 }
 
 .hero h1 {
-    font-size: 48px;
-    font-weight: 800;
-    margin: 0;
+  font-size: 48px;
+  font-weight: 800;
+  margin: 0;
 }
 
 .hero p {
-    font-size: 18px;
-    margin-top: 12px;
-    letter-spacing: 1px;
+  font-size: 18px;
+  margin-top: 12px;
+  letter-spacing: 1px;
 }
 
-/* FORM SECTION */
 .booking {
-    max-width: 1000px;
-    margin: 50px auto;
-    background: white;
-    padding: 35px 40px;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+  max-width: 1000px;
+  margin: 50px auto;
+  background: white;
+  padding: 35px 40px;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .booking h2 {
-    margin-top: 0;
-    margin-bottom: 25px;
-    color: #0F766E;
-    font-size: 28px;
+  margin-top: 0;
+  margin-bottom: 25px;
+  color: #0F766E;
+  font-size: 28px;
 }
 
 form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
 }
 
 label {
-    display: block;
-    font-size: 13px;
-    font-weight: 600;
-    margin-bottom: 4px;
-    color: #555;
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: #555;
 }
 
 input, select, textarea {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    font-family: Inter, sans-serif;
-    font-size: 15px;
-    box-sizing: border-box;
-    transition: border-color 0.2s;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: Inter, sans-serif;
+  font-size: 15px;
+  box-sizing: border-box;
+  transition: border-color 0.2s;
 }
 
 input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: #0F766E;
+  outline: none;
+  border-color: #0F766E;
 }
 
 textarea {
-    grid-column: span 2;
-    min-height: 110px;
-    resize: vertical;
+  grid-column: span 2;
+  min-height: 110px;
+  resize: vertical;
 }
 
 .full-width {
-    grid-column: span 2;
+  grid-column: span 2;
 }
 
 .hint {
-    font-size: 12px;
-    color: #888;
-    margin-top: 4px;
+  font-size: 12px;
+  color: #888;
+  margin-top: 4px;
 }
 
-/* PAYMENT METHOD SECTION */
+/* Payment method cards */
 .payment-section {
-    grid-column: span 2;
-    margin-top: 10px;
+  grid-column: span 2;
+  margin-top: 8px;
 }
 
 .payment-section > label {
-    font-size: 15px;
-    margin-bottom: 12px;
-    color: #0F766E;
+  font-size: 15px;
+  margin-bottom: 12px;
+  color: #0F766E;
 }
 
 .payment-options {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-    gap: 12px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
 }
 
 .payment-option {
-    position: relative;
+  position: relative;
 }
 
 .payment-option input {
-    position: absolute;
-    opacity: 0;
-    width: 0;
-    height: 0;
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
 }
 
 .payment-option label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    padding: 18px 12px;
-    border: 2px solid #e5e7eb;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    background: #fafafa;
-    font-weight: 600;
-    font-size: 14px;
-    color: #374151;
-    text-align: center;
-    margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 10px;
+  border: 2px solid #e5e7eb;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background: #fafafa;
+  font-weight: 600;
+  font-size: 13px;
+  color: #374151;
+  text-align: center;
+  margin: 0;
 }
 
 .payment-option label:hover {
-    border-color: #0F766E;
-    background: #f0fdfa;
+  border-color: #0F766E;
+  background: #f0fdfa;
 }
 
 .payment-option input:checked + label {
-    border-color: #0F766E;
-    background: #ecfdf5;
-    color: #0F766E;
-    box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
+  border-color: #0F766E;
+  background: #ecfdf5;
+  color: #0F766E;
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.15);
 }
 
 .payment-icon {
-    font-size: 26px;
+  font-size: 24px;
 }
 
-button {
-    grid-column: span 2;
-    padding: 15px;
-    background: #0F766E;
-    color: white;
-    font-size: 16px;
-    font-weight: 700;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: background 0.2s;
-    margin-top: 10px;
+button[type="submit"] {
+  grid-column: span 2;
+  padding: 15px;
+  background: #0F766E;
+  color: white;
+  font-size: 16px;
+  font-weight: 700;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-top: 10px;
 }
 
-button:hover:not(:disabled) {
-    background: #115E59;
+button[type="submit"]:hover:not(:disabled) {
+  background: #115E59;
 }
 
-button:disabled {
-    background: #94a3b8;
-    cursor: not-allowed;
+button[type="submit"]:disabled {
+  background: #94a3b8;
+  cursor: not-allowed;
 }
 
-/* POPUP */
+/* Feedback */
+.form-feedback {
+  grid-column: span 2;
+  margin-top: 16px;
+  padding: 16px 18px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  display: none;
+}
+
+.form-feedback.success {
+  background: #ecfdf5;
+  border: 1px solid #a7f3d0;
+  color: #065f46;
+}
+
+.form-feedback.error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+}
+
+/* Popup */
 #popup {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: #0F766E;
-    color: white;
-    padding: 22px 36px;
-    border-radius: 12px;
-    display: none;
-    font-weight: 600;
-    z-index: 9999;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #0F766E;
+  color: white;
+  padding: 22px 36px;
+  border-radius: 12px;
+  display: none;
+  font-weight: 600;
+  z-index: 9999;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  text-align: center;
 }
 
-/* Responsive */
 @media (max-width: 700px) {
-    form {
-        grid-template-columns: 1fr;
-    }
-    textarea, .full-width, button, .payment-section {
-        grid-column: span 1;
-    }
-    nav {
-        padding: 15px 20px;
-    }
-    .hero h1 {
-        font-size: 34px;
-    }
-    .booking {
-        margin: 30px 15px;
-        padding: 25px 20px;
-    }
-    .payment-options {
-        grid-template-columns: 1fr 1fr;
-    }
+  form {
+    grid-template-columns: 1fr;
+  }
+  textarea, .full-width, button[type="submit"], .payment-section, .form-feedback {
+    grid-column: span 1;
+  }
+  nav {
+    padding: 15px 20px;
+  }
+  .hero h1 {
+    font-size: 34px;
+  }
+  .booking {
+    margin: 30px 15px;
+    padding: 25px 20px;
+  }
+  .payment-options {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 </style>
 </head>
@@ -265,222 +286,218 @@ button:disabled {
 <body>
 
 <header>
-    <nav>
-        <a href="index.html" class="home-btn">⬅ Go Home</a>
-        <a href="about.html" class="get-started">About Us</a>
-    </nav>
+  <nav>
+    <a href="index.html" class="home-btn">⬅ Go Home</a>
+    <a href="about.html" class="get-started">About Us</a>
+  </nav>
 
-    <div class="hero">
-        <h1>GET STARTED</h1>
-        <p id="changingText">DISCOVER EAST AFRICA</p>
-    </div>
+  <div class="hero">
+    <h1>GET STARTED</h1>
+    <p id="changingText">DISCOVER EAST AFRICA</p>
+  </div>
 </header>
 
 <section class="booking">
-    <h2>Book Your Safari</h2>
+  <h2>Book Your Safari</h2>
 
-    <form id="bookingForm">
-        <div>
-            <label for="name">Full Name *</label>
-            <input type="text" id="name" placeholder="Your full name" required>
+  <form id="bookingForm">
+    <!-- Hidden field used by EmailJS template (same as homepage) -->
+    <input type="hidden" name="to_email" value="brendavatoursandtravel@gmail.com">
+
+    <div>
+      <label for="name">Full Name *</label>
+      <input type="text" id="name" name="name" placeholder="Your full name" required>
+    </div>
+
+    <div>
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="email" placeholder="you@example.com" required>
+    </div>
+
+    <div>
+      <label for="phone">Phone / WhatsApp *</label>
+      <input type="tel" id="phone" name="phone" placeholder="+256 700 000 000" required>
+    </div>
+
+    <div>
+      <label for="country">Country</label>
+      <input type="text" id="country" name="country" placeholder="Your country">
+    </div>
+
+    <div>
+      <label for="start_date">Preferred Start Date</label>
+      <input type="date" id="start_date" name="start_date">
+    </div>
+
+    <div>
+      <label for="duration">Number of Days</label>
+      <input type="number" id="duration" name="duration" placeholder="e.g. 7" min="1">
+    </div>
+
+    <div>
+      <label for="adults">Number of Clients</label>
+      <input type="number" id="adults" name="adults" placeholder="e.g. 2" min="1">
+    </div>
+
+    <div>
+      <label for="destination">Preferred Destination</label>
+      <input type="text" id="destination" name="destination" placeholder="e.g. Bwindi, Murchison, Multi-country">
+    </div>
+
+    <div class="full-width">
+      <label for="parks">National Parks of Interest</label>
+      <select id="parks" name="parks" multiple size="5">
+        <option value="Maasai Mara">Maasai Mara</option>
+        <option value="Serengeti">Serengeti</option>
+        <option value="Queen Elizabeth">Queen Elizabeth</option>
+        <option value="Murchison Falls">Murchison Falls</option>
+        <option value="Bwindi">Bwindi</option>
+        <option value="Kidepo">Kidepo</option>
+      </select>
+      <div class="hint">Hold Ctrl (Windows) or Cmd (Mac) to select multiple</div>
+    </div>
+
+    <!-- Payment Method -->
+    <div class="payment-section">
+      <label>Preferred Payment Method *</label>
+      <div class="payment-options">
+        <div class="payment-option">
+          <input type="radio" id="pay-mobile" name="payment_method" value="Mobile Money (MTN / Airtel)" required>
+          <label for="pay-mobile">
+            <span class="payment-icon">📱</span>
+            Mobile Money
+          </label>
         </div>
-
-        <div>
-            <label for="email">Email *</label>
-            <input type="email" id="email" placeholder="you@example.com" required>
+        <div class="payment-option">
+          <input type="radio" id="pay-bank" name="payment_method" value="Bank Transfer (I&M Bank)">
+          <label for="pay-bank">
+            <span class="payment-icon">🏦</span>
+            Bank Transfer
+          </label>
         </div>
-
-        <div>
-            <label for="phone">Phone *</label>
-            <input type="tel" id="phone" placeholder="+256 700 000 000" required>
+        <div class="payment-option">
+          <input type="radio" id="pay-card" name="payment_method" value="Credit / Debit Card or PayPal">
+          <label for="pay-card">
+            <span class="payment-icon">💳</span>
+            Card / PayPal
+          </label>
         </div>
-
-        <div>
-            <label for="country">Country</label>
-            <input type="text" id="country" placeholder="Your country">
+        <div class="payment-option">
+          <input type="radio" id="pay-arrival" name="payment_method" value="Pay on Arrival">
+          <label for="pay-arrival">
+            <span class="payment-icon">🏕️</span>
+            Pay on Arrival
+          </label>
         </div>
+      </div>
+    </div>
 
-        <div>
-            <label for="destination">Preferred Destination</label>
-            <input type="text" id="destination" placeholder="e.g. Uganda, Kenya, Tanzania">
-        </div>
+    <div class="full-width">
+      <label for="message">Message / Special Requests</label>
+      <textarea id="message" name="message" placeholder="Tell us more about your dream safari, dietary needs, or any questions..."></textarea>
+    </div>
 
-        <div>
-            <label for="clients">Number of Clients</label>
-            <input type="number" id="clients" placeholder="e.g. 2" min="1">
-        </div>
+    <button type="submit" id="submitBtn">
+      <i class="fas fa-paper-plane"></i> SEND BOOKING
+    </button>
 
-        <div>
-            <label for="arrival">Arrival Date</label>
-            <input type="date" id="arrival">
-        </div>
-
-        <div>
-            <label for="departure">Departure Date</label>
-            <input type="date" id="departure">
-        </div>
-
-        <div>
-            <label for="days">Number of Days</label>
-            <input type="number" id="days" placeholder="e.g. 7" min="1">
-        </div>
-
-        <div class="full-width">
-            <label for="parks">National Parks (hold Ctrl / Cmd to select multiple)</label>
-            <select id="parks" multiple size="5">
-                <option>Maasai Mara</option>
-                <option>Serengeti</option>
-                <option>Queen Elizabeth</option>
-                <option>Murchison Falls</option>
-                <option>Bwindi</option>
-                <option>Kidepo</option>
-            </select>
-            <div class="hint">You can select more than one park</div>
-        </div>
-
-        <!-- PAYMENT METHOD -->
-        <div class="payment-section">
-            <label>Preferred Payment Method *</label>
-            <div class="payment-options">
-                <div class="payment-option">
-                    <input type="radio" id="pay-mobile" name="payment" value="Mobile Money (M-Pesa / Airtel Money)" required>
-                    <label for="pay-mobile">
-                        <span class="payment-icon">📱</span>
-                        Mobile Money
-                    </label>
-                </div>
-                <div class="payment-option">
-                    <input type="radio" id="pay-bank" name="payment" value="Bank Transfer">
-                    <label for="pay-bank">
-                        <span class="payment-icon">🏦</span>
-                        Bank Transfer
-                    </label>
-                </div>
-                <div class="payment-option">
-                    <input type="radio" id="pay-card" name="payment" value="Credit / Debit Card">
-                    <label for="pay-card">
-                        <span class="payment-icon">💳</span>
-                        Card Payment
-                    </label>
-                </div>
-                <div class="payment-option">
-                    <input type="radio" id="pay-arrival" name="payment" value="Pay on Arrival">
-                    <label for="pay-arrival">
-                        <span class="payment-icon">🏕️</span>
-                        Pay on Arrival
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="full-width">
-            <label for="message">Message / Special Requests</label>
-            <textarea id="message" placeholder="Tell us more about your dream safari..."></textarea>
-        </div>
-
-        <button type="submit" id="submitBtn">SEND BOOKING</button>
-    </form>
+    <div id="formFeedback" class="form-feedback"></div>
+  </form>
 </section>
 
-<div id="popup">Booking Sent Successfully! 🎉<br><small style="font-weight:400;opacity:0.9">We’ll get back to you soon.</small></div>
+<div id="popup">
+  Booking Sent Successfully! 🎉<br>
+  <small style="font-weight:400; opacity:0.9">We’ll reply shortly with a proposal.</small>
+</div>
 
-<script type="module">
-// Firebase imports MUST be at the top
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+<script>
+  // ========== SAME EmailJS setup as homepage ==========
+  emailjs.init({ publicKey: "pA1qeAlZDgevk8-It" });
 
-// Text rotator
-const texts = [
+  // Text rotator
+  const texts = [
     "DISCOVER EAST AFRICA",
     "EXPLORE WILDLIFE",
     "LUXURY SAFARIS",
     "YOUR JOURNEY STARTS HERE"
-];
-
-let i = 0;
-setInterval(() => {
+  ];
+  let i = 0;
+  setInterval(() => {
     i = (i + 1) % texts.length;
     document.getElementById("changingText").innerText = texts[i];
-}, 4000);
+  }, 4000);
 
-// EmailJS
-emailjs.init("pA1qeAlZDgevk8-It");
+  // Form submission – same method that works on homepage
+  const form = document.getElementById("bookingForm");
+  const submitBtn = document.getElementById("submitBtn");
+  const feedback = document.getElementById("formFeedback");
+  const popup = document.getElementById("popup");
 
-// Firebase config
-const firebaseConfig = {
-    apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
-    authDomain: "brendava-tours-and-travel.firebaseapp.com",
-    databaseURL: "https://brendava-tours-and-travel-default-rtdb.firebaseio.com",
-    projectId: "brendava-tours-and-travel",
-    storageBucket: "brendava-tours-and-travel.firebasestorage.app",
-    messagingSenderId: "732703885570",
-    appId: "1:732703885570:web:3011a3989d5fe36eb69a1b",
-    measurementId: "G-ZC356HMW9C"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-
-// Form handling
-const form = document.getElementById("bookingForm");
-const popup = document.getElementById("popup");
-const submitBtn = document.getElementById("submitBtn");
-
-form.addEventListener("submit", async (e) => {
+  form.addEventListener("submit", function (e) {
     e.preventDefault();
 
+    // Build a rich message that includes parks + payment (so the template receives everything)
+    const parks = [...document.getElementById("parks").selectedOptions]
+      .map(o => o.value)
+      .join(", ") || "Not specified";
+
+    const payment = document.querySelector('input[name="payment_method"]:checked')?.value || "Not specified";
+
+    const originalMessage = document.getElementById("message").value;
+
+    // Temporarily enrich the message field so EmailJS template gets all info
+    document.getElementById("message").value = `
+Preferred Destination: ${document.getElementById("destination").value || "Not specified"}
+Parks of Interest: ${parks}
+Preferred Payment Method: ${payment}
+Number of Days: ${document.getElementById("duration").value || "Not specified"}
+Number of Clients: ${document.getElementById("adults").value || "Not specified"}
+Start Date: ${document.getElementById("start_date").value || "Not specified"}
+Country: ${document.getElementById("country").value || "Not specified"}
+
+--- Guest Message ---
+${originalMessage}
+    `.trim();
+
     submitBtn.disabled = true;
-    submitBtn.textContent = "Sending...";
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    feedback.style.display = "none";
 
-    // Get selected payment method
-    const paymentMethod = document.querySelector('input[name="payment"]:checked')?.value || "";
+    // EXACT same call that works on the homepage
+    emailjs.sendForm("service_1hlp5ii", "template_vs01t7d", this)
+      .then(() => {
+        // Success
+        feedback.className = "form-feedback success";
+        feedback.innerHTML = `
+          <strong>Thank you!</strong> Your safari request has been sent successfully.<br><br>
+          We will reply within a few hours with a tailored proposal.<br><br>
+          You can also message us directly on WhatsApp: 
+          <a href="https://wa.me/256789336441" target="_blank" style="color:#0F766E; font-weight:600;">+256 789 336 441</a>
+        `;
+        feedback.style.display = "block";
 
-    const data = {
-        name: document.getElementById("name").value.trim(),
-        email: document.getElementById("email").value.trim(),
-        phone: document.getElementById("phone").value.trim(),
-        country: document.getElementById("country").value.trim(),
-        destination: document.getElementById("destination").value.trim(),
-        arrival: document.getElementById("arrival").value,
-        departure: document.getElementById("departure").value,
-        clients: document.getElementById("clients").value,
-        days: document.getElementById("days").value,
-        parks: [...document.getElementById("parks").selectedOptions]
-                    .map(o => o.value)
-                    .join(", "),
-        paymentMethod: paymentMethod,
-        message: document.getElementById("message").value.trim()
-    };
-
-    try {
-        // Save to Firestore
-        await addDoc(collection(db, "bookings"), {
-            ...data,
-            createdAt: new Date()
-        });
-
-        // Send email via EmailJS
-        await emailjs.send(
-            "service_1hlp5ii",
-            "template_vs01t7d",
-            data
-        );
-
-        // Success popup
         popup.style.display = "block";
-        setTimeout(() => {
-            popup.style.display = "none";
-        }, 3500);
+        setTimeout(() => popup.style.display = "none", 3500);
 
         form.reset();
-    } catch (err) {
+      })
+      .catch((err) => {
         console.error(err);
-        alert("Booking failed. Please try again or contact us directly.");
-    } finally {
+        feedback.className = "form-feedback error";
+        feedback.innerHTML = `
+          Something went wrong while sending the form.<br>
+          Please try again or contact us directly on WhatsApp: 
+          <a href="https://wa.me/256789336441" target="_blank">+256 789 336 441</a>
+        `;
+        feedback.style.display = "block";
+      })
+      .finally(() => {
+        // Restore original message
+        document.getElementById("message").value = originalMessage;
         submitBtn.disabled = false;
-        submitBtn.textContent = "SEND BOOKING";
-    }
-});
+        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> SEND BOOKING';
+      });
+  });
 </script>
 
 </body>
