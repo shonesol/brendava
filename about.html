@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us | Brendava Tours & Travel</title>
+<link rel="canonical" href="https://www.brendavatoursandtravel.com/about.html">
+<meta name="description" content="Brendava Tours & Travel is a trusted East African tour company committed to delivering unforgettable travel experiences across Uganda, Kenya, Tanzania, and Rwanda. Specialising in gorilla trekking, wildlife safaris and tailor-made packages.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#0f766e">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f7fa;
+    color:#333;
+}
+
+header{
+    background:linear-gradient(rgba(15,118,110,.8),rgba(15,118,110,.8)),
+    url('e41f3c80-4431-44a8-bae2-1b7edfdc10a4.jpeg');
+    background-size:cover;
+    background-position:center;
+    color:white;
+    text-align:center;
+    padding:100px 20px;
+}
+
+header h1{
+    font-size:50px;
+    margin-bottom:15px;
+}
+
+header p{
+    font-size:20px;
+}
+
+.about-section{
+    max-width:1100px;
+    margin:auto;
+    padding:70px 20px;
+}
+
+.about-section h2{
+    text-align:center;
+    color:#0f766e;
+    margin-bottom:30px;
+    font-size:38px;
+}
+
+.intro{
+    text-align:center;
+    max-width:880px;
+    margin:auto;
+    line-height:1.9;
+    color:#555;
+    font-size:18px;
+    margin-bottom:50px;
+}
+
+.features{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:25px;
+    margin-bottom:50px;
+}
+
+.card{
+    background:white;
+    padding:32px 28px;
+    border-radius:18px;
+    text-align:center;
+    box-shadow:0 8px 24px rgba(0,0,0,.07);
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 14px 32px rgba(0,0,0,.1);
+}
+
+.card i{
+    font-size:42px;
+    color:#0f766e;
+    margin-bottom:16px;
+}
+
+.card h3{
+    margin-bottom:12px;
+    font-size:20px;
+    color:#1a1a1a;
+}
+
+.card p{
+    color:#666;
+    line-height:1.8;
+    font-size:15.5px;
+}
+
+.mission,
+.vision{
+    background:white;
+    padding:32px 30px;
+    margin-bottom:24px;
+    border-radius:18px;
+    box-shadow:0 8px 24px rgba(0,0,0,.07);
+}
+
+.mission h3,
+.vision h3{
+    color:#0f766e;
+    margin-bottom:12px;
+    font-size:20px;
+}
+
+.mission p,
+.vision p{
+    line-height:1.85;
+    color:#555;
+    font-size:16px;
+}
+
+/* Professional trust strip – no registration number */
+.trust-strip{
+    background:linear-gradient(135deg,#0f766e,#0d5f58);
+    color:white;
+    border-radius:18px;
+    padding:28px 30px;
+    margin:45px 0 40px;
+    text-align:center;
+}
+.trust-strip h3{
+    font-size:20px;
+    margin-bottom:8px;
+    font-weight:600;
+}
+.trust-strip p{
+    opacity:0.95;
+    line-height:1.7;
+    font-size:15.5px;
+    max-width:700px;
+    margin:0 auto;
+}
+
+/* Team */
+.team{
+    margin:50px 0 35px;
+}
+.team > h3{
+    text-align:center;
+    color:#0f766e;
+    font-size:28px;
+    margin-bottom:28px;
+}
+.team-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:24px;
+}
+.team-card{
+    background:white;
+    border-radius:18px;
+    padding:28px 22px;
+    text-align:center;
+    box-shadow:0 8px 24px rgba(0,0,0,.07);
+    transition:.3s;
+}
+.team-card:hover{
+    transform:translateY(-4px);
+}
+.team-card h4{
+    color:#0f766e;
+    margin-bottom:4px;
+    font-size:18px;
+}
+.team-card .role{
+    color:#b8860b;
+    font-weight:600;
+    font-size:13.5px;
+    margin-bottom:12px;
+    letter-spacing:0.3px;
+}
+.team-card p{
+    color:#666;
+    font-size:14px;
+    line-height:1.6;
+    margin-bottom:12px;
+}
+.team-card a{
+    display:inline-block;
+    color:#0f766e;
+    text-decoration:none;
+    font-size:14px;
+    font-weight:500;
+}
+.team-card a:hover{
+    text-decoration:underline;
+}
+
+/* CTA */
+.cta{
+    text-align:center;
+    margin-top:45px;
+    display:flex;
+    gap:14px;
+    justify-content:center;
+    flex-wrap:wrap;
+}
+
+.cta a{
+    background:#0f766e;
+    color:white;
+    padding:15px 28px;
+    text-decoration:none;
+    border-radius:10px;
+    font-weight:600;
+    font-size:15px;
+    display:inline-block;
+    transition:.25s;
+}
+
+.cta a:hover{
+    background:#0d5f58;
+    transform:translateY(-2px);
+}
+
+.cta a.secondary{
+    background:#ffffff;
+    color:#0f766e;
+    border:2px solid #0f766e;
+}
+.cta a.secondary:hover{
+    background:#f0f7f6;
+}
+
+.cta a.whatsapp{
+    background:#25D366;
+}
+.cta a.whatsapp:hover{
+    background:#1da851;
+}
+
+footer{
+    background:#111827;
+    color:white;
+    text-align:center;
+    padding:36px 20px;
+    margin-top:50px;
+}
+footer p{
+    margin:7px 0;
+    font-size:15px;
+    opacity:0.92;
+}
+
+@media(max-width:768px){
+    header h1{
+        font-size:34px;
+    }
+    .about-section h2{
+        font-size:30px;
+    }
+    .intro{
+        font-size:16px;
+    }
+    .team > h3{
+        font-size:24px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Brendava Tours & Travel</h1>
+    <p>Discover East Africa's Finest Adventures</p>
+</header>
+
+<section class="about-section">
+
+    <h2>About Us</h2>
+
+    <!-- ORIGINAL INTRO – kept word for word -->
+    <p class="intro">
+        Brendava Tours & Travel is a trusted East African tour company committed to delivering unforgettable travel experiences across Uganda, Kenya, Tanzania, and Rwanda. We specialize in wildlife safaris, gorilla trekking, bird watching, cultural encounters, mountain adventures, and tailor-made holiday packages designed to meet every traveler's dream.
+    </p>
+
+    <!-- ORIGINAL FEATURES – kept word for word -->
+    <div class="features">
+
+        <div class="card">
+            <i class="fas fa-binoculars"></i>
+            <h3>Expert Safari Guides</h3>
+            <p>
+                Our knowledgeable guides provide exceptional wildlife interpretation and ensure every safari becomes a memorable adventure.
+            </p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-route"></i>
+            <h3>Customized Tours</h3>
+            <p>
+                Every traveler is unique. We create personalized itineraries tailored to your interests, schedule, and budget.
+            </p>
+        </div>
+
+        <div class="card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Safe & Reliable</h3>
+            <p>
+                We prioritize safety, comfort, and professional service throughout your journey from arrival to departure.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- ORIGINAL MISSION – kept word for word -->
+    <div class="mission">
+        <h3>Our Mission</h3>
+        <p>
+            To provide authentic, sustainable, and life-changing travel experiences while supporting wildlife conservation and empowering local communities throughout East Africa.
+        </p>
+    </div>
+
+    <!-- ORIGINAL VISION – kept word for word -->
+    <div class="vision">
+        <h3>Our Vision</h3>
+        <p>
+            To become East Africa's leading safari company, recognized globally for excellence, professionalism, and unforgettable adventures.
+        </p>
+    </div>
+
+    <!-- Professional trust strip (no registration number) -->
+    <div class="trust-strip">
+        <h3>A Local Team You Can Trust</h3>
+        <p>
+            Based in Kampala, we work directly with experienced local guides, drivers and community partners across Uganda, Rwanda, Kenya and Tanzania. 
+            From your first enquiry to the final day of your safari, you deal with the same dedicated team — clear communication, transparent pricing and personal attention throughout.
+        </p>
+    </div>
+
+    <!-- Team -->
+    <div class="team">
+        <h3>Meet the Team</h3>
+        <div class="team-grid">
+            <div class="team-card">
+                <h4>Brenda N</h4>
+                <div class="role">Managing Director</div>
+                <p>Plans itineraries, arranges gorilla permits and builds long-term community partnerships.</p>
+                <a href="https://wa.me/256789336441" target="_blank"><i class="fab fa-whatsapp"></i> +256 789 336 441</a>
+            </div>
+            <div class="team-card">
+                <h4>Andrew K</h4>
+                <div class="role">Assistant Manager</div>
+                <p>Designs multi-country routes and coordinates closely with drivers and field guides.</p>
+                <a href="https://wa.me/256770462422" target="_blank"><i class="fab fa-whatsapp"></i> +256 770 462 422</a>
+            </div>
+            <div class="team-card">
+                <h4>Shone T</h4>
+                <div class="role">Reservations Officer</div>
+                <p>Handles bookings, logistics and day-to-day communication with our guests.</p>
+                <a href="https://wa.me/256762584996" target="_blank"><i class="fab fa-whatsapp"></i> +256 762 584 996</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+        <a href="index.html" class="secondary">Back to Home</a>
+        <a href="index.html#booking">Plan Your Safari</a>
+        <a href="https://wa.me/256789336441?text=Hello%20Brendava%2C%20I%20would%20like%20to%20enquire%20about%20a%20safari" class="whatsapp" target="_blank">
+            <i class="fab fa-whatsapp"></i> Chat on WhatsApp
+        </a>
+    </div>
+
+</section>
+
+<footer>
+    <p>+256 789 336 441 · +256 762 584 996 · +256 770 462 422</p>
+    <p>brendavatoursandtravel@gmail.com</p>
+    <p>Mukalazi Road, Bukoto, Kampala, Uganda</p>
+    <p>© 2026 Brendava Tours & Travel. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
