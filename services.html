@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Brendava Tours & Travel</title>
+    <meta name="description" content="Gorilla trekking, wildlife safaris, multi-country East Africa tours, cultural experiences and tailor-made itineraries with Brendava Tours & Travel – licensed Kampala-based operator.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
+
+    body{
+        font-family:Arial, Helvetica, sans-serif;
+        background:#F5F5DC;
+    }
+
+    .carousel-item{
+        height:70vh;
+        min-height:420px;
+        background-size:cover;
+        background-position:center;
+        position:relative;
+    }
+
+    .slide1{
+        background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),
+                   url("e41f3c80-4431-44a8-bae2-1b7edfdc10a4.jpeg") center/cover no-repeat;
+    }
+
+    .overlay{
+        position:absolute;
+        inset:0;
+        background:rgba(0,0,0,.45);
+    }
+
+    .slide-content{
+        position:relative;
+        z-index:2;
+        color:#fff;
+        height:100%;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        padding:6%;
+        text-align:center;
+        align-items:center;
+    }
+
+    .slide-content h1{
+        font-size:48px;
+        font-weight:bold;
+        margin-bottom:18px;
+    }
+
+    .slide-content span{
+        color:#ffc107;
+    }
+
+    .lead{
+        font-size:20px;
+        line-height:1.7;
+        max-width:780px;
+        margin-bottom:28px;
+    }
+
+    .btn-custom{
+        min-width:200px;
+        padding:14px 28px;
+        border-radius:50px;
+        font-size:18px;
+        font-weight:600;
+    }
+
+    /* SERVICES SECTION */
+    #services{
+        padding:70px 6%;
+        background:#f5f5dc;
+    }
+
+    #services h1{
+        text-align:center;
+        color:#0f766e;
+        font-size:40px;
+        margin-bottom:16px;
+        font-weight:bold;
+    }
+
+    #services .intro-text{
+        max-width:880px;
+        margin:0 auto 45px;
+        text-align:center;
+        line-height:1.85;
+        color:#555;
+        font-size:17.5px;
+    }
+
+    #services h2{
+        text-align:center;
+        color:#0f766e;
+        font-size:32px;
+        margin:10px 0 35px;
+        font-weight:bold;
+    }
+
+    .services{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:26px;
+        margin-top:10px;
+    }
+
+    .service-box{
+        background:white;
+        padding:32px 26px;
+        border-radius:18px;
+        box-shadow:0 10px 28px rgba(0,0,0,0.08);
+        border-top:5px solid #0f766e;
+        transition:.35s;
+        text-align:left;
+        height:100%;
+    }
+
+    .service-box:hover{
+        transform:translateY(-8px);
+        box-shadow:0 18px 40px rgba(0,0,0,0.14);
+    }
+
+    .service-box .icon{
+        font-size:32px;
+        color:#0f766e;
+        margin-bottom:14px;
+    }
+
+    .service-box h3{
+        color:#0f766e;
+        font-size:20px;
+        margin-bottom:12px;
+        font-weight:700;
+    }
+
+    .service-box p{
+        color:#555;
+        font-size:15.5px;
+        line-height:1.75;
+        margin:0;
+    }
+
+    .closing{
+        max-width:860px;
+        margin:50px auto 0;
+        text-align:center;
+        line-height:1.85;
+        color:#555;
+        font-size:17px;
+    }
+
+    /* BACK TO HOME + CTA */
+    .action-buttons{
+        text-align:center;
+        margin:50px 0 30px;
+        display:flex;
+        gap:16px;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .action-buttons a{
+        display:inline-block;
+        padding:15px 32px;
+        border-radius:50px;
+        font-size:17px;
+        font-weight:600;
+        text-decoration:none;
+        transition:.3s;
+    }
+
+    .action-buttons .home-btn{
+        background:#0f766e;
+        color:white;
+        box-shadow:0 8px 20px rgba(15,118,110,.25);
+    }
+    .action-buttons .home-btn:hover{
+        background:#0d5f58;
+        transform:translateY(-3px);
+    }
+
+    .action-buttons .book-btn{
+        background:#ffc107;
+        color:#1a1a1a;
+    }
+    .action-buttons .book-btn:hover{
+        background:#e0a800;
+        transform:translateY(-3px);
+    }
+
+    .action-buttons .wa-btn{
+        background:#25D366;
+        color:white;
+    }
+    .action-buttons .wa-btn:hover{
+        background:#1da851;
+        transform:translateY(-3px);
+    }
+
+    footer{
+        background:#111827;
+        color:white;
+        text-align:center;
+        padding:32px 20px;
+        margin-top:20px;
+    }
+    footer p{
+        margin:6px 0;
+        font-size:15px;
+        opacity:0.9;
+    }
+
+    /* TABLET */
+    @media(max-width:900px){
+        .services{
+            grid-template-columns:repeat(2,1fr);
+        }
+        .slide-content h1{
+            font-size:36px;
+        }
+    }
+
+    /* PHONE */
+    @media(max-width:600px){
+        #services h1{
+            font-size:30px;
+        }
+        #services h2{
+            font-size:26px;
+        }
+        .services{
+            grid-template-columns:1fr;
+        }
+        .service-box{
+            padding:26px 22px;
+        }
+        .carousel-item{
+            height:55vh;
+            min-height:360px;
+        }
+    }
+    </style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<div id="heroSlider" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
+    <div class="carousel-inner">
+        <div class="carousel-item active slide1">
+            <div class="overlay"></div>
+            <div class="slide-content">
+                <h1>Our <span>Services</span></h1>
+                <p class="lead">
+                    Tailor-made gorilla treks, wildlife safaris and multi-country journeys across Uganda, Rwanda, Kenya and Tanzania — planned by a local team that lives here.
+                </p>
+                <a href="index.html#booking" class="btn btn-warning btn-custom">Plan Your Trip</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- SERVICES SECTION -->
+<section id="services">
+    <div class="container-fluid">
+
+        <h1>Brendava Tours & Travel</h1>
+
+        <p class="intro-text">
+            We design private and small-group journeys focused on mountain gorilla trekking, classic East African wildlife safaris and authentic cultural experiences. 
+            Every itinerary is built around your interests, pace and group size, with clear communication and reliable local partners from start to finish.
+        </p>
+
+        <h2>What We Offer</h2>
+
+        <div class="services">
+
+            <!-- Core strength -->
+            <div class="service-box">
+                <div class="icon"><i class="fas fa-paw"></i></div>
+                <h3>Gorilla Trekking</h3>
+                <p>
+                    Guided mountain gorilla treks in Bwindi Impenetrable National Park (Uganda) and Volcanoes National Park (Rwanda). We handle permits, transport, accommodation and experienced trackers so you can focus on the encounter.
+                </p>
+            </div>
+
+            <div class="service-box">
+                <div class="icon"><i class="fas fa-binoculars"></i></div>
+                <h3>Wildlife Safaris</h3>
+                <p>
+                    Game drives and boat cruises in Murchison Falls, Queen Elizabeth, Kidepo Valley and other top parks. Spot the Big Five, tree-climbing lions, elephants, hippos and rare species with knowledgeable local guides.
+                </p>
+            </div>
+
+            <div class="service-box">
+                <div class="icon"><i class="fas fa-globe-africa"></i></div>
+                <h3>Multi-Country East Africa</h3>
+                <p>
+                    Seamless itineraries combining Uganda with Rwanda, Kenya (Masai Mara) and Tanzania (Serengeti & Ngorongoro). Ideal for travellers who want the best of the region in one well-planned journey.
+                </p>
+            </div>
+
+            <div class="service-box">
+                <div class="icon"><i class="fas fa-leaf"></i></div>
+                <h3>Chimpanzee Tracking</h3>
+                <p>
+                    Walk with chimpanzees in Kibale Forest and other primate habitats. A perfect addition to gorilla trekking or a dedicated primate-focused trip with expert trackers.
+                </p>
+            </div>
+
+            <div class="service-box">
+                <div class="icon"><i class="fas fa-users"></i></div>
+                <h3>Cultural Experiences</h3>
+                <p>
+                    Authentic community visits, including Batwa cultural walks around Bwindi, local markets, traditional food and meaningful interactions with the people who live alongside the parks.
+                </p>
+            </div>
+
+            <div class="service-box">
+                <div class="icon"><i class="fas fa-map-marked-alt"></i></div>
+                <h3>Tailor-Made Itineraries</h3>
+                <p>
+                    Every trip is designed around you — whether you want a short gorilla-focused stay, a family safari, a honeymoon or a longer multi-country circuit. Private or small-group options available.
+                </p>
+            </div>
+
+            <div class="service-box">
+                <div class="icon"><i class="fas fa-dove"></i></div>
+                <h3>Birding Tours</h3>
+                <p>
+                    Uganda is one of Africa’s top birding destinations. Join guided birding trips targeting rare and endemic species with specialist local bird guides.
+                </p>
+            </div>
+
+            <div class="service-box">
+                <div class="icon"><i class="fas fa-heart"></i></div>
+                <h3>Honeymoon & Special Trips</h3>
+                <p>
+                    Romantic, carefully paced itineraries for couples — combining gorilla encounters, scenic lodges, private dinners and the most memorable moments of East Africa.
+                </p>
+            </div>
+
+            <div class="service-box">
+                <div class="icon"><i class="fas fa-shuttle-van"></i></div>
+                <h3>Airport Transfers & Logistics</h3>
+                <p>
+                    Reliable airport pick-ups and drop-offs, inter-park transfers and full ground logistics so your journey runs smoothly from arrival to departure.
+                </p>
+            </div>
+
+            <div class="service-box">
+                <div class="icon"><i class="fas fa-hotel"></i></div>
+                <h3>Lodge & Hotel Arrangements</h3>
+                <p>
+                    We book carefully selected lodges and hotels that match your style and budget — from comfortable mid-range to higher-end properties near the parks.
+                </p>
+            </div>
+
+            <div class="service-box">
+                <div class="icon"><i class="fas fa-hiking"></i></div>
+                <h3>Adventure Activities</h3>
+                <p>
+                    Optional additions such as white-water rafting on the Nile, nature walks, crater lake visits and short hikes that complement your main safari or trek.
+                </p>
+            </div>
+
+            <div class="service-box">
+                <div class="icon"><i class="fas fa-hands-helping"></i></div>
+                <h3>Full Trip Support</h3>
+                <p>
+                    From the first enquiry through permits, payments and on-ground assistance, our Kampala-based team stays available so you always have a clear point of contact.
+                </p>
+            </div>
+
+        </div>
+
+        <p class="closing">
+            At Brendava Tours & Travel we focus on genuine experiences, transparent pricing and personal service. 
+            Tell us what you would like to see and do — we will shape a clear proposal around it.
+        </p>
+
+        <div class="action-buttons">
+            <a href="index.html" class="home-btn">Back to Home</a>
+            <a href="index.html#booking" class="book-btn">Plan Your Safari</a>
+            <a href="https://wa.me/256789336441?text=Hello%20Brendava%2C%20I%20would%20like%20to%20enquire%20about%20your%20services" class="wa-btn" target="_blank">
+                <i class="fab fa-whatsapp"></i> WhatsApp Us
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<footer>
+    <p>+256 789 336 441 · +256 762 584 996 · +256 770 462 422</p>
+    <p>brendavatoursandtravel@gmail.com</p>
+    <p>Mukalazi Road, Bukoto, Kampala, Uganda</p>
+    <p>© 2026 Brendava Tours & Travel. All Rights Reserved.</p>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
