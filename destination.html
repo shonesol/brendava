@@ -1,295 +1,394 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
 <meta charset="UTF-8">
-
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Brendava Tours and Travel - Destinations</title>
-
 <style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 
-body{
+  body {
+    font-family: 'Segoe UI', system-ui, Arial, sans-serif;
+    background: #f1f5f9;
+    color: #1e293b;
+    line-height: 1.6;
+  }
 
-    font-family:Arial,sans-serif;
+  header {
+    background: linear-gradient(135deg, #1e40af, #2563eb);
+    color: white;
+    padding: 40px 20px 50px;
+    text-align: center;
+    position: relative;
+  }
 
-    margin:0;
+  header h1 {
+    font-size: 2.4rem;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
 
-    background:#f3f4f6;
+  header p {
+    font-size: 1.15rem;
+    opacity: 0.95;
+  }
 
-}
+  .back-home {
+    display: inline-block;
+    margin-top: 22px;
+    background: #0f172a;
+    color: white;
+    text-decoration: none;
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: background 0.25s;
+  }
 
-header{
+  .back-home:hover {
+    background: #000;
+  }
 
-    background:#2563eb;
+  .container {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 40px 20px 60px;
+  }
 
-    color:white;
+  .section-title {
+    text-align: center;
+    margin-bottom: 35px;
+  }
 
-    padding:25px;
+  .section-title h2 {
+    font-size: 1.8rem;
+    color: #1e40af;
+  }
 
-    text-align:center;
+  .section-title p {
+    color: #64748b;
+    margin-top: 6px;
+  }
 
-}
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 28px;
+  }
 
-.container{
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 26px 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+    transition: transform 0.25s, box-shadow 0.25s;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #e2e8f0;
+  }
 
-    max-width:1200px;
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 30px rgba(37, 99, 235, 0.15);
+  }
 
-    margin:auto;
+  .card h2 {
+    color: #1e40af;
+    font-size: 1.35rem;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
 
-    padding:20px;
+  .card p {
+    margin-bottom: 10px;
+    font-size: 0.95rem;
+  }
 
-}
+  .card .desc {
+    color: #475569;
+    margin-top: 6px;
+    margin-bottom: 20px;
+    flex-grow: 1;
+  }
 
-.grid{
+  .btn {
+    display: inline-block;
+    background: #2563eb;
+    color: white;
+    text-decoration: none;
+    padding: 11px 18px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+    transition: background 0.25s;
+    margin-top: auto;
+  }
 
-    display:grid;
+  .btn:hover {
+    background: #1d4ed8;
+  }
 
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+  .country-flag {
+    font-size: 1.3rem;
+  }
 
-    gap:20px;
-
-}
-
-.card{
-
-    background:white;
-
-    padding:20px;
-
-    border-radius:12px;
-
-    box-shadow:0 4px 12px rgba(0,0,0,.1);
-
-}
-
-.card h2{
-
-    color:#2563eb;
-
-}
-
-.btn{
-
-    display:inline-block;
-
-    background:#2563eb;
-
-    color:white;
-
-    text-decoration:none;
-
-    padding:10px 16px;
-
-    border-radius:8px;
-
-}
-.back-home{
-    margin-top:10px;
-    display:inline-block;
-    background:#111827;
-}
-
-.back-home:hover{
-    background:#000;
-}
+  footer {
+    text-align: center;
+    padding: 30px;
+    color: #64748b;
+    font-size: 0.9rem;
+  }
 </style>
-
 </head>
-
 <body>
 
 <header>
-    <h1>East Africa Safari Destinations</h1>
-    <p>Brendava Tours and Travel</p>
-
-    <!-- BACK HOME BUTTON -->
-    <a href="index.html" class="btn back-home">
-        ⬅ Back Home
-    </a>
-
+  <h1>East Africa Safari Destinations</h1>
+  <p>Brendava Tours and Travel</p>
+  <a href="index.html" class="back-home">⬅ Back Home</a>
 </header>
 
 <div class="container">
 
-<div class="grid">
-  <div class="park-card">
-  <h2>🇺🇬 Bwindi Impenetrable National Park</h2>
-  <p><strong>Location:</strong> Southwestern Uganda</p>
-  <p><strong>Size:</strong> 331 km²</p>
-  <p><strong>Animals:</strong> Mountain gorillas, chimpanzees, forest elephants, monkeys.</p>
-  <p>World-famous for mountain gorilla trekking and rich rainforest biodiversity.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
+  <div class="section-title">
+    <h2>Explore Our Safari Destinations</h2>
+    <p>Discover the best national parks across Uganda, Kenya, Tanzania, Rwanda & DR Congo</p>
+  </div>
+
+  <div class="grid">
+
+    <!-- Uganda -->
+    <div class="card">
+      <h2><span class="country-flag">🇺🇬</span> Bwindi Impenetrable National Park</h2>
+      <p><strong>Location:</strong> Southwestern Uganda</p>
+      <p><strong>Size:</strong> 331 km²</p>
+      <p><strong>Animals:</strong> Mountain gorillas, chimpanzees, forest elephants, monkeys</p>
+      <p class="desc">World-famous for mountain gorilla trekking and rich rainforest biodiversity.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇺🇬</span> Murchison Falls National Park</h2>
+      <p><strong>Location:</strong> Northwestern Uganda</p>
+      <p><strong>Size:</strong> 3,893 km²</p>
+      <p><strong>Animals:</strong> Lions, elephants, giraffes, buffaloes, hippos, crocodiles</p>
+      <p class="desc">Uganda’s largest national park and home to the mighty Murchison Falls.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇺🇬</span> Queen Elizabeth National Park</h2>
+      <p><strong>Location:</strong> Western Uganda</p>
+      <p><strong>Size:</strong> 1,978 km²</p>
+      <p><strong>Animals:</strong> Tree-climbing lions, elephants, leopards, hippos, chimpanzees</p>
+      <p class="desc">One of East Africa’s most diverse wildlife destinations.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇺🇬</span> Kibale National Park</h2>
+      <p><strong>Location:</strong> Western Uganda</p>
+      <p><strong>Size:</strong> 795 km²</p>
+      <p><strong>Animals:</strong> Chimpanzees, red colobus monkeys, baboons</p>
+      <p class="desc">Known as the primate capital of East Africa.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇺🇬</span> Kidepo Valley National Park</h2>
+      <p><strong>Location:</strong> Northeastern Uganda</p>
+      <p><strong>Size:</strong> 1,442 km²</p>
+      <p><strong>Animals:</strong> Lions, cheetahs, elephants, ostriches, buffaloes</p>
+      <p class="desc">One of Africa’s most remote and beautiful safari parks.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <!-- New Uganda parks -->
+    <div class="card">
+      <h2><span class="country-flag">🇺🇬</span> Lake Mburo National Park</h2>
+      <p><strong>Location:</strong> Western Uganda</p>
+      <p><strong>Size:</strong> 370 km²</p>
+      <p><strong>Animals:</strong> Zebras, impalas, buffaloes, hippos, leopards</p>
+      <p class="desc">Uganda’s smallest savannah park — perfect for walking safaris and boat rides.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇺🇬</span> Mgahinga Gorilla National Park</h2>
+      <p><strong>Location:</strong> Southwestern Uganda</p>
+      <p><strong>Size:</strong> 33.7 km²</p>
+      <p><strong>Animals:</strong> Mountain gorillas, golden monkeys</p>
+      <p class="desc">Part of the Virunga volcanoes and an excellent gorilla trekking destination.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇺🇬</span> Rwenzori Mountains National Park</h2>
+      <p><strong>Location:</strong> Western Uganda</p>
+      <p><strong>Size:</strong> 996 km²</p>
+      <p><strong>Animals:</strong> Chimpanzees, elephants, various birds</p>
+      <p class="desc">UNESCO World Heritage Site known as the “Mountains of the Moon” — ideal for hiking.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇺🇬</span> Semuliki National Park</h2>
+      <p><strong>Location:</strong> Western Uganda</p>
+      <p><strong>Size:</strong> 220 km²</p>
+      <p><strong>Animals:</strong> Forest elephants, chimpanzees, rare birds</p>
+      <p class="desc">Home to hot springs and unique Central African rainforest wildlife.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇺🇬</span> Mount Elgon National Park</h2>
+      <p><strong>Location:</strong> Eastern Uganda</p>
+      <p><strong>Size:</strong> 1,121 km²</p>
+      <p><strong>Animals:</strong> Elephants, buffaloes, monkeys, birds</p>
+      <p class="desc">Features the world’s largest volcanic caldera and excellent trekking opportunities.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <!-- Kenya -->
+    <div class="card">
+      <h2><span class="country-flag">🇰🇪</span> Maasai Mara National Reserve</h2>
+      <p><strong>Location:</strong> Southwestern Kenya</p>
+      <p><strong>Size:</strong> 1,510 km²</p>
+      <p><strong>Animals:</strong> Big Five, wildebeests, zebras, cheetahs</p>
+      <p class="desc">Home to the Great Wildebeest Migration.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇰🇪</span> Amboseli National Park</h2>
+      <p><strong>Location:</strong> Southern Kenya</p>
+      <p><strong>Size:</strong> 392 km²</p>
+      <p><strong>Animals:</strong> Elephants, lions, giraffes, zebras</p>
+      <p class="desc">Famous for elephant herds and views of Mount Kilimanjaro.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇰🇪</span> Tsavo East National Park</h2>
+      <p><strong>Location:</strong> Eastern Kenya</p>
+      <p><strong>Size:</strong> 13,747 km²</p>
+      <p><strong>Animals:</strong> Red elephants, lions, buffaloes</p>
+      <p class="desc">One of Kenya’s largest and oldest national parks.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇰🇪</span> Lake Nakuru National Park</h2>
+      <p><strong>Location:</strong> Central Kenya</p>
+      <p><strong>Size:</strong> 188 km²</p>
+      <p><strong>Animals:</strong> Rhinos, lions, flamingos, giraffes</p>
+      <p class="desc">Known worldwide for birdlife and rhino conservation.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <!-- Tanzania -->
+    <div class="card">
+      <h2><span class="country-flag">🇹🇿</span> Serengeti National Park</h2>
+      <p><strong>Location:</strong> Northern Tanzania</p>
+      <p><strong>Size:</strong> 14,763 km²</p>
+      <p><strong>Animals:</strong> Lions, cheetahs, leopards, wildebeests, zebras</p>
+      <p class="desc">One of the most famous safari destinations on Earth.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇹🇿</span> Ngorongoro Conservation Area</h2>
+      <p><strong>Location:</strong> Northern Tanzania</p>
+      <p><strong>Size:</strong> 8,292 km²</p>
+      <p><strong>Animals:</strong> Black rhinos, lions, elephants, buffaloes</p>
+      <p class="desc">Home to the spectacular Ngorongoro Crater.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇹🇿</span> Tarangire National Park</h2>
+      <p><strong>Location:</strong> Northern Tanzania</p>
+      <p><strong>Size:</strong> 2,850 km²</p>
+      <p><strong>Animals:</strong> Elephants, lions, leopards, zebras</p>
+      <p class="desc">Known for giant baobab trees and elephant herds.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇹🇿</span> Lake Manyara National Park</h2>
+      <p><strong>Location:</strong> Northern Tanzania</p>
+      <p><strong>Size:</strong> 325 km²</p>
+      <p><strong>Animals:</strong> Tree-climbing lions, elephants, flamingos</p>
+      <p class="desc">A beautiful park with forests, lake shores and wildlife.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇹🇿</span> Ruaha National Park</h2>
+      <p><strong>Location:</strong> Central Tanzania</p>
+      <p><strong>Size:</strong> 20,226 km²</p>
+      <p><strong>Animals:</strong> Lions, elephants, wild dogs, leopards</p>
+      <p class="desc">Tanzania’s largest national park.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <!-- Rwanda -->
+    <div class="card">
+      <h2><span class="country-flag">🇷🇼</span> Volcanoes National Park</h2>
+      <p><strong>Location:</strong> Northwestern Rwanda</p>
+      <p><strong>Size:</strong> 160 km²</p>
+      <p><strong>Animals:</strong> Mountain gorillas, golden monkeys</p>
+      <p class="desc">Rwanda’s premier gorilla trekking destination.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇷🇼</span> Akagera National Park</h2>
+      <p><strong>Location:</strong> Eastern Rwanda</p>
+      <p><strong>Size:</strong> 1,122 km²</p>
+      <p><strong>Animals:</strong> Big Five, crocodiles, hippos</p>
+      <p class="desc">Rwanda’s only savannah national park.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇷🇼</span> Nyungwe Forest National Park</h2>
+      <p><strong>Location:</strong> Southwestern Rwanda</p>
+      <p><strong>Size:</strong> 1,019 km²</p>
+      <p><strong>Animals:</strong> Chimpanzees, monkeys, birds</p>
+      <p class="desc">One of Africa’s oldest rainforests.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <!-- DR Congo -->
+    <div class="card">
+      <h2><span class="country-flag">🇨🇩</span> Virunga National Park</h2>
+      <p><strong>Location:</strong> Eastern DR Congo</p>
+      <p><strong>Size:</strong> 7,800 km²</p>
+      <p><strong>Animals:</strong> Mountain gorillas, elephants, hippos</p>
+      <p class="desc">Africa’s oldest national park and a UNESCO World Heritage Site.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+    <div class="card">
+      <h2><span class="country-flag">🇨🇩</span> Kahuzi-Biéga National Park</h2>
+      <p><strong>Location:</strong> Eastern DR Congo</p>
+      <p><strong>Size:</strong> 6,000 km²</p>
+      <p><strong>Animals:</strong> Eastern lowland gorillas, chimpanzees</p>
+      <p class="desc">Best known for lowland gorilla trekking.</p>
+      <a href="index.html#booking" class="btn">Book This Destination</a>
+    </div>
+
+  </div>
 </div>
 
-<div class="park-card">
-  <h2>🇺🇬 Murchison Falls National Park</h2>
-  <p><strong>Location:</strong> Northwestern Uganda</p>
-  <p><strong>Size:</strong> 3,893 km²</p>
-  <p><strong>Animals:</strong> Lions, elephants, giraffes, buffaloes, hippos, crocodiles.</p>
-  <p>Uganda's largest national park and home to the mighty Murchison Falls.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇺🇬 Queen Elizabeth National Park</h2>
-  <p><strong>Location:</strong> Western Uganda</p>
-  <p><strong>Size:</strong> 1,978 km²</p>
-  <p><strong>Animals:</strong> Tree-climbing lions, elephants, leopards, hippos, chimpanzees.</p>
-  <p>One of East Africa's most diverse wildlife destinations.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇺🇬 Kibale National Park</h2>
-  <p><strong>Location:</strong> Western Uganda</p>
-  <p><strong>Size:</strong> 795 km²</p>
-  <p><strong>Animals:</strong> Chimpanzees, red colobus monkeys, baboons.</p>
-  <p>Known as the primate capital of East Africa.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇺🇬 Kidepo Valley National Park</h2>
-  <p><strong>Location:</strong> Northeastern Uganda</p>
-  <p><strong>Size:</strong> 1,442 km²</p>
-  <p><strong>Animals:</strong> Lions, cheetahs, elephants, ostriches, buffaloes.</p>
-  <p>One of Africa's most remote and beautiful safari parks.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇰🇪 Maasai Mara National Reserve</h2>
-  <p><strong>Location:</strong> Southwestern Kenya</p>
-  <p><strong>Size:</strong> 1,510 km²</p>
-  <p><strong>Animals:</strong> Big Five, wildebeests, zebras, cheetahs.</p>
-  <p>Home to the Great Wildebeest Migration.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇰🇪 Amboseli National Park</h2>
-  <p><strong>Location:</strong> Southern Kenya</p>
-  <p><strong>Size:</strong> 392 km²</p>
-  <p><strong>Animals:</strong> Elephants, lions, giraffes, zebras.</p>
-  <p>Famous for elephant herds and views of Mount Kilimanjaro.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇰🇪 Tsavo East National Park</h2>
-  <p><strong>Location:</strong> Eastern Kenya</p>
-  <p><strong>Size:</strong> 13,747 km²</p>
-  <p><strong>Animals:</strong> Red elephants, lions, buffaloes.</p>
-  <p>One of Kenya's largest and oldest national parks.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇰🇪 Lake Nakuru National Park</h2>
-  <p><strong>Location:</strong> Central Kenya</p>
-  <p><strong>Size:</strong> 188 km²</p>
-  <p><strong>Animals:</strong> Rhinos, lions, flamingos, giraffes.</p>
-  <p>Known worldwide for birdlife and rhino conservation.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇹🇿 Serengeti National Park</h2>
-  <p><strong>Location:</strong> Northern Tanzania</p>
-  <p><strong>Size:</strong> 14,763 km²</p>
-  <p><strong>Animals:</strong> Lions, cheetahs, leopards, wildebeests, zebras.</p>
-  <p>One of the most famous safari destinations on Earth.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇹🇿 Ngorongoro Conservation Area</h2>
-  <p><strong>Location:</strong> Northern Tanzania</p>
-  <p><strong>Size:</strong> 8,292 km²</p>
-  <p><strong>Animals:</strong> Black rhinos, lions, elephants, buffaloes.</p>
-  <p>Home to the spectacular Ngorongoro Crater.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇹🇿 Tarangire National Park</h2>
-  <p><strong>Location:</strong> Northern Tanzania</p>
-  <p><strong>Size:</strong> 2,850 km²</p>
-  <p><strong>Animals:</strong> Elephants, lions, leopards, zebras.</p>
-  <p>Known for giant baobab trees and elephant herds.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇹🇿 Lake Manyara National Park</h2>
-  <p><strong>Location:</strong> Northern Tanzania</p>
-  <p><strong>Size:</strong> 325 km²</p>
-  <p><strong>Animals:</strong> Tree-climbing lions, elephants, flamingos.</p>
-  <p>A beautiful park with forests, lake shores and wildlife.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇹🇿 Ruaha National Park</h2>
-  <p><strong>Location:</strong> Central Tanzania</p>
-  <p><strong>Size:</strong> 20,226 km²</p>
-  <p><strong>Animals:</strong> Lions, elephants, wild dogs, leopards.</p>
-  <p>Tanzania's largest national park.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇷🇼 Volcanoes National Park</h2>
-  <p><strong>Location:</strong> Northwestern Rwanda</p>
-  <p><strong>Size:</strong> 160 km²</p>
-  <p><strong>Animals:</strong> Mountain gorillas, golden monkeys.</p>
-  <p>Rwanda's premier gorilla trekking destination.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇷🇼 Akagera National Park</h2>
-  <p><strong>Location:</strong> Eastern Rwanda</p>
-  <p><strong>Size:</strong> 1,122 km²</p>
-  <p><strong>Animals:</strong> Big Five, crocodiles, hippos.</p>
-  <p>Rwanda's only savannah national park.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇷🇼 Nyungwe Forest National Park</h2>
-  <p><strong>Location:</strong> Southwestern Rwanda</p>
-  <p><strong>Size:</strong> 1,019 km²</p>
-  <p><strong>Animals:</strong> Chimpanzees, monkeys, birds.</p>
-  <p>One of Africa's oldest rainforests.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇨🇩 Virunga National Park</h2>
-  <p><strong>Location:</strong> Eastern DR Congo</p>
-  <p><strong>Size:</strong> 7,800 km²</p>
-  <p><strong>Animals:</strong> Mountain gorillas, elephants, hippos.</p>
-  <p>Africa's oldest national park and UNESCO World Heritage Site.</p>
-  <a href="index.html#booking" class="btn">Book This Destination</a>
-</div>
-
-<div class="park-card">
-  <h2>🇨🇩 Kahuzi-Biéga National Park</h2>
-  <p><strong>Location:</strong> Eastern DR Congo</p>
-  <p><strong>Size:</strong> 6,000 km²</p>
-  <p><strong>Animals:</strong> Eastern lowland gorillas, chimpanzees.</p>
-  <p>Best known for lowland gorilla trekking.</p>
-
-</div>
-</div>
-
-</div>
+<footer>
+  © 2025 Brendava Tours and Travel. All rights reserved.
+</footer>
 
 </body>
-
 </html>
