@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Primary SEO -->
+<title>Featured Safari Trips East Africa | Brendava Tours & Travel Uganda</title>
+<meta name="description" content="Discover the best East African safari packages with Brendava Tours & Travel. Gorilla trekking, Murchison Falls, Serengeti, Maasai Mara and multi-country adventures. All trips include Uganda. Book your dream safari today.">
+<meta name="keywords" content="Uganda safari, gorilla trekking, East Africa safari packages, Murchison Falls tour, Serengeti safari, Maasai Mara safari, Rwanda gorilla trek, Brendava Tours, Kampala safari company, multi country safari East Africa">
+<meta name="author" content="Brendava Tours and Travel">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Featured Safari Trips East Africa | Brendava Tours & Travel">
+<meta property="og:description" content="Hand-crafted East African safari adventures. Every itinerary includes Uganda. Gorilla trekking, Big Five, Great Migration and more.">
+<meta property="og:image" content="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1200">
+<meta property="og:url" content="https://brendavatours.com/featured-trips">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Featured Safari Trips | Brendava Tours & Travel">
+<meta name="twitter:description" content="Best East Africa safari packages including Uganda, Kenya, Tanzania and Rwanda.">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://brendavatours.com/featured-trips">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f0fdf4;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+/* ===== HEADER ===== */
+header{
+    background: linear-gradient(135deg, rgba(6,95,70,0.92), rgba(4,120,87,0.88)),
+                url('https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1600') center/cover;
+    color: white;
+    text-align: center;
+    padding: 110px 20px 90px;
+    position: relative;
+}
+
+header h1{
+    font-size: clamp(36px, 6vw, 58px);
+    font-weight: 800;
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+header p{
+    font-size: clamp(16px, 2.5vw, 22px);
+    opacity: 0.95;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.header-badge{
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(8px);
+    padding: 8px 20px;
+    border-radius: 50px;
+    font-size: 14px;
+    margin-top: 20px;
+    border: 1px solid rgba(255,255,255,0.25);
+}
+
+/* ===== SECTION ===== */
+.trips-section{
+    padding: 70px 20px 90px;
+    max-width: 1300px;
+    margin: auto;
+}
+
+.section-title{
+    text-align: center;
+    margin-bottom: 55px;
+}
+
+.section-title h2{
+    color: #065f46;
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 800;
+    margin-bottom: 12px;
+}
+
+.section-title p{
+    color: #64748b;
+    font-size: 17px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ===== TRIP GRID ===== */
+.trip-grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 32px;
+}
+
+/* ===== TRIP CARD ===== */
+.trip-card{
+    background: white;
+    border-radius: 22px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+}
+
+.trip-card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(6,95,70,0.15);
+}
+
+.trip-image{
+    position: relative;
+    height: 230px;
+    overflow: hidden;
+}
+
+.trip-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.trip-card:hover .trip-image img{
+    transform: scale(1.08);
+}
+
+.trip-badge{
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background: #065f46;
+    color: white;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 50px;
+    letter-spacing: 0.3px;
+}
+
+.trip-duration{
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: rgba(255,255,255,0.95);
+    color: #065f46;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 14px;
+    border-radius: 50px;
+}
+
+.trip-content{
+    padding: 26px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.trip-content h3{
+    color: #064e3b;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    line-height: 1.3;
+}
+
+.trip-meta{
+    display: flex;
+    gap: 16px;
+    margin-bottom: 14px;
+    font-size: 13.5px;
+    color: #64748b;
+}
+
+.trip-meta span{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.trip-meta i{
+    color: #059669;
+}
+
+.trip-content p{
+    color: #475569;
+    font-size: 14.5px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    flex-grow: 1;
+}
+
+.trip-footer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.price-tag{
+    font-size: 20px;
+    font-weight: 800;
+    color: #065f46;
+}
+
+.btn{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #059669, #047857);
+    color: white;
+    text-decoration: none;
+    padding: 11px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(5,150,105,0.25);
+}
+
+.btn:hover{
+    background: linear-gradient(135deg, #047857, #065f46);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(5,150,105,0.35);
+}
+
+/* ===== WHY US ===== */
+.why-us{
+    margin-top: 90px;
+    text-align: center;
+}
+
+.why-us h2{
+    color: #065f46;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 40px;
+}
+
+.features{
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+}
+
+.feature{
+    background: white;
+    padding: 32px 24px;
+    border-radius: 18px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+    border: 1px solid #e2e8f0;
+    transition: 0.3s;
+}
+
+.feature:hover{
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(6,95,70,0.12);
+}
+
+.feature i{
+    font-size: 36px;
+    color: #059669;
+    margin-bottom: 16px;
+}
+
+.feature h3{
+    font-size: 17px;
+    color: #064e3b;
+    margin-bottom: 8px;
+}
+
+.feature p{
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* ===== FOOTER ===== */
+footer{
+    background: #064e3b;
+    color: white;
+    text-align: center;
+    padding: 40px 20px;
+    margin-top: 80px;
+}
+
+footer p{
+    margin: 6px 0;
+    font-size: 15px;
+    opacity: 0.95;
+}
+
+footer .copy{
+    margin-top: 18px;
+    font-size: 13px;
+    opacity: 0.7;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width: 768px){
+    header{
+        padding: 80px 16px 70px;
+    }
+    .trip-grid{
+        grid-template-columns: 1fr;
+    }
+    .trip-footer{
+        flex-direction: column;
+        gap: 14px;
+        align-items: flex-start;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Featured Safari Trips</h1>
+    <p>Hand-crafted East African adventures — every itinerary includes the best of Uganda</p>
+    <div class="header-badge">🇺🇬 Uganda • 🇰🇪 Kenya • 🇹🇿 Tanzania • 🇷🇼 Rwanda</div>
+</header>
+
+<section class="trips-section">
+
+    <div class="section-title">
+        <h2>Our Best Safari Packages</h2>
+        <p>From short getaways to epic multi-country journeys — all carefully designed around Uganda and the wider East African region.</p>
+    </div>
+
+    <div class="trip-grid">
+
+        <!-- 3 DAYS = $1,560 -->
+        <div class="trip-card">
+            <div class="trip-image">
+                <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800" alt="3 Day Gorilla Trekking Safari Uganda">
+                <span class="trip-badge">Uganda</span>
+                <span class="trip-duration">3 Days</span>
+            </div>
+            <div class="trip-content">
+                <h3>3-Day Gorilla Trekking Safari</h3>
+                <div class="trip-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Bwindi, Uganda</span>
+                </div>
+                <p>Encounter endangered mountain gorillas in Bwindi Impenetrable Forest — one of the world’s greatest wildlife experiences.</p>
+                <div class="trip-footer">
+                    <div class="price-tag">$1,560</div>
+                    <a href="get-started.html" class="btn">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 DAYS = $2,080 -->
+        <div class="trip-card">
+            <div class="trip-image">
+                <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800" alt="4 Day Murchison Falls Safari Uganda">
+                <span class="trip-badge">Uganda</span>
+                <span class="trip-duration">4 Days</span>
+            </div>
+            <div class="trip-content">
+                <h3>4-Day Murchison Falls Explorer</h3>
+                <div class="trip-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Murchison Falls NP</span>
+                </div>
+                <p>Game drives, a thrilling Nile boat cruise to the base of the falls, and classic Big Five viewing in Uganda’s largest park.</p>
+                <div class="trip-footer">
+                    <div class="price-tag">$2,080</div>
+                    <a href="get-started.html" class="btn">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5 DAYS = $2,600 -->
+        <div class="trip-card">
+            <div class="trip-image">
+                <img src="https://images.unsplash.com/photo-1549366021-9f761d040a94?w=800" alt="5 Day Queen Elizabeth Safari Uganda">
+                <span class="trip-badge">Uganda</span>
+                <span class="trip-duration">5 Days</span>
+            </div>
+            <div class="trip-content">
+                <h3>5-Day Queen Elizabeth & Ishasha</h3>
+                <div class="trip-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> QENP + Ishasha</span>
+                </div>
+                <p>Tree-climbing lions, Kazinga Channel boat safari, crater lakes and excellent birding in one of Uganda’s most scenic parks.</p>
+                <div class="trip-footer">
+                    <div class="price-tag">$2,600</div>
+                    <a href="get-started.html" class="btn">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7 DAYS = $3,640 -->
+        <div class="trip-card">
+            <div class="trip-image">
+                <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800" alt="7 Day Uganda Highlights Safari">
+                <span class="trip-badge">Uganda</span>
+                <span class="trip-duration">7 Days</span>
+            </div>
+            <div class="trip-content">
+                <h3>7-Day Uganda Highlights Safari</h3>
+                <div class="trip-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Murchison + Queen + Bwindi</span>
+                </div>
+                <p>The perfect introduction to Uganda: Murchison Falls, Queen Elizabeth National Park and a gorilla trek in Bwindi.</p>
+                <div class="trip-footer">
+                    <div class="price-tag">$3,640</div>
+                    <a href="get-started.html" class="btn">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 8 DAYS = $4,160 -->
+        <div class="trip-card">
+            <div class="trip-image">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="8 Day Rwenzori Hiking and Safari Uganda">
+                <span class="trip-badge">Uganda Focus</span>
+                <span class="trip-duration">8 Days</span>
+            </div>
+            <div class="trip-content">
+                <h3>8-Day Rwenzori & Wildlife Combo</h3>
+                <div class="trip-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Rwenzori + Queen Elizabeth</span>
+                </div>
+                <p>Trek the legendary Mountains of the Moon, then unwind with game drives and a boat cruise in Queen Elizabeth National Park.</p>
+                <div class="trip-footer">
+                    <div class="price-tag">$4,160</div>
+                    <a href="get-started.html" class="btn">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 10 DAYS = $5,200 -->
+        <div class="trip-card">
+            <div class="trip-image">
+                <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800" alt="10 Day Uganda Rwanda Gorilla Safari">
+                <span class="trip-badge">Uganda + Rwanda</span>
+                <span class="trip-duration">10 Days</span>
+            </div>
+            <div class="trip-content">
+                <h3>10-Day Uganda & Rwanda Primate Safari</h3>
+                <div class="trip-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Bwindi + Volcanoes NP</span>
+                </div>
+                <p>Gorilla trekking in both Uganda and Rwanda, golden monkeys, and scenic drives through the Virunga region. Pure primate magic.</p>
+                <div class="trip-footer">
+                    <div class="price-tag">$5,200</div>
+                    <a href="get-started.html" class="btn">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 12 DAYS = $6,240 -->
+        <div class="trip-card">
+            <div class="trip-image">
+                <img src="https://images.unsplash.com/photo-1549366021-9f761d040a94?w=800" alt="12 Day Uganda Kenya Maasai Mara Safari">
+                <span class="trip-badge">Uganda + Kenya</span>
+                <span class="trip-duration">12 Days</span>
+            </div>
+            <div class="trip-content">
+                <h3>12-Day Uganda & Maasai Mara Adventure</h3>
+                <div class="trip-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Murchison • Queen • Mara</span>
+                </div>
+                <p>Combine Uganda’s classic parks with the legendary Maasai Mara. Big Five, great scenery and authentic cultural encounters.</p>
+                <div class="trip-footer">
+                    <div class="price-tag">$6,240</div>
+                    <a href="get-started.html" class="btn">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 14 DAYS = $7,280 -->
+        <div class="trip-card">
+            <div class="trip-image">
+                <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800" alt="14 Day East Africa Safari Uganda Kenya Tanzania">
+                <span class="trip-badge">Uganda + Kenya + Tanzania</span>
+                <span class="trip-duration">14 Days</span>
+            </div>
+            <div class="trip-content">
+                <h3>14-Day Classic East Africa Circuit</h3>
+                <div class="trip-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Uganda • Mara • Serengeti</span>
+                </div>
+                <p>The ultimate classic: Murchison Falls & Bwindi in Uganda, Maasai Mara in Kenya, and the Serengeti & Ngorongoro in Tanzania.</p>
+                <div class="trip-footer">
+                    <div class="price-tag">$7,280</div>
+                    <a href="get-started.html" class="btn">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 16 DAYS = $8,320 -->
+        <div class="trip-card">
+            <div class="trip-image">
+                <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800" alt="16 Day Uganda Rwanda Safari">
+                <span class="trip-badge">Deep Uganda + Rwanda</span>
+                <span class="trip-duration">16 Days</span>
+            </div>
+            <div class="trip-content">
+                <h3>16-Day Grand Uganda & Rwanda Explorer</h3>
+                <div class="trip-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> Kidepo • Murchison • Bwindi • Volcanoes</span>
+                </div>
+                <p>Remote Kidepo Valley, the Nile, gorilla forests and Volcanoes National Park. A deep dive into the best of the Albertine Rift.</p>
+                <div class="trip-footer">
+                    <div class="price-tag">$8,320</div>
+                    <a href="get-started.html" class="btn">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <!-- 20 DAYS = $10,400 -->
+        <div class="trip-card">
+            <div class="trip-image">
+                <img src="https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800" alt="20 Day Ultimate East Africa Safari">
+                <span class="trip-badge">Uganda + Kenya + Tanzania + Rwanda</span>
+                <span class="trip-duration">20 Days</span>
+            </div>
+            <div class="trip-content">
+                <h3>20-Day Ultimate East Africa Odyssey</h3>
+                <div class="trip-meta">
+                    <span><i class="fas fa-map-marker-alt"></i> 4 Countries • Full Circuit</span>
+                </div>
+                <p>The most complete journey: Uganda’s primates & waterfalls, Kenya’s Mara, Tanzania’s Serengeti & Ngorongoro, and Rwanda’s volcanoes. A once-in-a-lifetime safari.</p>
+                <div class="trip-footer">
+                    <div class="price-tag">$10,400</div>
+                    <a href="get-started.html" class="btn">Book Now <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- WHY US -->
+    <div class="why-us">
+        <h2>Why Travel With Brendava Tours & Travel?</h2>
+
+        <div class="features">
+            <div class="feature">
+                <i class="fas fa-binoculars"></i>
+                <h3>Expert Local Guides</h3>
+                <p>Professional, passionate guides who know every park intimately.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-car"></i>
+                <h3>Comfortable 4x4s</h3>
+                <p>Modern safari vehicles with pop-up roofs for the best game viewing.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-map-marked-alt"></i>
+                <h3>Tailor-Made Itineraries</h3>
+                <p>Every trip can be customized to match your pace and interests.</p>
+            </div>
+            <div class="feature">
+                <i class="fas fa-headset"></i>
+                <h3>24/7 Support</h3>
+                <p>Friendly assistance before, during and after your safari.</p>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<footer>
+    <p>📞 +256 789 336 441</p>
+    <p>📧 brendavatoursandtravel@gmail.com</p>
+    <p>📍 Kampala, Uganda</p>
+    <p class="copy">© 2026 Brendava Tours & Travel. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
