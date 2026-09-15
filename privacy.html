@@ -92,6 +92,63 @@ header h1{
 }
 
 }
+   /* ===== WATERMARK ===== */
+.watermark {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 130px;
+  height: 130px;
+  background-image: url('brendava_logo_500px.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.14;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+}
+
+.watermark-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 620px;          /* large size */
+  height: 620px;
+  background-image: url('brendava_logo_500px.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.055;
+  pointer-events: none;
+  z-index: 1;
+  border-radius: 50%;
+}
+
+@media (max-width: 700px) {
+  .itinerary-header { padding: 16px; }
+  .itinerary-header h3 { font-size: 16px; }
+  .price-box { width: 100%; }
+  .highlights, .itinerary-body, .booking-footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .day { grid-template-columns: 1fr; gap: 3px; }
+  .info-grid { grid-template-columns: 1fr; }
+  .book-button { width: 100%; justify-content: center; }
+
+  .watermark {
+    width: 85px;
+    height: 85px;
+    bottom: 16px;
+    right: 16px;
+  }
+  .watermark-center {
+    width: 220px;
+    height: 220px;
+  }
+} 
 </style>
 </head>
 
