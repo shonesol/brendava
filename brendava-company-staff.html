@@ -25,58 +25,133 @@
       background: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 50%, #f8fafc 100%);
       color: var(--text); min-height: 100vh; line-height: 1.5;
     }
-    .header {
-      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
-      color: white; padding: 1rem 1.5rem;
-      display: flex; align-items: center; justify-content: space-between;
-      position: static; top: 0; z-index: 50;
-      box-shadow: 0 4px 12px rgba(15,118,110,0.25);
-    }
- /* Responsive header */
-@media (max-width: 1200px) {
- .desktop-nav { display: none !important; }
- .menu-toggle { display: inline-flex !important; visibility: visible !important; opacity: 1 !important; }
+ /* ================= HEADER ================= */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: linear-gradient(90deg, #0f766e 0%, #0d5c56 100%);
+  color: #fff;
+  border-bottom: 1px solid rgba(255,255,255,0.12);
+  box-shadow: 0 4px 16px rgba(15,118,110,0.28);
 }
-@media (max-width: 900px) {
- .header-main {
- padding: 10px 14px;
- gap: 10px;
- }
- .logo-area {
- gap: 10px;
- min-width: 0;
- flex: 1 1 auto;
- overflow: hidden;
- }
-.logo-text h1 { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
-.logo-text span { font-size: 0.75rem; opacity: 0.85; }
-.header-right { display: flex; align-items: center; gap: 0.75rem; }
-.header-right a, .header-right button {
-    color: white; background: rgba(255,255,255,0.15);
-    border: none; padding: 0.45rem 0.9rem; border-radius: 8px;
-    font-size: 0.85rem; font-weight: 500; cursor: pointer; text-decoration: none;
+.header-main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0.75rem 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
- .header-actions {
- flex-shrink: 0 !important;
- margin-left: 8px;
- }
- .menu-toggle {
- display: inline-flex !important;
- padding: 9px 14px;
- font-size: 0.85rem;
- white-space: nowrap;
- }
+/* Logo */
+.logo-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+  color: inherit;
+  text-decoration: none;
 }
+.header-logo {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #fff;
+  border: 2px solid rgba(255,255,255,0.85);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  flex-shrink: 0;
+}
+.logo-text { min-width: 0; line-height: 1.2; }
+.logo-text h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.logo-text span {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+/* Right actions */
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+}
+.header-right a,
+.header-right button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.12);
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s, border-color 0.2s;
+}
+.header-right a:hover,
+.header-right button:hover {
+  background: rgba(255,255,255,0.25);
+  border-color: rgba(255,255,255,0.6);
+  transform: translateY(-1px);
+}
+.header-right a:focus-visible,
+.header-right button:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+/* Primary action (Admin Login) */
+#adminLoginBtn {
+  background: #fff;
+  color: #0f766e;
+  border-color: #fff;
+}
+#adminLoginBtn:hover { background: #f0fdfa; }
+
+/* Admin badge in header */
+.header .badge-admin {
+  background: #fde68a;
+  color: #78350f;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+  .header-main { padding: 0.65rem 1rem; }
+  .logo-text h1 { font-size: 1.2rem; }
+}
+
+/* Mobile */
 @media (max-width: 520px) {
- .header-top { font-size: 0.68rem; text-align: center; }
- .header-top-inner { justify-content: center; gap: 8px; }
- .logo-text h1 { font-size: 0.9rem; }
- .header-logo { width: 40px; height: 40px; }
- .menu-toggle {
- padding: 9px 12px;
- font-size: 0.82rem;
- }
+  .header-main { padding: 0.55rem 0.75rem; gap: 0.5rem; }
+  .header-logo { width: 38px; height: 38px; }
+  .logo-area { gap: 0.5rem; }
+  .logo-text h1 { font-size: 1rem; }
+  .logo-text span { font-size: 0.6rem; letter-spacing: 1px; }
+  .header-right { gap: 0.4rem; }
+  .header-right a,
+  .header-right button { padding: 0.45rem 0.7rem; font-size: 0.75rem; }
+}
+
  .lang-select {
  min-width: 140px;
  font-size: 0.75rem;
