@@ -32,19 +32,66 @@
       position: sticky; top: 0; z-index: 50;
       box-shadow: 0 4px 12px rgba(15,118,110,0.25);
     }
-    .logo { display: flex; align-items: center; gap: 0.75rem; }
-    .logo-icon {
-      width: 42px; height: 42px; background: rgba(255,255,255,0.2);
-      border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem;
-    }
-    .logo-text h1 { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
-    .logo-text span { font-size: 0.75rem; opacity: 0.85; }
-    .header-right { display: flex; align-items: center; gap: 0.75rem; }
-    .header-right a, .header-right button {
-      color: white; background: rgba(255,255,255,0.15);
-      border: none; padding: 0.45rem 0.9rem; border-radius: 8px;
-      font-size: 0.85rem; font-weight: 500; cursor: pointer; text-decoration: none;
-    }
+ /* Responsive header */
+@media (max-width: 1200px) {
+ .desktop-nav { display: none !important; }
+ .menu-toggle { display: inline-flex !important; visibility: visible !important; opacity: 1 !important; }
+}
+@media (max-width: 900px) {
+ .header-main {
+ padding: 10px 14px;
+ gap: 10px;
+ }
+ .logo-area {
+ gap: 10px;
+ min-width: 0;
+ flex: 1 1 auto;
+ overflow: hidden;
+ }
+ .logo-text {
+ min-width: 0;
+ overflow: hidden;
+ }
+ .logo-text h1 {
+ font-size: 1rem;
+ white-space: nowrap;
+ overflow: hidden;
+ text-overflow: ellipsis;
+ }
+ .logo-text p { display: none !important; }
+ .header-logo {
+ width: 44px;
+ height: 44px;
+ flex-shrink: 0;
+ }
+ .header-actions {
+ flex-shrink: 0 !important;
+ margin-left: 8px;
+ }
+ .menu-toggle {
+ display: inline-flex !important;
+ padding: 9px 14px;
+ font-size: 0.85rem;
+ white-space: nowrap;
+ }
+}
+@media (max-width: 520px) {
+ .header-top { font-size: 0.68rem; text-align: center; }
+ .header-top-inner { justify-content: center; gap: 8px; }
+ .logo-text h1 { font-size: 0.9rem; }
+ .header-logo { width: 40px; height: 40px; }
+ .menu-toggle {
+ padding: 9px 12px;
+ font-size: 0.82rem;
+ }
+ .lang-select {
+ min-width: 140px;
+ font-size: 0.75rem;
+ padding: 4px 8px;
+ padding-right: 24px;
+ }
+
+
     .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
 
     .page-title {
