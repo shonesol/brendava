@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Primary SEO -->
+  <title>Brendava Tours Agent Portal | B2B Safari & Tour Operator Login – Uganda & Rwanda</title>
+  <meta name="description" content="Secure agent portal for licensed tour operators and travel agents. Login or register to view exclusive B2B itineraries for Uganda gorilla trekking, Rwanda safaris, Murchison Falls and more. Official Brendava Tours partner access." />
+  <meta name="keywords" content="Brendava Tours, agent portal, B2B safari itineraries, Uganda tour operator login, Rwanda gorilla trekking agents, licensed tour agent registration, East Africa safari partners, Murchison Falls packages, Bwindi itineraries" />
+  <meta name="author" content="Brendava Tours & Travel" />
+  <meta name="robots" content="index, follow, max-image-preview:large" />
+  <meta name="googlebot" content="index, follow" />
+  <link rel="canonical" href="https://www.brendavatoursandtravel.com/agent-portal" />
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.brendavatoursandtravel.com/agent-portal" />
+  <meta property="og:title" content="Brendava Tours Agent Portal | B2B Safari Itineraries" />
+  <meta property="og:description" content="Licensed tour agents and operators: log in to access exclusive Uganda & Rwanda B2B itineraries, gorilla trekking packages and partner rates." />
+  <meta property="og:image" content="https://www.brendavatoursandtravel.com/images/og-agent-portal.jpg" />
+  <meta property="og:site_name" content="Brendava Tours & Travel" />
+  <meta property="og:locale" content="en_US" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://www.brendavatoursandtravel.com/agent-portal" />
+  <meta name="twitter:title" content="Brendava Tours Agent Portal | B2B Safari Itineraries" />
+  <meta name="twitter:description" content="Secure login for licensed tour agents. Access exclusive Uganda & Rwanda safari itineraries and partner rates." />
+  <meta name="twitter:image" content="https://www.brendavatoursandtravel.com/images/og-agent-portal.jpg" />
+
+  <meta name="theme-color" content="#0f766e" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="format-detection" content="telephone=no" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Brendava Tours Agent Portal",
+    "description": "Secure B2B agent portal for licensed tour operators and travel agents specializing in Uganda and Rwanda safaris.",
+    "url": "https://www.brendavatoursandtravel.com/agent-portal",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Brendava Tours & Travel",
+      "url": "https://www.brendavatoursandtravel.com"
+    },
+    "about": {
+      "@type": "TravelAgency",
+      "name": "Brendava Tours & Travel",
+      "url": "https://www.brendavatoursandtravel.com",
+      "areaServed": ["Uganda", "Rwanda", "East Africa"]
+    }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-database-compat.js"></script>
+
+  <style>
+    :root {
+      --primary: #0f766e; --primary-dark: #0d5c56; --primary-light: #14b8a6;
+      --accent: #c2410c; --bg: #f8fafc; --card: #ffffff; --text: #0f172a;
+      --text-muted: #64748b; --border: #e2e8f0; --success: #059669;
+      --danger: #dc2626; --warning: #d97706; --radius: 12px;
+      --shadow: 0 10px 25px -5px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 40%, #f8fafc 100%);
+      color: var(--text); min-height: 100vh; line-height: 1.5;
+    }
+    .header {
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: white; padding: 1rem 1.5rem; display: flex; align-items: center;
+      justify-content: space-between; box-shadow: 0 4px 12px rgba(15,118,110,0.25);
+      position: sticky; top: 0; z-index: 100;
+    }
+    .logo { display: flex; align-items: center; gap: 0.75rem; }
+    .logo-icon {
+      width: 42px; height: 42px; background: rgba(255,255,255,0.2);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem;
+    }
+    .logo-text h1 { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 700; }
+    .logo-text span { font-size: 0.75rem; opacity: 0.85; }
+    .header-right a { color: rgba(255,255,255,0.9); text-decoration: none; font-size: 0.9rem; font-weight: 500; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+    .auth-wrapper { display: flex; justify-content: center; align-items: flex-start; min-height: calc(100vh - 140px); padding-top: 1.5rem; }
+    .auth-card {
+      background: var(--card); border-radius: 20px; box-shadow: var(--shadow);
+      width: 100%; max-width: 520px; overflow: hidden; border: 1px solid var(--border);
+    }
+    .auth-tabs { display: flex; background: #f1f5f9; }
+    .auth-tab {
+      flex: 1; padding: 1.1rem; text-align: center; font-weight: 600; font-size: 0.95rem;
+      color: var(--text-muted); cursor: pointer; border: none; background: transparent;
+    }
+    .auth-tab.active { background: white; color: var(--primary); box-shadow: 0 -2px 0 var(--primary) inset; }
+    .auth-body { padding: 2rem 1.75rem 2.25rem; }
+    .auth-title { font-family: 'Playfair Display', serif; font-size: 1.6rem; margin-bottom: 0.35rem; }
+    .auth-subtitle { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.75rem; }
+
+    .form-group { margin-bottom: 1.15rem; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.4rem; }
+    .form-group label .required { color: var(--danger); }
+    .form-control {
+      width: 100%; padding: 0.75rem 1rem; border: 1.5px solid var(--border);
+      border-radius: 10px; font-size: 0.95rem; font-family: inherit;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(15,118,110,0.15); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+    .radio-group { display: flex; gap: 1.25rem; margin-top: 0.35rem; }
+    .radio-option { display: flex; align-items: center; gap: 0.45rem; cursor: pointer; font-size: 0.9rem; }
+    .radio-option input { accent-color: var(--primary); width: 16px; height: 16px; }
+
+    .conditional-section {
+      display: none; background: #f0fdfa; border: 1px solid #99f6e4;
+      border-radius: 12px; padding: 1.25rem; margin-bottom: 1.25rem;
+    }
+    .conditional-section.active { display: block; }
+    .conditional-section h4 { font-size: 0.9rem; color: var(--primary-dark); margin-bottom: 1rem; font-weight: 600; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+      padding: 0.85rem 1.5rem; border-radius: 10px; font-weight: 600; font-size: 0.95rem;
+      cursor: pointer; border: none; transition: all 0.2s; font-family: inherit; width: 100%;
+    }
+    .btn:disabled { opacity: 0.65; cursor: not-allowed; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover:not(:disabled) { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(15,118,110,0.3); }
+    .btn-google { background: white; color: var(--text); border: 1.5px solid var(--border); margin-bottom: 1.25rem; }
+    .btn-google:hover { background: #f8fafc; border-color: #cbd5e1; }
+    .btn-sm { width: auto; padding: 0.45rem 0.9rem; font-size: 0.82rem; }
+    .btn-success { background: var(--success); color: white; }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-outline { background: white; border: 1.5px solid var(--border); color: var(--text); }
+
+    .divider { display: flex; align-items: center; gap: 1rem; margin: 1.25rem 0; color: var(--text-muted); font-size: 0.85rem; }
+    .divider::before, .divider::after { content: ""; flex: 1; height: 1px; background: var(--border); }
+    .form-footer { text-align: center; margin-top: 1.5rem; font-size: 0.9rem; color: var(--text-muted); }
+    .form-footer a { color: var(--primary); font-weight: 600; text-decoration: none; }
+
+    .alert { padding: 0.85rem 1rem; border-radius: 10px; font-size: 0.9rem; margin-bottom: 1.25rem; display: none; }
+    .alert.show { display: block; }
+    .alert-success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .alert-error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .alert-info { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+    .alert-warning { background: #fffbeb; color: #92400e; border: 1px solid #fde68a; }
+
+    .dashboard, .pending-screen, .admin-dashboard { display: none; }
+    .dashboard.active, .pending-screen.active, .admin-dashboard.active { display: block; }
+
+    .dash-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem; }
+    .dash-header h2 { font-family: 'Playfair Display', serif; font-size: 1.75rem; }
+    .user-badge {
+      display: flex; align-items: center; gap: 0.75rem; background: white;
+      padding: 0.5rem 1rem 0.5rem 0.5rem; border-radius: 50px; box-shadow: var(--shadow); border: 1px solid var(--border);
+    }
+    .user-avatar {
+      width: 36px; height: 36px; background: var(--primary); color: white; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 0.9rem;
+    }
+    .btn-logout {
+      background: transparent; border: 1.5px solid var(--border); color: var(--text-muted);
+      padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.85rem; cursor: pointer; font-weight: 500;
+    }
+    .btn-logout:hover { background: #f1f5f9; color: var(--text); }
+
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.25rem; margin-bottom: 2rem; }
+    .stat-card { background: white; border-radius: var(--radius); padding: 1.35rem; border: 1px solid var(--border); }
+    .stat-card h3 { font-size: 0.85rem; color: var(--text-muted); font-weight: 500; margin-bottom: 0.35rem; }
+    .stat-card .value { font-size: 1.6rem; font-weight: 700; color: var(--primary); }
+
+    .section-card { background: white; border-radius: 16px; border: 1px solid var(--border); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 1.75rem; }
+    .section-header { padding: 1.15rem 1.5rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+    .section-header h3 { font-size: 1.1rem; font-weight: 600; }
+    .section-body { padding: 1.5rem; }
+
+    .itinerary-item, .agent-item {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 1rem 0; border-bottom: 1px solid var(--border); gap: 1rem;
+    }
+    .itinerary-item:last-child, .agent-item:last-child { border-bottom: none; }
+    .itinerary-info h4, .agent-info h4 { font-size: 1rem; margin-bottom: 0.25rem; }
+    .itinerary-info p, .agent-info p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.15rem; }
+
+    .badge { display: inline-block; padding: 0.25rem 0.7rem; border-radius: 50px; font-size: 0.75rem; font-weight: 600; }
+    .badge-view { background: #ecfdf5; color: #065f46; }
+    .badge-pending { background: #fffbeb; color: #92400e; }
+    .badge-approved { background: #ecfdf5; color: #065f46; }
+    .badge-rejected { background: #fef2f2; color: #991b1b; }
+    .badge-admin { background: #ede9fe; color: #5b21b6; }
+
+    .actions { display: flex; gap: 0.5rem; flex-shrink: 0; flex-wrap: wrap; }
+
+    .pending-box {
+      background: white; border-radius: 20px; padding: 2.5rem 2rem; text-align: center;
+      max-width: 480px; margin: 3rem auto; box-shadow: var(--shadow); border: 1px solid var(--border);
+    }
+    .pending-box .icon { font-size: 3rem; margin-bottom: 1rem; }
+    .pending-box h2 { font-family: 'Playfair Display', serif; margin-bottom: 0.75rem; }
+    .pending-box p { color: var(--text-muted); margin-bottom: 1.5rem; }
+
+    .upload-area {
+      border: 2px dashed var(--border); border-radius: 12px; padding: 1.5rem;
+      text-align: center; margin-bottom: 1rem; background: #f8fafc; cursor: pointer; transition: border-color 0.2s;
+    }
+    .upload-area:hover, .upload-area.dragover { border-color: var(--primary); background: #f0fdfa; }
+    .upload-area input[type="file"] { display: none; }
+    .file-name { font-size: 0.85rem; color: var(--primary); margin-top: 0.5rem; font-weight: 500; }
+
+    /* ========== CHAT UI (Facebook / Instagram style) ========== */
+    .chat-container {
+      display: flex; flex-direction: column;
+      height: 420px; background: #f8fafc; border-radius: 12px; overflow: hidden;
+      border: 1px solid var(--border);
+    }
+    .chat-messages {
+      flex: 1; overflow-y: auto; padding: 1rem;
+      display: flex; flex-direction: column; gap: 0.6rem;
+    }
+    .chat-bubble {
+      max-width: 78%; padding: 0.65rem 0.9rem;
+      border-radius: 16px; font-size: 0.92rem; position: relative;
+      word-wrap: break-word; line-height: 1.4;
+    }
+    .chat-bubble.mine {
+      background: var(--primary); color: white;
+      align-self: flex-end; border-bottom-right-radius: 4px;
+    }
+    .chat-bubble.theirs {
+      background: white; color: var(--text);
+      align-self: flex-start; border-bottom-left-radius: 4px;
+      border: 1px solid var(--border);
+    }
+    .chat-bubble .meta {
+      font-size: 0.68rem; margin-top: 0.25rem; opacity: 0.75;
+      display: flex; align-items: center; gap: 0.4rem;
+    }
+    .chat-bubble.mine .meta { justify-content: flex-end; }
+    .chat-bubble .edited-tag { font-style: italic; opacity: 0.8; }
+    .chat-bubble .msg-actions {
+      position: absolute; top: -8px; right: 4px;
+      display: none; gap: 2px;
+    }
+    .chat-bubble.mine:hover .msg-actions { display: flex; }
+    .chat-bubble .msg-actions button {
+      background: white; border: 1px solid var(--border);
+      border-radius: 6px; padding: 2px 6px; font-size: 0.7rem;
+      cursor: pointer; color: var(--text-muted);
+    }
+    .chat-bubble .msg-actions button:hover { background: #f1f5f9; color: var(--text); }
+    .chat-input-bar {
+      display: flex; gap: 0.5rem; padding: 0.75rem;
+      background: white; border-top: 1px solid var(--border); align-items: center;
+    }
+    .chat-input-bar input {
+      flex: 1; border: 1.5px solid var(--border); border-radius: 24px;
+      padding: 0.65rem 1rem; font-size: 0.92rem; font-family: inherit;
+    }
+    .chat-input-bar input:focus {
+      outline: none; border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.12);
+    }
+    .chat-input-bar .btn {
+      width: auto; padding: 0.65rem 1.1rem; border-radius: 24px; font-size: 0.88rem;
+    }
+    .chat-edit-mode {
+      background: #fffbeb; border: 1px solid #fde68a;
+      padding: 0.4rem 0.75rem; font-size: 0.8rem; color: #92400e;
+      display: none; align-items: center; justify-content: space-between;
+    }
+    .chat-edit-mode.active { display: flex; }
+    .chat-edit-mode button {
+      background: none; border: none; color: var(--danger);
+      cursor: pointer; font-size: 0.8rem; font-weight: 600;
+    }
+
+    /* Admin chat list */
+    .admin-chat-layout {
+      display: grid; grid-template-columns: 260px 1fr; gap: 0;
+      height: 480px; border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+    }
+    @media (max-width: 700px) {
+      .admin-chat-layout { grid-template-columns: 1fr; height: auto; }
+      .admin-chat-list { max-height: 180px; }
+    }
+    .admin-chat-list {
+      background: #f1f5f9; border-right: 1px solid var(--border);
+      overflow-y: auto;
+    }
+    .admin-chat-list-item {
+      padding: 0.85rem 1rem; cursor: pointer; border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+    .admin-chat-list-item:hover, .admin-chat-list-item.active {
+      background: white;
+    }
+    .admin-chat-list-item h4 { font-size: 0.9rem; margin-bottom: 0.15rem; }
+    .admin-chat-list-item p {
+      font-size: 0.78rem; color: var(--text-muted);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .admin-chat-window { display: flex; flex-direction: column; background: #f8fafc; }
+    .admin-chat-header {
+      padding: 0.85rem 1rem; background: white;
+      border-bottom: 1px solid var(--border); font-weight: 600; font-size: 0.95rem;
+    }
+    .admin-chat-empty {
+      flex: 1; display: flex; align-items: center; justify-content: center;
+      color: var(--text-muted); font-size: 0.9rem;
+    }
+
+    .footer { text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.85rem; }
+    .footer a { color: var(--primary); text-decoration: none; font-weight: 500; }
+    .hidden { display: none !important; }
+    .note { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.35rem; }
+    .empty-state { text-align: center; padding: 2rem; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">🌍</div>
+      <div class="logo-text">
+        <h1>Brendava Tours</h1>
+        <span>Agent Portal</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <a href="https://www.brendavatoursandtravel.com" target="_blank">Main Website</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- AUTH -->
+    <div id="authSection" class="auth-wrapper">
+      <div class="auth-card">
+        <div class="auth-tabs">
+          <button class="auth-tab active" data-tab="login">Sign In</button>
+          <button class="auth-tab" data-tab="register">Create Account</button>
+        </div>
+        <div class="auth-body">
+          <div id="alertBox" class="alert"></div>
+
+          <div id="loginForm">
+            <h2 class="auth-title">Welcome back</h2>
+            <p class="auth-subtitle">Sign in as Agent or Admin to continue.</p>
+            <button class="btn btn-google" id="googleLoginBtn">
+              <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Continue with Google
+            </button>
+            <div class="divider">or sign in with email</div>
+            <form id="loginFormEl">
+              <div class="form-group">
+                <label>Email address <span class="required">*</span></label>
+                <input type="email" class="form-control" id="loginEmail" placeholder="you@example.com" required>
+              </div>
+              <div class="form-group">
+                <label>Password <span class="required">*</span></label>
+                <input type="password" class="form-control" id="loginPassword" placeholder="••••••••" required>
+              </div>
+              <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+            <div class="form-footer">Don't have an account? <a href="#" id="switchToRegister">Create one</a></div>
+          </div>
+
+          <div id="registerForm" class="hidden">
+            <h2 class="auth-title">Create Agent Account</h2>
+            <p class="auth-subtitle">All details are verified by Admin before approval.</p>
+            <button class="btn btn-google" id="googleRegisterBtn">
+              <svg width="20" height="20" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
+              Sign up with Google
+            </button>
+            <div class="divider">or register with email</div>
+            <form id="registerFormEl">
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Full Name <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="regName" placeholder="John Doe" required>
+                </div>
+                <div class="form-group">
+                  <label>Phone Number <span class="required">*</span></label>
+                  <input type="tel" class="form-control" id="regPhone" placeholder="+256 700 000000" required>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Email address <span class="required">*</span></label>
+                <input type="email" class="form-control" id="regEmail" placeholder="you@example.com" required>
+              </div>
+              <div class="form-group">
+                <label>Password <span class="required">*</span></label>
+                <input type="password" class="form-control" id="regPassword" placeholder="Minimum 8 characters" minlength="8" required>
+              </div>
+              <div class="form-group">
+                <label>Residence / Location <span class="required">*</span></label>
+                <input type="text" class="form-control" id="regResidence" placeholder="Kampala, Uganda" required>
+              </div>
+              <div class="form-group">
+                <label>Account Type <span class="required">*</span></label>
+                <div class="radio-group">
+                  <label class="radio-option"><input type="radio" name="accountType" value="company" checked> Company Agent</label>
+                  <label class="radio-option"><input type="radio" name="accountType" value="independent"> Independent Agent</label>
+                </div>
+              </div>
+              <div id="companySection" class="conditional-section active">
+                <h4>Company Details (Verified by Admin)</h4>
+                <div class="form-group">
+                  <label>Company Name <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="companyName" placeholder="Safari Adventures Ltd">
+                </div>
+                <div class="form-group">
+                  <label>Company Website <span class="required">*</span></label>
+                  <input type="url" class="form-control" id="companyWebsite" placeholder="https://www.example.com">
+                </div>
+                <div class="form-group">
+                  <label>Company License Number <span class="required">*</span></label>
+                  <input type="text" class="form-control" id="companyLicense" placeholder="Tour Operator / Agent License">
+                  <p class="note">License is mandatory and will be verified by Admin.</p>
+                </div>
+              </div>
+              <div id="independentSection" class="conditional-section">
+                <h4>Independent Agent Verification</h4>
+                <div class="form-group">
+                  <label>Tour License Number</label>
+                  <input type="text" class="form-control" id="personalLicense" placeholder="Your personal tour license">
+                </div>
+                <div class="form-group">
+                  <label>National ID or Passport Number</label>
+                  <input type="text" class="form-control" id="idNumber" placeholder="National ID or Passport">
+                </div>
+                <div class="form-group">
+                  <label>TIN Number</label>
+                  <input type="text" class="form-control" id="tinNumber" placeholder="Tax Identification Number">
+                </div>
+                <p class="note">Provide either a valid Tour License <strong>or</strong> National ID/Passport + TIN. All details are verified by Admin.</p>
+              </div>
+              <button type="submit" class="btn btn-primary">Submit for Verification</button>
+            </form>
+            <div class="form-footer">Already have an account? <a href="#" id="switchToLogin">Sign in</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PENDING -->
+    <div id="pendingScreen" class="pending-screen">
+      <div class="pending-box">
+        <div class="icon">⏳</div>
+        <h2>Account Under Review</h2>
+        <p>Thank you for registering. Your license, company details, IDs and documents are being verified by the Brendava Admin team.</p>
+        <p style="font-size:0.9rem;color:var(--text-muted);">You will gain full access to B2B itineraries once your account is approved.</p>
+        <div style="margin-top:1.5rem;"><span class="badge badge-pending" id="pendingStatusBadge">Pending Verification</span></div>
+        <button class="btn btn-outline btn-sm" id="pendingLogoutBtn" style="margin-top:1.75rem;width:auto;">Sign Out</button>
+      </div>
+    </div>
+
+    <!-- AGENT DASHBOARD -->
+    <div id="dashboardSection" class="dashboard">
+      <div class="dash-header">
+        <div>
+          <h2>Agent Dashboard</h2>
+          <p style="color:var(--text-muted);font-size:0.95rem;">View official B2B itineraries and message the team.</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <div class="user-badge">
+            <div class="user-avatar" id="userAvatar">A</div>
+            <div>
+              <div style="font-weight:600;font-size:0.9rem;" id="userNameDisplay">Agent</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);" id="userEmailDisplay">agent@example.com</div>
+            </div>
+          </div>
+          <button class="btn-logout" id="logoutBtn">Sign Out</button>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><h3>Available Itineraries</h3><div class="value" id="itineraryCount">0</div></div>
+        <div class="stat-card"><h3>Account Status</h3><div class="value" style="font-size:1.15rem;color:var(--success);">Approved</div></div>
+      </div>
+      <div class="section-card">
+        <div class="section-header"><h3>Official B2B Itineraries</h3><span class="badge badge-view">View Only</span></div>
+        <div class="section-body" id="agentItinerariesList"><div class="empty-state">Loading itineraries...</div></div>
+      </div>
+      <div class="section-card">
+        <div class="section-header"><h3>Chat with Brendava Admin</h3></div>
+        <div class="section-body" style="padding: 0;">
+          <div class="chat-container">
+            <div class="chat-edit-mode" id="agentEditBar">
+              <span>Editing message...</span>
+              <button type="button" id="cancelAgentEdit">Cancel</button>
+            </div>
+            <div class="chat-messages" id="agentChatMessages"></div>
+            <div class="chat-input-bar">
+              <input type="text" id="agentMessageInput" placeholder="Type a message..." autocomplete="off">
+              <button class="btn btn-primary" id="agentSendBtn">Send</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ADMIN DASHBOARD -->
+    <div id="adminDashboard" class="admin-dashboard">
+      <div class="dash-header">
+        <div>
+          <h2>Admin Dashboard</h2>
+          <p style="color:var(--text-muted);font-size:0.95rem;">Manage agents and upload B2B itineraries.</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:1rem;">
+          <span class="badge badge-admin">Admin</span>
+          <div class="user-badge">
+            <div class="user-avatar" id="adminAvatar">A</div>
+            <div>
+              <div style="font-weight:600;font-size:0.9rem;" id="adminNameDisplay">Admin</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);" id="adminEmailDisplay">admin@brendava.com</div>
+            </div>
+          </div>
+          <button class="btn-logout" id="adminLogoutBtn">Sign Out</button>
+        </div>
+      </div>
+      <div class="stats-grid">
+        <div class="stat-card"><h3>Pending Agents</h3><div class="value" id="pendingCount">0</div></div>
+        <div class="stat-card"><h3>Approved Agents</h3><div class="value" id="approvedCount">0</div></div>
+        <div class="stat-card"><h3>Itineraries</h3><div class="value" id="adminItineraryCount">0</div></div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header"><h3>Pending Agent Verifications</h3></div>
+        <div class="section-body" id="pendingAgentsList"><div class="empty-state">No pending agents</div></div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header"><h3>Upload B2B Itinerary</h3></div>
+        <div class="section-body">
+          <form id="uploadItineraryForm">
+            <div class="form-group">
+              <label>Itinerary Title <span class="required">*</span></label>
+              <input type="text" class="form-control" id="itinTitle" placeholder="e.g. 7-Day Gorilla Trekking Safari" required>
+            </div>
+            <div class="form-group">
+              <label>Short Description</label>
+              <input type="text" class="form-control" id="itinDesc" placeholder="Uganda • Bwindi + Queen Elizabeth • From $2,450">
+            </div>
+            <div class="form-group">
+              <label>File (PDF, DOC, DOCX) <span class="required">*</span></label>
+              <div class="upload-area" id="uploadArea">
+                <div>📄 Click or drag file here</div>
+                <div style="font-size:0.8rem;color:var(--text-muted);margin-top:0.35rem;">PDF, DOC or DOCX • Max ~10MB</div>
+                <input type="file" id="itinFile" accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+                <div class="file-name" id="fileName"></div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="uploadBtn">Upload Itinerary</button>
+          </form>
+          <div id="uploadAlert" class="alert" style="margin-top:1rem;"></div>
+        </div>
+      </div>
+
+      <div class="section-card">
+        <div class="section-header"><h3>Uploaded Itineraries</h3></div>
+        <div class="section-body" id="adminItinerariesList"><div class="empty-state">No itineraries uploaded yet</div></div>
+      </div>
+
+      <!-- Admin Chat with Agents -->
+      <div class="section-card">
+        <div class="section-header"><h3>Messages with Agents</h3></div>
+        <div class="section-body" style="padding: 0;">
+          <div class="admin-chat-layout">
+            <div class="admin-chat-list" id="adminChatList">
+              <div class="empty-state" style="padding:1.5rem;font-size:0.85rem;">No conversations yet</div>
+            </div>
+            <div class="admin-chat-window" id="adminChatWindow">
+              <div class="admin-chat-empty" id="adminChatEmpty">Select an agent to start chatting</div>
+              <div id="adminActiveChat" class="hidden" style="display:flex;flex-direction:column;height:100%;">
+                <div class="admin-chat-header" id="adminChatHeader">Agent</div>
+                <div class="chat-edit-mode" id="adminEditBar">
+                  <span>Editing message...</span>
+                  <button type="button" id="cancelAdminEdit">Cancel</button>
+                </div>
+                <div class="chat-messages" id="adminChatMessages" style="flex:1;"></div>
+                <div class="chat-input-bar">
+                  <input type="text" id="adminMessageInput" placeholder="Type a message..." autocomplete="off">
+                  <button class="btn btn-primary" id="adminSendBtn">Send</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    © 2026 Brendava Tours & Travel • <a href="https://www.brendavatoursandtravel.com" target="_blank">www.brendavatoursandtravel.com</a>
+  </footer>
+
+  <script>
+    const CLOUD_NAME = "ziudh5iv";
+    const UPLOAD_PRESET = "brendava_gallery";
+    const PUBLIC_JSONBIN_ID = "6ac1a023ac6210605a111365";
+    const LOCAL_KEY = "brendava_uploaded_itineraries_v3";
+    const JSONBIN_CFG_KEY = "brendava_jsonbin_cfg";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
+      authDomain: "brendava-tours-and-travel.firebaseapp.com",
+      databaseURL: "https://brendava-tours-and-travel-default-rtdb.firebaseio.com",
+      projectId: "brendava-tours-and-travel",
+      storageBucket: "brendava-tours-and-travel.firebasestorage.app",
+      messagingSenderId: "732703885570",
+      appId: "1:732703885570:web:3011a3989d5fe36eb69a1b",
+      measurementId: "G-ZC356HMW9C"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const database = firebase.database();
+
+    const authSection = document.getElementById('authSection');
+    const pendingScreen = document.getElementById('pendingScreen');
+    const dashboardSection = document.getElementById('dashboardSection');
+    const adminDashboard = document.getElementById('adminDashboard');
+    const loginForm = document.getElementById('loginForm');
+    const registerForm = document.getElementById('registerForm');
+    const alertBox = document.getElementById('alertBox');
+    const tabs = document.querySelectorAll('.auth-tab');
+    const companySection = document.getElementById('companySection');
+    const independentSection = document.getElementById('independentSection');
+
+    let currentUser = null;
+    let currentProfile = null;
+    let isAdmin = false;
+
+    function showAlert(message, type = 'info') {
+      alertBox.textContent = message;
+      alertBox.className = `alert alert-${type} show`;
+      if (type === 'success') setTimeout(hideAlert, 4000);
+    }
+    function hideAlert() { alertBox.className = 'alert'; }
+    function showUploadAlert(message, type = 'info') {
+      const el = document.getElementById('uploadAlert');
+      el.textContent = message;
+      el.className = `alert alert-${type} show`;
+    }
+    function hideAllScreens() {
+      authSection.style.display = 'none';
+      pendingScreen.classList.remove('active');
+      dashboardSection.classList.remove('active');
+      adminDashboard.classList.remove('active');
+    }
+    function showTab(tabName) {
+      tabs.forEach(t => t.classList.remove('active'));
+      document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
+      if (tabName === 'login') { loginForm.classList.remove('hidden'); registerForm.classList.add('hidden'); }
+      else { loginForm.classList.add('hidden'); registerForm.classList.remove('hidden'); }
+      hideAlert();
+    }
+
+    tabs.forEach(tab => tab.addEventListener('click', () => showTab(tab.dataset.tab)));
+    document.getElementById('switchToRegister').addEventListener('click', e => { e.preventDefault(); showTab('register'); });
+    document.getElementById('switchToLogin').addEventListener('click', e => { e.preventDefault(); showTab('login'); });
+
+    document.querySelectorAll('input[name="accountType"]').forEach(radio => {
+      radio.addEventListener('change', () => {
+        if (radio.value === 'company') { companySection.classList.add('active'); independentSection.classList.remove('active'); }
+        else { companySection.classList.remove('active'); independentSection.classList.add('active'); }
+      });
+    });
+
+    function collectLicenseData() {
+      const accountType = document.querySelector('input[name="accountType"]:checked').value;
+      let data = { accountType };
+      if (accountType === 'company') {
+        const companyName = document.getElementById('companyName').value.trim();
+        const companyWebsite = document.getElementById('companyWebsite').value.trim();
+        const companyLicense = document.getElementById('companyLicense').value.trim();
+        if (!companyName || !companyWebsite || !companyLicense) {
+          showAlert('Company Name, Website and License Number are all required.', 'error');
+          return null;
+        }
+        data = { ...data, companyName, companyWebsite, licenseNumber: companyLicense };
+      } else {
+        const personalLicense = document.getElementById('personalLicense').value.trim();
+        const idNumber = document.getElementById('idNumber').value.trim();
+        const tinNumber = document.getElementById('tinNumber').value.trim();
+        if (!personalLicense && !(idNumber && tinNumber)) {
+          showAlert('Provide either a Tour License OR National ID/Passport + TIN.', 'error');
+          return null;
+        }
+        data = {
+          ...data,
+          personalLicense: personalLicense || null,
+          nationalIdOrPassport: idNumber || null,
+          tinNumber: tinNumber || null,
+          licenseNumber: personalLicense || `ID-${idNumber}`
+        };
+      }
+      return data;
+    }
+
+    async function saveAgentProfile(uid, profile) {
+      await database.ref('agents/' + uid).set({
+        ...profile, uid,
+        updatedAt: firebase.database.ServerValue.TIMESTAMP,
+        createdAt: profile.createdAt || firebase.database.ServerValue.TIMESTAMP
+      });
+    }
+    async function loadAgentProfile(uid) {
+      const snap = await database.ref('agents/' + uid).once('value');
+      return snap.val();
+    }
+    async function checkIsAdmin(uid) {
+      const snap = await database.ref('admins/' + uid).once('value');
+      return snap.exists();
+    }
+
+    // REGISTER
+    document.getElementById('registerFormEl').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert();
+      if (window._pendingGoogleUser) return;
+
+      const name = document.getElementById('regName').value.trim();
+      const email = document.getElementById('regEmail').value.trim();
+      const password = document.getElementById('regPassword').value;
+      const phone = document.getElementById('regPhone').value.trim();
+      const residence = document.getElementById('regResidence').value.trim();
+
+      if (password.length < 8) { showAlert('Password must be at least 8 characters.', 'error'); return; }
+      const licenseData = collectLicenseData();
+      if (!licenseData) return;
+
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      submitBtn.disabled = true; submitBtn.textContent = 'Submitting...';
+
+      try {
+        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        const user = userCredential.user;
+        await user.updateProfile({ displayName: name });
+        const profile = {
+          fullName: name, email, phone, residence, ...licenseData,
+          verificationStatus: 'pending', provider: 'password', createdAt: Date.now()
+        };
+        await saveAgentProfile(user.uid, profile);
+        showAlert('Submitted for verification! Admin will review your details.', 'success');
+        await auth.signOut();
+        setTimeout(() => {
+          document.getElementById('registerFormEl').reset();
+          companySection.classList.add('active'); independentSection.classList.remove('active');
+          showTab('login'); document.getElementById('loginEmail').value = email;
+        }, 1800);
+      } catch (error) {
+        let msg = 'Registration failed. Please try again.';
+        if (error.code === 'auth/email-already-in-use') msg = 'This email is already registered. Please sign in.';
+        else if (error.code === 'auth/weak-password') msg = 'Password is too weak.';
+        else if (error.code === 'auth/invalid-email') msg = 'Invalid email address.';
+        showAlert(msg, 'error');
+      } finally {
+        submitBtn.disabled = false; submitBtn.textContent = 'Submit for Verification';
+      }
+    });
+
+    // LOGIN
+    document.getElementById('loginFormEl').addEventListener('submit', async (e) => {
+      e.preventDefault(); hideAlert();
+      const email = document.getElementById('loginEmail').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      submitBtn.disabled = true; submitBtn.textContent = 'Signing in...';
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+      } catch (error) {
+        let msg = 'Invalid email or password.';
+        if (error.code === 'auth/too-many-requests') msg = 'Too many attempts. Try again later.';
+        showAlert(msg, 'error');
+        submitBtn.disabled = false; submitBtn.textContent = 'Sign In';
+      }
+    });
+
+    // GOOGLE
+    async function handleGoogleSignIn() {
+      hideAlert();
+      const provider = new firebase.auth.GoogleAuthProvider();
+      provider.setCustomParameters({ prompt: 'select_account' });
+      try {
+        const result = await auth.signInWithPopup(provider);
+        const user = result.user;
+        const existingProfile = await loadAgentProfile(user.uid);
+        if (existingProfile && existingProfile.licenseNumber) return;
+        showTab('register');
+        document.getElementById('regName').value = user.displayName || '';
+        document.getElementById('regEmail').value = user.email || '';
+        document.getElementById('regPassword').value = '';
+        document.getElementById('regPassword').required = false;
+        document.getElementById('regPassword').placeholder = 'Not required for Google accounts';
+        showAlert('Google connected. Please complete license verification for Admin approval.', 'info');
+        window._pendingGoogleUser = user;
+      } catch (error) {
+        if (error.code === 'auth/popup-closed-by-user') showAlert('Sign-in cancelled.', 'info');
+        else if (error.code === 'auth/popup-blocked') showAlert('Popup blocked. Allow popups for this site.', 'error');
+        else showAlert('Google Sign-In failed. Try email instead.', 'error');
+      }
+    }
+    document.getElementById('googleLoginBtn').addEventListener('click', handleGoogleSignIn);
+    document.getElementById('googleRegisterBtn').addEventListener('click', handleGoogleSignIn);
+
+    document.getElementById('registerFormEl').addEventListener('submit', async function(e) {
+      if (!window._pendingGoogleUser) return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      const user = window._pendingGoogleUser;
+      const name = document.getElementById('regName').value.trim() || user.displayName;
+      const phone = document.getElementById('regPhone').value.trim();
+      const residence = document.getElementById('regResidence').value.trim();
+      if (!phone || !residence) { showAlert('Phone and Residence are required.', 'error'); return; }
+      const licenseData = collectLicenseData();
+      if (!licenseData) return;
+      const submitBtn = e.target.querySelector('button[type="submit"]');
+      submitBtn.disabled = true; submitBtn.textContent = 'Submitting...';
+      try {
+        const profile = {
+          fullName: name, email: user.email, phone, residence, ...licenseData,
+          verificationStatus: 'pending', provider: 'google', photoURL: user.photoURL || null, createdAt: Date.now()
+        };
+        await saveAgentProfile(user.uid, profile);
+        window._pendingGoogleUser = null;
+        showAlert('Submitted for verification! Waiting for Admin approval.', 'success');
+        routeUser(user, profile, false);
+      } catch (err) {
+        showAlert('Could not complete registration.', 'error');
+      } finally {
+        submitBtn.disabled = false; submitBtn.textContent = 'Submit for Verification';
+      }
+    }, true);
+
+    function routeUser(user, profile, admin) {
+      currentUser = user; currentProfile = profile; isAdmin = admin;
+      hideAllScreens();
+      if (admin) {
+        document.getElementById('adminNameDisplay').textContent = user.displayName || profile?.fullName || 'Admin';
+        document.getElementById('adminEmailDisplay').textContent = user.email;
+        document.getElementById('adminAvatar').textContent = (user.displayName || 'A').charAt(0).toUpperCase();
+        adminDashboard.classList.add('active');
+        loadAdminData();
+        return;
+      }
+      if (!profile || !profile.licenseNumber) {
+        authSection.style.display = 'flex'; showTab('register'); return;
+      }
+      if (profile.verificationStatus === 'pending') {
+        pendingScreen.classList.add('active'); return;
+      }
+      if (profile.verificationStatus === 'rejected') {
+        pendingScreen.classList.add('active');
+        document.getElementById('pendingStatusBadge').textContent = 'Rejected – Contact Admin';
+        document.getElementById('pendingStatusBadge').className = 'badge badge-rejected';
+        return;
+      }
+      document.getElementById('userNameDisplay').textContent = profile.fullName || user.displayName || 'Agent';
+      document.getElementById('userEmailDisplay').textContent = profile.email || user.email;
+      document.getElementById('userAvatar').textContent = (profile.fullName || 'A').charAt(0).toUpperCase();
+      dashboardSection.classList.add('active');
+      loadAgentItineraries();
+    }
+
+    auth.onAuthStateChanged(async (user) => {
+      if (!user) {
+        hideAllScreens(); authSection.style.display = 'flex';
+        currentUser = null; currentProfile = null; isAdmin = false; return;
+      }
+      const admin = await checkIsAdmin(user.uid);
+      const profile = await loadAgentProfile(user.uid);
+      routeUser(user, profile, admin);
+    });
+
+    async function doLogout() {
+      window._pendingGoogleUser = null;
+      await auth.signOut();
+      showTab('login');
+      document.getElementById('loginFormEl').reset();
+      document.getElementById('registerFormEl').reset();
+    }
+    document.getElementById('logoutBtn').addEventListener('click', doLogout);
+    document.getElementById('adminLogoutBtn').addEventListener('click', doLogout);
+    document.getElementById('pendingLogoutBtn').addEventListener('click', doLogout);
+
+    async function loadAdminData() {
+      const agentsSnap = await database.ref('agents').once('value');
+      const agents = agentsSnap.val() || {};
+      const list = Object.values(agents);
+      const pending = list.filter(a => a.verificationStatus === 'pending');
+      const approved = list.filter(a => a.verificationStatus === 'approved');
+      document.getElementById('pendingCount').textContent = pending.length;
+      document.getElementById('approvedCount').textContent = approved.length;
+
+      const pendingEl = document.getElementById('pendingAgentsList');
+      if (pending.length === 0) {
+        pendingEl.innerHTML = '<div class="empty-state">No pending agents</div>';
+      } else {
+        pendingEl.innerHTML = pending.map(a => `
+          <div class="agent-item">
+            <div class="agent-info">
+              <h4>${a.fullName || 'Unknown'}</h4>
+              <p>${a.email} • ${a.phone || ''}</p>
+              <p>${a.accountType === 'company' ? 'Company: ' + (a.companyName || '') : 'Independent'}</p>
+              <p>License: ${a.licenseNumber || '—'}</p>
+              ${a.companyWebsite ? `<p>Website: ${a.companyWebsite}</p>` : ''}
+              ${a.nationalIdOrPassport ? `<p>ID/Passport: ${a.nationalIdOrPassport}</p>` : ''}
+              ${a.tinNumber ? `<p>TIN: ${a.tinNumber}</p>` : ''}
+              <p style="margin-top:0.35rem;"><span class="badge badge-pending">Pending</span></p>
+            </div>
+            <div class="actions">
+              <button class="btn btn-success btn-sm" onclick="approveAgent('${a.uid}')">Approve</button>
+              <button class="btn btn-danger btn-sm" onclick="rejectAgent('${a.uid}')">Reject</button>
+            </div>
+          </div>
+        `).join('');
+      }
+      loadAdminItineraries();
+    }
+
+    window.approveAgent = async function(uid) {
+      await database.ref('agents/' + uid + '/verificationStatus').set('approved');
+      await database.ref('agents/' + uid + '/updatedAt').set(firebase.database.ServerValue.TIMESTAMP);
+      loadAdminData();
+    };
+    window.rejectAgent = async function(uid) {
+      await database.ref('agents/' + uid + '/verificationStatus').set('rejected');
+      await database.ref('agents/' + uid + '/updatedAt').set(firebase.database.ServerValue.TIMESTAMP);
+      loadAdminData();
+    };
+
+    async function loadAdminItineraries() {
+      const snap = await database.ref('itineraries').once('value');
+      const data = snap.val() || {};
+      const list = Object.entries(data).map(([id, v]) => ({ id, ...v })).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      document.getElementById('adminItineraryCount').textContent = list.length;
+      const el = document.getElementById('adminItinerariesList');
+      if (list.length === 0) { el.innerHTML = '<div class="empty-state">No itineraries uploaded yet</div>'; return; }
+      el.innerHTML = list.map(it => `
+        <div class="itinerary-item">
+          <div class="itinerary-info">
+            <h4>${it.title}</h4>
+            <p>${it.description || ''}</p>
+            <p style="font-size:0.8rem;">${it.fileName || 'File'} • ${new Date(it.createdAt || Date.now()).toLocaleDateString()}</p>
+          </div>
+          <div class="actions">
+            <a href="${it.fileUrl}" target="_blank" class="btn btn-primary btn-sm">Open</a>
+            <button class="btn btn-danger btn-sm" onclick="deleteItinerary('${it.id}')">Delete</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    async function loadAgentItineraries() {
+      const snap = await database.ref('itineraries').once('value');
+      const data = snap.val() || {};
+      const list = Object.entries(data).map(([id, v]) => ({ id, ...v })).sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+      document.getElementById('itineraryCount').textContent = list.length;
+      const el = document.getElementById('agentItinerariesList');
+      if (list.length === 0) { el.innerHTML = '<div class="empty-state">No itineraries available yet. Check back soon.</div>'; return; }
+      el.innerHTML = list.map(it => `
+        <div class="itinerary-item">
+          <div class="itinerary-info"><h4>${it.title}</h4><p>${it.description || ''}</p></div>
+          <a href="${it.fileUrl}" target="_blank" class="btn btn-primary btn-sm">View / Download</a>
+        </div>
+      `).join('');
+    }
+
+    window.deleteItinerary = async function(id) {
+      if (!confirm('Delete this itinerary?')) return;
+      await database.ref('itineraries/' + id).remove();
+      loadAdminItineraries();
+    };
+
+    // Upload
+    const uploadArea = document.getElementById('uploadArea');
+    const fileInput = document.getElementById('itinFile');
+    const fileNameEl = document.getElementById('fileName');
+    uploadArea.addEventListener('click', () => fileInput.click());
+    uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('dragover'); });
+    uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('dragover'));
+    uploadArea.addEventListener('drop', e => {
+      e.preventDefault(); uploadArea.classList.remove('dragover');
+      if (e.dataTransfer.files.length) { fileInput.files = e.dataTransfer.files; fileNameEl.textContent = e.dataTransfer.files[0].name; }
+    });
+    fileInput.addEventListener('change', () => { fileNameEl.textContent = fileInput.files[0] ? fileInput.files[0].name : ''; });
+
+    document.getElementById('uploadItineraryForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const title = document.getElementById('itinTitle').value.trim();
+      const description = document.getElementById('itinDesc').value.trim();
+      const file = fileInput.files[0];
+      if (!title || !file) { showUploadAlert('Title and file are required.', 'error'); return; }
+      const allowed = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'];
+      if (!allowed.includes(file.type) && !file.name.match(/\.(pdf|doc|docx)$/i)) {
+        showUploadAlert('Only PDF, DOC or DOCX files are allowed.', 'error'); return;
+      }
+      const btn = document.getElementById('uploadBtn');
+      btn.disabled = true; btn.textContent = 'Uploading...';
+      try {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', UPLOAD_PRESET);
+        formData.append('folder', 'brendava_itineraries');
+        const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`, { method: 'POST', body: formData });
+        const data = await res.json();
+        if (!data.secure_url) throw new Error(data.error?.message || 'Upload failed');
+        const newRef = database.ref('itineraries').push();
+        await newRef.set({
+          title, description, fileUrl: data.secure_url, fileName: file.name,
+          publicId: data.public_id, createdAt: Date.now(), uploadedBy: currentUser.uid
+        });
+        showUploadAlert('Itinerary uploaded successfully!', 'success');
+        document.getElementById('uploadItineraryForm').reset(); fileNameEl.textContent = '';
+        loadAdminItineraries();
+      } catch (err) {
+        console.error(err);
+        showUploadAlert('Upload failed: ' + (err.message || 'Unknown error'), 'error');
+      } finally {
+        btn.disabled = false; btn.textContent = 'Upload Itinerary';
+      }
+    });
+
+    // ========== REAL-TIME MESSAGING (Facebook / Instagram style) ==========
+    let agentChatUnsub = null;
+    let adminChatUnsub = null;
+    let editingMessageId = null;
+    let editingAsAdmin = false;
+    let activeAdminChatAgentId = null;
+    let activeAdminChatAgentName = '';
+
+    function formatTime(ts) {
+      if (!ts) return '';
+      const d = new Date(ts);
+      const now = new Date();
+      const sameDay = d.toDateString() === now.toDateString();
+      const time = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+      if (sameDay) return time;
+      return d.toLocaleDateString([], { month: 'short', day: 'numeric' }) + ' ' + time;
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function renderMessageBubble(msg, myUid, container) {
+      const isMine = msg.senderId === myUid;
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble ' + (isMine ? 'mine' : 'theirs');
+      bubble.dataset.id = msg.id;
+
+      let actionsHtml = '';
+      if (isMine) {
+        actionsHtml = `<div class="msg-actions">
+          <button type="button" onclick="startEditMessage('${msg.id}', ${editingAsAdmin})">Edit</button>
+        </div>`;
+      }
+
+      bubble.innerHTML = `
+        ${actionsHtml}
+        <div class="msg-text">${escapeHtml(msg.text)}</div>
+        <div class="meta">
+          ${isMine ? 'You' : (msg.senderRole === 'admin' ? 'Admin' : 'Agent')}
+          • ${formatTime(msg.createdAt)}
+          ${msg.isEdited ? '<span class="edited-tag">(edited)</span>' : ''}
+        </div>
+      `;
+      container.appendChild(bubble);
+    }
+
+    function listenToChat(agentUid, messagesEl, myUid, asAdmin) {
+      editingAsAdmin = asAdmin;
+      const path = 'chats/' + agentUid + '/messages';
+
+      // Detach previous listener
+      if (asAdmin && adminChatUnsub) { database.ref(path).off('value', adminChatUnsub); }
+      if (!asAdmin && agentChatUnsub) { database.ref(path).off('value', agentChatUnsub); }
+
+      const handler = (snap) => {
+        const data = snap.val() || {};
+        const list = Object.entries(data).map(([id, v]) => ({ id, ...v }))
+          .sort((a, b) => (a.createdAt || 0) - (b.createdAt || 0));
+
+        messagesEl.innerHTML = '';
+        if (list.length === 0) {
+          messagesEl.innerHTML = '<div class="empty-state" style="padding:2rem;font-size:0.85rem;">No messages yet. Say hello!</div>';
+        } else {
+          list.forEach(msg => renderMessageBubble(msg, myUid, messagesEl));
+          messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+      };
+
+      database.ref(path).on('value', handler);
+      if (asAdmin) adminChatUnsub = handler;
+      else agentChatUnsub = handler;
+    }
+
+    async function sendChatMessage(agentUid, text, senderRole) {
+      if (!text.trim() || !currentUser) return;
+
+      // If editing
+      if (editingMessageId) {
+        const path = 'chats/' + agentUid + '/messages/' + editingMessageId;
+        await database.ref(path).update({
+          text: text.trim(),
+          isEdited: true,
+          editedAt: Date.now()
+        });
+        cancelEdit();
+        return;
+      }
+
+      const newRef = database.ref('chats/' + agentUid + '/messages').push();
+      await newRef.set({
+        text: text.trim(),
+        senderId: currentUser.uid,
+        senderRole,
+        createdAt: Date.now(),
+        isEdited: false
+      });
+
+      // Update conversation meta for admin list
+      await database.ref('chats/' + agentUid + '/meta').update({
+        agentId: agentUid,
+        agentName: currentProfile?.fullName || currentUser.displayName || 'Agent',
+        agentEmail: currentProfile?.email || currentUser.email,
+        lastMessage: text.trim().slice(0, 80),
+        lastMessageAt: Date.now(),
+        lastSenderRole: senderRole
+      });
+    }
+
+    function cancelEdit() {
+      editingMessageId = null;
+      document.getElementById('agentEditBar')?.classList.remove('active');
+      document.getElementById('adminEditBar')?.classList.remove('active');
+      const agentInput = document.getElementById('agentMessageInput');
+      const adminInput = document.getElementById('adminMessageInput');
+      if (agentInput) { agentInput.value = ''; agentInput.placeholder = 'Type a message...'; }
+      if (adminInput) { adminInput.value = ''; adminInput.placeholder = 'Type a message...'; }
+    }
+
+    window.startEditMessage = function(msgId, asAdmin) {
+      editingMessageId = msgId;
+      editingAsAdmin = asAdmin;
+      const bar = asAdmin ? document.getElementById('adminEditBar') : document.getElementById('agentEditBar');
+      const input = asAdmin ? document.getElementById('adminMessageInput') : document.getElementById('agentMessageInput');
+      bar.classList.add('active');
+
+      // Find current text
+      const container = asAdmin ? document.getElementById('adminChatMessages') : document.getElementById('agentChatMessages');
+      const bubble = container.querySelector(`[data-id="${msgId}"]`);
+      if (bubble) {
+        const text = bubble.querySelector('.msg-text')?.textContent || '';
+        input.value = text;
+        input.focus();
+        input.placeholder = 'Edit your message...';
+      }
+    };
+
+    document.getElementById('cancelAgentEdit')?.addEventListener('click', cancelEdit);
+    document.getElementById('cancelAdminEdit')?.addEventListener('click', cancelEdit);
+
+    // Agent send
+    document.getElementById('agentSendBtn')?.addEventListener('click', async () => {
+      const input = document.getElementById('agentMessageInput');
+      const text = input.value.trim();
+      if (!text || !currentUser) return;
+      input.value = '';
+      await sendChatMessage(currentUser.uid, text, 'agent');
+    });
+    document.getElementById('agentMessageInput')?.addEventListener('keypress', async (e) => {
+      if (e.key === 'Enter') {
+        const input = document.getElementById('agentMessageInput');
+        const text = input.value.trim();
+        if (!text || !currentUser) return;
+        input.value = '';
+        await sendChatMessage(currentUser.uid, text, 'agent');
+      }
+    });
+
+    // Admin send
+    document.getElementById('adminSendBtn')?.addEventListener('click', async () => {
+      if (!activeAdminChatAgentId) return;
+      const input = document.getElementById('adminMessageInput');
+      const text = input.value.trim();
+      if (!text) return;
+      input.value = '';
+      await sendChatMessage(activeAdminChatAgentId, text, 'admin');
+    });
+    document.getElementById('adminMessageInput')?.addEventListener('keypress', async (e) => {
+      if (e.key === 'Enter' && activeAdminChatAgentId) {
+        const input = document.getElementById('adminMessageInput');
+        const text = input.value.trim();
+        if (!text) return;
+        input.value = '';
+        await sendChatMessage(activeAdminChatAgentId, text, 'admin');
+      }
+    });
+
+    // Start agent chat when dashboard loads
+    function startAgentChat() {
+      if (!currentUser) return;
+      const el = document.getElementById('agentChatMessages');
+      if (el) listenToChat(currentUser.uid, el, currentUser.uid, false);
+    }
+
+    // Admin: load conversation list
+    function loadAdminConversations() {
+      database.ref('chats').on('value', (snap) => {
+        const data = snap.val() || {};
+        const list = Object.entries(data)
+          .filter(([_, v]) => v.meta)
+          .map(([agentId, v]) => ({ agentId, ...v.meta }))
+          .sort((a, b) => (b.lastMessageAt || 0) - (a.lastMessageAt || 0));
+
+        const listEl = document.getElementById('adminChatList');
+        if (list.length === 0) {
+          listEl.innerHTML = '<div class="empty-state" style="padding:1.5rem;font-size:0.85rem;">No conversations yet</div>';
+          return;
+        }
+
+        listEl.innerHTML = list.map(c => `
+          <div class="admin-chat-list-item ${c.agentId === activeAdminChatAgentId ? 'active' : ''}"
+               onclick="openAdminChat('${c.agentId}', '${escapeHtml(c.agentName || 'Agent')}')">
+            <h4>${escapeHtml(c.agentName || 'Agent')}</h4>
+            <p>${escapeHtml(c.lastMessage || 'No messages')}</p>
+          </div>
+        `).join('');
+      });
+    }
+
+    window.openAdminChat = function(agentId, agentName) {
+      activeAdminChatAgentId = agentId;
+      activeAdminChatAgentName = agentName;
+      document.getElementById('adminChatEmpty').classList.add('hidden');
+      const active = document.getElementById('adminActiveChat');
+      active.classList.remove('hidden');
+      active.style.display = 'flex';
+      document.getElementById('adminChatHeader').textContent = agentName;
+      cancelEdit();
+
+      // Highlight active
+      document.querySelectorAll('.admin-chat-list-item').forEach(el => el.classList.remove('active'));
+      // re-render will handle active class on next data event, but set now
+      const el = document.getElementById('adminChatMessages');
+      listenToChat(agentId, el, currentUser.uid, true);
+    };
+
+    // Hook into existing route functions
+    const originalLoadAgentItineraries = loadAgentItineraries;
+    loadAgentItineraries = async function() {
+      await originalLoadAgentItineraries();
+      startAgentChat();
+    };
+
+    const originalLoadAdminData = loadAdminData;
+    loadAdminData = async function() {
+      await originalLoadAdminData();
+      loadAdminConversations();
+    };
+  </script>
+</body>
+</html>
