@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brendava Tours – Company Documents & Staff</title>
+  <meta name="description" content="View official company documents and meet the professional staff of Brendava Tours & Travel – licensed guides, drivers and team members in Uganda & Rwanda." />
+  <meta name="theme-color" content="#0f766e" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/firebase@10.14.0/firebase-app-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/firebase@10.14.0/firebase-auth-compat.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/firebase@10.14.0/firebase-firestore-compat.js"></script>
+  <style>
+    :root {
+      --primary: #0f766e; --primary-dark: #0d5c56; --primary-light: #14b8a6;
+      --text: #0f172a; --text-muted: #64748b; --border: #e2e8f0;
+      --success: #059669; --danger: #dc2626; --card: #ffffff;
+      --shadow: 0 10px 25px -5px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: linear-gradient(135deg, #ecfdf5 0%, #f0fdfa 50%, #f8fafc 100%);
+      color: var(--text); min-height: 100vh; line-height: 1.5;
+    }
+    .header {
+      background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+      color: white; padding: 1rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between;
+      position: sticky; top: 0; z-index: 50;
+      box-shadow: 0 4px 12px rgba(15,118,110,0.25);
+    }
+    .logo { display: flex; align-items: center; gap: 0.75rem; }
+    .logo-icon {
+      width: 42px; height: 42px; background: rgba(255,255,255,0.2);
+      border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.35rem;
+    }
+    .logo-text h1 { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
+    .logo-text span { font-size: 0.75rem; opacity: 0.85; }
+    .header-right { display: flex; align-items: center; gap: 0.75rem; }
+    .header-right a, .header-right button {
+      color: white; background: rgba(255,255,255,0.15);
+      border: none; padding: 0.45rem 0.9rem; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 500; cursor: pointer; text-decoration: none;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+
+    .page-title {
+      font-family: 'Playfair Display', serif; font-size: 1.85rem;
+      margin-bottom: 0.35rem;
+    }
+    .page-sub { color: var(--text-muted); margin-bottom: 2rem; }
+
+    .section-card {
+      background: white; border-radius: 16px; border: 1px solid var(--border);
+      box-shadow: var(--shadow); margin-bottom: 2rem; overflow: hidden;
+    }
+    .section-header {
+      padding: 1.15rem 1.5rem; border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem;
+    }
+    .section-header h2 { font-size: 1.15rem; font-weight: 600; }
+    .section-body { padding: 1.5rem; }
+
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.4rem;
+      padding: 0.7rem 1.25rem; border-radius: 10px; font-weight: 600; font-size: 0.9rem;
+      border: none; cursor: pointer; font-family: inherit; transition: all 0.2s;
+    }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-outline { background: white; border: 1.5px solid var(--border); color: var(--text); }
+    .btn-sm { padding: 0.4rem 0.85rem; font-size: 0.8rem; }
+    .btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.35rem; }
+    .form-control {
+      width: 100%; padding: 0.7rem 1rem; border: 1.5px solid var(--border);
+      border-radius: 10px; font-size: 0.95rem; font-family: inherit;
+    }
+    .form-control:focus { outline: none; border-color: var(--primary); box-shadow: 0 0 0 3px rgba(15,118,110,0.12); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+    .upload-area {
+      border: 2px dashed var(--border); border-radius: 12px; padding: 1.25rem;
+      text-align: center; background: #f8fafc; cursor: pointer;
+    }
+    .upload-area:hover { border-color: var(--primary); background: #f0fdfa; }
+    .upload-area input { display: none; }
+    .file-name { font-size: 0.85rem; color: var(--primary); margin-top: 0.4rem; font-weight: 500; }
+
+    .alert {
+      padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.9rem;
+      margin-bottom: 1rem; display: none;
+    }
+    .alert.show { display: block; }
+    .alert-success { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+    .alert-error { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+    .alert-info { background: #eff6ff; color: #1e40af; border: 1px solid #bfdbfe; }
+
+    /* Documents grid */
+    .docs-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem;
+    }
+    .doc-card {
+      border: 1px solid var(--border); border-radius: 12px; padding: 1.15rem;
+      background: #f8fafc; display: flex; flex-direction: column; gap: 0.5rem;
+    }
+    .doc-card h4 { font-size: 0.95rem; }
+    .doc-card p { font-size: 0.8rem; color: var(--text-muted); }
+    .doc-card .actions { display: flex; gap: 0.4rem; margin-top: 0.5rem; flex-wrap: wrap; }
+
+    /* Staff grid */
+    .staff-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1.25rem;
+    }
+    .staff-card {
+      border: 1px solid var(--border); border-radius: 14px; overflow: hidden;
+      background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .staff-photo {
+      width: 100%; height: 200px; object-fit: cover; background: #e2e8f0;
+      display: block;
+    }
+    .staff-photo-placeholder {
+      width: 100%; height: 200px; background: linear-gradient(135deg, #ccfbf1, #99f6e4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem; color: var(--primary-dark);
+    }
+    .staff-info { padding: 1rem; }
+    .staff-info h4 { font-size: 1rem; margin-bottom: 0.35rem; }
+    .staff-info p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.2rem; }
+    .staff-info .actions { display: flex; gap: 0.4rem; margin-top: 0.75rem; }
+
+    .badge {
+      display: inline-block; padding: 0.2rem 0.6rem; border-radius: 50px;
+      font-size: 0.72rem; font-weight: 600;
+    }
+    .badge-admin { background: #ede9fe; color: #5b21b6; }
+
+    .empty-state { text-align: center; padding: 2.5rem 1rem; color: var(--text-muted); }
+    .hidden { display: none !important; }
+
+    .admin-panel {
+      background: #fffbeb; border: 1px solid #fde68a; border-radius: 12px;
+      padding: 1.25rem; margin-bottom: 1.5rem;
+    }
+    .admin-panel h3 { font-size: 1rem; margin-bottom: 1rem; color: #92400e; }
+
+    .login-box {
+      max-width: 400px; margin: 3rem auto; background: white;
+      border-radius: 16px; padding: 2rem; box-shadow: var(--shadow);
+      border: 1px solid var(--border);
+    }
+    .login-box h2 {
+      font-family: 'Playfair Display', serif; margin-bottom: 0.5rem; text-align: center;
+    }
+    .login-box p { text-align: center; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+    .footer {
+      text-align: center; padding: 1.5rem; color: var(--text-muted); font-size: 0.85rem;
+    }
+    .footer a { color: var(--primary); text-decoration: none; font-weight: 500; }
+  </style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">🌍</div>
+      <div class="logo-text">
+        <h1>Brendava Tours</h1>
+        <span>Company & Staff</span>
+      </div>
+    </div>
+    <div class="header-right">
+      <a href="https://www.brendavatoursandtravel.com" target="_blank">Main Website</a>
+      <button id="adminLoginBtn" class="hidden">Admin Login</button>
+      <button id="logoutBtn" class="hidden">Sign Out</button>
+      <span id="adminBadge" class="badge badge-admin hidden">Admin</span>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Public view always visible -->
+    <h1 class="page-title">Company Documents & Our Team</h1>
+    <p class="page-sub">Official documents and the professional staff of Brendava Tours & Travel.</p>
+
+    <!-- ========== COMPANY DOCUMENTS ========== -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>📄 Company Documents</h2>
+      </div>
+      <div class="section-body">
+        <!-- Admin upload form -->
+        <div id="docAdminPanel" class="admin-panel hidden">
+          <h3>Upload Company Document (Admin only)</h3>
+          <div id="docAlert" class="alert"></div>
+          <form id="docUploadForm">
+            <div class="form-group">
+              <label>Document Title *</label>
+              <input type="text" class="form-control" id="docTitle" placeholder="e.g. Tour Operator License 2026" required>
+            </div>
+            <div class="form-group">
+              <label>Description</label>
+              <input type="text" class="form-control" id="docDesc" placeholder="Short description">
+            </div>
+            <div class="form-group">
+              <label>File (PDF, DOC, DOCX, Image) *</label>
+              <div class="upload-area" id="docUploadArea">
+                <div>📎 Click or drag file here</div>
+                <input type="file" id="docFile" accept=".pdf,.doc,.docx,image/*">
+                <div class="file-name" id="docFileName"></div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" id="docUploadBtn">Upload Document</button>
+          </form>
+        </div>
+
+        <div class="docs-grid" id="docsList">
+          <div class="empty-state">Loading documents...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== STAFF ========== -->
+    <div class="section-card">
+      <div class="section-header">
+        <h2>👥 Our Staff</h2>
+      </div>
+      <div class="section-body">
+        <!-- Admin add staff form -->
+        <div id="staffAdminPanel" class="admin-panel hidden">
+          <h3>Add / Update Staff Member (Admin only)</h3>
+          <div id="staffAlert" class="alert"></div>
+          <form id="staffForm">
+            <input type="hidden" id="staffEditId">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name *</label>
+                <input type="text" class="form-control" id="staffName" placeholder="John Doe" required>
+              </div>
+              <div class="form-group">
+                <label>Position / Role</label>
+                <input type="text" class="form-control" id="staffRole" placeholder="e.g. Driver, Tour Guide">
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>National ID / Staff ID</label>
+                <input type="text" class="form-control" id="staffIdNumber" placeholder="ID number">
+              </div>
+              <div class="form-group">
+                <label>Driving Permit Number</label>
+                <input type="text" class="form-control" id="staffPermit" placeholder="Driving permit No.">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Photo</label>
+              <div class="upload-area" id="staffPhotoArea">
+                <div>📷 Click to upload photo</div>
+                <input type="file" id="staffPhoto" accept="image/*">
+                <div class="file-name" id="staffPhotoName"></div>
+              </div>
+            </div>
+            <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+              <button type="submit" class="btn btn-primary" id="staffSaveBtn">Add Staff Member</button>
+              <button type="button" class="btn btn-outline hidden" id="staffCancelEdit">Cancel Edit</button>
+            </div>
+          </form>
+        </div>
+
+        <div class="staff-grid" id="staffList">
+          <div class="empty-state">Loading staff...</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Simple Admin Login Modal-style box (shown when needed) -->
+  <div id="loginOverlay" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:100;display:flex;align-items:center;justify-content:center;padding:1rem;">
+    <div class="login-box">
+      <h2>Admin Login</h2>
+      <p>Enter the admin password to manage documents and staff</p>
+      <div id="loginAlert" class="alert"></div>
+      <form id="adminLoginForm">
+        <input type="hidden" id="loginEmail" value="brendavatoursandtravel@gmail.com">
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" class="form-control" id="loginPassword" required>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%;">Sign In</button>
+      </form>
+      <button class="btn btn-outline" style="width:100%;margin-top:0.75rem;" id="closeLoginBtn">Cancel</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    © 2026 Brendava Tours & Travel • <a href="https://www.brendavatoursandtravel.com" target="_blank">www.brendavatoursandtravel.com</a>
+  </footer>
+
+  <script>
+    const CLOUD_NAME = "ziudh5iv";
+    const UPLOAD_PRESET = "brendava_gallery";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
+      authDomain: "brendava-tours-and-travel.firebaseapp.com",
+      databaseURL: "https://brendava-tours-and-travel-default-rtdb.firebaseio.com",
+      projectId: "brendava-tours-and-travel",
+      storageBucket: "brendava-tours-and-travel.firebasestorage.app",
+      messagingSenderId: "732703885570",
+      appId: "1:732703885570:web:3011a3989d5fe36eb69a1b",
+      measurementId: "G-ZC356HMW9C"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+    let isAdmin = false;
+    let currentUser = null;
+
+    // ========== HELPERS ==========
+    function showAlert(elId, msg, type) {
+      const el = document.getElementById(elId);
+      el.textContent = msg;
+      el.className = `alert alert-${type} show`;
+    }
+    function hideAlert(elId) {
+      document.getElementById(elId).className = 'alert';
+    }
+
+    const ADMIN_EMAIL = 'brendavatoursandtravel@gmail.com';
+    let adminCheckError = '';
+    async function checkIsAdmin(uid) {
+      const u = auth.currentUser;
+      return !!u && (u.email || '').toLowerCase() === ADMIN_EMAIL;
+    }
+
+    async function uploadToCloudinary(file, folder) {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('upload_preset', UPLOAD_PRESET);
+      formData.append('folder', folder);
+      const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`, {
+        method: 'POST', body: formData
+      });
+      const data = await res.json();
+      if (!data.secure_url) throw new Error(data.error?.message || 'Upload failed');
+      return data;
+    }
+
+    // ========== AUTH ==========
+    auth.onAuthStateChanged(async (user) => {
+      currentUser = user;
+      if (user) {
+        isAdmin = await checkIsAdmin(user.uid);
+      } else {
+        isAdmin = false;
+      }
+      updateUI();
+    });
+
+    function updateUI() {
+      const loginBtn = document.getElementById('adminLoginBtn');
+      const logoutBtn = document.getElementById('logoutBtn');
+      const badge = document.getElementById('adminBadge');
+      const docPanel = document.getElementById('docAdminPanel');
+      const staffPanel = document.getElementById('staffAdminPanel');
+
+      if (isAdmin) {
+        loginBtn.classList.add('hidden');
+        logoutBtn.classList.remove('hidden');
+        badge.classList.remove('hidden');
+        docPanel.classList.remove('hidden');
+        staffPanel.classList.remove('hidden');
+      } else {
+        loginBtn.classList.remove('hidden');
+        logoutBtn.classList.add('hidden');
+        badge.classList.add('hidden');
+        docPanel.classList.add('hidden');
+        staffPanel.classList.add('hidden');
+      }
+      showAdminHelp();
+      loadDocuments();
+      loadStaff();
+    }
+
+    function showAdminHelp() {
+      let b = document.getElementById('adminHelp');
+      if (!b) {
+        b = document.createElement('div');
+        b.id = 'adminHelp';
+        b.style.cssText = 'margin:12px;padding:12px;border-radius:10px;background:#fef3c7;color:#92400e;font-size:0.85rem;word-break:break-all;';
+        document.body.insertBefore(b, document.body.children[0]);
+      }
+      if (currentUser && !isAdmin) {
+        b.style.display = 'block';
+        b.innerHTML = 'Signed in as ' + escapeHtml(currentUser.email || '') + ' but not recognized as admin.<br>UID: <strong>' + escapeHtml(currentUser.uid) + '</strong><br>' +
+          (adminCheckError ? 'Error: ' + escapeHtml(adminCheckError) + ' (publish the Firestore rules, then retry)' : 'Create document admins/' + escapeHtml(currentUser.uid) + ' in Firestore.');
+      } else {
+        b.style.display = 'none';
+      }
+    }
+
+    document.getElementById('adminLoginBtn').addEventListener('click', () => {
+      document.getElementById('loginOverlay').classList.remove('hidden');
+      document.getElementById('loginOverlay').style.display = 'flex';
+    });
+    document.getElementById('closeLoginBtn').addEventListener('click', () => {
+      document.getElementById('loginOverlay').classList.add('hidden');
+      document.getElementById('loginOverlay').style.display = 'none';
+    });
+    document.getElementById('logoutBtn').addEventListener('click', () => auth.signOut());
+
+    document.getElementById('adminLoginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      hideAlert('loginAlert');
+      const email = 'brendavatoursandtravel@gmail.com';
+      const password = document.getElementById('loginPassword').value;
+      try {
+        await auth.signInWithEmailAndPassword(email, password);
+        document.getElementById('loginOverlay').classList.add('hidden');
+        document.getElementById('loginOverlay').style.display = 'none';
+      } catch (err) {
+        showAlert('loginAlert', 'Sign-in failed (' + (err.code || 'unknown') + '): ' + err.message, 'error');
+      }
+    });
+
+    // ========== COMPANY DOCUMENTS ==========
+    const docUploadArea = document.getElementById('docUploadArea');
+    const docFileInput = document.getElementById('docFile');
+    docUploadArea.addEventListener('click', () => docFileInput.click());
+    docFileInput.addEventListener('change', () => {
+      document.getElementById('docFileName').textContent = docFileInput.files[0]?.name || '';
+    });
+
+    document.getElementById('docUploadForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!isAdmin) return;
+      hideAlert('docAlert');
+
+      const title = document.getElementById('docTitle').value.trim();
+      const description = document.getElementById('docDesc').value.trim();
+      const file = docFileInput.files[0];
+      if (!title || !file) {
+        showAlert('docAlert', 'Title and file are required.', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('docUploadBtn');
+      btn.disabled = true; btn.textContent = 'Uploading...';
+
+      try {
+        const cloud = await uploadToCloudinary(file, 'brendava_company_docs');
+        await db.collection('companyDocuments').add({
+          title,
+          description,
+          fileUrl: cloud.secure_url,
+          fileName: file.name,
+          publicId: cloud.public_id,
+          createdAt: Date.now(),
+          uploadedBy: currentUser.uid
+        });
+        showAlert('docAlert', 'Document uploaded successfully!', 'success');
+        document.getElementById('docUploadForm').reset();
+        document.getElementById('docFileName').textContent = '';
+        loadDocuments();
+      } catch (err) {
+        showAlert('docAlert', 'Upload failed: ' + err.message, 'error');
+      } finally {
+        btn.disabled = false; btn.textContent = 'Upload Document';
+      }
+    });
+
+    function loadDocuments() {
+      db.collection('companyDocuments').get().then(snap => {
+        const list = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+          .sort((a, b) => (b.createdAt || 0) - (a.createdAt || 0));
+
+        const el = document.getElementById('docsList');
+        if (list.length === 0) {
+          el.innerHTML = '<div class="empty-state">No company documents uploaded yet.</div>';
+          return;
+        }
+
+        el.innerHTML = list.map(d => `
+          <div class="doc-card">
+            <h4>${escapeHtml(d.title)}</h4>
+            <p>${escapeHtml(d.description || '')}</p>
+            <p style="font-size:0.75rem;">${escapeHtml(d.fileName || 'File')} • ${new Date(d.createdAt || Date.now()).toLocaleDateString()}</p>
+            <div class="actions">
+              <a href="${d.fileUrl}" target="_blank" class="btn btn-primary btn-sm">View / Download</a>
+              ${isAdmin ? `<button class="btn btn-danger btn-sm" onclick="deleteDoc('${d.id}')">Delete</button>` : ''}
+            </div>
+          </div>
+        `).join('');
+      });
+    }
+
+    window.deleteDoc = async function(id) {
+      if (!isAdmin || !confirm('Delete this document?')) return;
+      await db.collection('companyDocuments').doc(id).delete();
+      loadDocuments();
+    };
+
+    // ========== STAFF ==========
+    const staffPhotoArea = document.getElementById('staffPhotoArea');
+    const staffPhotoInput = document.getElementById('staffPhoto');
+    staffPhotoArea.addEventListener('click', () => staffPhotoInput.click());
+    staffPhotoInput.addEventListener('change', () => {
+      document.getElementById('staffPhotoName').textContent = staffPhotoInput.files[0]?.name || '';
+    });
+
+    document.getElementById('staffForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (!isAdmin) return;
+      hideAlert('staffAlert');
+
+      const name = document.getElementById('staffName').value.trim();
+      const role = document.getElementById('staffRole').value.trim();
+      const idNumber = document.getElementById('staffIdNumber').value.trim();
+      const permit = document.getElementById('staffPermit').value.trim();
+      const editId = document.getElementById('staffEditId').value;
+      const photoFile = staffPhotoInput.files[0];
+
+      if (!name) {
+        showAlert('staffAlert', 'Name is required.', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('staffSaveBtn');
+      btn.disabled = true; btn.textContent = editId ? 'Updating...' : 'Adding...';
+
+      try {
+        let photoUrl = null;
+        let publicId = null;
+
+        if (photoFile) {
+          const cloud = await uploadToCloudinary(photoFile, 'brendava_staff_photos');
+          photoUrl = cloud.secure_url;
+          publicId = cloud.public_id;
+        }
+
+        const payload = {
+          fullName: name,
+          role: role || null,
+          idNumber: idNumber || null,
+          drivingPermit: permit || null,
+          updatedAt: Date.now()
+        };
+
+        if (photoUrl) {
+          payload.photoUrl = photoUrl;
+          payload.photoPublicId = publicId;
+        }
+
+        if (editId) {
+          // Keep existing photo if no new one
+          if (!photoUrl) {
+            const existing = (await db.collection('staff').doc(editId).get()).data();
+            if (existing?.photoUrl) {
+              payload.photoUrl = existing.photoUrl;
+              payload.photoPublicId = existing.photoPublicId || null;
+            }
+          }
+          await db.collection('staff').doc(editId).update(payload);
+          showAlert('staffAlert', 'Staff member updated!', 'success');
+        } else {
+          payload.createdAt = Date.now();
+          payload.photoUrl = photoUrl;
+          payload.photoPublicId = publicId;
+          await db.collection('staff').add(payload);
+          showAlert('staffAlert', 'Staff member added!', 'success');
+        }
+
+        resetStaffForm();
+        loadStaff();
+      } catch (err) {
+        showAlert('staffAlert', 'Error: ' + err.message, 'error');
+      } finally {
+        btn.disabled = false;
+        btn.textContent = document.getElementById('staffEditId').value ? 'Update Staff Member' : 'Add Staff Member';
+      }
+    });
+
+    function resetStaffForm() {
+      document.getElementById('staffForm').reset();
+      document.getElementById('staffEditId').value = '';
+      document.getElementById('staffPhotoName').textContent = '';
+      document.getElementById('staffSaveBtn').textContent = 'Add Staff Member';
+      document.getElementById('staffCancelEdit').classList.add('hidden');
+    }
+
+    document.getElementById('staffCancelEdit').addEventListener('click', resetStaffForm);
+
+    function loadStaff() {
+      db.collection('staff').get().then(snap => {
+        const list = snap.docs.map(d => ({ id: d.id, ...d.data() }))
+          .sort((a, b) => (a.fullName || '').localeCompare(b.fullName || ''));
+
+        const el = document.getElementById('staffList');
+        if (list.length === 0) {
+          el.innerHTML = '<div class="empty-state">No staff members added yet.</div>';
+          return;
+        }
+
+        el.innerHTML = list.map(s => `
+          <div class="staff-card">
+            ${s.photoUrl
+              ? `<img class="staff-photo" src="${s.photoUrl}" alt="${escapeHtml(s.fullName)}">`
+              : `<div class="staff-photo-placeholder">👤</div>`}
+            <div class="staff-info">
+              <h4>${escapeHtml(s.fullName)}</h4>
+              ${s.role ? `<p><strong>Role:</strong> ${escapeHtml(s.role)}</p>` : ''}
+              ${s.idNumber ? `<p><strong>ID:</strong> ${escapeHtml(s.idNumber)}</p>` : ''}
+              ${s.drivingPermit ? `<p><strong>Driving Permit:</strong> ${escapeHtml(s.drivingPermit)}</p>` : ''}
+              ${isAdmin ? `
+                <div class="actions">
+                  <button class="btn btn-outline btn-sm" onclick='editStaff(${JSON.stringify(s).replace(/'/g, "&#39;")})'>Edit</button>
+                  <button class="btn btn-danger btn-sm" onclick="deleteStaff('${s.id}')">Delete</button>
+                </div>
+              ` : ''}
+            </div>
+          </div>
+        `).join('');
+      });
+    }
+
+    window.editStaff = function(s) {
+      document.getElementById('staffEditId').value = s.id;
+      document.getElementById('staffName').value = s.fullName || '';
+      document.getElementById('staffRole').value = s.role || '';
+      document.getElementById('staffIdNumber').value = s.idNumber || '';
+      document.getElementById('staffPermit').value = s.drivingPermit || '';
+      document.getElementById('staffPhotoName').textContent = s.photoUrl ? 'Current photo kept (upload new to replace)' : '';
+      document.getElementById('staffSaveBtn').textContent = 'Update Staff Member';
+      document.getElementById('staffCancelEdit').classList.remove('hidden');
+      document.getElementById('staffAdminPanel').scrollIntoView({ behavior: 'smooth' });
+    };
+
+    window.deleteStaff = async function(id) {
+      if (!isAdmin || !confirm('Delete this staff member?')) return;
+      await db.collection('staff').doc(id).delete();
+      loadStaff();
+    };
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      const d = document.createElement('div');
+      d.textContent = str;
+      return d.innerHTML;
+    }
+
+    // Initial load (public)
+    loadDocuments();
+    loadStaff();
+  </script>
+</body>
+</html>
