@@ -48,22 +48,15 @@
  flex: 1 1 auto;
  overflow: hidden;
  }
- .logo-text {
- min-width: 0;
- overflow: hidden;
- }
- .logo-text h1 {
- font-size: 1rem;
- white-space: nowrap;
- overflow: hidden;
- text-overflow: ellipsis;
- }
- .logo-text p { display: none !important; }
- .header-logo {
- width: 44px;
- height: 44px;
- flex-shrink: 0;
- }
+.logo-text h1 { font-family: 'Playfair Display', serif; font-size: 1.3rem; }
+.logo-text span { font-size: 0.75rem; opacity: 0.85; }
+.header-right { display: flex; align-items: center; gap: 0.75rem; }
+.header-right a, .header-right button {
+    color: white; background: rgba(255,255,255,0.15);
+    border: none; padding: 0.45rem 0.9rem; border-radius: 8px;
+    font-size: 0.85rem; font-weight: 500; cursor: pointer; text-decoration: none;
+}
+
  .header-actions {
  flex-shrink: 0 !important;
  margin-left: 8px;
