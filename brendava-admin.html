@@ -1,0 +1,1590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Brendava Tours & Travel – Admin Panel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.14.0/firebase-auth-compat.js"></script>
+  <style>
+    :root {
+      --green: #0A5C36;
+      --green-dark: #08472a;
+      --green-light: #e8f5ee;
+      --gold: #c9a227;
+      --bg: #f7f9f8;
+      --card: #ffffff;
+      --text: #1a1a1a;
+      --muted: #5a6a60;
+      --border: #dce5df;
+      --danger: #c0392b;
+      --warning: #d68910;
+      --success: #1e8449;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      min-height: 100vh;
+    }
+    /* LOGIN */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #0A5C36 0%, #0d7a48 100%);
+      padding: 20px;
+    }
+    .login-card {
+      background: white;
+      border-radius: 16px;
+      padding: 40px 36px;
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    }
+    .login-card h1 {
+      font-size: 1.5rem;
+      color: var(--green);
+      margin-bottom: 6px;
+      text-align: center;
+    }
+    .login-card p {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 28px;
+    }
+    .login-card input {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      margin-bottom: 16px;
+    }
+    .login-card button {
+      width: 100%;
+      padding: 14px;
+      background: var(--green);
+      color: white;
+      border: none;
+      border-radius: 10px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .login-card button:hover { background: var(--green-dark); }
+    .login-error { color: var(--danger); font-size: 0.85rem; text-align: center; margin-top: 12px; display: none; }
+
+    /* APP LAYOUT */
+    #app { display: none; }
+    .sidebar {
+      position: fixed;
+      left: 0; top: 0; bottom: 0;
+      width: 250px;
+      background: var(--green);
+      color: white;
+      padding: 24px 0;
+      z-index: 100;
+      overflow-y: auto;
+    }
+    .sidebar .brand {
+      padding: 0 20px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      margin-bottom: 16px;
+    }
+    .sidebar .brand h2 { font-size: 1.15rem; font-weight: 700; }
+    .sidebar .brand span { font-size: 0.75rem; opacity: 0.8; }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 20px;
+      color: rgba(255,255,255,0.9);
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: background 0.15s;
+    }
+    .nav-item:hover, .nav-item.active { background: rgba(255,255,255,0.12); }
+    .nav-item svg { width: 18px; height: 18px; opacity: 0.9; }
+    .main {
+      margin-left: 250px;
+      padding: 28px 32px;
+      min-height: 100vh;
+    }
+    header.top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    header.top h1 { font-size: 1.6rem; color: var(--green-dark); }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 18px;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .btn-primary { background: var(--green); color: white; }
+    .btn-primary:hover { background: var(--green-dark); }
+    .btn-outline { background: white; border: 1px solid var(--border); color: var(--text); }
+    .btn-outline:hover { border-color: var(--green); color: var(--green); }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-sm { padding: 6px 12px; font-size: 0.8rem; }
+    .btn-whatsapp { background: #25D366; color: white; }
+    .btn-whatsapp:hover { background: #1da851; }
+
+    /* CARDS & GRID */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 18px;
+      margin-bottom: 28px;
+    }
+    .stat-card {
+      background: var(--card);
+      border-radius: 12px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .stat-card .label { font-size: 0.8rem; color: var(--muted); margin-bottom: 6px; }
+    .stat-card .value { font-size: 1.6rem; font-weight: 700; color: var(--green-dark); }
+    .stat-card .sub { font-size: 0.8rem; color: var(--muted); margin-top: 4px; }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .card-header h3 { font-size: 1.05rem; }
+    .card-body { padding: 20px; }
+
+    /* TABLE */
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+    th { background: var(--green-light); color: var(--green-dark); font-weight: 600; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.03em; }
+    tr:hover td { background: #f9fbfa; }
+    .badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+    .badge-paid { background: #d4edda; color: #155724; }
+    .badge-partial { background: #fff3cd; color: #856404; }
+    .badge-outstanding { background: #f8d7da; color: #721c24; }
+    .badge-completed { background: #d1ecf1; color: #0c5460; }
+
+    /* FORMS */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .form-group { margin-bottom: 16px; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { display: block; font-size: 0.85rem; font-weight: 500; margin-bottom: 6px; color: var(--muted); }
+    input, select, textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(10,92,54,0.12);
+    }
+    textarea { min-height: 90px; resize: vertical; }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0;
+      background: rgba(0,0,0,0.45);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 200;
+      padding: 20px;
+    }
+    .modal-overlay.show { display: flex; }
+    .modal {
+      background: white;
+      border-radius: 14px;
+      width: 100%;
+      max-width: 640px;
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+    }
+    .modal-header {
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-header h3 { font-size: 1.15rem; }
+    .modal-body { padding: 24px; }
+    .modal-footer {
+      padding: 16px 24px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+    .close-btn {
+      background: none; border: none; font-size: 1.4rem; cursor: pointer; color: var(--muted);
+    }
+
+    /* DETAIL VIEW */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .info-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); }
+    .info-row .label { color: var(--muted); font-size: 0.85rem; }
+    .info-row .value { font-weight: 500; }
+    .balance-box {
+      background: var(--green-light);
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .balance-box .remaining { font-size: 2rem; font-weight: 700; color: var(--green-dark); }
+    .balance-box.zero { background: #d4edda; }
+    .balance-box.zero .remaining { color: var(--success); }
+
+    .section-title {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--green-dark);
+      margin: 24px 0 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 48px 20px;
+      color: var(--muted);
+    }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .sidebar { width: 70px; }
+      .sidebar .brand h2, .sidebar .brand span, .nav-item span { display: none; }
+      .main { margin-left: 70px; padding: 20px; }
+      .form-grid, .detail-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .sidebar { display: none; }
+      .main { margin-left: 0; }
+    }
+
+    .hidden { display: none !important; }
+    .toast {
+      position: fixed; bottom: 24px; right: 24px;
+      background: var(--green-dark); color: white;
+      padding: 14px 22px; border-radius: 10px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      z-index: 300; display: none;
+    }
+    .toast.show { display: block; animation: fadeIn 0.3s; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  </style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-card">
+    <h1>Brendava Tours & Travel</h1>
+    <p>Admin Panel – Secure Access</p>
+    <input type="password" id="admin-password" placeholder="Enter admin password" autofocus />
+    <button onclick="login()">Login</button>
+    <div class="login-error" id="login-error">Incorrect password</div>
+  </div>
+</div>
+
+<!-- MAIN APP -->
+<div id="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <h2>Brendava</h2>
+      <span>Admin Panel</span>
+    </div>
+    <div class="nav-item active" data-page="dashboard" onclick="showPage('dashboard')">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z"/></svg>
+      <span>Dashboard</span>
+    </div>
+    <div class="nav-item" data-page="bookings" onclick="showPage('bookings')">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+      <span>Clients / Bookings</span>
+    </div>
+    <div class="nav-item" data-page="guides" onclick="showPage('guides')">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+      <span>Tour Guides</span>
+    </div>
+    <div class="nav-item" data-page="itineraries" onclick="showPage('itineraries')">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      <span>Itineraries</span>
+    </div>
+    <div class="nav-item" data-page="alerts" onclick="showPage('alerts')">
+      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      <span>Alerts Log</span>
+    </div>
+    <div style="margin-top: auto; padding: 20px; border-top: 1px solid rgba(255,255,255,0.15);">
+      <div class="nav-item" onclick="logout()">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+        <span>Logout</span>
+      </div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <!-- DASHBOARD -->
+    <div id="page-dashboard" class="page">
+      <header class="top">
+        <h1>Dashboard</h1>
+        <button class="btn btn-primary" onclick="openBookingModal()">+ New Booking</button>
+      </header>
+      <div class="stats">
+        <div class="stat-card">
+          <div class="label">Active Bookings</div>
+          <div class="value" id="stat-active">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Outstanding Balance</div>
+          <div class="value" id="stat-outstanding">$0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Fully Paid</div>
+          <div class="value" id="stat-paid">0</div>
+        </div>
+        <div class="stat-card">
+          <div class="label">Upcoming (30 days)</div>
+          <div class="value" id="stat-upcoming">0</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><h3>Recent Bookings</h3></div>
+        <div class="card-body" id="recent-bookings">
+          <div class="empty-state">Loading...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOKINGS LIST -->
+    <div id="page-bookings" class="page hidden">
+      <header class="top">
+        <h1>Clients & Bookings</h1>
+        <div style="display:flex;gap:10px;">
+          <input type="search" id="search-bookings" placeholder="Search by name or passport..." style="width:240px;padding:10px 14px;border-radius:8px;border:1px solid var(--border);" oninput="renderBookings()">
+          <button class="btn btn-primary" onclick="openBookingModal()">+ New Booking</button>
+        </div>
+      </header>
+      <div class="card">
+        <div class="card-body" style="padding:0;">
+          <table>
+            <thead>
+              <tr>
+                <th>Client</th>
+                <th>Passport</th>
+                <th>Travel Date</th>
+                <th>Total</th>
+                <th>Paid</th>
+                <th>Remaining</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="bookings-tbody"></tbody>
+          </table>
+          <div id="bookings-empty" class="empty-state hidden">No bookings yet. Create the first one.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- BOOKING DETAIL -->
+    <div id="page-detail" class="page hidden">
+      <header class="top">
+        <div>
+          <button class="btn btn-outline btn-sm" onclick="showPage('bookings')">← Back</button>
+          <h1 id="detail-title" style="display:inline;margin-left:12px;">Client Detail</h1>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <button class="btn btn-outline" onclick="editCurrentBooking()">Edit</button>
+          <button class="btn btn-primary" onclick="openPaymentModal()">Record Payment</button>
+        </div>
+      </header>
+      <div class="detail-grid">
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <div class="balance-box" id="balance-box">
+                <div style="font-size:0.85rem;color:var(--muted);">Remaining Balance</div>
+                <div class="remaining" id="detail-remaining">$0</div>
+                <div style="font-size:0.8rem;margin-top:4px;" id="detail-paid-of">Paid $0 of $0</div>
+              </div>
+              <div class="info-row"><span class="label">Client Name</span><span class="value" id="d-name">–</span></div>
+              <div class="info-row"><span class="label">Passport / ID</span><span class="value" id="d-passport">–</span></div>
+              <div class="info-row"><span class="label">WhatsApp</span><span class="value" id="d-whatsapp">–</span></div>
+              <div class="info-row"><span class="label">Email</span><span class="value" id="d-email">–</span></div>
+              <div class="info-row"><span class="label">Travel Start</span><span class="value" id="d-travel">–</span></div>
+              <div class="info-row"><span class="label">Destinations</span><span class="value" id="d-destinations">–</span></div>
+              <div class="info-row"><span class="label">Tour Guide</span><span class="value" id="d-guide">–</span></div>
+              <div class="info-row"><span class="label">Channel</span><span class="value" id="d-channel">–</span></div>
+            </div>
+          </div>
+
+          <div class="section-title">Payment History</div>
+          <div class="card">
+            <div class="card-body" style="padding:0;">
+              <table>
+                <thead><tr><th>Date</th><th>Amount</th><th>Method</th><th>Notes / Receipt</th></tr></thead>
+                <tbody id="payments-tbody"></tbody>
+              </table>
+              <div id="payments-empty" class="empty-state" style="padding:24px;">No payments recorded yet.</div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <div class="section-title">Itinerary & Map</div>
+          <div class="card">
+            <div class="card-body">
+              <div id="detail-itinerary" style="white-space:pre-wrap;font-size:0.9rem;margin-bottom:16px;max-height:180px;overflow-y:auto;">No itinerary attached.</div>
+              <div id="map-preview-box" style="display:none;margin-bottom:14px;">
+                <a id="detail-map-link" href="#" target="_blank" class="btn btn-outline btn-sm" style="margin-bottom:8px;">🗺 Open Full Google Maps Route</a>
+                <div style="font-size:0.8rem;color:var(--muted);">Waypoints used for the route are stored with this booking. The link opens the complete multi-stop journey.</div>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <button class="btn btn-whatsapp btn-sm" onclick="sendClientMessage('itinerary')">Send Itinerary + Map + Balance</button>
+                <button class="btn btn-outline btn-sm" onclick="sendClientMessage('balance')">Send Balance Reminder</button>
+                <button class="btn btn-outline btn-sm" onclick="sendClientMessage('month')">Send 1-Month Reminder</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="section-title">Scheduled Alerts</div>
+          <div class="card">
+            <div class="card-body" id="detail-alerts">
+              <div class="empty-state" style="padding:16px;">Alerts will appear here based on travel date.</div>
+            </div>
+          </div>
+
+          <div class="section-title">Actions</div>
+          <div class="card">
+            <div class="card-body" style="display:flex;flex-direction:column;gap:10px;">
+              <button class="btn btn-primary" onclick="markTripComplete()">Mark Trip Completed → Send Thank You</button>
+              <button class="btn btn-outline" onclick="sendGuideTripDayMap()">Send Guide Trip-Day Map Now</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- GUIDES -->
+    <div id="page-guides" class="page hidden">
+      <header class="top">
+        <h1>Tour Guides</h1>
+        <button class="btn btn-primary" onclick="openGuideModal()">+ Add Guide</button>
+      </header>
+      <div class="card">
+        <div class="card-body" style="padding:0;">
+          <table>
+            <thead><tr><th>Name</th><th>WhatsApp</th><th>Email</th><th>Actions</th></tr></thead>
+            <tbody id="guides-tbody"></tbody>
+          </table>
+          <div id="guides-empty" class="empty-state hidden">No guides added yet.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ITINERARIES -->
+    <div id="page-itineraries" class="page hidden">
+      <header class="top">
+        <h1>Itineraries Library</h1>
+        <button class="btn btn-primary" onclick="openItineraryModal()">+ New Itinerary</button>
+      </header>
+      <div class="card">
+        <div class="card-body" id="itineraries-list">
+          <div class="empty-state">Loading itineraries...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALERTS LOG -->
+    <div id="page-alerts" class="page hidden">
+      <header class="top">
+        <h1>Alerts & Message Log</h1>
+      </header>
+      <div class="card">
+        <div class="card-body" style="padding:0;">
+          <table>
+            <thead><tr><th>Date</th><th>Type</th><th>Recipient</th><th>Channel</th><th>Status</th><th>Preview</th></tr></thead>
+            <tbody id="alerts-tbody"></tbody>
+          </table>
+          <div id="alerts-empty" class="empty-state hidden">No messages logged yet.</div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- BOOKING MODAL -->
+<div class="modal-overlay" id="booking-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3 id="booking-modal-title">New Booking</h3>
+      <button class="close-btn" onclick="closeModal('booking-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <form id="booking-form">
+        <input type="hidden" id="b-id" />
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Client Full Name *</label>
+            <input type="text" id="b-name" required />
+          </div>
+          <div class="form-group">
+            <label>Passport / ID Number *</label>
+            <input type="text" id="b-passport" required />
+          </div>
+          <div class="form-group">
+            <label>WhatsApp Number (with country code)</label>
+            <input type="text" id="b-whatsapp" placeholder="+2567..." />
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" id="b-email" />
+          </div>
+          <div class="form-group">
+            <label>Total Package Amount (USD) *</label>
+            <input type="number" id="b-total" min="0" step="0.01" required />
+          </div>
+          <div class="form-group">
+            <label>Travel Start Date *</label>
+            <input type="date" id="b-travel" required />
+          </div>
+          <div class="form-group full">
+            <label>Destinations (e.g. Bwindi, Queen Elizabeth, Murchison)</label>
+            <input type="text" id="b-destinations" placeholder="Bwindi Impenetrable NP, Queen Elizabeth NP" />
+          </div>
+          <div class="form-group">
+            <label>Assigned Tour Guide</label>
+            <select id="b-guide"></select>
+          </div>
+          <div class="form-group">
+            <label>Preferred Channel</label>
+            <select id="b-channel">
+              <option value="whatsapp">WhatsApp</option>
+              <option value="email">Email / Gmail</option>
+              <option value="both">Both</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Itinerary (day-by-day text)</label>
+            <textarea id="b-itinerary" placeholder="Day 1: Arrival Entebbe...&#10;Day 2: Transfer to Bwindi..."></textarea>
+          </div>
+          <div class="form-group full">
+            <label>Google Maps waypoints (optional, comma-separated places for route)</label>
+            <input type="text" id="b-waypoints" placeholder="Entebbe, Bwindi Impenetrable National Park, Queen Elizabeth National Park" />
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('booking-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveBooking()">Save Booking</button>
+    </div>
+  </div>
+</div>
+
+<!-- PAYMENT MODAL -->
+<div class="modal-overlay" id="payment-modal">
+  <div class="modal" style="max-width:440px;">
+    <div class="modal-header">
+      <h3>Record Payment</h3>
+      <button class="close-btn" onclick="closeModal('payment-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Amount (USD) *</label>
+        <input type="number" id="p-amount" min="0.01" step="0.01" required />
+      </div>
+      <div class="form-group">
+        <label>Payment Method</label>
+        <select id="p-method">
+          <option>Bank Transfer (I&M)</option>
+          <option>MTN Mobile Money</option>
+          <option>Airtel Money</option>
+          <option>Cash</option>
+          <option>Card / PayPal</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="p-date" />
+      </div>
+      <div class="form-group">
+        <label>Notes / Transaction ID</label>
+        <input type="text" id="p-notes" />
+      </div>
+      <div class="form-group">
+        <label>Receipt / Proof (optional – uploaded to Cloudinary)</label>
+        <input type="file" id="p-receipt" accept="image/*,.pdf" />
+        <div id="p-receipt-status" style="font-size:0.8rem;color:var(--muted);margin-top:6px;"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('payment-modal')">Cancel</button>
+      <button class="btn btn-primary" id="save-payment-btn" onclick="savePayment()">Save Payment</button>
+    </div>
+  </div>
+</div>
+
+<!-- GUIDE MODAL -->
+<div class="modal-overlay" id="guide-modal">
+  <div class="modal" style="max-width:420px;">
+    <div class="modal-header">
+      <h3>Add / Edit Tour Guide</h3>
+      <button class="close-btn" onclick="closeModal('guide-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="g-id" />
+      <div class="form-group">
+        <label>Full Name *</label>
+        <input type="text" id="g-name" required />
+      </div>
+      <div class="form-group">
+        <label>WhatsApp (with country code)</label>
+        <input type="text" id="g-whatsapp" placeholder="+2567..." />
+      </div>
+      <div class="form-group">
+        <label>Email / Gmail</label>
+        <input type="email" id="g-email" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('guide-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveGuide()">Save Guide</button>
+    </div>
+  </div>
+</div>
+
+<!-- ITINERARY MODAL -->
+<div class="modal-overlay" id="itinerary-modal">
+  <div class="modal">
+    <div class="modal-header">
+      <h3>New Itinerary</h3>
+      <button class="close-btn" onclick="closeModal('itinerary-modal')">&times;</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>Title *</label>
+        <input type="text" id="i-title" placeholder="e.g. 7-Day Gorilla & Wildlife Safari" />
+      </div>
+      <div class="form-group">
+        <label>Day-by-day Content</label>
+        <textarea id="i-content" style="min-height:180px;" placeholder="Day 1: ...&#10;Day 2: ..."></textarea>
+      </div>
+      <div class="form-group">
+        <label>Waypoints for Google Maps (comma separated)</label>
+        <input type="text" id="i-waypoints" />
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" onclick="closeModal('itinerary-modal')">Cancel</button>
+      <button class="btn btn-primary" onclick="saveItinerary()">Save Itinerary</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ========== CONFIG ==========
+  const ADMIN_PASSWORD = "namarisha";
+  const CLOUD_NAME = "ziudh5iv";
+  const UPLOAD_PRESET = "brendava_gallery";
+  const PHOTO_TAG = "brendava_photos";
+  const VIDEO_TAG = "brendava_videos";
+
+  // Firebase
+  const firebaseConfig = {
+    apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
+    authDomain: "brendava-tours-and-travel.firebaseapp.com",
+    projectId: "brendava-tours-and-travel",
+    storageBucket: "brendava-tours-and-travel.firebasestorage.app",
+    messagingSenderId: "732703885570",
+    appId: "1:732703885570:web:3011a3989d5fe36eb69a1b",
+    measurementId: "G-ZC356HMW9C"
+  };
+
+  // ========== STATE ==========
+  let db = null;
+  let bookings = [];
+  let guides = [];
+  let itineraries = [];
+  let alertsLog = [];
+  let currentBookingId = null;
+  let useLocal = false; // fallback if Firebase fails
+
+  // ========== INIT ==========
+  function initFirebase() {
+    try {
+      if (!firebaseConfig.apiKey) {
+        console.warn("Firebase apiKey is empty – using localStorage fallback");
+        useLocal = true;
+        loadLocalData();
+        return;
+      }
+      firebase.initializeApp(firebaseConfig);
+      db = firebase.firestore();
+      loadAllData();
+    } catch (e) {
+      console.error("Firebase init error:", e);
+      useLocal = true;
+      loadLocalData();
+    }
+  }
+
+  function loadLocalData() {
+    bookings = JSON.parse(localStorage.getItem("brendava_bookings") || "[]");
+    guides = JSON.parse(localStorage.getItem("brendava_guides") || "[]");
+    itineraries = JSON.parse(localStorage.getItem("brendava_itineraries") || "[]");
+    alertsLog = JSON.parse(localStorage.getItem("brendava_alerts") || "[]");
+    renderAll();
+  }
+
+  function saveLocal() {
+    localStorage.setItem("brendava_bookings", JSON.stringify(bookings));
+    localStorage.setItem("brendava_guides", JSON.stringify(guides));
+    localStorage.setItem("brendava_itineraries", JSON.stringify(itineraries));
+    localStorage.setItem("brendava_alerts", JSON.stringify(alertsLog));
+  }
+
+  async function loadAllData() {
+    if (useLocal) return loadLocalData();
+    try {
+      const [bSnap, gSnap, iSnap, aSnap] = await Promise.all([
+        db.collection("bookings").orderBy("createdAt", "desc").get(),
+        db.collection("guides").get(),
+        db.collection("itineraries").get(),
+        db.collection("alerts").orderBy("createdAt", "desc").limit(100).get()
+      ]);
+      bookings = bSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+      guides = gSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+      itineraries = iSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+      alertsLog = aSnap.docs.map(d => ({ id: d.id, ...d.data() }));
+      renderAll();
+    } catch (e) {
+      console.error(e);
+      useLocal = true;
+      loadLocalData();
+      toast("Using offline/local storage (Firebase not fully configured)");
+    }
+  }
+
+  // ========== AUTH ==========
+  function login() {
+    const pw = document.getElementById("admin-password").value;
+    if (pw === ADMIN_PASSWORD) {
+      document.getElementById("login-screen").style.display = "none";
+      document.getElementById("app").style.display = "block";
+      initFirebase();
+    } else {
+      document.getElementById("login-error").style.display = "block";
+    }
+  }
+  document.getElementById("admin-password").addEventListener("keydown", e => {
+    if (e.key === "Enter") login();
+  });
+
+  function logout() {
+    document.getElementById("app").style.display = "none";
+    document.getElementById("login-screen").style.display = "flex";
+    document.getElementById("admin-password").value = "";
+  }
+
+  // ========== NAV ==========
+  function showPage(page) {
+    document.querySelectorAll(".page").forEach(p => p.classList.add("hidden"));
+    document.getElementById("page-" + page).classList.remove("hidden");
+    document.querySelectorAll(".nav-item").forEach(n => n.classList.remove("active"));
+    const nav = document.querySelector(`.nav-item[data-page="${page}"]`);
+    if (nav) nav.classList.add("active");
+    if (page === "bookings") renderBookings();
+    if (page === "guides") renderGuides();
+    if (page === "itineraries") renderItineraries();
+    if (page === "alerts") renderAlerts();
+    if (page === "dashboard") renderDashboard();
+  }
+
+  // ========== HELPERS ==========
+  function toast(msg) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.classList.add("show");
+    setTimeout(() => t.classList.remove("show"), 3200);
+  }
+  function closeModal(id) {
+    document.getElementById(id).classList.remove("show");
+  }
+  function formatMoney(n) {
+    return "$" + Number(n || 0).toLocaleString("en-US", { minimumFractionDigits: 0, maximumFractionDigits: 2 });
+  }
+  function formatDate(d) {
+    if (!d) return "–";
+    const dt = d.toDate ? d.toDate() : new Date(d);
+    return dt.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+  }
+  function daysUntil(dateStr) {
+    const target = new Date(dateStr);
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    target.setHours(0,0,0,0);
+    return Math.round((target - today) / 86400000);
+  }
+  function calcPaid(booking) {
+    return (booking.payments || []).reduce((s, p) => s + Number(p.amount || 0), 0);
+  }
+  function calcRemaining(booking) {
+    return Math.max(0, Number(booking.total || 0) - calcPaid(booking));
+  }
+  function getStatus(booking) {
+    if (booking.completed) return "completed";
+    const rem = calcRemaining(booking);
+    if (rem <= 0) return "paid";
+    if (calcPaid(booking) > 0) return "partial";
+    return "outstanding";
+  }
+  function statusBadge(status) {
+    const map = {
+      paid: '<span class="badge badge-paid">Fully Paid</span>',
+      partial: '<span class="badge badge-partial">Partial</span>',
+      outstanding: '<span class="badge badge-outstanding">Outstanding</span>',
+      completed: '<span class="badge badge-completed">Completed</span>'
+    };
+    return map[status] || status;
+  }
+  function buildGoogleMapsUrl(waypoints) {
+    if (!waypoints) return null;
+    const parts = waypoints.split(",").map(s => s.trim()).filter(Boolean);
+    if (parts.length < 2) return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(parts[0] || "Uganda");
+    const origin = encodeURIComponent(parts[0]);
+    const destination = encodeURIComponent(parts[parts.length - 1]);
+    const mid = parts.slice(1, -1).map(p => encodeURIComponent(p)).join("|");
+    let url = `https://www.google.com/maps/dir/?api=1&origin=${origin}&destination=${destination}`;
+    if (mid) url += `&waypoints=${mid}`;
+    return url;
+  }
+
+  // ========== RENDER ==========
+  function renderAll() {
+    renderDashboard();
+    renderBookings();
+    renderGuides();
+    renderItineraries();
+    renderAlerts();
+    populateGuideSelect();
+  }
+
+  function renderDashboard() {
+    const active = bookings.filter(b => !b.completed);
+    const outstanding = active.reduce((s, b) => s + calcRemaining(b), 0);
+    const paid = active.filter(b => getStatus(b) === "paid").length;
+    const upcoming = active.filter(b => {
+      const d = daysUntil(b.travelDate);
+      return d >= 0 && d <= 30;
+    }).length;
+
+    document.getElementById("stat-active").textContent = active.length;
+    document.getElementById("stat-outstanding").textContent = formatMoney(outstanding);
+    document.getElementById("stat-paid").textContent = paid;
+    document.getElementById("stat-upcoming").textContent = upcoming;
+
+    const recent = bookings.slice(0, 6);
+    const container = document.getElementById("recent-bookings");
+    if (!recent.length) {
+      container.innerHTML = '<div class="empty-state">No bookings yet.</div>';
+      return;
+    }
+    container.innerHTML = `<table><thead><tr><th>Client</th><th>Travel</th><th>Remaining</th><th>Status</th><th></th></tr></thead><tbody>
+      ${recent.map(b => `
+        <tr>
+          <td><strong>${b.name}</strong></td>
+          <td>${formatDate(b.travelDate)}</td>
+          <td>${formatMoney(calcRemaining(b))}</td>
+          <td>${statusBadge(getStatus(b))}</td>
+          <td><button class="btn btn-outline btn-sm" onclick="viewBooking('${b.id}')">View</button></td>
+        </tr>`).join("")}
+    </tbody></table>`;
+  }
+
+  function renderBookings() {
+    const q = (document.getElementById("search-bookings")?.value || "").toLowerCase();
+    let list = bookings;
+    if (q) list = bookings.filter(b =>
+      (b.name || "").toLowerCase().includes(q) ||
+      (b.passport || "").toLowerCase().includes(q)
+    );
+    const tbody = document.getElementById("bookings-tbody");
+    const empty = document.getElementById("bookings-empty");
+    if (!list.length) {
+      tbody.innerHTML = "";
+      empty.classList.remove("hidden");
+      return;
+    }
+    empty.classList.add("hidden");
+    tbody.innerHTML = list.map(b => {
+      const paid = calcPaid(b);
+      const rem = calcRemaining(b);
+      return `<tr>
+        <td><strong>${b.name}</strong><br><small style="color:var(--muted)">${b.destinations || ""}</small></td>
+        <td>${b.passport || "–"}</td>
+        <td>${formatDate(b.travelDate)}</td>
+        <td>${formatMoney(b.total)}</td>
+        <td>${formatMoney(paid)}</td>
+        <td><strong>${formatMoney(rem)}</strong></td>
+        <td>${statusBadge(getStatus(b))}</td>
+        <td>
+          <button class="btn btn-outline btn-sm" onclick="viewBooking('${b.id}')">View</button>
+        </td>
+      </tr>`;
+    }).join("");
+  }
+
+  function viewBooking(id) {
+    currentBookingId = id;
+    const b = bookings.find(x => x.id === id);
+    if (!b) return;
+    document.getElementById("detail-title").textContent = b.name;
+    document.getElementById("d-name").textContent = b.name;
+    document.getElementById("d-passport").textContent = b.passport || "–";
+    document.getElementById("d-whatsapp").textContent = b.whatsapp || "–";
+    document.getElementById("d-email").textContent = b.email || "–";
+    document.getElementById("d-travel").textContent = formatDate(b.travelDate);
+    document.getElementById("d-destinations").textContent = b.destinations || "–";
+    const guide = guides.find(g => g.id === b.guideId);
+    document.getElementById("d-guide").textContent = guide ? guide.name : (b.guideName || "–");
+    document.getElementById("d-channel").textContent = b.channel || "whatsapp";
+
+    const paid = calcPaid(b);
+    const rem = calcRemaining(b);
+    document.getElementById("detail-remaining").textContent = formatMoney(rem);
+    document.getElementById("detail-paid-of").textContent = `Paid ${formatMoney(paid)} of ${formatMoney(b.total)}`;
+    const box = document.getElementById("balance-box");
+    box.classList.toggle("zero", rem <= 0);
+
+    // Payments
+    const pays = b.payments || [];
+    const pt = document.getElementById("payments-tbody");
+    const pe = document.getElementById("payments-empty");
+    if (!pays.length) {
+      pt.innerHTML = "";
+      pe.style.display = "block";
+    } else {
+      pe.style.display = "none";
+      pt.innerHTML = pays.map(p => `<tr>
+        <td>${formatDate(p.date)}</td>
+        <td>${formatMoney(p.amount)}</td>
+        <td>${p.method || "–"}</td>
+        <td>${p.notes || "–"}${p.receiptUrl ? ` <a href="${p.receiptUrl}" target="_blank" style="color:var(--green);font-size:0.8rem;">View receipt</a>` : ""}</td>
+      </tr>`).join("");
+    }
+
+    // Itinerary + map
+    document.getElementById("detail-itinerary").textContent = b.itinerary || "No itinerary attached.";
+    const mapUrl = buildGoogleMapsUrl(b.waypoints);
+    const mapBox = document.getElementById("map-preview-box");
+    const mapLink = document.getElementById("detail-map-link");
+    if (mapUrl) {
+      mapLink.href = mapUrl;
+      mapBox.style.display = "block";
+    } else {
+      mapBox.style.display = "none";
+    }
+
+    // Alerts preview
+    renderDetailAlerts(b);
+
+    showPage("detail");
+  }
+
+  function renderDetailAlerts(b) {
+    const container = document.getElementById("detail-alerts");
+    const travel = new Date(b.travelDate);
+    const today = new Date();
+    const alerts = [];
+    const rem = calcRemaining(b);
+
+    // Client payment alerts (only if remaining > 0)
+    if (rem > 0) {
+      alerts.push({ when: "On partial payment", type: "Client Balance Reminder", status: "Ready" });
+      const d30 = new Date(travel); d30.setDate(d30.getDate() - 30);
+      const d14 = new Date(travel); d14.setDate(d14.getDate() - 14);
+      const d2  = new Date(travel); d2.setDate(d2.getDate() - 2);
+      alerts.push({ when: formatDate(d30), type: "Client 1-month reminder", status: daysUntil(d30) <= 0 ? "Due / Sent" : "Scheduled" });
+      alerts.push({ when: formatDate(d14), type: "Client 2-weeks reminder", status: daysUntil(d14) <= 0 ? "Due / Sent" : "Scheduled" });
+      alerts.push({ when: formatDate(d2),  type: "Client 2-days reminder", status: daysUntil(d2) <= 0 ? "Due / Sent" : "Scheduled" });
+      alerts.push({ when: formatDate(travel), type: "Client trip-day reminder", status: daysUntil(travel) <= 0 ? "Due / Sent" : "Scheduled" });
+    } else {
+      alerts.push({ when: "–", type: "Client payment alerts", status: "Skipped (fully paid)" });
+    }
+
+    // Guide alerts (always)
+    const g30 = new Date(travel); g30.setDate(g30.getDate() - 30);
+    const g7  = new Date(travel); g7.setDate(g7.getDate() - 7);
+    const g1  = new Date(travel); g1.setDate(g1.getDate() - 1);
+    alerts.push({ when: formatDate(g30), type: "Guide 1-month alert", status: daysUntil(g30) <= 0 ? "Due / Sent" : "Scheduled" });
+    alerts.push({ when: formatDate(g7),  type: "Guide 1-week alert", status: daysUntil(g7) <= 0 ? "Due / Sent" : "Scheduled" });
+    alerts.push({ when: formatDate(g1),  type: "Guide 1-day alert", status: daysUntil(g1) <= 0 ? "Due / Sent" : "Scheduled" });
+    alerts.push({ when: formatDate(travel), type: "Guide Trip-Day + Google Map", status: daysUntil(travel) <= 0 ? "Due / Sent" : "Scheduled" });
+
+    container.innerHTML = `<table><thead><tr><th>When</th><th>Alert</th><th>Status</th></tr></thead><tbody>
+      ${alerts.map(a => `<tr><td>${a.when}</td><td>${a.type}</td><td>${a.status}</td></tr>`).join("")}
+    </tbody></table>`;
+  }
+
+  function renderGuides() {
+    const tbody = document.getElementById("guides-tbody");
+    const empty = document.getElementById("guides-empty");
+    if (!guides.length) {
+      tbody.innerHTML = "";
+      empty.classList.remove("hidden");
+      return;
+    }
+    empty.classList.add("hidden");
+    tbody.innerHTML = guides.map(g => `<tr>
+      <td><strong>${g.name}</strong></td>
+      <td>${g.whatsapp || "–"}</td>
+      <td>${g.email || "–"}</td>
+      <td><button class="btn btn-outline btn-sm" onclick="editGuide('${g.id}')">Edit</button></td>
+    </tr>`).join("");
+  }
+
+  function renderItineraries() {
+    const container = document.getElementById("itineraries-list");
+    if (!itineraries.length) {
+      container.innerHTML = '<div class="empty-state">No itineraries saved yet.</div>';
+      return;
+    }
+    container.innerHTML = itineraries.map(i => `
+      <div style="border-bottom:1px solid var(--border);padding:16px 0;">
+        <strong>${i.title}</strong>
+        <div style="font-size:0.85rem;color:var(--muted);margin-top:6px;white-space:pre-wrap;">${(i.content || "").substring(0, 180)}...</div>
+      </div>`).join("");
+  }
+
+  function renderAlerts() {
+    const tbody = document.getElementById("alerts-tbody");
+    const empty = document.getElementById("alerts-empty");
+    if (!alertsLog.length) {
+      tbody.innerHTML = "";
+      empty.classList.remove("hidden");
+      return;
+    }
+    empty.classList.add("hidden");
+    tbody.innerHTML = alertsLog.map(a => `<tr>
+      <td>${formatDate(a.createdAt)}</td>
+      <td>${a.type}</td>
+      <td>${a.recipient}</td>
+      <td>${a.channel}</td>
+      <td>${a.status}</td>
+      <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${a.preview || ""}</td>
+    </tr>`).join("");
+  }
+
+  function populateGuideSelect() {
+    const sel = document.getElementById("b-guide");
+    sel.innerHTML = '<option value="">– Select guide –</option>' +
+      guides.map(g => `<option value="${g.id}">${g.name}</option>`).join("");
+  }
+
+  // ========== BOOKING CRUD ==========
+  function openBookingModal(editId = null) {
+    document.getElementById("booking-form").reset();
+    document.getElementById("b-id").value = "";
+    document.getElementById("booking-modal-title").textContent = "New Booking";
+    populateGuideSelect();
+    if (editId) {
+      const b = bookings.find(x => x.id === editId);
+      if (b) {
+        document.getElementById("b-id").value = b.id;
+        document.getElementById("booking-modal-title").textContent = "Edit Booking";
+        document.getElementById("b-name").value = b.name || "";
+        document.getElementById("b-passport").value = b.passport || "";
+        document.getElementById("b-whatsapp").value = b.whatsapp || "";
+        document.getElementById("b-email").value = b.email || "";
+        document.getElementById("b-total").value = b.total || "";
+        document.getElementById("b-travel").value = b.travelDate || "";
+        document.getElementById("b-destinations").value = b.destinations || "";
+        document.getElementById("b-guide").value = b.guideId || "";
+        document.getElementById("b-channel").value = b.channel || "whatsapp";
+        document.getElementById("b-itinerary").value = b.itinerary || "";
+        document.getElementById("b-waypoints").value = b.waypoints || "";
+      }
+    }
+    document.getElementById("booking-modal").classList.add("show");
+  }
+
+  function editCurrentBooking() {
+    if (currentBookingId) openBookingModal(currentBookingId);
+  }
+
+  async function saveBooking() {
+    const id = document.getElementById("b-id").value;
+    const data = {
+      name: document.getElementById("b-name").value.trim(),
+      passport: document.getElementById("b-passport").value.trim(),
+      whatsapp: document.getElementById("b-whatsapp").value.trim(),
+      email: document.getElementById("b-email").value.trim(),
+      total: Number(document.getElementById("b-total").value) || 0,
+      travelDate: document.getElementById("b-travel").value,
+      destinations: document.getElementById("b-destinations").value.trim(),
+      guideId: document.getElementById("b-guide").value,
+      channel: document.getElementById("b-channel").value,
+      itinerary: document.getElementById("b-itinerary").value.trim(),
+      waypoints: document.getElementById("b-waypoints").value.trim(),
+      payments: id ? (bookings.find(b => b.id === id)?.payments || []) : [],
+      completed: id ? (bookings.find(b => b.id === id)?.completed || false) : false,
+      updatedAt: new Date().toISOString()
+    };
+    if (!data.name || !data.passport || !data.total || !data.travelDate) {
+      toast("Please fill required fields");
+      return;
+    }
+    const guide = guides.find(g => g.id === data.guideId);
+    if (guide) data.guideName = guide.name;
+
+    if (useLocal) {
+      if (id) {
+        const idx = bookings.findIndex(b => b.id === id);
+        bookings[idx] = { ...bookings[idx], ...data };
+      } else {
+        data.id = "local_" + Date.now();
+        data.createdAt = new Date().toISOString();
+        bookings.unshift(data);
+      }
+      saveLocal();
+    } else {
+      if (id) {
+        await db.collection("bookings").doc(id).update(data);
+      } else {
+        data.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+        const ref = await db.collection("bookings").add(data);
+        data.id = ref.id;
+      }
+      await loadAllData();
+    }
+    closeModal("booking-modal");
+    toast(id ? "Booking updated" : "Booking created");
+    renderAll();
+    if (!id && data.id) viewBooking(data.id);
+  }
+
+  // ========== PAYMENTS ==========
+  function openPaymentModal() {
+    document.getElementById("p-amount").value = "";
+    document.getElementById("p-notes").value = "";
+    document.getElementById("p-date").value = new Date().toISOString().slice(0, 10);
+    document.getElementById("payment-modal").classList.add("show");
+  }
+
+  async function savePayment() {
+    const amount = Number(document.getElementById("p-amount").value);
+    if (!amount || amount <= 0) {
+      toast("Enter a valid amount");
+      return;
+    }
+    const btn = document.getElementById("save-payment-btn");
+    const statusEl = document.getElementById("p-receipt-status");
+    btn.disabled = true;
+    btn.textContent = "Saving...";
+
+    let receiptUrl = null;
+    const fileInput = document.getElementById("p-receipt");
+    if (fileInput.files && fileInput.files[0]) {
+      statusEl.textContent = "Uploading receipt to Cloudinary...";
+      try {
+        const result = await uploadToCloudinary(fileInput.files[0], "brendava_receipts");
+        if (result.secure_url) {
+          receiptUrl = result.secure_url;
+          statusEl.textContent = "Receipt uploaded ✓";
+        } else {
+          statusEl.textContent = "Upload failed – continuing without receipt";
+        }
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = "Upload error – continuing without receipt";
+      }
+    }
+
+    const payment = {
+      amount,
+      method: document.getElementById("p-method").value,
+      date: document.getElementById("p-date").value || new Date().toISOString().slice(0, 10),
+      notes: document.getElementById("p-notes").value.trim(),
+      receiptUrl: receiptUrl,
+      recordedAt: new Date().toISOString()
+    };
+    const b = bookings.find(x => x.id === currentBookingId);
+    if (!b) {
+      btn.disabled = false;
+      btn.textContent = "Save Payment";
+      return;
+    }
+    b.payments = b.payments || [];
+    b.payments.push(payment);
+
+    const remaining = calcRemaining(b);
+
+    if (useLocal) {
+      saveLocal();
+    } else {
+      await db.collection("bookings").doc(currentBookingId).update({ payments: b.payments });
+    }
+
+    // Log + auto message
+    if (remaining <= 0) {
+      logAlert("Client Fully Paid Congrats", b.name, b.channel, "Congratulations! Your balance is fully cleared.", "sent");
+      sendWhatsAppOrEmail(b, buildFullyPaidMessage(b));
+    } else {
+      logAlert("Client Partial Payment", b.name, b.channel, `Remaining ${formatMoney(remaining)}`, "sent");
+      sendWhatsAppOrEmail(b, buildBalanceMessage(b, remaining));
+    }
+
+    btn.disabled = false;
+    btn.textContent = "Save Payment";
+    closeModal("payment-modal");
+    toast("Payment recorded – balance updated" + (receiptUrl ? " + receipt saved" : ""));
+    viewBooking(currentBookingId);
+    renderAll();
+  }
+
+  // ========== MESSAGES ==========
+  function buildBalanceMessage(b, remaining) {
+    const mapUrl = buildGoogleMapsUrl(b.waypoints) || "";
+    return `Hello ${b.name},
+
+This is *Brendava Tours & Travel*.
+
+Your remaining balance is *${formatMoney(remaining)}* for your safari starting *${formatDate(b.travelDate)}*.
+
+Destinations: ${b.destinations || "–"}
+
+${b.itinerary ? "Itinerary:\n" + b.itinerary + "\n" : ""}
+${mapUrl ? "Google Maps route for your full journey:\n" + mapUrl + "\n" : ""}
+Please clear the remaining balance at your earliest convenience using our official accounts.
+
+Thank you,
+Brendava Tours & Travel Team
+WhatsApp: +256 762 584 996`;
+  }
+
+  function buildFullyPaidMessage(b) {
+    return `Hello ${b.name},
+
+Congratulations! 🎉
+
+Your safari balance with *Brendava Tours & Travel* is now *fully cleared*.
+
+We look forward to welcoming you on *${formatDate(b.travelDate)}*.
+
+Your itinerary and Google Maps route will be shared again closer to the travel date.
+
+Safe travels!
+Brendava Tours & Travel Team`;
+  }
+
+  function buildItineraryMessage(b) {
+    const remaining = calcRemaining(b);
+    const mapUrl = buildGoogleMapsUrl(b.waypoints) || "";
+    return `Hello ${b.name},
+
+Here is your full itinerary and route for your Brendava safari.
+
+📅 Travel date: *${formatDate(b.travelDate)}*
+📍 Destinations: ${b.destinations || "–"}
+💰 Remaining balance: *${formatMoney(remaining)}*
+
+${b.itinerary || "(Itinerary details will be confirmed by the team)"}
+
+${mapUrl ? "🗺 Google Maps full journey:\n" + mapUrl : ""}
+
+We are excited to host you!
+Brendava Tours & Travel
+WhatsApp: +256 762 584 996`;
+  }
+
+  function buildMonthReminderMessage(b) {
+    const remaining = calcRemaining(b);
+    const mapUrl = buildGoogleMapsUrl(b.waypoints) || "";
+    return `Hello ${b.name},
+
+Friendly reminder from *Brendava Tours & Travel*.
+
+Your safari starts in approximately *one month* on *${formatDate(b.travelDate)}*.
+
+Current remaining balance: *${formatMoney(remaining)}*
+Destinations: ${b.destinations || "–"}
+
+${b.itinerary ? "Itinerary overview:\n" + b.itinerary + "\n" : ""}
+${mapUrl ? "Google Maps route:\n" + mapUrl + "\n" : ""}
+Please arrange any outstanding balance soon so we can secure all permits and services.
+
+Thank you,
+Brendava Team
++256 762 584 996`;
+  }
+
+  function buildGuideAlert(b, type) {
+    const guide = guides.find(g => g.id === b.guideId);
+    const mapUrl = buildGoogleMapsUrl(b.waypoints) || "";
+    let body = `Hello ${guide ? guide.name : "Guide"},
+
+This is *Brendava Tours & Travel* Admin.
+
+You have an upcoming trip with client *${b.name}* on *${formatDate(b.travelDate)}*.
+
+📍 Destinations: ${b.destinations || "–"}
+`;
+    if (type === "tripday") {
+      body += `\n📋 Full itinerary:\n${b.itinerary || "–"}\n\n🗺 Google Maps route for the journey:\n${mapUrl}\n\nPlease follow the itinerary sequence. Safe travels!`;
+    } else if (type === "week") {
+      body += `\nThis is your 1-week reminder. Please prepare vehicles, permits and logistics.`;
+    } else if (type === "day") {
+      body += `\nThis is your 1-day reminder. Trip starts tomorrow.`;
+    } else {
+      body += `\nThis is your 1-month heads-up.`;
+    }
+    body += `\n\nBrendava Tours & Travel Admin`;
+    return body;
+  }
+
+  function sendWhatsAppOrEmail(person, message, isGuide = false) {
+    // Opens WhatsApp with pre-filled text (real automated sending needs WhatsApp Business API + Cloud Functions)
+    const number = (person.whatsapp || "").replace(/[^0-9+]/g, "");
+    if (number) {
+      const url = `https://wa.me/${number.replace("+","")}?text=${encodeURIComponent(message)}`;
+      window.open(url, "_blank");
+    }
+    // For email we just log – real sending needs backend
+    if (person.email) {
+      console.log("Email would be sent to", person.email, message);
+    }
+  }
+
+  function sendClientMessage(kind) {
+    const b = bookings.find(x => x.id === currentBookingId);
+    if (!b) return;
+    let msg = "";
+    let label = "Client Balance Reminder";
+    if (kind === "itinerary") {
+      msg = buildItineraryMessage(b);
+      label = "Client Itinerary + Map";
+    } else if (kind === "month") {
+      msg = buildMonthReminderMessage(b);
+      label = "Client 1-Month Reminder";
+    } else {
+      msg = buildBalanceMessage(b, calcRemaining(b));
+    }
+    sendWhatsAppOrEmail(b, msg);
+    logAlert(label, b.name, b.channel, msg.substring(0, 80), "manual");
+    toast("WhatsApp opened with message (or logged for email)");
+  }
+
+  function sendGuideTripDayMap() {
+    const b = bookings.find(x => x.id === currentBookingId);
+    if (!b || !b.guideId) {
+      toast("No guide assigned");
+      return;
+    }
+    const guide = guides.find(g => g.id === b.guideId);
+    if (!guide) return;
+    const msg = buildGuideAlert(b, "tripday");
+    sendWhatsAppOrEmail(guide, msg, true);
+    logAlert("Guide Trip-Day + Map", guide.name, "whatsapp/email", msg.substring(0, 80), "manual");
+    toast("Guide message opened");
+  }
+
+  async function markTripComplete() {
+    const b = bookings.find(x => x.id === currentBookingId);
+    if (!b) return;
+    b.completed = true;
+    if (useLocal) saveLocal();
+    else await db.collection("bookings").doc(currentBookingId).update({ completed: true });
+
+    // Thank you to client
+    const thankYou = `Hello ${b.name},
+
+Thank you for travelling with Brendava Tours & Travel!
+
+Your safari has been completed. We hope you had an unforgettable experience in East Africa.
+
+We would love to welcome you again.
+
+Warm regards,
+Brendava Team`;
+    sendWhatsAppOrEmail(b, thankYou);
+    logAlert("Client Trip Completed Thank You", b.name, b.channel, "Thank you message", "sent");
+
+    // Confirm to guide
+    if (b.guideId) {
+      const guide = guides.find(g => g.id === b.guideId);
+      if (guide) {
+        const gMsg = `Hello ${guide.name},\n\nTrip with client ${b.name} (${formatDate(b.travelDate)}) has been marked completed. Well done!\n\nBrendava Admin`;
+        sendWhatsAppOrEmail(guide, gMsg, true);
+        logAlert("Guide Trip Completed", guide.name, "whatsapp/email", "Trip completed confirmation", "sent");
+      }
+    }
+    toast("Trip marked complete – thank you messages triggered");
+    viewBooking(currentBookingId);
+    renderAll();
+  }
+
+  function logAlert(type, recipient, channel, preview, status) {
+    const entry = {
+      type,
+      recipient,
+      channel,
+      preview,
+      status,
+      createdAt: new Date().toISOString()
+    };
+    alertsLog.unshift(entry);
+    if (useLocal) saveLocal();
+    else if (db) db.collection("alerts").add(entry);
+  }
+
+  // ========== GUIDES ==========
+  function openGuideModal(editId = null) {
+    document.getElementById("g-id").value = editId || "";
+    document.getElementById("g-name").value = "";
+    document.getElementById("g-whatsapp").value = "";
+    document.getElementById("g-email").value = "";
+    if (editId) {
+      const g = guides.find(x => x.id === editId);
+      if (g) {
+        document.getElementById("g-name").value = g.name || "";
+        document.getElementById("g-whatsapp").value = g.whatsapp || "";
+        document.getElementById("g-email").value = g.email || "";
+      }
+    }
+    document.getElementById("guide-modal").classList.add("show");
+  }
+  function editGuide(id) { openGuideModal(id); }
+
+  async function saveGuide() {
+    const id = document.getElementById("g-id").value;
+    const data = {
+      name: document.getElementById("g-name").value.trim(),
+      whatsapp: document.getElementById("g-whatsapp").value.trim(),
+      email: document.getElementById("g-email").value.trim()
+    };
+    if (!data.name) { toast("Name required"); return; }
+
+    if (useLocal) {
+      if (id) {
+        const idx = guides.findIndex(g => g.id === id);
+        guides[idx] = { ...guides[idx], ...data };
+      } else {
+        data.id = "g_" + Date.now();
+        guides.push(data);
+      }
+      saveLocal();
+    } else {
+      if (id) await db.collection("guides").doc(id).update(data);
+      else {
+        const ref = await db.collection("guides").add(data);
+        data.id = ref.id;
+      }
+      await loadAllData();
+    }
+    closeModal("guide-modal");
+    toast("Guide saved");
+    renderGuides();
+    populateGuideSelect();
+  }
+
+  // ========== ITINERARIES ==========
+  function openItineraryModal() {
+    document.getElementById("i-title").value = "";
+    document.getElementById("i-content").value = "";
+    document.getElementById("i-waypoints").value = "";
+    document.getElementById("itinerary-modal").classList.add("show");
+  }
+
+  async function saveItinerary() {
+    const data = {
+      title: document.getElementById("i-title").value.trim(),
+      content: document.getElementById("i-content").value.trim(),
+      waypoints: document.getElementById("i-waypoints").value.trim(),
+      createdAt: new Date().toISOString()
+    };
+    if (!data.title) { toast("Title required"); return; }
+    if (useLocal) {
+      data.id = "i_" + Date.now();
+      itineraries.push(data);
+      saveLocal();
+    } else {
+      await db.collection("itineraries").add(data);
+      await loadAllData();
+    }
+    closeModal("itinerary-modal");
+    toast("Itinerary saved");
+    renderItineraries();
+  }
+
+  // Cloudinary helper (ready for receipts / photos if needed later)
+  async function uploadToCloudinary(file, tag = PHOTO_TAG) {
+    const form = new FormData();
+    form.append("file", file);
+    form.append("upload_preset", UPLOAD_PRESET);
+    form.append("tags", tag);
+    const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/auto/upload`, {
+      method: "POST",
+      body: form
+    });
+    return res.json();
+  }
+
+  // Init on load if already logged in (optional)
+  // For security we always start at login
+</script>
+</body>
+</html>
