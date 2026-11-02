@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Brendava Global AI — tourism lead discovery and East Africa safari opportunities.">
+<title>Global AI | Brendava Tours and Travel</title>
+<style>
+:root{--ink:#17221d;--green:#173d2c;--green2:#24583e;--gold:#c8a45d;--cream:#f5f2e9;--paper:#fffefa;--muted:#718078;--line:#e5e8e1;--red:#a8493f;--blue:#416b83}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font-family:Inter,Arial,sans-serif}
+a{color:inherit}.topbar{background:var(--green);color:white;padding:14px 5%;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:12px;font-weight:800;letter-spacing:.08em}.brand-mark{width:40px;height:40px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold);font-size:19px}
+.brand small{display:block;font-size:10px;letter-spacing:.19em;color:#d8d8c8;margin-top:4px}
+.nav{display:flex;gap:22px;flex-wrap:wrap;font-size:13px}.nav a{text-decoration:none;color:#f4f1e7;opacity:.9}.nav a.active{color:#f0cf86}
+.hero{background:linear-gradient(110deg,rgba(14,43,30,.97),rgba(24,67,47,.88)),radial-gradient(circle at 85% 20%,#54765b,transparent 45%);color:white;padding:52px 5% 44px}
+.hero-inner{max-width:1200px;margin:auto;display:grid;grid-template-columns:1.5fr 1fr;gap:30px;align-items:center}
+.eyebrow{color:#e0c27e;text-transform:uppercase;letter-spacing:.18em;font-size:11px;font-weight:700}
+h1{font-size:clamp(34px,5vw,57px);line-height:1.05;margin:13px 0 15px;max-width:720px}
+.hero p{color:#e1e8df;line-height:1.65;max-width:690px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.btn{border:0;border-radius:7px;padding:12px 17px;font-weight:700;cursor:pointer;font-size:13px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn-gold{background:var(--gold);color:#17221d}.btn-outline{border:1px solid #b9c9bc;color:white;background:transparent}
+.hero-card{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:14px;padding:22px}
+.hero-card h3{margin:0 0 7px;color:#f1d18a}.hero-card p{font-size:13px;margin:0 0 15px}
+.signal{display:flex;justify-content:space-between;padding:11px 0;border-top:1px solid rgba(255,255,255,.15);font-size:12px}.signal strong{color:#f2d38e}
+main{max-width:1200px;margin:30px auto;padding:0 5% 60px}
+.notice{background:#fff8e7;border:1px solid #ead7a8;padding:13px 15px;border-radius:8px;font-size:12px;line-height:1.55;color:#5b4b2b;margin-bottom:22px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;flex-wrap:wrap;margin:25px 0 15px}
+.section-head h2{margin:0;font-size:23px}.section-head p{margin:5px 0 0;color:var(--muted);font-size:13px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.stat,.panel,.lead-card{background:var(--paper);border:1px solid var(--line);border-radius:11px}
+.stat{padding:17px}.stat span{font-size:11px;color:var(--muted)}.stat strong{display:block;font-size:27px;margin:8px 0 4px}.stat small{font-size:11px;color:var(--green2)}
+.layout{display:grid;grid-template-columns:1.25fr .75fr;gap:16px;margin-top:17px}
+.panel{padding:19px}.panel h3{margin:0 0 6px;font-size:16px}.sub{color:var(--muted);font-size:12px;margin:0 0 15px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:11px;font-weight:700;color:#536259;margin-bottom:6px}
+input,select,textarea{width:100%;padding:11px;border:1px solid #dce2da;border-radius:7px;background:white;font:13px Arial;color:var(--ink)}
+textarea{min-height:75px;resize:vertical}.full{grid-column:1/-1}
+.btn-green{background:var(--green);color:white}.btn-light{background:#edf1eb;color:var(--green)}
+.form-actions{display:flex;gap:9px;margin-top:13px;flex-wrap:wrap}
+.source-list{display:grid;gap:10px}.source{display:flex;gap:11px;align-items:center;padding:10px;border:1px solid var(--line);border-radius:8px}
+.source-icon{width:35px;height:35px;display:grid;place-items:center;background:#edf1eb;border-radius:8px;color:var(--green);font-weight:800}
+.source strong{font-size:12px;display:block}.source small{font-size:11px;color:var(--muted)}
+.lead-tools{display:flex;gap:9px;flex-wrap:wrap}.lead-tools input{max-width:260px}.lead-tools select{max-width:170px}
+.leads{display:grid;gap:11px}.lead-card{padding:15px;display:grid;grid-template-columns:1fr auto;gap:12px}
+.lead-top{display:flex;gap:10px;align-items:center}.avatar{width:37px;height:37px;border-radius:50%;background:#e9eee7;display:grid;place-items:center;color:var(--green);font-weight:800}
+.lead-name{font-weight:800;font-size:14px}.lead-meta{font-size:11px;color:var(--muted);margin-top:3px}
+.tag{display:inline-block;border-radius:20px;padding:5px 8px;font-size:10px;font-weight:700;background:#edf2ec;color:#31583f;margin:8px 5px 0 0}
+.tag.gold{background:#f8f0dc;color:#785c21}.tag.blue{background:#eaf1f5;color:#365f78}
+.lead-note{font-size:12px;line-height:1.5;color:#56645b;margin:9px 0 0}
+.lead-actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:flex-end}.mini{padding:8px 10px;font-size:11px}
+.empty{padding:24px;text-align:center;color:var(--muted);font-size:13px}
+.footer{background:#14291e;color:#dce5dc;padding:24px 5%;font-size:12px;text-align:center}.footer a{color:#e6c77e}
+.toast{position:fixed;right:18px;bottom:18px;background:#172f22;color:white;padding:13px 17px;border-radius:8px;box-shadow:0 8px 25px #0002;display:none;z-index:10;font-size:13px}
+.geo-row{display:grid;grid-template-columns:120px 1fr 64px;gap:10px;align-items:center;font-size:12px;margin:8px 0}.bar{height:9px;background:#edf1eb;border-radius:5px;overflow:hidden}.bar i{display:block;height:100%;background:var(--green2)}
+.score{display:inline-block;margin-top:8px;font-weight:800;font-size:10px;padding:5px 8px;border-radius:20px;background:#f8e4e0;color:var(--red)}.score.mid{background:#f8f0dc;color:#785c21}
+dialog{border:0;border-radius:12px;padding:20px;max-width:560px;width:92%}dialog::backdrop{background:#0006}
+@media(max-width:800px){.hero-inner,.layout{grid-template-columns:1fr}.stats{grid-template-columns:repeat(2,1fr)}.nav{gap:12px}}
+@media(max-width:520px){.topbar{padding:12px 4%}.nav{font-size:11px}.hero{padding:38px 5%}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:23px}.form-grid{grid-template-columns:1fr}.full{grid-column:auto}.lead-card{grid-template-columns:1fr}.lead-actions{justify-content:flex-start}}
+</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="https://www.brendavatoursandtravel.com/" style="text-decoration:none">
+    <span class="brand-mark">B</span><span>BRENDAVA<small>TOURS &amp; TRAVEL</small></span>
+  </a>
+  <nav class="nav" aria-label="Main navigation">
+    <a href="https://www.brendavatoursandtravel.com/">Home</a><a href="https://www.brendavatoursandtravel.com/">Destinations</a><a href="https://www.brendavatoursandtravel.com/">Safaris</a><a href="https://www.brendavatoursandtravel.com/">About</a><a href="https://www.brendavatoursandtravel.com/">Contact</a><a class="active" href="#global-ai">Global AI</a>
+  </nav>
+</header>
+
+<section class="hero" id="global-ai">
+ <div class="hero-inner">
+  <div>
+   <div class="eyebrow">Brendava Global Tourism Intelligence</div>
+   <h1>Discover global travel opportunities. Bring the world to East Africa.</h1>
+   <p>An intelligent workspace for finding tourism prospects, understanding travel demand and building relationships with international tourists and travel agents interested in Uganda, Rwanda, Kenya and Tanzania.</p>
+   <div class="hero-actions">
+    <a class="btn btn-gold" href="#leads">Explore leads ↓</a>
+    <a class="btn btn-outline" href="https://www.brendavatoursandtravel.com/">Visit Brendava website ↗</a>
+   </div>
+  </div>
+  <aside class="hero-card">
+   <h3>Global opportunity centre</h3>
+   <p>Organize prospects discovered through approved public sources, partner referrals and connected platforms.</p>
+   <div class="signal"><span>Tourist prospects</span><strong id="touristCount">2</strong></div>
+   <div class="signal"><span>Travel-agent prospects</span><strong id="agentCount">2</strong></div>
+   <div class="signal"><span>Follow-ups needed</span><strong id="followCount">2</strong></div>
+  </aside>
+ </div>
+</section>
+
+<main>
+ <div class="notice"><strong>Important:</strong> This is the first working dashboard prototype. Its sample records are demonstrations, not real discovered people. Live discovery requires approved search/social APIs or partner data connections. Only use publicly available business information and contact people through channels where outreach is permitted. Never track a person's private location without explicit consent.</div>
+
+ <div class="section-head"><div><h2>Opportunity overview</h2><p>Keep your international tourism pipeline organized.</p></div><span class="tag gold">Brendava private workspace</span></div>
+ <section class="stats">
+  <div class="stat"><span>ALL PROSPECTS</span><strong id="totalCount">4</strong><small>Saved in this browser demo</small></div>
+  <div class="stat"><span>TOURIST LEADS</span><strong id="touristStat">2</strong><small>Safari and holiday interest</small></div>
+  <div class="stat"><span>AGENT LEADS</span><strong id="agentStat">2</strong><small>Potential B2B partners</small></div>
+  <div class="stat"><span>FOLLOW-UP QUEUE</span><strong id="pendingStat">2</strong><small>Open opportunities</small></div>
+ </section>
+
+<div class="layout" id="engine">
+  <section class="panel">
+   <h3>Discovery engine</h3><p class="sub">Paste public posts, enquiries or a lead list, one per line. The AI scores buying intent, detects country, type and interest, and keeps only relevant prospects.</p>
+   <textarea id="feedText" placeholder="Name | Country | Post or enquiry text | Link (optional)&#10;Anna K | Germany | Planning gorilla trekking in Uganda next June, any agency tips?"></textarea>
+   <div class="form-actions"><select id="dsrc" style="max-width:200px" aria-label="Where these came from"></select><button class="btn btn-green" id="scanBtn" type="button">Analyze and add</button></div>
+   <div style="margin-top:16px"><label for="feedUrl">Live feed URL (JSON from your backend, Zapier or Make)</label>
+    <div style="display:flex;gap:9px;flex-wrap:wrap"><input id="feedUrl" placeholder="https://example.com/leads.json" style="flex:1;min-width:200px"><button class="btn btn-light" id="feedBtn" type="button">Connect feed</button></div>
+    <p class="sub" id="feedState" style="margin:8px 0 0">Not connected. Once connected, the feed is checked every 5 minutes.</p></div>
+  </section>
+  <aside class="panel">
+   <h3>Hot lead alerts <span class="tag gold" id="hotBadge">0</span></h3><p class="sub">New leads with an intent score of 70 or more.</p>
+   <div id="alertList" class="source-list"></div>
+   <input id="alertEmail" type="email" placeholder="Your alert email" style="margin-top:12px">
+   <div class="form-actions"><button class="btn btn-light mini" id="notifBtn" type="button">Enable browser alerts</button><a class="btn btn-green mini" id="digestBtn" href="#">Email me the digest</a></div>
+  </aside>
+ </div>
+ <section class="panel" style="margin-top:16px"><h3>World coverage</h3><p class="sub">Prospects by stated or public country, with count and average intent score. Personal location is never tracked.</p><div id="geo"></div></section>
+
+ <div class="layout">
+  <section class="panel">
+   <h3>Add a tourism prospect</h3><p class="sub">Save a lead found through a permitted source, referral or direct enquiry.</p>
+   <form id="leadForm">
+    <div class="form-grid">
+     <div><label for="name">Name / company *</label><input id="name" required placeholder="e.g. Alex Morgan or Safari World Ltd"></div>
+     <div><label for="type">Prospect type *</label><select id="type"><option>Tourist</option><option>Travel Agent</option></select></div>
+     <div><label for="country">Country</label><input id="country" placeholder="e.g. Germany"></div>
+     <div><label for="source">Discovery source</label><select id="source"><option>Public website</option><option>LinkedIn</option><option>Facebook</option><option>Instagram</option><option>Travel forum</option><option>Partner referral</option><option>Direct enquiry</option><option>Other permitted source</option></select></div>
+     <div><label for="interest">Interest / opportunity</label><select id="interest"><option>Uganda gorilla trekking</option><option>East Africa wildlife safari</option><option>Uganda and Rwanda safari</option><option>Kenya and Tanzania safari</option><option>Travel-agent partnership</option><option>Other East Africa travel</option></select></div>
+     <div><label for="status">Lead status</label><select id="status"><option>New</option><option>Review needed</option><option>Contacted</option><option>Interested</option><option>Converted</option><option>Not suitable</option></select></div>
+     <div class="full"><label for="notes">Public context / notes</label><textarea id="notes" placeholder="Record the relevant public enquiry or business opportunity. Do not add sensitive personal information."></textarea></div>
+    </div>
+    <div class="form-actions"><button class="btn btn-green" type="submit">＋ Save prospect</button><button class="btn btn-light" type="reset">Clear form</button></div>
+   </form>
+  </section>
+  <aside class="panel">
+   <h3>Discovery channels</h3><p class="sub">Potential integrations for the live platform.</p>
+   <div class="source-list">
+    <div class="source"><span class="source-icon">G</span><div><strong>Search and public web</strong><small>Discover public safari enquiries and travel content.</small></div></div>
+    <div class="source"><span class="source-icon">in</span><div><strong>LinkedIn</strong><small>Find travel businesses and partnership prospects through permitted access.</small></div></div>
+    <div class="source"><span class="source-icon">f</span><div><strong>Meta platforms</strong><small>Use approved APIs, ads and authorized business integrations.</small></div></div>
+    <div class="source"><span class="source-icon">AI</span><div><strong>Gemini intelligence</strong><small>Classify relevant leads and draft tailored recommendations.</small></div></div>
+   </div>
+   <p class="sub" style="margin-top:14px">No social account is connected yet. Add API credentials securely on the backend when development begins.</p>
+  </aside>
+ </div>
+
+ <section id="leads">
+  <div class="section-head"><div><h2>Tourism prospects</h2><p>Sample leads are included so you can test the interface.</p></div>
+   <div class="lead-tools"><input id="search" placeholder="Search name, country, interest…"><select id="filter"><option value="All">All prospects</option><option>Tourist</option><option>Travel Agent</option></select></div>
+  </div>
+  <div class="leads" id="leadList"></div>
+ </section>
+
+ <section class="panel" style="margin-top:18px">
+  <h3>Brendava recommendation link</h3><p class="sub">Use this official website link in relevant, permission-based conversations.</p>
+  <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:center">
+   <input id="brendavaLink" value="https://www.brendavatoursandtravel.com/" readonly style="flex:1;min-width:220px">
+   <button class="btn btn-green" id="copyLink" type="button">Copy website link</button>
+   <a class="btn btn-light" href="https://www.brendavatoursandtravel.com/" target="_blank" rel="noopener">Open website ↗</a>
+  </div>
+ </section>
+</main>
+<footer class="footer">© <span id="year"></span> Brendava Tours and Travel. Global AI is a Brendava tourism intelligence concept. <br><a href="https://www.brendavatoursandtravel.com/">www.brendavatoursandtravel.com</a></footer>
+<dialog id="msgDlg"><h3 style="margin:0 0 6px">Recommendation message</h3><p class="sub">Review and personalize before sending. Send only through channels where outreach is permitted.</p>
+ <label for="msgLang">Language</label><select id="msgLang" style="max-width:200px;margin-bottom:10px"><option value="en">English</option><option value="de">Deutsch</option><option value="fr">Français</option><option value="es">Español</option><option value="it">Italiano</option><option value="pt">Português</option></select>
+ <textarea id="msgText" style="min-height:230px"></textarea>
+ <div class="form-actions"><button class="btn btn-green" id="msgCopy" type="button">Copy message</button><button class="btn btn-light" id="msgWa" type="button">WhatsApp</button><button class="btn btn-light" id="msgMail" type="button">Email</button><button class="btn btn-light" id="msgDone" type="button">Mark contacted</button><button class="btn btn-light" id="msgClose" type="button">Close</button></div></dialog>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+const starterLeads = [
+ {id:1,name:"Sample safari enquiry",type:"Tourist",country:"Germany",source:"Public website",interest:"Uganda gorilla trekking",status:"Review needed",notes:"Demonstration record: example of a public enquiry about gorilla trekking. Not a real person or lead."},
+ {id:2,name:"Sample wildlife traveller",type:"Tourist",country:"United States",source:"Travel forum",interest:"East Africa wildlife safari",status:"New",notes:"Demonstration record: example of someone researching an East African safari. Not a real person or lead."},
+ {id:3,name:"Example Travel Partners",type:"Travel Agent",country:"United Kingdom",source:"LinkedIn",interest:"Travel-agent partnership",status:"Contacted",notes:"Demonstration company record for testing the agent pipeline. Not a real business lead."},
+ {id:4,name:"Sample Adventure Agency",type:"Travel Agent",country:"France",source:"Public website",interest:"Uganda and Rwanda safari",status:"New",notes:"Demonstration company record for testing the agent pipeline. Not a real business lead."}
+];
+const KEY="brendava_global_ai_v2";
+let leads;try{leads=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+if(!Array.isArray(leads))leads=[...starterLeads];
+function save(){try{localStorage.setItem(KEY,JSON.stringify(leads))}catch(e){}}
+const $ = id => document.getElementById(id);
+function toast(msg){const t=$("toast");t.textContent=msg;t.style.display="block";clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display="none",2600)}
+function updateStats(){save();renderAlerts();renderGeo();
+ const tourists=leads.filter(x=>x.type==="Tourist").length, agents=leads.filter(x=>x.type==="Travel Agent").length;
+ const pending=leads.filter(x=>!["Converted","Not suitable"].includes(x.status)).length;
+ $("totalCount").textContent=leads.length;$("touristStat").textContent=tourists;$("agentStat").textContent=agents;$("pendingStat").textContent=pending;
+ $("touristCount").textContent=tourists;$("agentCount").textContent=agents;$("followCount").textContent=pending;
+}
+function render(){leads.forEach(x=>{if(x.score==null)x.score=analyze((x.notes||"")+" "+x.interest,x.name,x.country).score});
+ const q=$("search").value.toLowerCase(), f=$("filter").value;
+ const shown=leads.filter(x=>(f==="All"||x.type===f)&&[x.name,x.country,x.interest,x.source,x.notes].join(" ").toLowerCase().includes(q));
+ $("leadList").innerHTML="";
+ if(!shown.length){$("leadList").innerHTML='<div class="panel empty">No prospects match your search. Add a new prospect above.</div>';updateStats();return}
+ shown.forEach(x=>{
+  const card=document.createElement("article");card.className="lead-card";
+  const left=document.createElement("div");
+  const top=document.createElement("div");top.className="lead-top";
+  const av=document.createElement("span");av.className="avatar";av.textContent=x.type==="Tourist"?"T":"A";
+  const info=document.createElement("div");const name=document.createElement("div");name.className="lead-name";name.textContent=x.name;
+  const meta=document.createElement("div");meta.className="lead-meta";meta.textContent=[x.type,x.country||"Country not specified",x.source].join(" · ");
+  info.append(name,meta);top.append(av,info);left.append(top);
+  const tags=document.createElement("div");
+  [x.interest,x.status].forEach((v,i)=>{const s=document.createElement("span");s.className="tag "+(i===1?"gold":"");s.textContent=v;tags.append(s)});
+  if(x.score!=null){const sc=document.createElement("span");sc.className="score"+(x.score<70?" mid":"");sc.textContent="Intent "+x.score;tags.append(sc)}const note=document.createElement("p");note.className="lead-note";note.textContent=x.notes||"No additional notes.";
+  left.append(tags,note);
+  const actions=document.createElement("div");actions.className="lead-actions";
+  const status=document.createElement("select");status.className="mini";["New","Review needed","Contacted","Interested","Converted","Not suitable"].forEach(v=>{const o=document.createElement("option");o.textContent=v;o.selected=v===x.status;status.append(o)});
+  status.setAttribute("aria-label","Update lead status");status.addEventListener("change",()=>{x.status=status.value;render();toast("Lead status updated.")});
+  const msg=document.createElement("button");msg.className="btn btn-light mini";msg.textContent="Prepare message";msg.addEventListener("click",()=>prepareMessage(x));
+  const del=document.createElement("button");del.className="btn mini";del.style.background="#f5e9e6";del.style.color="#8b3e35";del.textContent="Delete";del.addEventListener("click",()=>{if(confirm("Delete this prospect from this demo?")){leads=leads.filter(y=>y.id!==x.id);render()}});
+  actions.append(status,msg);if(/^https?:\/\//.test(x.url||"")){const l=document.createElement("a");l.className="btn btn-light mini";l.href=x.url;l.target="_blank";l.rel="noopener";l.textContent="Source ↗";actions.append(l)}actions.append(del);card.append(left,actions);$("leadList").append(card);
+ });
+ updateStats();
+}
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const COUNTRIES={"germany":"Germany","deutschland":"Germany","united states":"United States","usa":"United States","united kingdom":"United Kingdom","uk":"United Kingdom","england":"United Kingdom","france":"France","spain":"Spain","italy":"Italy","netherlands":"Netherlands","canada":"Canada","australia":"Australia","china":"China","japan":"Japan","india":"India","brazil":"Brazil","uae":"United Arab Emirates","dubai":"United Arab Emirates","south africa":"South Africa","switzerland":"Switzerland","sweden":"Sweden","norway":"Norway","belgium":"Belgium","singapore":"Singapore","south korea":"South Korea","mexico":"Mexico","portugal":"Portugal","ireland":"Ireland","poland":"Poland"};
+const LANG={"Germany":"de","Switzerland":"de","France":"fr","Belgium":"fr","Spain":"es","Mexico":"es","Italy":"it","Portugal":"pt","Brazil":"pt"};
+const INTENT=[[/gorilla|chimp|safari|serengeti|masai mara|big five|migration|bwindi|volcanoes|murchison|wildlife/,25],[/uganda|rwanda|kenya|tanzania|east africa|zanzibar|kilimanjaro/,25],[/planning|looking for|want to|need|recommend|advice|tips|honeymoon|book|quote|itinerary|budget|price|cost|how much/,25],[/202[6-8]|next (year|month|summer)|january|june|july|august|september|december/,10],[/\?/,5]];
+const AGENT=/travel agent|travel agency|agency|tour operator|dmc|wholesale|b2b|partner|ltd|gmbh|consultant|reseller|commission/;
+function analyze(text,name,country){
+ const t=((name||"")+" "+(text||"")).toLowerCase();let score=0;INTENT.forEach(([r,w])=>{if(r.test(t))score+=w});
+ const agent=AGENT.test(t);if(agent)score+=10;score=Math.min(100,score);
+ let c=country?(COUNTRIES[country.toLowerCase()]||country):"";
+ if(!c)for(const k in COUNTRIES){if(new RegExp("\\b"+k+"\\b").test(t)){c=COUNTRIES[k];break}}
+ let interest="Other East Africa travel";
+ if(agent)interest="Travel-agent partnership";else if(/gorilla|bwindi/.test(t))interest="Uganda gorilla trekking";else if(/rwanda/.test(t)&&/uganda/.test(t))interest="Uganda and Rwanda safari";else if(/kenya|tanzania|serengeti|mara|kilimanjaro|zanzibar/.test(t))interest="Kenya and Tanzania safari";else if(/safari|wildlife/.test(t))interest="East Africa wildlife safari";
+ return{score,type:agent?"Travel Agent":"Tourist",country:c,interest};
+}
+function alertHot(name,a){const m="Hot lead: "+name+(a.country?" ("+a.country+")":"")+" · "+a.interest;toast(m);if("Notification"in window&&Notification.permission==="granted")new Notification("Brendava Global AI",{body:m})}
+function ingest(items,src,quiet){
+ let add=0,hotN=0,skip=0;
+ items.forEach(it=>{const text=String(it.text||"").slice(0,600),name=String(it.name||"Unnamed enquirer").slice(0,80),a=analyze(text,name,it.country||"");if(it.score!=null)a.score=Math.max(a.score,+it.score||0);if(it.type)a.type=it.type;const ex=it.id&&leads.find(l=>l.fid===it.id);if(ex){ex.notes=text;ex.score=Math.max(ex.score||0,a.score);return}
+  if(a.score<40||leads.some(l=>l.name===name&&l.notes===text)){skip++;return}
+  leads.unshift({id:Date.now()+Math.random(),name,type:a.type,country:a.country,source:it.source||src,interest:a.interest,status:a.score>=70?"New":"Review needed",notes:text,score:a.score,fid:it.id||"",url:/^https?:\/\//.test(it.url||"")?it.url:""});
+  add++;if(a.score>=70){hotN++;alertHot(name,a)}});
+ render();if(!quiet||add)toast(add+" added, "+hotN+" hot, "+skip+" filtered out.");
+}
+function renderAlerts(){
+ const h=leads.filter(x=>x.score>=70&&["New","Review needed"].includes(x.status));$("hotBadge").textContent=h.length;
+ const box=$("alertList");box.innerHTML=h.length?"":'<div class="empty">No hot leads right now.</div>';
+ h.slice(0,5).forEach(x=>{const d=document.createElement("div");d.className="source";
+  const s=document.createElement("span");s.className="source-icon";s.textContent=x.score;
+  const w=document.createElement("div"),n=document.createElement("strong"),m=document.createElement("small");n.textContent=x.name;m.textContent=(x.country||"Unknown")+" · "+x.interest;w.append(n,m);
+  const b=document.createElement("button");b.type="button";b.className="btn btn-light mini";b.style.marginLeft="auto";b.textContent="Reply";b.addEventListener("click",()=>prepareMessage(x));
+  d.append(s,w,b);box.append(d)});
+ const body=h.map(x=>x.name+" ("+(x.country||"Unknown")+"), "+x.interest+", score "+x.score).join("\n")||"No hot leads.";
+ $("digestBtn").href="mailto:"+encodeURIComponent($("alertEmail").value.trim())+"?subject="+encodeURIComponent("Brendava hot leads")+"&body="+encodeURIComponent(body);
+}
+function renderGeo(){
+ const m={};leads.forEach(x=>{const c=x.country||"Unknown";(m[c]=m[c]||{n:0,s:0}).n++;m[c].s+=x.score||0});
+ const rows=Object.entries(m).sort((a,b)=>b[1].n-a[1].n),max=rows.length?rows[0][1].n:1;
+ $("geo").innerHTML=rows.map(([c,v])=>'<div class="geo-row"><span>'+esc(c)+'</span><div class="bar"><i style="width:'+(v.n/max*100)+'%"></i></div><span>'+v.n+' · '+Math.round(v.s/v.n)+'</span></div>').join("")||'<div class="empty">No prospects yet.</div>';
+}
+const TXT={
+en:{h:"Hello",k:"Kind regards",t:"Thank you for your interest in East Africa. Brendava Tours and Travel can help with your {i} plans in Uganda, Rwanda, Kenya and Tanzania.\n\nExplore our trips: {u}\n\nShare your dates and group size and we will prepare a tailored itinerary.",a:"Brendava Tours and Travel is an East African tour operator offering safaris in Uganda, Rwanda, Kenya and Tanzania. We would be glad to explore a partnership with your agency.\n\nLearn more: {u}"},
+de:{h:"Guten Tag",k:"Freundliche Grüße",t:"Vielen Dank für Ihr Interesse an Ostafrika. Brendava Tours and Travel unterstützt Sie gern bei Ihrer Reise ({i}) in Uganda, Ruanda, Kenia und Tansania.\n\nUnsere Reisen: {u}\n\nNennen Sie uns Reisedaten und Gruppengröße, dann erstellen wir ein individuelles Angebot.",a:"Brendava Tours and Travel ist ein ostafrikanischer Reiseveranstalter mit Safaris in Uganda, Ruanda, Kenia und Tansania. Wir würden gern eine Partnerschaft mit Ihrer Agentur besprechen.\n\nMehr erfahren: {u}"},
+fr:{h:"Bonjour",k:"Cordialement",t:"Merci de votre intérêt pour l’Afrique de l’Est. Brendava Tours and Travel peut vous aider à organiser votre projet ({i}) en Ouganda, au Rwanda, au Kenya et en Tanzanie.\n\nDécouvrez nos voyages : {u}\n\nIndiquez-nous vos dates et le nombre de voyageurs pour recevoir un itinéraire sur mesure.",a:"Brendava Tours and Travel est un voyagiste est-africain proposant des safaris en Ouganda, au Rwanda, au Kenya et en Tanzanie. Nous serions ravis d’étudier un partenariat avec votre agence.\n\nEn savoir plus : {u}"},
+es:{h:"Hola",k:"Saludos cordiales",t:"Gracias por su interés en África Oriental. Brendava Tours and Travel puede ayudarle con su viaje ({i}) a Uganda, Ruanda, Kenia y Tanzania.\n\nConozca nuestros viajes: {u}\n\nIndíquenos fechas y número de viajeros y prepararemos un itinerario a medida.",a:"Brendava Tours and Travel es un operador turístico de África Oriental con safaris en Uganda, Ruanda, Kenia y Tanzania. Nos encantaría explorar una colaboración con su agencia.\n\nMás información: {u}"},
+it:{h:"Buongiorno",k:"Cordiali saluti",t:"Grazie per l’interesse per l’Africa orientale. Brendava Tours and Travel può aiutarla a organizzare il suo viaggio ({i}) in Uganda, Ruanda, Kenya e Tanzania.\n\nScopra i nostri viaggi: {u}\n\nCi indichi date e numero di viaggiatori e prepareremo un itinerario su misura.",a:"Brendava Tours and Travel è un tour operator dell’Africa orientale con safari in Uganda, Ruanda, Kenya e Tanzania. Saremmo lieti di valutare una collaborazione con la vostra agenzia.\n\nMaggiori informazioni: {u}"},
+pt:{h:"Olá",k:"Cumprimentos",t:"Obrigado pelo interesse na África Oriental. A Brendava Tours and Travel pode ajudar com a sua viagem ({i}) ao Uganda, Ruanda, Quénia e Tanzânia.\n\nConheça as nossas viagens: {u}\n\nIndique datas e número de viajantes e preparamos um roteiro à medida.",a:"A Brendava Tours and Travel é uma operadora da África Oriental com safáris no Uganda, Ruanda, Quénia e Tanzânia. Teríamos prazer em explorar uma parceria com a sua agência.\n\nSaiba mais: {u}"}};
+let cur=null;
+function buildMsg(){const x=cur,L=TXT[$("msgLang").value],u=$("brendavaLink").value;
+ const body=(x.type==="Tourist"?L.t.replace("{i}",x.interest.toLowerCase()):L.a).replace("{u}",u);
+ const nm=/^(sample|example|unnamed)/i.test(x.name)?"":" "+x.name;
+ $("msgText").value=L.h+nm+",\n\n"+body+"\n\n"+L.k+",\nBrendava Tours and Travel";}
+function prepareMessage(x){cur=x;$("msgLang").value=LANG[x.country]||"en";buildMsg();$("msgDlg").showModal()}
+$("msgLang").addEventListener("change",buildMsg);
+$("msgClose").addEventListener("click",()=>$("msgDlg").close());
+$("msgCopy").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("msgText").value);toast("Message copied.")}catch(e){$("msgText").select();toast("Select and copy the message.")}});
+$("msgWa").addEventListener("click",()=>window.open("https://wa.me/?text="+encodeURIComponent($("msgText").value),"_blank","noopener"));
+$("msgMail").addEventListener("click",()=>{location.href="mailto:?subject="+encodeURIComponent("Explore East Africa with Brendava Tours and Travel")+"&body="+encodeURIComponent($("msgText").value)});
+$("msgDone").addEventListener("click",()=>{cur.status="Contacted";$("msgDlg").close();render();toast("Marked as contacted.")});
+$("dsrc").innerHTML=$("source").innerHTML;
+$("scanBtn").addEventListener("click",()=>{
+ const items=$("feedText").value.split("\n").map(l=>l.trim()).filter(Boolean).map(l=>{const p=l.split("|").map(t=>t.trim());return p.length>=3?{name:p[0],country:p[1],text:p[2],url:p[3]}:p.length===2?{name:p[0],text:p[1]}:{text:p[0]}});
+ if(!items.length)return toast("Paste at least one post or enquiry.");ingest(items,$("dsrc").value);$("feedText").value="";
+});
+let feedTimer;
+async function pull(url,quiet){try{const r=await fetch(url),d=await r.json();ingest(Array.isArray(d)?d:(d.leads||[]),"Live feed",quiet);$("feedState").textContent="Connected. Last check "+new Date().toLocaleTimeString()+".";}catch(e){$("feedState").textContent="Could not read the feed. Check the URL, the JSON format and CORS settings."}}
+function saveCfg(){try{localStorage.setItem(KEY+"_cfg",JSON.stringify({feed:$("feedUrl").value.trim(),email:$("alertEmail").value.trim()}))}catch(e){}}
+$("feedBtn").addEventListener("click",()=>{const u=$("feedUrl").value.trim();if(!/^https:\/\//.test(u))return toast("Enter a secure https:// feed URL.");saveCfg();clearInterval(feedTimer);pull(u,false);feedTimer=setInterval(()=>pull(u,true),3e5)});
+$("alertEmail").addEventListener("input",()=>{saveCfg();renderAlerts()});
+$("notifBtn").addEventListener("click",()=>{if(!("Notification"in window))return toast("This browser does not support alerts.");Notification.requestPermission().then(p=>toast(p==="granted"?"Browser alerts are on.":"Alerts are blocked in browser settings."))});
+$("leadForm").addEventListener("submit",e=>{
+ e.preventDefault();leads.unshift({id:Date.now(),name:$("name").value.trim(),type:$("type").value,country:$("country").value.trim(),source:$("source").value,interest:$("interest").value,status:$("status").value,notes:$("notes").value.trim()});
+ $("leadForm").reset();render();toast("Prospect added to this browser demo.");
+});
+$("search").addEventListener("input",render);$("filter").addEventListener("change",render);
+$("copyLink").addEventListener("click",async()=>{try{await navigator.clipboard.writeText($("brendavaLink").value);toast("Brendava website link copied.")}catch(e){$("brendavaLink").select();toast("Select and copy the website link.")}});
+$("year").textContent=new Date().getFullYear();render();
+try{const c=JSON.parse(localStorage.getItem(KEY+"_cfg")||"{}");if(c.email)$("alertEmail").value=c.email;if(c.feed){$("feedUrl").value=c.feed;$("feedBtn").click()}renderAlerts()}catch(e){}
+</script>
+</body>
+</html>
