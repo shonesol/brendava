@@ -46,7 +46,8 @@ export default {
   async fetch(req, env) {
     const u = new URL(req.url);
     if (req.method === "OPTIONS") return J({});
-    if (u.pathname === "/collect" && req.method === "POST") return collect(req, env);
+        if (u.pathname === "/health") return J({ dashKeySet: !!env.DASH_KEY, dashKeyLength: (env.DASH_KEY || "").length });
+
     if (u.pathname === "/leads.json" && u.searchParams.get("key") === env.DASH_KEY) return J(await load(env));
     return J({ error: "not found" }, 404);
   },
