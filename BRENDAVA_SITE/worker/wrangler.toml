@@ -1,0 +1,11 @@
+name = "brendava-global-ai"
+main = "worker.mjs"
+compatibility_date = "2026-01-01"
+[vars]
+SITE = "https://www.brendavatoursandtravel.com"
+RSS = ""   # comma-separated Google Alerts RSS feed URLs
+[[kv_namespaces]]
+binding = "LEADS"
+id = "882ea1962aa64ecd999f684860dcbb39"
+[triggers]
+crons = ["*/15 * * * *"]
