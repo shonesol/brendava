@@ -16,12 +16,15 @@ jobs:
         run: |
           T=$(printf '%s' "$RAW_TOKEN" | tr -d '[:space:]')
           A=$(printf '%s' "$RAW_ACCOUNT" | tr -d '[:space:]')
+          echo "Token length: ${#T}  Account ID length: ${#A}"
           echo "::add-mask::$T"
           echo "::add-mask::$A"
           echo "CF_TOKEN=$T" >> "$GITHUB_ENV"
           echo "CF_ACCOUNT=$A" >> "$GITHUB_ENV"
       - uses: cloudflare/wrangler-action@v3
         with:
+          wranglerVersion: "4"
           apiToken: ${{ env.CF_TOKEN }}
           accountId: ${{ env.CF_ACCOUNT }}
           workingDirectory: worker
+
