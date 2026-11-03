@@ -4364,6 +4364,16 @@ ${messageField.value}
    document.getElementById("payment")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
   await bvLoadCatalogue();
+  bvRefreshTotal();
+  const msg = document.getElementById("bvPaymentMessage");
+  if (msg) {
+   const tv = document.querySelector('#brendavaBookingForm [name="travellers"]')?.value;
+   if (!bvCatalogue || !bvCatalogue.length) msg.textContent = "Could not load safari prices from the payment server. Please try again shortly or contact Brendava for a quote.";
+   else if (!bvQuote(bvFindPackage(item), tv)) msg.textContent = "Online payment is not available for this safari yet. Please contact Brendava for a quotation.";
+   else msg.textContent = "Your card or mobile-money details are entered only on Pesapal's secure checkout page.";
+  }
+ };
+ bvLoadCatalogue();
  // itineraries.html -> index.html?select=<id or title>#payment
  (async () => {
   const wanted = new URLSearchParams(window.location.search).get("select");
@@ -4373,9 +4383,6 @@ ${messageField.value}
   const pkg = bvCatalogue.find(p => String(p.id).toLowerCase() === w) || bvCatalogue.find(p => String(p.title).toLowerCase() === w);
   if (pkg) window.selectBrendavaItinerary({ id: pkg.id, title: pkg.title });
  })();
-  bvRefreshTotal();
- };
- bvLoadCatalogue();
  document.getElementById("brendavaBookingForm")?.querySelector('[name="travellers"]')?.addEventListener("input", bvRefreshTotal);
  const bvForm = document.getElementById("brendavaBookingForm");
  if (bvForm) bvForm.addEventListener("submit", async event => {
