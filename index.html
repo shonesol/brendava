@@ -3054,6 +3054,29 @@ a[href="Payments.html"]:hover {
  try {
  let items = [];
 
+ // Payable safaris come from the Worker price list (same source the payment uses).
+ try {
+  const apiBase = (window.BRENDAVA_PAYMENT_API_URL && !String(window.BRENDAVA_PAYMENT_API_URL).includes("YOUR-WORKER-NAME"))
+   ? window.BRENDAVA_PAYMENT_API_URL : "https://brendava-global-ai.shonesol28.workers.dev";
+  const apiRes = await fetch(apiBase.replace(/\/$/, "") + "/api/itineraries");
+  if (apiRes.ok) {
+   const apiData = await apiRes.json();
+   (apiData.itineraries || []).forEach(p => {
+    const prices = Object.values(p.prices || {}).map(Number).filter(n => n > 0);
+    const dayMatch = String(p.title).match(/(\d+)\s*-?\s*day/i);
+    items.push({
+     id: p.id, title: p.title,
+     description: p.paymentEnabled
+      ? (p.category || "Safari") + " package. Price per person depends on your group size; pay securely online with Pesapal."
+      : (p.category || "Safari") + " package. Request a quotation and Brendava will reply with a tailored price.",
+     image: "IMG_3108.jpeg", duration: dayMatch ? dayMatch[1] + " days" : "",
+     price: prices.length ? "$" + Math.min(...prices).toLocaleString("en-US") + " per person" : "",
+     destinations: "", documentUrl: "", amount: 0, currency: p.currency || "USD", createdAt: 0
+    });
+   });
+  }
+ } catch (catalogueError) { console.warn("Safari price list unavailable; using fallback packages.", catalogueError); }
+
  // Cloudinary public JSON manifest is the cross-device source of truth.
  // Upload the supplied itinerary-manifest.json to Cloudinary as a RAW file.
  try {
@@ -3075,7 +3098,7 @@ a[href="Payments.html"]:hover {
 
  // 1) Uploaded itineraries from this browser (legacy compatibility)
  try {
- const uploaded = JSON.parse(localStorage.getItem(ITIN_LIBRARY_KEY) || "[]");
+ const uploaded = items.length ? [] : JSON.parse(localStorage.getItem(ITIN_LIBRARY_KEY) || "[]");
  if (Array.isArray(uploaded)) {
  uploaded.forEach(u => {
  items.push({
