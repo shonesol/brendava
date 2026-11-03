@@ -115,7 +115,7 @@
  },
  "priceRange": "$$-$$$",
  "currenciesAccepted": "USD",
- "paymentAccepted": "Bank Transfer, Credit Card, Mobile Money",
+ "paymentAccepted": "Pesapal secure checkout",
  "openingHoursSpecification": {
  "@type": "OpeningHoursSpecification",
  "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
@@ -1970,6 +1970,14 @@ a[href="Payments.html"]:hover {
 }
 </script>
 
+
+<style>
+.brendava-pesapal-section{padding:64px 20px;background:#f7faf9}.bv-checkout-card{max-width:900px;margin:24px auto 0;background:#fff;border:1px solid #e5e7eb;border-radius:22px;padding:clamp(20px,4vw,38px);box-shadow:0 18px 55px rgba(15,45,35,.09)}
+.bv-checkout-intro{display:flex;gap:14px;align-items:center;background:#f0f8f4;border-radius:14px;padding:16px;margin-bottom:24px;color:#0b7a41}.bv-checkout-intro>i{font-size:25px}.bv-checkout-intro span{display:block;color:#52615a;font-size:.9rem;margin-top:4px;line-height:1.5}
+.bv-booking-form label{display:flex;flex-direction:column;gap:7px;font-weight:650;color:#25352d;font-size:.92rem;margin-bottom:16px}.bv-booking-form input,.bv-booking-form select,.bv-booking-form textarea{width:100%;box-sizing:border-box;border:1px solid #d7e0da;border-radius:10px;padding:13px 14px;font:inherit;background:#fff;color:#1f2937}.bv-booking-form input:focus,.bv-booking-form select:focus,.bv-booking-form textarea:focus{outline:2px solid #0b7a41;outline-offset:1px}.bv-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}.bv-total-row{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e5e7eb;padding:18px 0;margin-top:4px;font-size:1.05rem}.bv-total-row strong{font-size:1.3rem;color:#0b7a41}.bv-pay-button{width:100%;border:0;cursor:pointer}.bv-pay-button:disabled{opacity:.65;cursor:wait}.bv-payment-message{text-align:center;color:#64748b;font-size:.86rem;margin:14px 0 0}.itinerary-slide .bv-select-itinerary{background:#0b7a41;color:#fff;border:0;cursor:pointer}.itinerary-slide .bv-select-itinerary:hover{background:#075c30}
+@media(max-width:650px){.bv-form-grid{grid-template-columns:1fr}.bv-total-row{gap:12px;align-items:flex-start;flex-direction:column}}
+</style>
+
 </head>
 <body>
 
@@ -2628,202 +2636,30 @@ a[href="Payments.html"]:hover {
  </div>
 </section>
 
-<!-- ========== MODERN SECURE PAYMENT SYSTEM ========== -->
-<section id="payment">
+<!-- ========== PESAPAL CHECKOUT ========== -->
+<section id="payment" class="brendava-pesapal-section">
  <div class="payment-header">
- <h2 data-lang="payment_title">Secure Online Payment</h2>
- <p class="section-sub" style="margin-bottom:12px;">
- Book with confidence. All deposits are paid only to our official company accounts.
- </p>
- <div class="secure-badge">
- <i class="fas fa-shield-alt"></i> Licensed Operator (URSB 80034588624947) • Secure Payments
+  <h2>Secure Booking & Payment</h2>
+  <p class="section-sub">Choose your safari, enter your booking details and pay securely through Pesapal.</p>
+  <div class="secure-badge"><i class="fas fa-shield-alt"></i> Secure checkout powered by Pesapal</div>
  </div>
- </div>
-
- <div class="payment-grid">
- <!-- LEFT: Payment Methods -->
- <div class="payment-methods-card">
- <div class="card-header">
- <i class="fas fa-lock"></i> Choose Your Payment Method
- </div>
-
- <div class="method-tabs">
- <button class="method-tab active" onclick="showPaymentMethod('bank')">
- <i class="fas fa-university"></i> Bank Transfer
- </button>
- <button class="method-tab" onclick="showPaymentMethod('mobile')">
- <i class="fas fa-mobile-alt"></i> Mobile Money
- </button>
- <button class="method-tab" onclick="showPaymentMethod('card')">
- <i class="fas fa-credit-card"></i> Card / PayPal
- </button>
- </div>
-
- <!-- BANK TRANSFER -->
- <div id="method-bank" class="method-content active">
- <div class="bank-details-box">
- <div class="payment-row">
- <span>Bank</span>
- <strong>I&M Bank (Uganda)</strong>
- </div>
- <div class="payment-row">
- <span>Account Name</span>
- <strong>Brenda Nabachwa (Brendava Tours & Travel)</strong>
- </div>
- 
- <div class="account-highlight">
- <div class="label">Official Account Number</div>
- <div class="number" id="accountNumber">50721817001</div>
- <button type="button" class="copy-btn" onclick="copyAccountNumber()">
- <i class="fas fa-copy"></i> Copy Account Number
- </button>
- </div>
-
- <div class="payment-row">
- <span>Currency</span>
- <strong>USD</strong>
- </div>
- <div class="payment-row">
- <span>Payment Reference</span>
- <strong>Your Full Name + "Safari Deposit"</strong>
- </div>
- </div>
-
- <div class="important-note">
- <i class="fas fa-exclamation-triangle"></i>
- <div>
- <strong>Security Notice:</strong> We only accept payments to this official I&M Bank account. 
- We will never ask you to pay into a personal account or send money via unsolicited links.
- </div>
- </div>
-
- <p style="font-size:0.93rem; color:#475569; margin-bottom:12px;">
- After you transfer the deposit, send the payment receipt + your full name so we can confirm and issue your official booking confirmation within 24 hours.
- </p>
-
- <div class="receipt-actions">
- <a href="https://wa.me/256762584996?text=Hello%20Brendava%20Tours%2C%20I%20have%20made%20a%20bank%20transfer%20to%20account%2050721817001%20for%20my%20safari.%20Here%20is%20my%20receipt%20and%20full%20name%3A" 
- class="btn whatsapp" target="_blank" rel="noopener">
- <i class="fab fa-whatsapp"></i> Send Receipt on WhatsApp
- </a>
- <a href="mailto:brendavatoursandtravel@gmail.com?subject=Payment%20Receipt%20-%20Safari%20Deposit&body=Hello%20Brendava%20Tours%2C%0A%0AI%20have%20made%20a%20bank%20transfer%20to%20account%2050721817001.%0A%0AFull%20Name%3A%0ABooking%20Reference%20(if%20any)%3A%0A%0APlease%20find%20the%20payment%20receipt%20attached." 
- class="btn">
- <i class="fas fa-envelope"></i> Email Receipt
- </a>
- </div>
- </div>
-
- <!-- MOBILE MONEY -->
- <div id="method-mobile" class="method-content">
- <p style="font-size:0.95rem; color:#475569; margin-bottom:18px;">
- Prefer Mobile Money? You can send your deposit directly to our registered numbers. Always confirm the amount with us first.
- </p>
-
- <div class="mobile-money-box">
- <div class="mm-option">
- <div class="mm-icon" style="background:#ffcc00; color:#000;">MTN</div>
- <div class="mm-info">
- <strong>MTN Mobile Money</strong>
- <span>Registered to Brendava Tours</span>
- </div>
- <div class="mm-number">+256 789 336 441</div>
- </div>
-
- <div class="mm-option">
- <div class="mm-icon" style="background:#ed1c24; color:white;">Airtel</div>
- <div class="mm-info">
- <strong>Airtel Money</strong>
- <span>Registered to Brendava Tours</span>
- </div>
- <div class="mm-number">+256 742 254321</div>
- </div>
- </div>
-
- <div class="important-note" style="margin-top:18px;">
- <i class="fas fa-info-circle"></i>
- <div>
- After sending Mobile Money, please message us on WhatsApp with the transaction ID and your full name so we can match the payment to your booking.
- </div>
- </div>
-
- <div class="receipt-actions">
- <a href="https://wa.me/256762584996?text=Hello%20Brendava%20Tours%2C%20I%20have%20sent%20Mobile%20Money%20for%20my%20safari%20deposit.%20Transaction%20ID%3A%20" 
- class="btn whatsapp" target="_blank" rel="noopener">
- <i class="fab fa-whatsapp"></i> Confirm Mobile Money Payment
- </a>
- </div>
- </div>
-
- <!-- CARD / PAYPAL -->
- <div id="method-card" class="method-content">
- <div class="card-payment-box">
- <p>
- Pay securely online with Visa, Mastercard or PayPal. 
- Click the button below and we will send you a private payment link within minutes so you can complete your booking immediately.
- </p>
-
- <div class="card-logos">
- <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/visa.svg" alt="Visa" style="filter:none; opacity:1; height:28px;">
- <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/mastercard.svg" alt="Mastercard" style="filter:none; opacity:1; height:28px;">
- <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/paypal.svg" alt="PayPal" style="filter:none; opacity:1; height:28px;">
- <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/applepay.svg" alt="Apple Pay" style="filter:none; opacity:1; height:28px;">
- </div>
-
- <a href="https://wa.me/256789336441?text=Hello%20Brendava%20Tours%2C%20I%20want%20to%20complete%20my%20safari%20booking%20and%20pay%20by%20card%20or%20PayPal.%20Please%20send%20me%20a%20secure%20payment%20link%20now." 
- class="pay-now-btn" target="_blank" rel="noopener">
- <i class="fas fa-credit-card"></i> Pay Online Now
- </a>
-
- <p style="margin-top:18px; font-size:0.88rem; color:#64748b;">
- You receive a secure private link. Your card details are never shared on WhatsApp.
- </p>
- </div>
- </div>
- </div>
-
- <!-- RIGHT: Trust & Policy -->
- <div class="trust-sidebar">
- <div class="trust-card">
- <h4><i class="fas fa-shield-check"></i> Why pay with us?</h4>
- <ul>
- <li>Licensed Ugandan tour operator </li>
- <li>Payments only to official company accounts</li>
- <li>Written confirmation within 24 hours of deposit</li>
- <li>Clear deposit & cancellation policy provided</li>
- <li>24/7 support via WhatsApp & phone</li>
- </ul>
- </div>
-
- <div class="policy-box">
- <h4><i class="fas fa-file-contract"></i> Deposit & Cancellation Policy</h4>
- <ul>
- <li><strong>Deposit:</strong> 30–50% of total tour cost secures your booking and gorilla permits.</li>
- <li><strong>Balance:</strong> Due 30–45 days before arrival.</li>
- <li><strong>Confirmation:</strong> Official written confirmation sent within 24 hours of receiving your deposit + receipt.</li>
- <li><strong>Cancellations:</strong> Clear written terms with every proposal. Gorilla permits are non-refundable once issued by the park authority.</li>
- </ul>
- <a href="Payments.html" class="policy-link" style="display:inline-flex; align-items:center; gap:8px; margin-top:14px; color:#0f766e; font-weight:600; text-decoration:none; font-size:0.95rem;">
- <i class="fas fa-external-link-alt"></i> View Full Payment & Cancellation Policy
- </a>
- </div>
-
- <div class="trust-card">
- <h4><i class="fas fa-headset"></i> Need help before paying?</h4>
- <p style="font-size:0.93rem; color:#475569; margin-bottom:14px;">
- Message or call us anytime. We are happy to answer questions before you transfer any money.
- </p>
- <a href="https://wa.me/256789336441" class="btn whatsapp" style="width:100%; justify-content:center;" target="_blank">
- <i class="fab fa-whatsapp"></i> Chat on WhatsApp
- </a>
- </div>
- </div>
- </div>
-
- <!-- Extra clear policy link under the whole payment section -->
- <div style="text-align:center; margin-top:28px;">
- <a href="Payments.html" style="display:inline-flex; align-items:center; gap:8px; background:#0f766e; color:white; padding:12px 24px; border-radius:10px; font-weight:600; text-decoration:none; font-size:0.95rem; box-shadow:0 4px 14px rgba(15,118,110,0.25);">
- <i class="fas fa-file-alt"></i> Full Payment & Cancellation Policy
- </a>
+ <div class="bv-checkout-card">
+  <div class="bv-checkout-intro"><i class="fas fa-lock"></i><div><strong>One secure payment option</strong><span>Visa, Mastercard and supported mobile-money options are displayed by Pesapal at checkout, depending on your country.</span></div></div>
+  <form id="brendavaBookingForm" class="bv-booking-form">
+   <div class="bv-form-grid">
+    <label>Full name<input name="name" autocomplete="name" required placeholder="Your full name"></label>
+    <label>Email address<input name="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+    <label>Phone / WhatsApp<input name="phone" autocomplete="tel" required placeholder="+256..."></label>
+    <label>Travel date<input name="travelDate" type="date" required></label>
+    <label>Number of travellers<input name="travellers" type="number" min="1" max="50" value="2" required></label>
+    <label>Currency<select name="currency"><option value="USD">USD</option></select></label>
+   </div>
+   <label>Selected itinerary<input id="bvSelectedItinerary" name="itinerary" required placeholder="Choose an itinerary above" readonly></label>
+   <label>Booking notes (optional)<textarea name="notes" rows="3" placeholder="Room preferences, special requests, etc."></textarea></label>
+   <div class="bv-total-row"><span>Amount to pay</span><strong id="bvPayAmount">Select an itinerary</strong></div>
+   <button class="pay-now-btn bv-pay-button" id="bvPayButton" type="submit"><i class="fas fa-shield-alt"></i> Continue to secure Pesapal payment</button>
+   <p id="bvPaymentMessage" class="bv-payment-message" role="status" aria-live="polite">Your card or mobile-money details are entered only on Pesapal's secure checkout page.</p>
+  </form>
  </div>
 </section>
 
@@ -3064,6 +2900,7 @@ a[href="Payments.html"]:hover {
  // Query is simple (no composite index required) – filter featured client-side.
  let itinIndex = 0;
  let itinTotal = 0;
+ let brendavaSelectedItinerary = null;
 
  // Sample slides so the carousel always works even before you upload real data
  // Same Cloudinary cloud as photos.html / itineraries.html
@@ -3162,6 +2999,7 @@ a[href="Payments.html"]:hover {
  actionButtons += `<a href="${escapeHtml(docUrl)}" class="btn" target="_blank" rel="noopener"><i class="fas ${icon}"></i> ${label}</a>`;
  }
  actionButtons += `<a href="itineraries.html#${escapeHtml(id)}" class="btn" style="background:#e5e7eb;color:#333;box-shadow:none;">View Details</a>`;
+ actionButtons += `<button type="button" class="btn bv-select-itinerary" data-itinerary-index="${idx}"><i class="fas fa-check-circle"></i> Select itinerary</button>`;
 
  html += `
  <div class="itinerary-slide">
@@ -3180,6 +3018,12 @@ a[href="Payments.html"]:hover {
  });
  html += `</div></div>`;
  container.innerHTML = html;
+ container.querySelectorAll(".bv-select-itinerary").forEach(button => {
+  button.addEventListener("click", () => {
+   const chosen = items[Number(button.dataset.itineraryIndex)];
+   window.selectBrendavaItinerary(chosen);
+  });
+ });
 
  itinTotal = items.length;
  itinIndex = 0;
@@ -3210,7 +3054,26 @@ a[href="Payments.html"]:hover {
  try {
  let items = [];
 
- // 1) Uploaded itineraries from itineraries.html (same localStorage key)
+ // Cloudinary public JSON manifest is the cross-device source of truth.
+ // Upload the supplied itinerary-manifest.json to Cloudinary as a RAW file.
+ try {
+  const manifestUrl = window.BRENDAVA_ITINERARY_MANIFEST_URL || "https://res.cloudinary.com/ziudh5iv/raw/upload/itineraries/itinerary-manifest.json";
+  const response = await fetch(manifestUrl + (manifestUrl.includes("?") ? "&" : "?") + "v=" + Date.now(), { cache: "no-store" });
+  if (response.ok) {
+   const manifest = await response.json();
+   const cloudItems = Array.isArray(manifest) ? manifest : (manifest.itineraries || []);
+   cloudItems.forEach((u, i) => items.push({
+    id: u.id || ("cloud-" + i), title: u.title || u.filename || "Uganda Safari",
+    description: u.description || "Explore Uganda with Brendava Tours & Travel.",
+    image: u.image || u.imageUrl || "IMG_3108.jpeg", duration: u.duration || (u.days ? u.days + " days" : ""),
+    price: u.price || "", destinations: u.destinations || "", documentUrl: u.documentUrl || u.pdfUrl || u.url || "",
+    amount: Number(u.amount || String(u.price || "").replace(/[^0-9.]/g, "")) || 0,
+    currency: u.currency || "USD", createdAt: Number(u.updatedAt || u.createdAt || 0), featured: u.featured !== false
+   }));
+  }
+ } catch (manifestError) { console.warn("Cloudinary itinerary manifest unavailable; using configured fallback packages.", manifestError); }
+
+ // 1) Uploaded itineraries from this browser (legacy compatibility)
  try {
  const uploaded = JSON.parse(localStorage.getItem(ITIN_LIBRARY_KEY) || "[]");
  if (Array.isArray(uploaded)) {
@@ -3232,8 +3095,8 @@ a[href="Payments.html"]:hover {
  console.warn("Uploaded itineraries localStorage read failed", e);
  }
 
- // 2) Packages published on itineraries.html (Cloudinary PDFs)
- SITE_ITINERARIES.forEach(s => items.push({ ...s, createdAt: s.createdAt || 0 }));
+ // Static packages are a fallback only; published Cloudinary manifest takes priority.
+ if (!items.length) SITE_ITINERARIES.forEach(s => items.push({ ...s, amount: Number(String(s.price || "").replace(/[^0-9.]/g, "")) || 0, currency: "USD", createdAt: s.createdAt || 0 }));
 
  // Dedupe by title+documentUrl
  const seen = new Set();
@@ -3248,6 +3111,11 @@ a[href="Payments.html"]:hover {
  items = items.slice(0, 10);
 
  renderItinerarySlides(items.length ? items : SITE_ITINERARIES);
+  const requestedId = new URLSearchParams(window.location.search).get("select");
+  if (requestedId) {
+   const match = items.find(item => String(item.id) === requestedId);
+   if (match) window.selectBrendavaItinerary(match);
+  }
  } catch (err) {
  console.error("Failed to load itineraries:", err);
  renderItinerarySlides(SITE_ITINERARIES);
@@ -4420,6 +4288,95 @@ ${messageField.value}
  btn.disabled = false;
  btn.innerHTML = '<i class="fas fa-plus"></i> Add to Gallery Slider';
  };
+
+ // ========== ITINERARY SELECTION + PESAPAL CHECKOUT ==========
+ const BV_WORKER_URL = (window.BRENDAVA_PAYMENT_API_URL && !String(window.BRENDAVA_PAYMENT_API_URL).includes("YOUR-WORKER-NAME"))
+  ? window.BRENDAVA_PAYMENT_API_URL
+  : "https://brendava-global-ai.shonesol28.workers.dev";
+ let bvCatalogue = null;
+ async function bvLoadCatalogue() {
+  if (bvCatalogue) return bvCatalogue;
+  try {
+   const r = await fetch(BV_WORKER_URL.replace(/\/$/, "") + "/api/itineraries");
+   const d = await r.json();
+   bvCatalogue = Array.isArray(d.itineraries) ? d.itineraries : [];
+  } catch (e) { console.warn("Safari price list unavailable", e); bvCatalogue = []; }
+  return bvCatalogue;
+ }
+ function bvFindPackage(item) {
+  if (!item || !bvCatalogue) return null;
+  const id = String(item.id || "");
+  const title = String(item.title || "").trim().toLowerCase();
+  return bvCatalogue.find(p => p.id === id) || bvCatalogue.find(p => String(p.title).toLowerCase() === title) || null;
+ }
+ // PER-PERSON pricing: group tiers hold the price per person; total = per-person price x travellers.
+ function bvQuote(pkg, travellers) {
+  if (!pkg || !pkg.paymentEnabled || !pkg.prices) return null;
+  const n = Math.max(1, Math.floor(Number(travellers)) || 1);
+  const tiers = Object.keys(pkg.prices).map(Number).sort((a, b) => a - b);
+  const tier = tiers.filter(t => t <= n).pop();
+  if (!tier) return null;
+  const perPerson = Number(pkg.prices[tier]);
+  if (!Number.isFinite(perPerson) || perPerson <= 0) return null;
+  return { perPerson, travellers: n, total: perPerson * n, currency: pkg.currency || "USD" };
+ }
+ function bvRefreshTotal() {
+  const totalEl = document.getElementById("bvPayAmount");
+  const form = document.getElementById("brendavaBookingForm");
+  if (!totalEl || !form) return;
+  if (!brendavaSelectedItinerary) { totalEl.textContent = "Select an itinerary"; return; }
+  const quote = bvQuote(bvFindPackage(brendavaSelectedItinerary), form.querySelector('[name="travellers"]')?.value);
+  if (!quote) { totalEl.textContent = "Contact us for a quote"; return; }
+  const fmt = v => new Intl.NumberFormat("en-US", { style: "currency", currency: quote.currency, maximumFractionDigits: 0 }).format(v);
+  totalEl.textContent = fmt(quote.total) + " (" + fmt(quote.perPerson) + " per person × " + quote.travellers + ")";
+ }
+ window.selectBrendavaItinerary = async function (item) {
+  if (!item) return;
+  brendavaSelectedItinerary = item;
+  const selected = document.getElementById("bvSelectedItinerary");
+  if (selected) selected.value = item.title || "Selected safari";
+  const form = document.getElementById("brendavaBookingForm");
+  if (form) {
+   form.dataset.itineraryId = item.id || "";
+   document.getElementById("payment")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+  await bvLoadCatalogue();
+  bvRefreshTotal();
+ };
+ bvLoadCatalogue();
+ document.getElementById("brendavaBookingForm")?.querySelector('[name="travellers"]')?.addEventListener("input", bvRefreshTotal);
+ const bvForm = document.getElementById("brendavaBookingForm");
+ if (bvForm) bvForm.addEventListener("submit", async event => {
+  event.preventDefault();
+  const message = document.getElementById("bvPaymentMessage");
+  const button = document.getElementById("bvPayButton");
+  const workerUrl = BV_WORKER_URL;
+  const formData = new FormData(bvForm);
+  await bvLoadCatalogue();
+  const quote = bvQuote(bvFindPackage(brendavaSelectedItinerary), formData.get("travellers"));
+  if (!brendavaSelectedItinerary || !formData.get("itinerary")) { message.textContent = "Please select a safari itinerary before continuing."; return; }
+  if (!quote) { message.textContent = "This itinerary needs a confirmed price. Please contact Brendava to receive a payment quote."; return; }
+  if (workerUrl.includes("YOUR-WORKER-NAME")) { message.textContent = "Pesapal backend is not configured yet. Add your deployed Worker URL in the setup instructions."; return; }
+  const payload = {
+   name: formData.get("name"), email: formData.get("email"), phone: formData.get("phone"),
+   travelDate: formData.get("travelDate"), travellers: Number(formData.get("travellers")),
+   itinerary: formData.get("itinerary"), itineraryId: bvForm.dataset.itineraryId || "",
+   notes: formData.get("notes"), currency: quote.currency
+  };
+  button.disabled = true; button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting to Pesapal...';
+  message.textContent = "Creating your secure payment session...";
+  try {
+   const response = await fetch(workerUrl.replace(/\/$/, "") + "/api/create-payment", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
+   });
+   const result = await response.json();
+   if (!response.ok || !result.redirect_url) throw new Error(result.message || "Could not start Pesapal checkout.");
+   window.location.assign(result.redirect_url);
+  } catch (error) {
+   message.textContent = error.message || "Payment could not be started. Please try again.";
+   button.disabled = false; button.innerHTML = '<i class="fas fa-shield-alt"></i> Continue to secure Pesapal payment';
+  }
+ });
 </script>
 
 </body>
