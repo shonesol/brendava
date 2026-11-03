@@ -4324,15 +4324,15 @@ ${messageField.value}
   const totalEl = document.getElementById("bvPayAmount");
   const form = document.getElementById("brendavaBookingForm");
   if (!totalEl || !form) return;
-  if (!brendavaSelectedItinerary) { totalEl.textContent = "Select an itinerary"; return; }
-  const quote = bvQuote(bvFindPackage(brendavaSelectedItinerary), form.querySelector('[name="travellers"]')?.value);
+  if (!window.__bvSelected) { totalEl.textContent = "Select an itinerary"; return; }
+  const quote = bvQuote(bvFindPackage(window.__bvSelected), form.querySelector('[name="travellers"]')?.value);
   if (!quote) { totalEl.textContent = "Contact us for a quote"; return; }
   const fmt = v => new Intl.NumberFormat("en-US", { style: "currency", currency: quote.currency, maximumFractionDigits: 0 }).format(v);
   totalEl.textContent = fmt(quote.total) + " (" + fmt(quote.perPerson) + " per person × " + quote.travellers + ")";
  }
  window.selectBrendavaItinerary = async function (item) {
   if (!item) return;
-  brendavaSelectedItinerary = item;
+  window.__bvSelected = item;
   const selected = document.getElementById("bvSelectedItinerary");
   if (selected) selected.value = item.title || "Selected safari";
   const form = document.getElementById("brendavaBookingForm");
@@ -4341,6 +4341,15 @@ ${messageField.value}
    document.getElementById("payment")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
   await bvLoadCatalogue();
+ // itineraries.html -> index.html?select=<id or title>#payment
+ (async () => {
+  const wanted = new URLSearchParams(window.location.search).get("select");
+  if (!wanted) return;
+  await bvLoadCatalogue();
+  const w = wanted.trim().toLowerCase();
+  const pkg = bvCatalogue.find(p => String(p.id).toLowerCase() === w) || bvCatalogue.find(p => String(p.title).toLowerCase() === w);
+  if (pkg) window.selectBrendavaItinerary({ id: pkg.id, title: pkg.title });
+ })();
   bvRefreshTotal();
  };
  bvLoadCatalogue();
@@ -4353,8 +4362,8 @@ ${messageField.value}
   const workerUrl = BV_WORKER_URL;
   const formData = new FormData(bvForm);
   await bvLoadCatalogue();
-  const quote = bvQuote(bvFindPackage(brendavaSelectedItinerary), formData.get("travellers"));
-  if (!brendavaSelectedItinerary || !formData.get("itinerary")) { message.textContent = "Please select a safari itinerary before continuing."; return; }
+  const quote = bvQuote(bvFindPackage(window.__bvSelected), formData.get("travellers"));
+  if (!window.__bvSelected || !formData.get("itinerary")) { message.textContent = "Please select a safari itinerary before continuing."; return; }
   if (!quote) { message.textContent = "This itinerary needs a confirmed price. Please contact Brendava to receive a payment quote."; return; }
   if (workerUrl.includes("YOUR-WORKER-NAME")) { message.textContent = "Pesapal backend is not configured yet. Add your deployed Worker URL in the setup instructions."; return; }
   const payload = {
