@@ -3057,9 +3057,9 @@ a[href="Payments.html"]:hover {
  // Cloudinary public JSON manifest is the cross-device source of truth.
  // Upload the supplied itinerary-manifest.json to Cloudinary as a RAW file.
  try {
-  const manifestUrl = window.BRENDAVA_ITINERARY_MANIFEST_URL || "https://res.cloudinary.com/ziudh5iv/raw/upload/itineraries/itinerary-manifest.json";
-  const response = await fetch(manifestUrl + (manifestUrl.includes("?") ? "&" : "?") + "v=" + Date.now(), { cache: "no-store" });
-  if (response.ok) {
+  const manifestUrl = window.BRENDAVA_ITINERARY_MANIFEST_URL || "";
+  const response = manifestUrl ? await fetch(manifestUrl + (manifestUrl.includes("?") ? "&" : "?") + "v=" + Date.now(), { cache: "no-store" }) : null;
+  if (response && response.ok) {
    const manifest = await response.json();
    const cloudItems = Array.isArray(manifest) ? manifest : (manifest.itineraries || []);
    cloudItems.forEach((u, i) => items.push({
