@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Payment status | Brendava Tours & Travel</title>
+  <style>
+    :root{color-scheme:light;font-family:Inter,Arial,sans-serif}*{box-sizing:border-box}body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f7f3eb;color:#18352a;padding:24px}.card{width:min(100%,560px);background:#fff;border-radius:18px;padding:36px;box-shadow:0 12px 40px #173b2a18;text-align:center}h1{margin:0 0 12px;font-size:28px}p{line-height:1.6;color:#52635a}#status{font-weight:700;font-size:20px;margin:22px 0}.small{font-size:13px;overflow-wrap:anywhere}a{display:inline-block;margin-top:18px;background:#0b7a41;color:#fff;text-decoration:none;padding:13px 22px;border-radius:8px}
+  </style>
+</head>
+<body>
+  <main class="card">
+    <h1>Thank you for choosing Brendava</h1>
+    <p>We are checking your payment securely with Pesapal. Please keep this page open for a moment.</p>
+    <div id="status" role="status" aria-live="polite">Checking payment…</div>
+    <p id="detail" class="small"></p>
+    <a href="https://brendavatoursandtravel.com/">Return to Brendava Tours &amp; Travel</a>
+  </main>
+  <script>
+    const WORKER_URL = "https://brendava-global-ai.shonesol28.workers.dev";
+    const params = new URLSearchParams(location.search);
+    const trackingId = params.get("OrderTrackingId");
+    const statusEl = document.getElementById("status");
+    const detailEl = document.getElementById("detail");
+    async function verify() {
+      if (!trackingId) {
+        statusEl.textContent = "Payment reference not found";
+        detailEl.textContent = "If you completed payment, contact Brendava and provide your Pesapal receipt.";
+        return;
+      }
+      try {
+        const response = await fetch(`${WORKER_URL}/api/payment-status?OrderTrackingId=${encodeURIComponent(trackingId)}`);
+        const data = await response.json();
+        if (!response.ok) throw new Error(data.message || "We could not verify this payment yet.");
+        statusEl.textContent = data.payment_status === "COMPLETED" ? "Payment successful" : data.payment_status === "FAILED" ? "Payment failed" : data.payment_status === "REVERSED" ? "Payment reversed" : "Payment is still pending";
+        const money = v => `${data.currency} ${Number(v).toLocaleString()}`;
+        const pct = data.deposit_percent || 30;
+        const paidPart = pct === 100 ? `Paid in full: ${money(data.amount)}.` : `Payment: ${money(data.amount)} (${pct}% of ${money(data.package_total || data.amount)}). Balance due before travel: ${money(data.balance_due || 0)}.`;
+        detailEl.textContent = `Booking: ${data.itinerary || "Your selected itinerary"} · ${data.travellers} traveller(s) · ${paidPart} Reference: ${data.merchant_reference}`;
+      } catch (error) {
+        statusEl.textContent = "Payment status is not confirmed yet";
+        detailEl.textContent = error.message + " Please contact Brendava before making another payment.";
+      }
+    }
+    verify();
+  </script>
+</body>
+</html>
