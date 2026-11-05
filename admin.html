@@ -102,6 +102,23 @@ hr{border:none;border-top:1px solid #e2e8f0;margin:20px 0;}
   .main{margin-left:200px;}
   .form-grid{grid-template-columns:1fr;}
 }
+
+@media(max-width:700px){
+  .dashboard{height:auto;min-height:100vh;flex-direction:column;}
+  .sidebar{position:sticky;top:0;z-index:50;width:100%;bottom:auto;padding:8px;
+    display:flex;align-items:center;gap:8px;overflow-x:auto;overflow-y:hidden;}
+  .sidebar h2{display:none;}
+  .sidebar ul{display:flex;gap:6px;}
+  .sidebar li{white-space:nowrap;margin:0;padding:10px 14px;background:rgba(255,255,255,.12);}
+  .sidebar li.active{background:rgba(255,255,255,.35);}
+  .main{margin-left:0;padding:14px;width:100%;}
+  .form-grid{grid-template-columns:1fr;}
+  .form-grid .form-group{grid-column:auto !important;}
+  .panel{padding:16px;}
+  table{display:block;overflow-x:auto;white-space:nowrap;}
+  .login-box{width:92%;padding:28px;}
+  #aiFrame{height:70vh !important;}
+}
 </style>
 </head>
 <body>
