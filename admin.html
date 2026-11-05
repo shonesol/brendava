@@ -458,7 +458,8 @@ hr{border:none;border-top:1px solid #e2e8f0;margin:20px 0;}
     </div>
   </div>
 </div>
-
+const CLOUD_NAME = "ziudh5iv";
+  const UPLOAD_PRESET = "brendava_gallery";
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
@@ -467,8 +468,8 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstati
 
 // ---------- CLOUDINARY (signature images) ----------
 // Cloudinary Console > Settings > Upload > Upload presets > Add preset (Signing mode: Unsigned)
-const CLOUDINARY_CLOUD_NAME = "";     // <-- PASTE your Cloudinary cloud name
-const CLOUDINARY_UPLOAD_PRESET = "";  // <-- PASTE your unsigned upload preset name
+const CLOUDINARY_CLOUD_NAME = "ziudh5iv";    
+const CLOUDINARY_UPLOAD_PRESET = "brendava_gallery";
 
 async function uploadToCloudinary(fileOrBlob, folder = "brendava/signatures") {
   if (!CLOUDINARY_CLOUD_NAME || !CLOUDINARY_UPLOAD_PRESET) {
