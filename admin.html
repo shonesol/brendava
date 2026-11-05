@@ -165,7 +165,7 @@ hr{border:none;border-top:1px solid #e2e8f0;margin:20px 0;}
         <div class="form-grid">
           <div class="form-group">
             <label>Invoice Number</label>
-            <input id="invNo" value="BT/2026/">
+            <input id="invNo" placeholder="Invoice number">
           </div>
           <div class="form-group">
             <label>Issue Date</label>
@@ -186,19 +186,19 @@ hr{border:none;border-top:1px solid #e2e8f0;margin:20px 0;}
           </div>
           <div class="form-group">
             <label>Client Full Name</label>
-            <input id="clientName" placeholder="e.g. Christopher James Toward">
+            <input id="clientName" placeholder="Client full name">
           </div>
           <div class="form-group">
             <label>Passport / ID Number</label>
-            <input id="passportNo" placeholder="e.g. 142560419">
+            <input id="passportNo" placeholder="Passport / ID number">
           </div>
           <div class="form-group">
             <label>Nationality</label>
-            <input id="nationality" placeholder="e.g. British Citizen">
+            <input id="nationality" placeholder="Nationality">
           </div>
           <div class="form-group">
             <label>Date of Birth</label>
-            <input id="dob" placeholder="e.g. 25 Nov 1998">
+            <input id="dob" placeholder="Date of birth (optional)">
           </div>
           <div class="form-group">
             <label>Client Email</label>
@@ -220,7 +220,7 @@ hr{border:none;border-top:1px solid #e2e8f0;margin:20px 0;}
         <div class="form-grid">
           <div class="form-group">
             <label>Travel / Service</label>
-            <input id="travelService" value="Gorilla Trekking Permit">
+            <input id="travelService" list="activityList" placeholder="e.g. Gorilla trekking, Game drive, Chimp trekking, Safari package">
           </div>
           <div class="form-group">
             <label>Travel Date(s)</label>
@@ -228,24 +228,40 @@ hr{border:none;border-top:1px solid #e2e8f0;margin:20px 0;}
           </div>
           <div class="form-group">
             <label>Destination</label>
-            <input id="destination" value="Bwindi / Uganda">
+            <input id="destination" placeholder="e.g. Bwindi, Queen Elizabeth NP, Murchison Falls">
           </div>
         </div>
       </div>
 
       <div class="panel">
         <h3>3. Invoice Items</h3>
+        <datalist id="activityList">
+          <option value="Gorilla Trekking Permit">
+          <option value="Chimpanzee Trekking Permit">
+          <option value="Game Drive">
+          <option value="Boat Cruise / Launch Trip">
+          <option value="Accommodation">
+          <option value="Transport / Car Hire">
+          <option value="Airport Transfer">
+          <option value="Guide / Driver Fee">
+          <option value="Park Entrance Fees">
+          <option value="Cultural Experience">
+          <option value="Company Service Fee">
+          <option value="Tax Fee">
+          <option value="Withdraw / Bank Charge">
+        </datalist>
         <div id="itemsContainer">
           <!-- items will be added here -->
         </div>
         <button class="btn-secondary" style="margin-top:10px;" onclick="addItemRow()">+ Add Item</button>
+        <p style="font-size:12px;color:var(--gray);margin-top:8px;">Type any activity or pick a suggestion (gorilla trekking, game drive, chimp trekking, accommodation, etc.).</p>
       </div>
 
       <div class="panel">
         <h3>4. Totals, Payment Status & Notes</h3>
         <div class="form-grid">
           <div class="form-group">
-            <label>Discount (USD)</label>
+            <label>Discount</label>
             <input type="number" id="discount" value="0" step="0.01">
           </div>
           <div class="form-group">
@@ -305,6 +321,7 @@ hr{border:none;border-top:1px solid #e2e8f0;margin:20px 0;}
       <div class="flex-row" style="margin:20px 0;">
         <button onclick="generateInvoicePDF()" style="padding:14px 28px;font-size:15px;">Generate & Download Invoice PDF</button>
         <button class="btn-secondary" onclick="saveInvoiceRecord()">Save Invoice Record</button>
+        <button class="btn-accent" onclick="newInvoice()">New Blank Invoice</button>
       </div>
       <p id="invStatus" class="status-msg"></p>
 
@@ -435,12 +452,12 @@ const GLOBAL_AI_URL = "https://www.brendavatoursandtravel.com/global-ai/";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
-      authDomain: "brendava-tours-and-travel.firebaseapp.com",
-      projectId: "brendava-tours-and-travel",
-      storageBucket: "brendava-tours-and-travel.firebasestorage.app",
-      messagingSenderId: "732703885570",
-      appId: "1:732703885570:web:3011a3989d5fe36eb69a1b",
-      measurementId: "G-ZC356HMW9C"
+  authDomain: "brendava-tours-and-travel.firebaseapp.com",
+  projectId: "brendava-tours-and-travel",
+  storageBucket: "brendava-tours-and-travel.firebasestorage.app",
+  messagingSenderId: "732703885570",
+  appId: "1:732703885570:web:3011a3989d5fe36eb69a1b",
+  measurementId: "G-ZC356HMW9C"
 };
 
 const app = initializeApp(firebaseConfig);
@@ -566,23 +583,44 @@ function loadAll() {
 let itemRowCount = 0;
 const logoUrl = "https://www.brendavatoursandtravel.com/bd90b2a7-58b4-4d31-8566-4058dac1bc50.jpeg"; // fallback logo
 
+function makeInvNo() {
+  const t = new Date();
+  const p = n => String(n).padStart(2,"0");
+  return "BT/" + t.getFullYear() + "/" + p(t.getMonth()+1) + p(t.getDate()) + "-" + p(t.getHours()) + p(t.getMinutes());
+}
+
 function initInvoiceDefaults() {
+  if (invNo.dataset.init) return;   // don't wipe a form that is being filled
+  invNo.dataset.init = "1";
+  resetInvoiceForm();
+}
+
+function resetInvoiceForm() {
   const today = new Date();
   const tomorrow = new Date(today);
   tomorrow.setDate(tomorrow.getDate() + 1);
   issueDate.value = today.toISOString().split("T")[0];
   dueDate.value = tomorrow.toISOString().split("T")[0];
-  invNo.value = "BT/2026/" + String(today.getMonth()+1).padStart(2,"0") + String(today.getDate()).padStart(2,"0");
-  // default items
-  if (itemsContainer.children.length === 0) {
-    addItemRow("Gorilla Trekking Permit", 1, 1200);
-    addItemRow("Company Service Fee", 1, 100);
-    addItemRow("Tax Fee", 1, 10);
-    addItemRow("Withdraw / Bank Charge", 1, 10);
-  }
+  invNo.value = makeInvNo();
+  currency.value = "USD";
+  ["clientName","passportNo","nationality","dob","clientEmail","clientPhone","clientAddress",
+   "travelService","travelDates","destination","notes"].forEach(id => document.getElementById(id).value = "");
+  discount.value = 0; extraTax.value = 0; amountPaid.value = 0;
+  paymentStatus.value = "Unpaid";
+  payMethod.selectedIndex = 0;
+  sigOfficer.value = ""; sigDirector.value = "";
+  previewOfficer.innerHTML = '<span style="color:#94a3b8;font-size:13px;">No signature selected</span>';
+  previewDirector.innerHTML = '<span style="color:#94a3b8;font-size:13px;">No signature selected</span>';
+  itemsContainer.innerHTML = "";
+  addItemRow();   // one empty row
+  invStatus.innerText = "";
 }
 
-window.addItemRow = (desc = "", qty = 1, price = 0) => {
+window.newInvoice = () => {
+  if (confirm("Clear the form and start a new blank invoice?")) resetInvoiceForm();
+};
+
+window.addItemRow = (desc = "", qty = 1, price = "") => {
   itemRowCount++;
   const id = itemRowCount;
   const div = document.createElement("div");
@@ -592,7 +630,7 @@ window.addItemRow = (desc = "", qty = 1, price = 0) => {
   div.innerHTML = `
     <div class="form-group" style="grid-column:span 2">
       <label>Description</label>
-      <input class="item-desc" value="${desc}" placeholder="Service / Package description">
+      <input class="item-desc" list="activityList" value="${String(desc).replace(/"/g,'&quot;')}" placeholder="Activity / service (e.g. Game drive)">
     </div>
     <div class="form-group">
       <label>Qty</label>
@@ -624,12 +662,12 @@ function getItems() {
 
 function calcTotals(items) {
   const subtotal = items.reduce((s, i) => s + i.amount, 0);
-  const discount = parseFloat(discount.value) || 0;
-  const tax = parseFloat(extraTax.value) || 0;
-  const total = subtotal - discount + tax;
-  const paid = parseFloat(amountPaid.value) || 0;
+  const discountVal = parseFloat(document.getElementById("discount").value) || 0;
+  const tax = parseFloat(document.getElementById("extraTax").value) || 0;
+  const total = subtotal - discountVal + tax;
+  const paid = parseFloat(document.getElementById("amountPaid").value) || 0;
   const balance = total - paid;
-  return { subtotal, discount, tax, total, paid, balance };
+  return { subtotal, discount: discountVal, tax, total, paid, balance };
 }
 
 // ---------- SIGNATURE PAD ----------
@@ -998,7 +1036,7 @@ window.generateInvoicePDF = async () => {
   });
 
   // Notes box (left of totals)
-  if (notes.value || clientName.value) {
+  if (notes.value) {
     doc.setFont("helvetica", "bold");
     doc.setFontSize(8);
     doc.setTextColor(...muted);
@@ -1007,7 +1045,7 @@ window.generateInvoicePDF = async () => {
     doc.setFontSize(8);
     doc.setTextColor(...slate);
     const noteLines = doc.splitTextToSize(
-      notes.value || `Booking for ${clientName.value}. Gorilla permit & related service fees.`,
+      notes.value,
       250
     );
     doc.text(noteLines, M, y + 14);
@@ -1167,6 +1205,24 @@ function loadImage(url) {
   });
 }
 
+window.openInvoice = (id) => {
+  const d = invoicesCache.find(x => x.id === id);
+  if (!d) return;
+  const set = (k, v) => { const el = document.getElementById(k); if (el) el.value = v || ""; };
+  ["invNo","issueDate","dueDate","currency","clientName","passportNo","nationality","dob","clientEmail",
+   "clientPhone","clientAddress","travelService","travelDates","destination","notes","paymentStatus","payMethod"]
+   .forEach(k => set(k, d[k]));
+  discount.value = d.totals ? d.totals.discount : 0;
+  extraTax.value = d.totals ? d.totals.tax : 0;
+  amountPaid.value = d.totals ? d.totals.paid : 0;
+  itemsContainer.innerHTML = "";
+  (d.items && d.items.length ? d.items : [{}]).forEach(i => addItemRow(i.desc || "", i.qty || 1, i.price ?? ""));
+  sigOfficer.value = d.officerSigId || ""; sigDirector.value = d.directorSigId || "";
+  sigOfficer.dispatchEvent(new Event("change")); sigDirector.dispatchEvent(new Event("change"));
+  invStatus.innerText = "Loaded invoice " + (d.invNo || "") + " - edit and click Generate.";
+  window.scrollTo({ top: 0, behavior: "smooth" });
+};
+
 // Save invoice record to Firestore
 window.saveInvoiceRecord = async () => {
   const items = getItems();
@@ -1204,13 +1260,16 @@ window.saveInvoiceRecord = async () => {
   }
 };
 
+let invoicesCache = [];
 async function loadInvoices() {
   const snap = await getDocs(invRef);
   invoiceTable.innerHTML = "";
+  invoicesCache = [];
   let count = 0;
   snap.forEach(d => {
     count++;
     const data = d.data();
+    invoicesCache.push({ id: d.id, ...data });
     const st = data.paymentStatus || "Unpaid";
     const badgeClass = st === "Paid" ? "badge-green" : "badge-blue";
     invoiceTable.innerHTML += `
@@ -1218,9 +1277,9 @@ async function loadInvoices() {
         <td>${data.invNo || ""}</td>
         <td>${data.clientName || ""}</td>
         <td>${data.issueDate || ""}</td>
-        <td>${data.totals ? data.totals.total.toFixed(2) : ""} ${data.currency || ""}</td>
+        <td>${data.totals ? Number(data.totals.total).toFixed(2) : ""} ${data.currency || ""}</td>
         <td><span class="badge ${badgeClass}">${st}</span></td>
-        <td><button class="btn-secondary" style="padding:5px 10px;font-size:12px;" onclick="alert('Open the form, fill details, and click Generate')">Re-generate</button></td>
+        <td><button class="btn-secondary" style="padding:5px 10px;font-size:12px;" onclick="openInvoice('${d.id}')">Open</button></td>
       </tr>`;
   });
   if (invoiceCount) invoiceCount.innerText = count;
