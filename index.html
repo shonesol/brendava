@@ -4582,7 +4582,7 @@ ${messageField.value}
  const BV_ALLOWED_PERCENTS = [30, 50, 100]; // must match ALLOWED_PAYMENT_PERCENTS in worker.js
  let bvCatalogue = null;
   async function bvLoadCatalogue() {
-  if (bvCatalogue && bvCatalogue.length) return bvCatalogue;
+   if (bvCatalogue && bvCatalogue.length) return bvCatalogue;
   try {
    const r = await fetch(BV_WORKER_URL.replace(/\/$/, "") + "/api/itineraries");
    const d = await r.json();
@@ -4628,6 +4628,7 @@ ${messageField.value}
   await bvLoadCatalogue();
   const current = sel.value;
   const payable = (bvCatalogue || []).filter(p => p.paymentEnabled && p.prices);
+        if (!payable.length) return;   // keep the built-in list if prices did not load
   sel.innerHTML = '<option value="">Choose a safari package…</option>';
   payable.forEach(p => {
    const opt = document.createElement("option");
