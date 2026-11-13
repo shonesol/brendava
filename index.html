@@ -4101,7 +4101,14 @@ ${messageField.value}
  <button type="button" class="btn" id="adminUploadBtn" onclick="adminUploadHeroFile()"><i class="fas fa-cloud-upload-alt"></i> Upload to Cloudinary</button>
  <div id="adminUploadMsg" class="admin-msg"></div>
 </div>
-
+<div id="heroAuthBox" style="border:1px dashed #cbd5e1;border-radius:10px;padding:12px;margin-bottom:14px;">
+ <p class="admin-hint" style="margin-top:0;">To publish the hero to all visitors, sign in with your Firebase admin account (the same one used in Messages). <strong id="heroAuthState">Not signed in.</strong></p>
+ <div id="heroAuthFields">
+  <input type="email" id="heroAuthEmail" placeholder="Admin email" autocomplete="username">
+  <input type="password" id="heroAuthPass" placeholder="Password" autocomplete="current-password">
+  <button type="button" class="btn" onclick="adminHeroSignIn()"><i class="fas fa-unlock"></i> Sign in</button>
+ </div>
+</div>
  <div class="admin-preview" id="adminPreview"><span>Preview appears here</span></div>
 
  <div class="admin-actions">
