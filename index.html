@@ -2752,7 +2752,7 @@ html.splash-on{overflow:hidden}
     <label>Travel date<input name="travelDate" type="date" required></label>
     <label>Number of travellers<input name="travellers" type="number" min="1" max="50" value="2" required></label>
     <label>Currency<select name="currency"><option value="USD">USD</option></select></label>
-    <label>Pay with<select name="paymentMethod" id="bvPaymentMethod"><option value="card">Visa / Mastercard</option><option value="mobile">Mobile Money (MTN / Airtel)</option><option value="bank">Bank transfer</option></select></label>
+    <label>Pay with<select name="paymentMethod" id="bvPaymentMethod"><option value="card">Visa / Mastercard</option><option value="mobile_money">Mobile Money (MTN / Airtel)</option><option value="bank">Bank transfer</option></select></label>
     <label>Payment option<select name="paymentPercent" id="bvPaymentPercent"><option value="30">Pay 30% deposit now</option><option value="50">Pay 50% now</option><option value="100">Pay in full (100%)</option></select></label>
    </div>
    <label>Selected itinerary
@@ -2967,18 +2967,6 @@ html.splash-on{overflow:hidden}
  }
  applyHeroImage(url || HERO_DEFAULT);
  }
-
- window.loadHeroBackground = async function () {
- // 1) localStorage
- try {
- const cached = localStorage.getItem(HERO_LS_KEY);
- if (cached) {
- const data = JSON.parse(cached);
- if (data) {
- applyHeroMedia(data.type, data.url, data.poster, data.videos);
- }
- }
- } catch (e) {}
  let heroLastSig = "";
  function heroApplyIfChanged(type, url, poster, videos) {
   const list = Array.isArray(videos) ? videos.filter(Boolean) : [];
@@ -3022,42 +3010,6 @@ html.splash-on{overflow:hidden}
   try {
    localStorage.setItem(HERO_LS_KEY, JSON.stringify({ type, url: url || "", poster: poster || "", videos: videos || [] }));
   } catch (e) {}
- };
- // 2) Firestore
- try {
- const snap = await getDoc(doc(db, "siteSettings", "hero"));
- if (snap.exists()) {
- const data = snap.data();
- const type = data.type || "image";
- const url = data.url || HERO_DEFAULT;
- const poster = data.poster || "";
- const videos = Array.isArray(data.videos) ? data.videos : [];
- applyHeroMedia(type, url, poster, videos);
- try {
- localStorage.setItem(HERO_LS_KEY, JSON.stringify({ type, url, poster, videos }));
- } catch (e) {}
- return;
- }
- } catch (err) {
- console.warn("Hero Firestore load failed:", err);
- }
-
- const hero = document.getElementById("heroSection");
- if (hero && !hero.querySelector(".hero-bg-media")) {
- applyHeroImage(HERO_DEFAULT);
- }
- };
-
- window.applyHeroFromAdmin = function (type, url, poster, videos) {
- applyHeroMedia(type, url, poster, videos);
- try {
- localStorage.setItem(HERO_LS_KEY, JSON.stringify({
- type,
- url: url || "",
- poster: poster || "",
- videos: videos || []
- }));
- } catch (e) {}
  };
 
  // ========== FEATURED ITINERARIES SLIDER ==========
@@ -4744,17 +4696,18 @@ ${messageField.value}
    document.getElementById("payment")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
  })();
+ async function bvPollMobile(reference) {
+ const BV_CARD_MAX = 200; // LivePay card limit for your account. Change to 5000 when LivePay raises it.
 
  async function bvPollMobile(reference) {
   const base = BV_WORKER_URL.replace(/\/$/, "");
-  for (let i = 0; i < 24; i++) {            // ~2 minutes
+  for (let i = 0; i < 24; i++) {            // about 2 minutes
    await new Promise(r => setTimeout(r, 5000));
    try {
-    const r = await fetch(base + "/api/payment-status?ref=?currency=UGX&reference=" + encodeURIComponent(reference));
+    const r = await fetch(base + "/api/payment-status?ref=" + encodeURIComponent(reference));
     const d = await r.json();
-    const s = String(d.status || "");
-    if (/success|complete|paid/i.test(s)) return "success";
-    if (/fail|reject|cancel|declin|expire/i.test(s)) return "failed";
+    if (d.payment_status === "COMPLETED") return "success";
+    if (d.payment_status === "FAILED") return "failed";
    } catch (e) {}
   }
   return "pending";
@@ -4779,15 +4732,10 @@ ${messageField.value}
   if (!window.__bvSelected || !formData.get("itinerary")) { bvMsg("Please select a safari itinerary before continuing."); return; }
   if (!quote) { bvMsg("This itinerary needs a confirmed price. Please contact Brendava to receive a payment quote."); return; }
 
-  const method = formData.get("paymentMethod") === "mobile" ? "mobile" : "card";
-  if (method === "card" && (quote.deposit < 1 || quote.deposit > 5000)) {
-   bvMsg("Card payments are limited to $5,000 per transaction. Please choose the 30% or 50% option, or pay by Mobile Money.");
-   return;
-  }
-
-    const pm = formData.get("paymentMethod");
+  const pm = formData.get("paymentMethod");
   const method = pm === "mobile_money" ? "mobile_money" : (pm === "bank" ? "bank" : "card");
 
+  // ---------- BANK TRANSFER (no LivePay, no limit) ----------
   if (method === "bank") {
    const ref = "BRD-" + Date.now().toString(36).toUpperCase();
    const money = v => new Intl.NumberFormat("en-US", { style: "currency", currency: quote.currency }).format(v);
@@ -4834,6 +4782,50 @@ ${messageField.value}
    bvMsg("Bank details are shown below, and your booking request has been sent to Brendava.");
    return;
   }
+
+  // ---------- CARD LIMIT ----------
+  if (method === "card" && (quote.deposit < 1 || quote.deposit > BV_CARD_MAX)) {
+   bvMsg("Card payments are limited to $" + BV_CARD_MAX + " per transaction. Please choose Mobile Money or bank transfer instead.");
+   return;
+  }
+
+  // ---------- CARD / MOBILE MONEY via your Worker + LivePay ----------
+  const payload = {
+   name: formData.get("name"), email: formData.get("email"), phone: formData.get("phone"),
+   travelDate: formData.get("travelDate"), travellers: Number(formData.get("travellers")),
+   itinerary: formData.get("itinerary"), itineraryId: itineraryId || window.__bvSelected.id || "",
+   notes: formData.get("notes"), currency: quote.currency, paymentPercent: quote.percent,
+   method: method
+  };
+
+  button.disabled = true;
+  button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting to LivePay...';
+  bvMsg(method === "mobile_money" ? "Sending the Mobile Money request..." : "Creating your secure card checkout...");
+
+  try {
+   const response = await fetch(BV_WORKER_URL.replace(/\/$/, "") + "/api/create-payment", {
+    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
+   });
+   const result = await response.json();
+   if (!response.ok) throw new Error(result.message || result.error || ("Payment server error " + response.status));
+
+   if (method === "card") {
+    if (!result.redirect_url) throw new Error("Could not start card checkout.");
+    window.location.assign(result.redirect_url);
+    return;
+   }
+
+   bvMsg("Check your phone and approve the Mobile Money prompt. Waiting for confirmation...");
+   const outcome = await bvPollMobile(result.reference);
+   if (outcome === "success") bvMsg("Payment confirmed. Thank you! Brendava will confirm your booking by email shortly.");
+   else if (outcome === "failed") bvMsg("The payment was not completed. Please try again or contact Brendava on WhatsApp.");
+   else bvMsg("We are still waiting for confirmation. If you approved the prompt, Brendava will confirm by email.");
+  } catch (error) {
+   bvMsg(error.message || "Payment could not be started. Please try again.");
+  }
+  button.disabled = false;
+  button.innerHTML = BV_PAY_LABEL;
+ });
 
   button.disabled = true;
   button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting to LivePay...';
@@ -5016,6 +5008,17 @@ const db = getFirestore(app);
   if (s) s.textContent = u ? "Signed in as " + u.email : "Not signed in.";
   if (f) f.style.display = u ? "none" : "block";
  });
+      window.adminHeroSignIn = async function () {
+  const msg = document.getElementById("adminHeroMsg");
+  try {
+   await signInWithEmailAndPassword(auth, document.getElementById("heroAuthEmail").value.trim(), document.getElementById("heroAuthPass").value);
+   document.getElementById("heroAuthPass").value = "";
+   msg.className = "admin-msg";
+  } catch (err) {
+   msg.className = "admin-msg err";
+   msg.textContent = "Sign-in failed (" + (err.code || "error") + ").";
+  }
+ };
  window.adminSaveHero = async function () {
   const btn = document.getElementById("adminSaveHeroBtn");
   const msg = document.getElementById("adminHeroMsg");
