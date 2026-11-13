@@ -2752,7 +2752,7 @@ html.splash-on{overflow:hidden}
     <label>Travel date<input name="travelDate" type="date" required></label>
     <label>Number of travellers<input name="travellers" type="number" min="1" max="50" value="2" required></label>
     <label>Currency<select name="currency"><option value="USD">USD</option></select></label>
-    <label>Pay with<select name="paymentMethod" id="bvPaymentMethod"><option value="card">Visa / Mastercard</option><option value="mobile">Mobile Money (MTN / Airtel)</option></select></label>
+    <label>Pay with<select name="paymentMethod" id="bvPaymentMethod"><option value="card">Visa / Mastercard</option><option value="mobile">Mobile Money (MTN / Airtel)</option><option value="bank">Bank transfer</option></select></label>
     <label>Payment option<select name="paymentPercent" id="bvPaymentPercent"><option value="30">Pay 30% deposit now</option><option value="50">Pay 50% now</option><option value="100">Pay in full (100%)</option></select></label>
    </div>
    <label>Selected itinerary
@@ -2779,6 +2779,7 @@ html.splash-on{overflow:hidden}
    <div class="bv-total-row"><span>Amount to pay now</span><strong id="bvPayAmount">Select an itinerary</strong></div>
    <button class="pay-now-btn bv-pay-button" id="bvPayButton" type="submit"><i class="fas fa-shield-alt"></i> Pay securely with LivePay</button>
    <p id="bvPaymentMessage" class="bv-payment-message" role="status" aria-live="polite">Choose to pay 30%, 50% or the full amount now; Brendava will confirm any balance before travel. Your card or mobile-money details are entered only on LivePay's secure checkout page.</p>
+       <div id="bvBankBox" style="display:none;margin-top:16px;padding:16px;border:2px solid #0f766e;border-radius:12px;background:#f0fdf4;line-height:1.7;"></div>
   </form>
  </div>
 </section>
@@ -4722,9 +4723,18 @@ ${messageField.value}
  const BV_PAY_LABEL = '<i class="fas fa-shield-alt"></i> Pay securely with LivePay';
 
  document.getElementById("bvPaymentMethod")?.addEventListener("change", function () {
-  bvMsg(this.value === "mobile"
-   ? "You will get a Mobile Money approval prompt on the phone number above (MTN or Airtel Uganda). The amount is charged in UGX at today's rate."
-   : "You will be taken to LivePay's secure card page. Card details are never entered on this website.");
+  const btn = document.getElementById("bvPayButton");
+  const box = document.getElementById("bvBankBox");
+  if (box) box.style.display = "none";
+  if (this.value === "bank") {
+   if (btn) btn.innerHTML = '<i class="fas fa-university"></i> Get bank transfer details';
+   bvMsg("Pay directly into Brendava's bank account. No card needed and no payment limit.");
+  } else {
+   if (btn) btn.innerHTML = BV_PAY_LABEL;
+   bvMsg(this.value === "mobile_money"
+    ? "You will get a Mobile Money approval prompt on the phone number above (MTN or Airtel Uganda). The amount is charged in UGX at today's rate."
+    : "You will be taken to LivePay's secure card page. Card details are never entered on this website.");
+  }
  });
 
  // Customer returns from the LivePay card page (LivePay appends ?checkout_id=...)
@@ -4775,13 +4785,55 @@ ${messageField.value}
    return;
   }
 
-  const payload = {
-   name: formData.get("name"), email: formData.get("email"), phone: formData.get("phone"),
-   travelDate: formData.get("travelDate"), travellers: Number(formData.get("travellers")),
-   itinerary: formData.get("itinerary"), itineraryId: itineraryId || window.__bvSelected.id || "",
-   notes: formData.get("notes"), currency: quote.currency, paymentPercent: quote.percent,
-   paymentMethod: method
-  };
+    const pm = formData.get("paymentMethod");
+  const method = pm === "mobile_money" ? "mobile_money" : (pm === "bank" ? "bank" : "card");
+
+  if (method === "bank") {
+   const ref = "BRD-" + Date.now().toString(36).toUpperCase();
+   const money = v => new Intl.NumberFormat("en-US", { style: "currency", currency: quote.currency }).format(v);
+   const box = document.getElementById("bvBankBox");
+   const lines = [
+    ["Amount to send", money(quote.deposit) + " (" + quote.percent + "% of " + money(quote.total) + ")"],
+    ["Bank", "I&M Bank"],
+    ["Account number", "50721817001"],
+    ["Account name", "NABACHWA BRENDA"],
+    ["SWIFT code (international)", "ORINUGKA"],
+    ["Payment reference", ref]
+   ];
+   box.innerHTML = "";
+   lines.forEach(([k, v]) => {
+    const row = document.createElement("div");
+    const b = document.createElement("strong");
+    b.textContent = k + ": ";
+    row.append(b, document.createTextNode(v));
+    box.appendChild(row);
+   });
+   const note = document.createElement("p");
+   note.style.margin = "10px 0 0";
+   note.textContent = "Use the payment reference when you transfer, then send your proof of payment on WhatsApp. Brendava confirms your booking once the money arrives.";
+   box.appendChild(note);
+   const wa = document.createElement("a");
+   wa.className = "btn whatsapp";
+   wa.target = "_blank";
+   wa.rel = "noopener";
+   wa.style.marginTop = "12px";
+   wa.textContent = "Send proof on WhatsApp";
+   wa.href = "https://wa.me/256789336441?text=" + encodeURIComponent("Hello Brendava, I paid by bank transfer. Reference " + ref + ", " + money(quote.deposit) + ", " + formData.get("itinerary") + ".");
+   box.appendChild(wa);
+   box.style.display = "block";
+   try {
+    emailjs.send("service_1hlp5ii", "template_vs01t7d", {
+     name: formData.get("name"), email: formData.get("email"), reply_to: formData.get("email"),
+     phone: formData.get("phone"), to_email: "brendavatoursandtravel@gmail.com",
+     message: "BANK TRANSFER booking request\nRef: " + ref + "\nSafari: " + formData.get("itinerary") +
+      "\nTravellers: " + formData.get("travellers") + "\nTravel date: " + formData.get("travelDate") +
+      "\nDeposit to receive: " + money(quote.deposit) + " (" + quote.percent + "%)\nBalance later: " + money(quote.balance) +
+      "\nNotes: " + (formData.get("notes") || "-")
+    }).catch(() => {});
+   } catch (e) {}
+   bvMsg("Bank details are shown below, and your booking request has been sent to Brendava.");
+   return;
+  }
 
   button.disabled = true;
   button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting to LivePay...';
