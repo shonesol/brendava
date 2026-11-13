@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en">checkout_id
 <head>
      <link rel="icon" href="/favicon.ico" sizes="any">
    <link rel="icon" href="/favicon.png" type="image/png" sizes="192x192">
@@ -4696,9 +4696,8 @@ ${messageField.value}
    document.getElementById("payment")?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
  })();
- async function bvPollMobile(reference) {
- const BV_CARD_MAX = 200; // LivePay card limit for your account. Change to 5000 when LivePay raises it.
-
+ 
+ const BV_CARD_MAX = 200; 
  async function bvPollMobile(reference) {
   const base = BV_WORKER_URL.replace(/\/$/, "");
   for (let i = 0; i < 24; i++) {            // about 2 minutes
@@ -4827,10 +4826,7 @@ ${messageField.value}
   button.innerHTML = BV_PAY_LABEL;
  });
 
-  button.disabled = true;
-  button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting to LivePay...';
-  bvMsg(method === "mobile" ? "Sending the Mobile Money request..." : "Creating your secure card checkout...");
-
+ 
   try {
    const response = await fetch(BV_WORKER_URL.replace(/\/$/, "") + "/api/create-payment", {
     method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
