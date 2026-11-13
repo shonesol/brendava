@@ -1976,7 +1976,7 @@ a[href="Payments.html"]:hover {
 
 
 <style>
-.brendava-pesapal-section{padding:64px 20px;background:#f7faf9}.bv-checkout-card{max-width:900px;margin:24px auto 0;background:#fff;border:1px solid #e5e7eb;border-radius:22px;padding:clamp(20px,4vw,38px);box-shadow:0 18px 55px rgba(15,45,35,.09)}
+.brendava-LivePay-section{padding:64px 20px;background:#f7faf9}.bv-checkout-card{max-width:900px;margin:24px auto 0;background:#fff;border:1px solid #e5e7eb;border-radius:22px;padding:clamp(20px,4vw,38px);box-shadow:0 18px 55px rgba(15,45,35,.09)}
 .bv-checkout-intro{display:flex;gap:14px;align-items:center;background:#f0f8f4;border-radius:14px;padding:16px;margin-bottom:24px;color:#0b7a41}.bv-checkout-intro>i{font-size:25px}.bv-checkout-intro span{display:block;color:#52615a;font-size:.9rem;margin-top:4px;line-height:1.5}
 .bv-booking-form label{display:flex;flex-direction:column;gap:7px;font-weight:650;color:#25352d;font-size:.92rem;margin-bottom:16px}.bv-booking-form input,.bv-booking-form select,.bv-booking-form textarea{width:100%;box-sizing:border-box;border:1px solid #d7e0da;border-radius:10px;padding:13px 14px;font:inherit;background:#fff;color:#1f2937}.bv-booking-form input:focus,.bv-booking-form select:focus,.bv-booking-form textarea:focus{outline:2px solid #0b7a41;outline-offset:1px}.bv-form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 16px}.bv-total-row{display:flex;justify-content:space-between;align-items:center;border-top:1px solid #e5e7eb;padding:18px 0;margin-top:4px;font-size:1.05rem}.bv-total-row strong{font-size:1.3rem;color:#0b7a41}.bv-pay-button{width:100%;border:0;cursor:pointer}.bv-pay-button:disabled{opacity:.65;cursor:wait}.bv-payment-message{text-align:center;color:#64748b;font-size:.86rem;margin:14px 0 0}.itinerary-slide .bv-select-itinerary{background:#0b7a41;color:#fff;border:0;cursor:pointer}.itinerary-slide .bv-select-itinerary:hover{background:#075c30}
 @media(max-width:650px){.bv-form-grid{grid-template-columns:1fr}.bv-total-row{gap:12px;align-items:flex-start;flex-direction:column}}
@@ -2734,12 +2734,12 @@ html.splash-on{overflow:hidden}
  </div>
 </section>
 
-<!-- ========== PESAPAL CHECKOUT ========== -->
-<section id="payment" class="brendava-pesapal-section">
+<!-- ========== LivePay CHECKOUT ========== -->
+<section id="payment" class="brendava-LivePay-section">
  <div class="payment-header">
   <h2>Secure Booking & Payment</h2>
-  <p class="section-sub">Choose your safari, enter your booking details and pay securely through Pesapal.</p>
-  <div class="secure-badge"><i class="fas fa-shield-alt"></i> Secure checkout powered by Pesapal</div>
+  <p class="section-sub">Choose your safari, enter your booking details and pay securely through LivePay.</p>
+  <div class="secure-badge"><i class="fas fa-shield-alt"></i> Secure checkout powered by LivePay</div>
  </div>
  <div class="bv-checkout-card">
   <div class="bv-checkout-intro"><i class="fas fa-lock"></i>
@@ -2777,8 +2777,8 @@ html.splash-on{overflow:hidden}
    <input type="hidden" id="bvItineraryId" value="">
    <label>Booking notes (optional)<textarea name="notes" rows="3" placeholder="Room preferences, special requests, etc."></textarea></label>
    <div class="bv-total-row"><span>Amount to pay now</span><strong id="bvPayAmount">Select an itinerary</strong></div>
-   <button class="pay-now-btn bv-pay-button" id="bvPayButton" type="submit"><i class="fas fa-shield-alt"></i> Pay securely with Pesapal</button>
-   <p id="bvPaymentMessage" class="bv-payment-message" role="status" aria-live="polite">Choose to pay 30%, 50% or the full amount now; Brendava will confirm any balance before travel. Your card or mobile-money details are entered only on Pesapal's secure checkout page.</p>
+   <button class="pay-now-btn bv-pay-button" id="bvPayButton" type="submit"><i class="fas fa-shield-alt"></i> Pay securely with LivePay</button>
+   <p id="bvPaymentMessage" class="bv-payment-message" role="status" aria-live="polite">Choose to pay 30%, 50% or the full amount now; Brendava will confirm any balance before travel. Your card or mobile-money details are entered only on LivePay's secure checkout page.</p>
   </form>
  </div>
 </section>
@@ -3231,7 +3231,7 @@ html.splash-on{overflow:hidden}
     items.push({
      id: p.id, title: p.title,
      description: p.paymentEnabled
-      ? (p.category || "Safari") + " package. Priced per person; pay securely online with Pesapal."
+      ? (p.category || "Safari") + " package. Priced per person; pay securely online with LivePay."
       : (p.category || "Safari") + " package. Request a quotation and Brendava will reply with a tailored price.",
      image: "IMG_3108.jpeg", duration: dayMatch ? dayMatch[1] + " days" : "",
      price: prices.length ? "$" + Math.min(...prices).toLocaleString("en-US") + " per person" : "",
@@ -4574,15 +4574,15 @@ ${messageField.value}
 
 
 <script>
-// Brendava Pesapal checkout — classic script (does not depend on Firebase module)
- // ========== ITINERARY SELECTION + PESAPAL CHECKOUT ==========
+// Brendava LivePay checkout — classic script (does not depend on Firebase module)
+ // ========== ITINERARY SELECTION + LivePay CHECKOUT ==========
  const BV_WORKER_URL = (window.BRENDAVA_PAYMENT_API_URL && !String(window.BRENDAVA_PAYMENT_API_URL).includes("YOUR-WORKER-NAME"))
   ? window.BRENDAVA_PAYMENT_API_URL
   : "https://brendava-global-ai.shonesol28.workers.dev";
  const BV_ALLOWED_PERCENTS = [30, 50, 100]; // must match ALLOWED_PAYMENT_PERCENTS in worker.js
  let bvCatalogue = null;
- async function bvLoadCatalogue() {
-  if (bvCatalogue) return bvCatalogue;
+  async function bvLoadCatalogue() {
+  if (bvCatalogue && bvCatalogue.length) return bvCatalogue;
   try {
    const r = await fetch(BV_WORKER_URL.replace(/\/$/, "") + "/api/itineraries");
    const d = await r.json();
@@ -4682,7 +4682,7 @@ ${messageField.value}
    const tv = document.querySelector('#brendavaBookingForm [name="travellers"]')?.value;
    if (!bvCatalogue || !bvCatalogue.length) msg.textContent = "Could not load safari prices from the payment server. Please try again shortly or contact Brendava for a quote.";
    else if (!bvQuote(bvFindPackage(item), tv)) msg.textContent = "Online payment is not available for this safari yet. Please contact Brendava for a quotation.";
-   else msg.textContent = "Your card or mobile-money details are entered only on Pesapal's secure checkout page.";
+   else msg.textContent = "Your card or mobile-money details are entered only on LivePay's secure checkout page.";
   }
  };
  // Populate dropdown from Worker catalogue
