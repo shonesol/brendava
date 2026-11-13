@@ -4792,7 +4792,7 @@ ${messageField.value}
     method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
    });
    const result = await response.json();
-   if (!response.ok) throw new Error(result.message || "Could not start the payment.");
+   if (!response.ok) throw new Error(result.message || result.error || ("Payment server error " + response.status));
 
    if (method === "card") {
     if (!result.checkout_url) throw new Error("Could not start card checkout.");
