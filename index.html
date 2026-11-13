@@ -2742,7 +2742,8 @@ html.splash-on{overflow:hidden}
   <div class="secure-badge"><i class="fas fa-shield-alt"></i> Secure checkout powered by Pesapal</div>
  </div>
  <div class="bv-checkout-card">
-  <div class="bv-checkout-intro"><i class="fas fa-lock"></i><div><strong>One secure payment option</strong><span>Visa, Mastercard and supported mobile-money options are displayed by Pesapal at checkout, depending on your country.</span></div></div>
+  <div class="bv-checkout-intro"><i class="fas fa-lock"></i>
+       <div><strong>Secure payment by LivePay</strong><span>Pay by Visa / Mastercard (charged in USD) or by MTN / Airtel Mobile Money (charged in UGX).</span></div></div>
   <form id="brendavaBookingForm" class="bv-booking-form">
    <div class="bv-form-grid">
     <label>Full name<input name="name" autocomplete="name" required placeholder="Your full name"></label>
@@ -2751,6 +2752,7 @@ html.splash-on{overflow:hidden}
     <label>Travel date<input name="travelDate" type="date" required></label>
     <label>Number of travellers<input name="travellers" type="number" min="1" max="50" value="2" required></label>
     <label>Currency<select name="currency"><option value="USD">USD</option></select></label>
+    <label>Pay with<select name="paymentMethod" id="bvPaymentMethod"><option value="card">Visa / Mastercard</option><option value="mobile">Mobile Money (MTN / Airtel)</option></select></label>
     <label>Payment option<select name="paymentPercent" id="bvPaymentPercent"><option value="30">Pay 30% deposit now</option><option value="50">Pay 50% now</option><option value="100">Pay in full (100%)</option></select></label>
    </div>
    <label>Selected itinerary
@@ -2867,7 +2869,7 @@ html.splash-on{overflow:hidden}
 
 <script type="module">
  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
- import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, doc, getDoc, setDoc, where } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+ import { getFirestore, collection, addDoc, getDocs, query, orderBy, limit, doc, getDoc, setDoc, where, onSnapshot } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
  const firebaseConfig = {
  apiKey: "AIzaSyAkUO02xkxGUUvgt2-C2UNRB_K6v3pBgiQ",
@@ -2976,7 +2978,50 @@ html.splash-on{overflow:hidden}
  }
  }
  } catch (e) {}
+ let heroLastSig = "";
+ function heroApplyIfChanged(type, url, poster, videos) {
+  const list = Array.isArray(videos) ? videos.filter(Boolean) : [];
+  const t = type === "video" ? "video" : "image";
+  const sig = JSON.stringify([t, url || "", t === "video" ? list : []]);
+  if (sig === heroLastSig) return;          // no restart/flicker when nothing changed
+  heroLastSig = sig;
+  applyHeroMedia(t, url, poster, t === "video" ? list : []);
+ }
 
+ window.loadHeroBackground = async function () {
+  let hadCache = false;
+  try {
+   const cached = localStorage.getItem(HERO_LS_KEY);
+   if (cached) {
+    const data = JSON.parse(cached);
+    if (data) { heroApplyIfChanged(data.type, data.url, data.poster, data.videos); hadCache = true; }
+   }
+  } catch (e) {}
+  if (!hadCache) applyHeroImage(HERO_DEFAULT);
+
+  // Live: any hero change saved in the admin appears for visitors without a reload
+  try {
+   onSnapshot(doc(db, "siteSettings", "hero"), snap => {
+    if (!snap.exists()) return;
+    const data = snap.data();
+    const type = data.type || "image";
+    const url = data.url || HERO_DEFAULT;
+    const poster = data.poster || "";
+    const videos = Array.isArray(data.videos) ? data.videos : [];
+    heroApplyIfChanged(type, url, poster, videos);
+    try { localStorage.setItem(HERO_LS_KEY, JSON.stringify({ type, url, poster, videos })); } catch (e) {}
+   }, err => console.warn("Hero live listener failed:", err));
+  } catch (err) {
+   console.warn("Hero Firestore load failed:", err);
+  }
+ };
+
+ window.applyHeroFromAdmin = function (type, url, poster, videos) {
+  heroApplyIfChanged(type, url, poster, videos);
+  try {
+   localStorage.setItem(HERO_LS_KEY, JSON.stringify({ type, url: url || "", poster: poster || "", videos: videos || [] }));
+  } catch (e) {}
+ };
  // 2) Firestore
  try {
  const snap = await getDoc(doc(db, "siteSettings", "hero"));
@@ -4672,14 +4717,44 @@ ${messageField.value}
  document.getElementById("brendavaBookingForm")?.querySelector('[name="travellers"]')?.addEventListener("input", bvRefreshTotal);
  document.getElementById("bvPaymentPercent")?.addEventListener("change", bvRefreshTotal);
  const bvForm = document.getElementById("brendavaBookingForm");
+ const bvMsg = text => { const m = document.getElementById("bvPaymentMessage"); if (m) m.textContent = text; };
+ const BV_PAY_LABEL = '<i class="fas fa-shield-alt"></i> Pay securely with LivePay';
+
+ document.getElementById("bvPaymentMethod")?.addEventListener("change", function () {
+  bvMsg(this.value === "mobile"
+   ? "You will get a Mobile Money approval prompt on the phone number above (MTN or Airtel Uganda). The amount is charged in UGX at today's rate."
+   : "You will be taken to LivePay's secure card page. Card details are never entered on this website.");
+ });
+
+ // Customer returns from the LivePay card page (LivePay appends ?checkout_id=...)
+ (function () {
+  if (new URLSearchParams(window.location.search).get("checkout_id")) {
+   bvMsg("Thank you! Your card payment was completed. Brendava will confirm your booking by email shortly.");
+   document.getElementById("payment")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+ })();
+
+ async function bvPollMobile(reference) {
+  const base = BV_WORKER_URL.replace(/\/$/, "");
+  for (let i = 0; i < 24; i++) {            // ~2 minutes
+   await new Promise(r => setTimeout(r, 5000));
+   try {
+    const r = await fetch(base + "/api/livepay/status?currency=UGX&reference=" + encodeURIComponent(reference));
+    const d = await r.json();
+    const s = String(d.status || "");
+    if (/success|complete|paid/i.test(s)) return "success";
+    if (/fail|reject|cancel|declin|expire/i.test(s)) return "failed";
+   } catch (e) {}
+  }
+  return "pending";
+ }
+
  if (bvForm) bvForm.addEventListener("submit", async event => {
   event.preventDefault();
-  const message = document.getElementById("bvPaymentMessage");
   const button = document.getElementById("bvPayButton");
-  const workerUrl = BV_WORKER_URL;
   const formData = new FormData(bvForm);
   await bvLoadCatalogue();
-  // Prefer hidden/dataset id; fall back to selected option data-id
+
   let itineraryId = bvForm.dataset.itineraryId || document.getElementById("bvItineraryId")?.value || "";
   if (!itineraryId) {
    const sel = document.getElementById("bvSelectedItinerary");
@@ -4690,28 +4765,50 @@ ${messageField.value}
    window.__bvSelected = { id: itineraryId, title: formData.get("itinerary") };
   }
   const quote = bvQuote(bvFindPackage(window.__bvSelected), formData.get("travellers"), formData.get("paymentPercent"));
-  if (!window.__bvSelected || !formData.get("itinerary")) { message.textContent = "Please select a safari itinerary before continuing."; return; }
-  if (!quote) { message.textContent = "This itinerary needs a confirmed price. Please contact Brendava to receive a payment quote."; return; }
-  if (workerUrl.includes("YOUR-WORKER-NAME")) { message.textContent = "Pesapal backend is not configured yet. Add your deployed Worker URL in the setup instructions."; return; }
+  if (!window.__bvSelected || !formData.get("itinerary")) { bvMsg("Please select a safari itinerary before continuing."); return; }
+  if (!quote) { bvMsg("This itinerary needs a confirmed price. Please contact Brendava to receive a payment quote."); return; }
+
+  const method = formData.get("paymentMethod") === "mobile" ? "mobile" : "card";
+  if (method === "card" && (quote.deposit < 1 || quote.deposit > 5000)) {
+   bvMsg("Card payments are limited to $5,000 per transaction. Please choose the 30% or 50% option, or pay by Mobile Money.");
+   return;
+  }
+
   const payload = {
    name: formData.get("name"), email: formData.get("email"), phone: formData.get("phone"),
    travelDate: formData.get("travelDate"), travellers: Number(formData.get("travellers")),
    itinerary: formData.get("itinerary"), itineraryId: itineraryId || window.__bvSelected.id || "",
-   notes: formData.get("notes"), currency: quote.currency, paymentPercent: quote.percent
+   notes: formData.get("notes"), currency: quote.currency, paymentPercent: quote.percent,
+   paymentMethod: method
   };
-  button.disabled = true; button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting to Pesapal...';
-  message.textContent = "Creating your secure payment session...";
+
+  button.disabled = true;
+  button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Connecting to LivePay...';
+  bvMsg(method === "mobile" ? "Sending the Mobile Money request..." : "Creating your secure card checkout...");
+
   try {
-   const response = await fetch(workerUrl.replace(/\/$/, "") + "/api/create-payment", {
+   const response = await fetch(BV_WORKER_URL.replace(/\/$/, "") + "/api/livepay/create", {
     method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
    });
    const result = await response.json();
-   if (!response.ok || !result.redirect_url) throw new Error(result.message || "Could not start Pesapal checkout.");
-   window.location.assign(result.redirect_url);
+   if (!response.ok) throw new Error(result.message || "Could not start the payment.");
+
+   if (method === "card") {
+    if (!result.checkout_url) throw new Error("Could not start card checkout.");
+    window.location.assign(result.checkout_url);
+    return;
+   }
+
+   bvMsg("Check your phone and approve the Mobile Money prompt. Waiting for confirmation...");
+   const outcome = await bvPollMobile(result.reference);
+   if (outcome === "success") bvMsg("Payment confirmed. Thank you! Brendava will confirm your booking by email shortly.");
+   else if (outcome === "failed") bvMsg("The payment was not completed. Please try again or contact Brendava on WhatsApp.");
+   else bvMsg("We are still waiting for confirmation. If you approved the prompt, Brendava will confirm by email.");
   } catch (error) {
-   message.textContent = error.message || "Payment could not be started. Please try again.";
-   button.disabled = false; button.innerHTML = '<i class="fas fa-shield-alt"></i> Pay securely with Pesapal';
+   bvMsg(error.message || "Payment could not be started. Please try again.");
   }
+  button.disabled = false;
+  button.innerHTML = BV_PAY_LABEL;
  });
 </script>
 <script type="module">
@@ -4859,7 +4956,56 @@ const firebaseConfig = {
 };
 const app = getApps().find(a => a.name === "adminApp") || initializeApp(firebaseConfig, "adminApp");
 const db = getFirestore(app);
-const auth = getAuth(app);
+ const auth = getAuth(app);
+ onAuthStateChanged(auth, u => {
+  const s = document.getElementById("heroAuthState");
+  const f = document.getElementById("heroAuthFields");
+  if (s) s.textContent = u ? "Signed in as " + u.email : "Not signed in.";
+  if (f) f.style.display = u ? "none" : "block";
+ });
+ window.adminSaveHero = async function () {
+  const btn = document.getElementById("adminSaveHeroBtn");
+  const msg = document.getElementById("adminHeroMsg");
+  const type = document.getElementById("adminBgType").value;
+  const poster = document.getElementById("adminBgPoster").value.trim();
+  const videos = ["adminVid1","adminVid2","adminVid3","adminVid4"]
+   .map(id => document.getElementById(id).value.trim()).filter(Boolean);
+  let url = document.getElementById("adminBgUrl").value.trim();
+
+  if (type === "video") {
+   if (!videos.length) { msg.className = "admin-msg err"; msg.textContent = "Paste at least Video 1 (Cloudinary mp4 URL)."; return; }
+   url = videos[0];
+  } else if (!url) {
+   msg.className = "admin-msg err"; msg.textContent = "Please paste a Cloudinary image URL."; return;
+  }
+  if (!auth.currentUser) {
+   msg.className = "admin-msg err";
+   msg.textContent = "Sign in with your Firebase admin account (box above) first, otherwise visitors will not see the change.";
+   return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+  msg.className = "admin-msg";
+  try {
+   await setDoc(doc(db, "siteSettings", "hero"), {
+    type, url, poster: poster || null,
+    videos: type === "video" ? videos : [],
+    updatedAt: Date.now()
+   }, { merge: true });
+   if (typeof window.applyHeroFromAdmin === "function") window.applyHeroFromAdmin(type, url, poster, type === "video" ? videos : []);
+   msg.className = "admin-msg ok";
+   msg.textContent = type === "video"
+    ? "Published. " + videos.length + " video(s) now play on the homepage for all visitors."
+    : "Published. The new hero image is live for all visitors.";
+  } catch (err) {
+   console.warn("Hero save failed:", err);
+   msg.className = "admin-msg err";
+   msg.textContent = "NOT published for visitors (" + (err.code || err.message) + "). Check the Firestore rules for siteSettings (see below).";
+  }
+  btn.disabled = false;
+  btn.innerHTML = '<i class="fas fa-save"></i> Save & Publish Hero';
+ };
 
 // Paste the ID of the EmailJS template you create in Part 8 (so replies are emailed to visitors)
 const REPLY_TEMPLATE_ID = "template_vs01t7d";
