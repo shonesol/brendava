@@ -4740,7 +4740,7 @@ ${messageField.value}
   for (let i = 0; i < 24; i++) {            // ~2 minutes
    await new Promise(r => setTimeout(r, 5000));
    try {
-    const r = await fetch(base + "/api/livepay/status?currency=UGX&reference=" + encodeURIComponent(reference));
+    const r = await fetch(base + "/api/payment-status?ref=?currency=UGX&reference=" + encodeURIComponent(reference));
     const d = await r.json();
     const s = String(d.status || "");
     if (/success|complete|paid/i.test(s)) return "success";
@@ -4788,7 +4788,7 @@ ${messageField.value}
   bvMsg(method === "mobile" ? "Sending the Mobile Money request..." : "Creating your secure card checkout...");
 
   try {
-   const response = await fetch(BV_WORKER_URL.replace(/\/$/, "") + "/api/livepay/create", {
+   const response = await fetch(BV_WORKER_URL.replace(/\/$/, "") + "/api/create-payment", {
     method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
    });
    const result = await response.json();
