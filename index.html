@@ -4727,13 +4727,93 @@ ${messageField.value}
   if (!window.__bvSelected && formData.get("itinerary")) {
    window.__bvSelected = { id: itineraryId, title: formData.get("itinerary") };
   }
-  const quote = bvQuote(bvFindPackage(window.__bvSelected), formData.get("travellers"), formData.get("paymentPercent"));
-  if (!window.__bvSelected || !formData.get("itinerary")) { bvMsg("Please select a safari itinerary before continuing."); return; }
-  if (!quote) { bvMsg("This itinerary needs a confirmed price. Please contact Brendava to receive a payment quote."); return; }
+const quote = bvQuote(bvFindPackage(window.__bvSelected), formData.get("travellers"), formData.get("paymentPercent"));
+if (!window.__bvSelected || !formData.get("itinerary")) { bvMsg("Please select a safari itinerary before continuing."); return; }
 
-  const pm = formData.get("paymentMethod");
-  const method = pm === "mobile_money" ? "mobile_money" : (pm === "bank" ? "bank" : "card");
+const pm = formData.get("paymentMethod");
+const method = pm === "mobile_money" ? "mobile_money" : (pm === "bank" ? "bank" : "card");
 
+// ---------- BANK TRANSFER (works even if the price list did not load) ----------
+if (method === "bank") {
+ const ref = "BRD-" + Date.now().toString(36).toUpperCase();
+ const cur = (quote && quote.currency) || "USD";
+ const money = v => new Intl.NumberFormat("en-US", { style: "currency", currency: cur }).format(v);
+ const amountText = quote
+  ? money(quote.deposit) + " (" + quote.percent + "% of " + money(quote.total) + ")"
+  : "Brendava will confirm the exact amount by email / WhatsApp";
+ const box = document.getElementById("bvBankBox");
+ box.innerHTML = "";
+ [
+  ["Amount to send", amountText],
+  ["Bank", "I&M Bank"],
+  ["Account number", "50721817001"],
+  ["Account name", "NABACHWA BRENDA"],
+  ["SWIFT code (international)", "ORINUGKA"],
+  ["Payment reference", ref]
+ ].forEach(([k, v]) => {
+  const row = document.createElement("div");
+  const b = document.createElement("strong");
+  b.textContent = k + ": ";
+  row.append(b, document.createTextNode(v));
+  box.appendChild(row);
+ });
+
+ // After-payment confirmation form
+ const h = document.createElement("p");
+ h.style.cssText = "margin:14px 0 8px;font-weight:700;color:#0f766e;";
+ h.textContent = "After you have sent the money, confirm it here:";
+ const sName = document.createElement("input"); sName.placeholder = "Name on the account you paid from";
+ const sBank = document.createElement("input"); sBank.placeholder = "Your bank name";
+ const sTx   = document.createElement("input"); sTx.placeholder = "Transaction ID / receipt number";
+ [sName, sBank, sTx].forEach(i => i.style.cssText = "width:100%;margin-bottom:8px;padding:11px;border:1px solid #d7e0da;border-radius:8px;");
+ const done = document.createElement("button");
+ done.type = "button"; done.className = "btn"; done.style.marginTop = "4px";
+ done.innerHTML = '<i class="fas fa-check-circle"></i> I have sent the payment';
+ const status = document.createElement("p");
+ status.style.cssText = "margin:10px 0 0;font-size:.9rem;";
+ done.addEventListener("click", async () => {
+  if (!sName.value.trim() || !sTx.value.trim()) { status.textContent = "Please enter the account name and transaction ID."; return; }
+  done.disabled = true;
+  try {
+   await emailjs.send("service_1hlp5ii", "template_vs01t7d", {
+    name: formData.get("name"), email: formData.get("email"), reply_to: formData.get("email"),
+    phone: formData.get("phone"), to_email: "brendavatoursandtravel@gmail.com",
+    message: "BANK TRANSFER SENT\nRef: " + ref + "\nSafari: " + formData.get("itinerary") +
+     "\nAmount: " + amountText + "\nPaid from: " + sName.value.trim() + " / " + (sBank.value.trim() || "-") +
+     "\nTransaction ID: " + sTx.value.trim()
+   });
+   status.style.color = "#065f46";
+   status.textContent = "Thank you! Brendava will confirm once the funds arrive.";
+  } catch (e) {
+   status.style.color = "#991b1b";
+   status.textContent = "Could not send. Please WhatsApp your proof of payment to +256 789 336 441.";
+   done.disabled = false;
+  }
+ });
+ box.append(h, sName, sBank, sTx, done, status);
+
+ const wa = document.createElement("a");
+ wa.className = "btn whatsapp"; wa.target = "_blank"; wa.rel = "noopener";
+ wa.style.cssText = "margin-top:12px;display:inline-flex;";
+ wa.textContent = "Send proof on WhatsApp";
+ wa.href = "https://wa.me/256789336441?text=" + encodeURIComponent("Hello Brendava, I paid by bank transfer. Reference " + ref + ", " + formData.get("itinerary") + ".");
+ box.appendChild(wa);
+ box.style.display = "block";
+
+ try {
+  emailjs.send("service_1hlp5ii", "template_vs01t7d", {
+   name: formData.get("name"), email: formData.get("email"), reply_to: formData.get("email"),
+   phone: formData.get("phone"), to_email: "brendavatoursandtravel@gmail.com",
+   message: "BANK TRANSFER booking request\nRef: " + ref + "\nSafari: " + formData.get("itinerary") +
+    "\nTravellers: " + formData.get("travellers") + "\nTravel date: " + formData.get("travelDate") +
+    "\nAmount: " + amountText + "\nNotes: " + (formData.get("notes") || "-")
+  }).catch(() => {});
+ } catch (e) {}
+ bvMsg("Bank details are shown below and your booking request has been sent to Brendava.");
+ return;
+}
+
+if (!quote) { bvMsg("This itinerary needs a confirmed price. Please contact Brendava to receive a payment quote."); return; }
   // ---------- BANK TRANSFER (no LivePay, no limit) ----------
   if (method === "bank") {
    const ref = "BRD-" + Date.now().toString(36).toUpperCase();
@@ -4808,12 +4888,12 @@ ${messageField.value}
    const result = await response.json();
    if (!response.ok) throw new Error(result.message || result.error || ("Payment server error " + response.status));
 
-   if (method === "card") {
-    if (!result.redirect_url) throw new Error("Could not start card checkout.");
-    window.location.assign(result.redirect_url);
-    return;
-   }
-
+if (method === "card") {
+ const go = result.redirect_url || result.checkout_url;
+ if (!go) throw new Error("Could not start card checkout.");
+ window.location.assign(go);
+ return;
+}
    bvMsg("Check your phone and approve the Mobile Money prompt. Waiting for confirmation...");
    const outcome = await bvPollMobile(result.reference);
    if (outcome === "success") bvMsg("Payment confirmed. Thank you! Brendava will confirm your booking by email shortly.");
@@ -4826,31 +4906,6 @@ ${messageField.value}
   button.innerHTML = BV_PAY_LABEL;
  });
 
- 
-  try {
-   const response = await fetch(BV_WORKER_URL.replace(/\/$/, "") + "/api/create-payment", {
-    method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload)
-   });
-   const result = await response.json();
-   if (!response.ok) throw new Error(result.message || result.error || ("Payment server error " + response.status));
-
-   if (method === "card") {
-    if (!result.checkout_url) throw new Error("Could not start card checkout.");
-    window.location.assign(result.checkout_url);
-    return;
-   }
-
-   bvMsg("Check your phone and approve the Mobile Money prompt. Waiting for confirmation...");
-   const outcome = await bvPollMobile(result.reference);
-   if (outcome === "success") bvMsg("Payment confirmed. Thank you! Brendava will confirm your booking by email shortly.");
-   else if (outcome === "failed") bvMsg("The payment was not completed. Please try again or contact Brendava on WhatsApp.");
-   else bvMsg("We are still waiting for confirmation. If you approved the prompt, Brendava will confirm by email.");
-  } catch (error) {
-   bvMsg(error.message || "Payment could not be started. Please try again.");
-  }
-  button.disabled = false;
-  button.innerHTML = BV_PAY_LABEL;
- });
 </script>
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
