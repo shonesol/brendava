@@ -1619,18 +1619,18 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
     Select <strong>up to 15 files</strong> (PDF, DOC, or DOCX). PDFs go to Cloudinary. The list is stored in a shared online bin so <strong>Safari and every visitor</strong> see the same itineraries.
   </p>
 
-  <!-- One-time setup for shared storage (JSONBin) -->
+  <!-- Setup for shared storage (JSONBin) -->
   <div id="jsonbinSetup" style="background:#f0fdfa;border:1px solid #0f766e;border-radius:10px;padding:14px;margin-bottom:16px;text-align:left;">
-    <strong style="color:#0f766e;">One-time setup (required so Safari & visitors see uploads)</strong>
+    <strong style="color:#0f766e;">Shared storage setup (required on each browser you upload from)</strong>
     <p style="font-size:13px;margin:8px 0;">
-      <strong>Easiest way:</strong><br>
-      1. Go to <a href="https://jsonbin.io/app/signup" target="_blank" rel="noopener">jsonbin.io</a> → Sign up free.<br>
-      2. Open <strong>API Keys</strong> and copy your <strong>X-Master-Key</strong>.<br>
-      3. Paste the Master Key below → click <strong>Create bin for me</strong>.<br>
-      4. Copy the Bin ID that appears and put it into the code line <code>PUBLIC_JSONBIN_ID</code> (instructions appear after create).
+      The shared bin is already set in the code. On the browser you upload from:<br>
+      1. Go to <a href="https://jsonbin.io/app/signup" target="_blank" rel="noopener">jsonbin.io</a> → <strong>API Keys</strong> and copy your <strong>X-Master-Key</strong>.<br>
+      2. Paste it below and click <strong>Save keys</strong>.<br>
+      3. Make sure the bin is set to <strong>Public</strong> on jsonbin.io so visitors can read it.<br>
+      <em>Only if no bin is set in the code:</em> paste the Master Key and click <strong>Create bin for me</strong>, then copy the Bin ID into <code>PUBLIC_JSONBIN_ID</code>.
     </p>
     <div class="admin-form-row" style="justify-content:flex-start;flex-wrap:wrap;">
-      <input type="text" id="jsonbinId" placeholder="Bin ID (auto-filled after create)" style="width:240px;">
+      <input type="text" id="jsonbinId" placeholder="Bin ID (auto-filled)" style="width:240px;">
       <input type="password" id="jsonbinKey" placeholder="X-Master-Key (required)" style="width:280px;">
       <button type="button" onclick="createJsonbin()" style="background:#047857;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-weight:700;cursor:pointer;">Create bin for me</button>
       <button type="button" onclick="saveJsonbinConfig()" style="background:#0f766e;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-weight:700;cursor:pointer;">Save keys</button>
@@ -1800,9 +1800,17 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
     }
   }
 
+  // FIX: one single source of truth for the bin ID, used for BOTH reading and saving
+  function getPublicBinId() {
+    if (PUBLIC_JSONBIN_ID && PUBLIC_JSONBIN_ID.length > 5) return PUBLIC_JSONBIN_ID;
+    const cfg = getJsonbinConfig();
+    return cfg.binId || '';
+  }
+
   function saveJsonbinConfig() {
-    const id = (document.getElementById('jsonbinId') || {}).value.trim();
-    const key = (document.getElementById('jsonbinKey') || {}).value.trim();
+    // FIX: falls back to the hardcoded bin ID so you only need to paste the Master Key
+    const id = ((document.getElementById('jsonbinId') || {}).value || '').trim() || getPublicBinId();
+    const key = ((document.getElementById('jsonbinKey') || {}).value || '').trim();
     const status = document.getElementById('jsonbinStatus');
     if (!key) {
       if (status) status.innerHTML = '<span style="color:#b91c1c">X-Master-Key is required. Get it from jsonbin.io → API Keys.</span>';
@@ -1813,22 +1821,35 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
       return;
     }
     localStorage.setItem(JSONBIN_CFG_KEY, JSON.stringify({ binId: id, masterKey: key }));
+    const idInput = document.getElementById('jsonbinId');
+    if (idInput) idInput.value = id;
     if (status) {
-      status.innerHTML = '<span style="color:green">✓ Keys saved on this browser.</span><br>' +
-        '<strong style="color:#b45309">IMPORTANT – do this once so Safari & visitors can see the list:</strong><br>' +
-        'Open the HTML file, find this line near the top of the script:<br>' +
-        '<code>const PUBLIC_JSONBIN_ID = "";</code><br>' +
-        'Change it to:<br>' +
-        '<code>const PUBLIC_JSONBIN_ID = "' + id + '";</code><br>' +
-        'Save the file and upload it to your website. After that every browser will load the shared list.';
+      if (PUBLIC_JSONBIN_ID && PUBLIC_JSONBIN_ID.length > 5) {
+        status.innerHTML = '<span style="color:green">✓ Master Key saved on this browser. Using shared bin ' + PUBLIC_JSONBIN_ID + '. You can upload now.</span>';
+      } else {
+        status.innerHTML = '<span style="color:green">✓ Keys saved on this browser.</span><br>' +
+          '<strong style="color:#b45309">IMPORTANT – do this once so Safari & visitors can see the list:</strong><br>' +
+          'Open the HTML file, find this line near the top of the script:<br>' +
+          '<code>const PUBLIC_JSONBIN_ID = "";</code><br>' +
+          'Change it to:<br>' +
+          '<code>const PUBLIC_JSONBIN_ID = "' + id + '";</code><br>' +
+          'Save the file and upload it to your website. After that every browser will load the shared list.';
+      }
     }
     fetchLibrary().then(items => renderLibrary(items));
   }
 
   // Create a new public bin automatically using only the Master Key
   async function createJsonbin() {
-    const key = (document.getElementById('jsonbinKey') || {}).value.trim();
+    const key = ((document.getElementById('jsonbinKey') || {}).value || '').trim();
     const status = document.getElementById('jsonbinStatus');
+
+    // FIX: never create a second bin if one is already set in the code
+    if (PUBLIC_JSONBIN_ID && PUBLIC_JSONBIN_ID.length > 5) {
+      if (status) status.innerHTML = '<span style="color:#b91c1c">A bin is already set in the code (' + PUBLIC_JSONBIN_ID + '). Just paste your Master Key and click "Save keys". Creating another bin would make uploads disappear.</span>';
+      return;
+    }
+
     if (!key) {
       if (status) status.innerHTML = '<span style="color:#b91c1c">Paste your X-Master-Key first (from jsonbin.io → API Keys).</span>';
       return;
@@ -1885,29 +1906,21 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
   }
 
   function saveLocalLibrary(items) {
-    localStorage.setItem(LOCAL_KEY, JSON.stringify(items));
+    try {
+      localStorage.setItem(LOCAL_KEY, JSON.stringify(items));
+    } catch (e) {}
   }
 
-  function getPublicBinId() {
-    // 1) Hardcoded constant (works for every visitor once set)
-    if (PUBLIC_JSONBIN_ID && PUBLIC_JSONBIN_ID.length > 5) return PUBLIC_JSONBIN_ID;
-    // 2) Admin config on this browser
-    const cfg = getJsonbinConfig();
-    if (cfg.binId) return cfg.binId;
-    return '';
-  }
-
+  // FIX: reads the shared bin. Local copy is only a fallback when the network read fails.
   async function fetchLibrary() {
     const binId = getPublicBinId();
     if (binId) {
       try {
-        // Works when the bin is set to Public on jsonbin.io (recommended)
-        // or when an access key is present
         const headers = { 'X-Bin-Meta': 'false' };
         const cfg = getJsonbinConfig();
         if (cfg.masterKey) headers['X-Master-Key'] = cfg.masterKey;
 
-        const res = await fetch('https://api.jsonbin.io/v3/b/' + binId + '/latest', {
+        const res = await fetch('https://api.jsonbin.io/v3/b/' + binId + '/latest?nocache=' + Date.now(), {
           headers,
           cache: 'no-store'
         });
@@ -1931,7 +1944,7 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
           saveLocalLibrary(list);
           return list;
         } else {
-          console.warn('JSONBin read status', res.status);
+          console.warn('JSONBin read status', res.status, '- bin may be private. Set it to Public on jsonbin.io.');
         }
       } catch (e) {
         console.warn('JSONBin fetch failed, using local cache', e);
@@ -1940,18 +1953,19 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
     return getLocalLibrary();
   }
 
+  // FIX: saves to the SAME bin that fetchLibrary reads, and only caches locally after success
   async function saveLibraryToShared(items) {
-    saveLocalLibrary(items);
-
     const cfg = getJsonbinConfig();
+    const binId = getPublicBinId();
+
     if (!cfg.masterKey) {
-      throw new Error('X-Master-Key missing. Paste it in the setup box and click "Create bin for me" or "Save keys".');
+      throw new Error('X-Master-Key missing on this browser. Paste it in the setup box and click "Save keys".');
     }
-    if (!cfg.binId) {
-      throw new Error('Bin ID is blank. Click "Create bin for me" (only Master Key needed) or paste an existing Bin ID and click Save keys.');
+    if (!binId) {
+      throw new Error('Bin ID missing. Set PUBLIC_JSONBIN_ID in the code.');
     }
 
-    const res = await fetch('https://api.jsonbin.io/v3/b/' + cfg.binId, {
+    const res = await fetch('https://api.jsonbin.io/v3/b/' + binId, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -1965,8 +1979,8 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
       const errText = await res.text();
       throw new Error('JSONBin save failed (' + res.status + '): ' + errText);
     }
-    // Make sure the public bin id is known on this browser
-    localStorage.setItem('brendava_jsonbin_public', cfg.binId);
+
+    saveLocalLibrary(items);
     return await res.json();
   }
 
@@ -1991,7 +2005,7 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
     );
 
     // If some were filtered, and admin is logged in, silently clean the shared list
-    if (isAdmin && items && validItems.length < items.length) {
+    if (isAdmin && items && items.length && validItems.length < items.length) {
       saveLibraryToShared(validItems).catch(() => {});
     }
 
@@ -2045,11 +2059,10 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
     if (sessionStorage.getItem('brendava_admin') !== '1') return;
     if (!confirm('Remove this itinerary from the dashboard for everyone?')) return;
     try {
-      let items = getLocalLibrary();
-      if (!items.length) items = await fetchLibrary();
+      const items = await fetchLibrary(); // FIX: always start from the shared list
       const next = items.filter(x => x.id !== id);
-      renderLibrary(next);
       await saveLibraryToShared(next);
+      renderLibrary(next);
     } catch (err) {
       alert('Could not remove: ' + err.message);
     }
@@ -2058,8 +2071,7 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
   async function editLibraryItem(id) {
     if (sessionStorage.getItem('brendava_admin') !== '1') return;
     try {
-      let items = getLocalLibrary();
-      if (!items.length) items = await fetchLibrary();
+      const items = await fetchLibrary(); // FIX: always start from the shared list
       const item = items.find(x => x.id === id);
       if (!item) {
         alert('Item not found.');
@@ -2088,8 +2100,8 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
       item.price = price;
 
       const next = items.map(x => x.id === id ? item : x);
-      renderLibrary(next);
       await saveLibraryToShared(next);
+      renderLibrary(next);
       alert('Updated successfully for all visitors.');
     } catch (err) {
       alert('Could not edit: ' + err.message);
@@ -2100,8 +2112,8 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
     if (sessionStorage.getItem('brendava_admin') !== '1') return;
     if (!confirm('Clear ALL uploaded itineraries for everyone?')) return;
     try {
-      renderLibrary([]);
       await saveLibraryToShared([]);
+      renderLibrary([]);
       document.getElementById('uploadStatus').innerHTML = '<span style="color:green">Library cleared for all visitors (Safari included).</span>';
     } catch (err) {
       document.getElementById('uploadStatus').innerHTML = '<span style="color:#b91c1c">Clear failed: ' + err.message + '</span>';
@@ -2146,12 +2158,17 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
       return;
     }
 
+    // FIX: stop BEFORE uploading if the shared save cannot work on this browser
+    const cfgCheck = getJsonbinConfig();
+    if (!cfgCheck.masterKey || !getPublicBinId()) {
+      status.innerHTML = '<strong style="color:#b91c1c">Setup incomplete.</strong> Paste your X-Master-Key in the setup box and click "Save keys" on this browser first. Otherwise uploads would disappear on refresh.';
+      return;
+    }
+
     status.innerHTML = "Uploading <strong>" + files.length + "</strong> file(s)...<br>";
 
-    let library = getLocalLibrary();
-    if (!library.length) {
-      library = await fetchLibrary();
-    }
+    // FIX: always start from the shared list, not a stale local copy
+    let library = await fetchLibrary();
     const results = [];
 
     for (let i = 0; i < files.length; i++) {
@@ -2196,24 +2213,15 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
       }
     }
 
-    // Save locally + to JSONBin (shared with every browser including Safari)
+    // Save to JSONBin (shared with every browser including Safari)
     let publishMsg = '';
     try {
       status.innerHTML += `<br><br>Saving shared list for all browsers (Safari, phones, other clients)...`;
       await saveLibraryToShared(library);
-      if (!PUBLIC_JSONBIN_ID || PUBLIC_JSONBIN_ID.length < 5) {
-        const cfg = getJsonbinConfig();
-        const id = cfg.binId || '';
-        publishMsg = `<br><strong style="color:#b45309">Saved to shared bin, but Safari/visitors still cannot see it.</strong><br>
-          You must put the Bin ID into the HTML code:<br>
-          <code>const PUBLIC_JSONBIN_ID = "${id}";</code><br>
-          Then save &amp; re-upload this HTML file to your website. After that every browser will see the list.`;
-      } else {
-        publishMsg = `<br><strong style="color:green">✓ Shared successfully. Open the page in Safari or any other browser – the itineraries will appear at the top.</strong>`;
-      }
+      publishMsg = `<br><strong style="color:green">✓ Shared successfully. Open the page in Safari or any other browser – the itineraries will appear at the top.</strong>`;
     } catch (err) {
-      publishMsg = `<br><br><strong style="color:#b91c1c">PDFs uploaded on this browser, but not yet shared:</strong><br>${err.message}
-        <br>Complete the <strong>One-time setup</strong> box above (JSONBin keys), then upload again.`;
+      publishMsg = `<br><br><strong style="color:#b91c1c">Files uploaded, but the shared list was NOT saved, so they will disappear on refresh:</strong><br>${err.message}
+        <br>Check your Master Key (Save keys) and try again.`;
     }
 
     renderLibrary(library);
@@ -2451,11 +2459,11 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
     const cfg = getJsonbinConfig();
     const idInput = document.getElementById('jsonbinId');
     const keyInput = document.getElementById('jsonbinKey');
-    if (idInput && cfg.binId) idInput.value = cfg.binId;
+    if (idInput) idInput.value = getPublicBinId();
     if (keyInput && cfg.masterKey) keyInput.value = cfg.masterKey;
-    if (cfg.binId && cfg.masterKey) {
+    if (cfg.masterKey) {
       const st = document.getElementById('jsonbinStatus');
-      if (st) st.innerHTML = '<span style="color:green">Keys already saved on this browser.</span>';
+      if (st) st.innerHTML = '<span style="color:green">Master Key already saved on this browser.</span>';
     }
 
     // Load the shared list so every browser / user sees the same uploads
