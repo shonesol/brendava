@@ -1634,6 +1634,7 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
       <input type="password" id="jsonbinKey" placeholder="X-Master-Key (required)" style="width:280px;">
       <button type="button" onclick="createJsonbin()" style="background:#047857;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-weight:700;cursor:pointer;">Create bin for me</button>
       <button type="button" onclick="saveJsonbinConfig()" style="background:#0f766e;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-weight:700;cursor:pointer;">Save keys</button>
+      <button type="button" onclick="testJsonbin()" style="background:#b45309;color:#fff;border:none;padding:8px 14px;border-radius:20px;font-weight:700;cursor:pointer;">Test connection</button>
     </div>
     <div id="jsonbinStatus" style="font-size:13px;margin-top:8px;"></div>
   </div>
@@ -1895,6 +1896,40 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
     } catch (err) {
       if (status) status.innerHTML = '<span style="color:#b91c1c">Create failed: ' + err.message + '</span><br>Check that the Master Key is correct.';
     }
+  }
+
+  // Diagnose the shared bin: tests READ and WRITE and reports the exact error
+  async function testJsonbin() {
+    const status = document.getElementById('jsonbinStatus');
+    const cfg = getJsonbinConfig();
+    const binId = getPublicBinId();
+    const out = [];
+    if (!binId) { status.innerHTML = '<span style="color:#b91c1c">No Bin ID set.</span>'; return; }
+    if (!cfg.masterKey) { status.innerHTML = '<span style="color:#b91c1c">No Master Key saved on this browser. Paste it and click "Save keys".</span>'; return; }
+    status.innerHTML = 'Testing…';
+    try {
+      const r = await fetch('https://api.jsonbin.io/v3/b/' + binId + '/latest?nocache=' + Date.now(), {
+        headers: { 'X-Master-Key': cfg.masterKey, 'X-Bin-Meta': 'false' }, cache: 'no-store'
+      });
+      const t = await r.text();
+      out.push('READ: HTTP ' + r.status + (r.ok ? ' ✓' : ' ✗ ' + t.slice(0, 200)));
+      if (r.ok) {
+        let d; try { d = JSON.parse(t); } catch (e) { d = null; }
+        const list = Array.isArray(d) ? d : (d && (d.record || d.itineraries)) || [];
+        out.push('Items currently in bin: ' + (Array.isArray(list) ? list.length : 'unknown shape'));
+        // Write test: write back exactly what we just read (no data change)
+        const w = await fetch('https://api.jsonbin.io/v3/b/' + binId, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json', 'X-Master-Key': cfg.masterKey, 'X-Bin-Versioning': 'false' },
+          body: JSON.stringify(Array.isArray(list) ? list : [])
+        });
+        const wt = await w.text();
+        out.push('WRITE: HTTP ' + w.status + (w.ok ? ' ✓ saving works' : ' ✗ ' + wt.slice(0, 300)));
+      }
+    } catch (e) {
+      out.push('Network error: ' + e.message);
+    }
+    status.innerHTML = '<div style="font-family:monospace;font-size:12.5px;white-space:pre-wrap;">' + out.join('\n') + '</div>';
   }
 
   function getLocalLibrary() {
@@ -2215,18 +2250,28 @@ footer p { margin: 4px 0; font-size: 13.5px; opacity: 0.9; }
 
     // Save to JSONBin (shared with every browser including Safari)
     let publishMsg = '';
+    let saved = false;
     try {
       status.innerHTML += `<br><br>Saving shared list for all browsers (Safari, phones, other clients)...`;
       await saveLibraryToShared(library);
+      saved = true;
       publishMsg = `<br><strong style="color:green">✓ Shared successfully. Open the page in Safari or any other browser – the itineraries will appear at the top.</strong>`;
     } catch (err) {
-      publishMsg = `<br><br><strong style="color:#b91c1c">Files uploaded, but the shared list was NOT saved, so they will disappear on refresh:</strong><br>${err.message}
-        <br>Check your Master Key (Save keys) and try again.`;
+      publishMsg = `<br><br><strong style="color:#b91c1c;font-size:15px;">✗ NOT SAVED. These files will disappear on refresh.</strong><br>
+        <strong>Reason:</strong> ${err.message}
+        <br>Click "Test connection" above to diagnose, then upload again.`;
     }
 
-    renderLibrary(library);
+    if (saved) {
+      renderLibrary(library);
+    } else {
+      // Do not show unsaved items as if they were published
+      fetchLibrary().then(items => renderLibrary(items));
+    }
 
-    let htmlOut = `<br><br><strong style="color:green">Upload complete.</strong>${publishMsg}<br><br>`;
+    let htmlOut = saved
+      ? `<br><br><strong style="color:green">Upload complete and saved.</strong>${publishMsg}<br><br>`
+      : `<br><br>${publishMsg}<br><br><em>Files reached Cloudinary only. Their links are listed below so nothing is lost.</em><br><br>`;
     results.forEach((r, idx) => {
       if (r.ok) {
         htmlOut += `<div style="margin-bottom:10px;padding:8px;background:#ecfdf5;border-radius:6px;">
