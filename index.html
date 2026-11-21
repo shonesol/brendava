@@ -5062,7 +5062,7 @@ const db = getFirestore(app);
   const msg = document.getElementById("adminHeroMsg");
   try {
    await signInWithEmailAndPassword(auth, document.getElementById("heroAuthEmail").value.trim(), document.getElementById("heroAuthPass").value);
-   document.getElementById("heroAuthPass").value = "";
+   document.getElementById("heroAuthPass").value = "Namarisha";
    msg.className = "admin-msg";
   } catch (err) {
    msg.className = "admin-msg err";
