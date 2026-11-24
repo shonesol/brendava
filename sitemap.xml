@@ -1,39 +1,90 @@
+
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
-  <url>
-    <loc>https://www.brendavatoursandtravel.com/</loc>
-    <priority>1.0</priority>
-  </url>
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/</loc>
+        <priority>1.0</priority>
+    </url>
 
-  <url>
-    <loc>https://www.brendavatoursandtravel.com/itineraries.html</loc>
-    <priority>0.9</priority>
-  </url>
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/about.html</loc>
+        <priority>0.8</priority>
+    </url>
 
-  <url>
-    <loc>https://www.brendavatoursandtravel.com/services.html</loc>
-    <priority>0.9</priority>
-  </url>
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/brendava-company-staff.html</loc>
+        <priority>0.6</priority>
+    </url>
 
-  <url>
-    <loc>https://www.brendavatoursandtravel.com/destination.html</loc>
-    <priority>0.9</priority>
-  </url>
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/destination.html</loc>
+        <priority>0.9</priority>
+    </url>
 
-  <url>
-    <loc>https://www.brendavatoursandtravel.com/lodge.html</loc>
-    <priority>0.8</priority>
-  </url>
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/featuredtrips.html</loc>
+        <priority>0.9</priority>
+    </url>
 
-  <url>
-    <loc>https://www.brendavatoursandtravel.com/stories.html</loc>
-    <priority>0.8</priority>
-  </url>
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/itineraries.html</loc>
+        <priority>1.0</priority>
+    </url>
 
-  <url>
-    <loc>https://www.brendavatoursandtravel.com/gallery.html</loc>
-    <priority>0.8</priority>
-  </url>
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/gallery.html</loc>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/photos.html</loc>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/lodge.html</loc>
+        <priority>0.8</priority>
+    </url>
+
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/get-started.html</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/services.html</loc>
+        <priority>0.9</priority>
+    </url>
+
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/stories.html</loc>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/testimonial.html</loc>
+        <priority>0.7</priority>
+    </url>
+
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/location.html</loc>
+        <priority>0.6</priority>
+    </url>
+
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/Payments.html</loc>
+        <priority>0.5</priority>
+    </url>
+
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/privacy.html</loc>
+        <priority>0.3</priority>
+    </url>
+
+    <url>
+        <loc>https://www.brendavatoursandtravel.com/terms.html</loc>
+        <priority>0.3</priority>
+    </url>
 
 </urlset>
