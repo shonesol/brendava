@@ -1953,7 +1953,7 @@ a[href="Payments.html"]:hover {
  "name": "How do I book a safari with Brendava?",
  "acceptedAnswer": {
  "@type": "Answer",
- "text": "Submit the online booking form on our website, or message us on WhatsApp. We send a clear proposal with pricing, then you pay a deposit by direct international bank transfer to our I&M Bank account. Official confirmation follows after the funds are received and verified."
+ "text": "Submit the online booking form on our website, or message us on WhatsApp. We send a clear proposal with pricing, then you pay a deposit securely online through DPO Pay by Network (international bank-supported card and payment methods), which settles to Brendava’s bank account. Official confirmation follows after the payment is verified."
  }
  }
  ]
@@ -2591,7 +2591,7 @@ html.splash-on{overflow:hidden}
 <section id="booking">
  <h2 data-lang="booking_title">Book Your Safari Online</h2>
  <p class="section-sub" data-lang="booking_sub">
- Fill in your details below. We reply quickly with a clear proposal, then you can pay by direct international SWIFT bank transfer to Brendava’s I&M Bank account.
+ Fill in your details below. We reply quickly with a clear proposal, then you can pay securely online through DPO, with the payment settled to Brendava’s bank account.
  </p>
 
  <div class="booking-wrapper">
@@ -2731,7 +2731,7 @@ html.splash-on{overflow:hidden}
  <ul>
  <li>Submit your details using the form</li>
  <li>Receive a clear proposal with exact price</li>
- <li>Pay deposit directly to Brendava by international SWIFT bank transfer</li>
+ <li>Pay your deposit securely online through DPO checkout</li>
  <li>Get official confirmation within 24 hours</li>
  </ul>
  </div>
@@ -2747,16 +2747,16 @@ html.splash-on{overflow:hidden}
  </div>
 </section>
 
-<!-- ========== DIRECT I&M BANK TRANSFER CHECKOUT ========== -->
+<!-- ========== DPO HOSTED INTERNATIONAL PAYMENT CHECKOUT ========== -->
 <section id="payment" class="brendava-bank-transfer-section">
  <div class="payment-header">
   <h2>Secure Booking & Payment</h2>
-  <p class="section-sub">Choose your safari and booking details. Your payment is made directly from your bank to Brendava’s I&amp;M Bank account by international SWIFT transfer.</p>
-  <div class="secure-badge"><i class="fas fa-university"></i> Direct bank payment · No card gateway or intermediary checkout</div>
+  <p class="section-sub">Choose your safari and booking details, then pay securely through DPO Pay by Network using an available international payment method.</p>
+  <div class="secure-badge"><i class="fas fa-shield-alt"></i> Secure international checkout · DPO Pay by Network</div>
  </div>
  <div class="bv-checkout-card">
-  <div class="bv-checkout-intro"><i class="fas fa-university"></i>
-       <div><strong>Pay Brendava directly by SWIFT bank transfer</strong><span>Your bank sends the funds straight to the I&amp;M Bank account below. Brendava does not collect or hold your transfer through this website.</span></div></div>
+  <div class="bv-checkout-intro"><i class="fas fa-lock"></i>
+       <div><strong>Pay securely through DPO hosted checkout</strong><span>Your card or other DPO-supported payment details are entered on DPO’s secure payment page. Brendava does not store your card details.</span></div></div>
   <form id="brendavaBookingForm" class="bv-booking-form">
    <div class="bv-form-grid">
     <label>Full name<input name="name" autocomplete="name" required placeholder="Your full name"></label>
@@ -2765,7 +2765,7 @@ html.splash-on{overflow:hidden}
     <label>Travel date<input name="travelDate" type="date" required></label>
     <label>Number of travellers<input name="travellers" type="number" min="1" max="50" value="2" required></label>
     <label>Currency<select name="currency"><option value="USD">USD</option></select></label>
-    <input type="hidden" name="paymentMethod" value="bank">
+    <input type="hidden" name="paymentMethod" value="dpo">
     <label>Payment option<select name="paymentPercent" id="bvPaymentPercent"><option value="30">Pay 30% deposit now</option><option value="50">Pay 50% now</option><option value="100">Pay in full (100%)</option></select></label>
    </div>
    <label>Selected itinerary
@@ -2790,9 +2790,8 @@ html.splash-on{overflow:hidden}
    <input type="hidden" id="bvItineraryId" value="">
    <label>Booking notes (optional)<textarea name="notes" rows="3" placeholder="Room preferences, special requests, etc."></textarea></label>
    <div class="bv-total-row"><span>Amount to pay now</span><strong id="bvPayAmount">Select an itinerary</strong></div>
-   <button class="pay-now-btn bv-pay-button" id="bvPayButton" type="submit"><i class="fas fa-university"></i> Show direct bank transfer details</button>
-   <p id="bvPaymentMessage" class="bv-payment-message" role="status" aria-live="polite">Choose a 30%, 50% or 100% payment. Your bank will transfer the money directly to Brendava’s I&amp;M Bank account. Your booking is confirmed after Brendava verifies receipt.</p>
-       <div id="bvBankBox" style="display:none;margin-top:16px;padding:16px;border:2px solid #0f766e;border-radius:12px;background:#f0fdf4;line-height:1.7;"></div>
+   <button class="pay-now-btn bv-pay-button" id="bvPayButton" type="submit"><i class="fas fa-lock"></i> Continue to secure DPO checkout</button>
+   <p id="bvPaymentMessage" class="bv-payment-message" role="status" aria-live="polite">Choose a 30%, 50% or 100% payment. You will be redirected to DPO to complete your payment. Your booking is confirmed only after DPO payment verification.</p>
   </form>
  </div>
 </section>
@@ -2862,7 +2861,7 @@ html.splash-on{overflow:hidden}
 
  <div class="payment-methods">
  <h4 data-lang="accepted_payments">Accepted Payment Method</h4>
- <p><i class="fas fa-university"></i> International SWIFT bank transfer directly to Brendava’s I&amp;M Bank account (USD).</p>
+ <p><i class="fas fa-lock"></i> Secure online payment through DPO Pay by Network. Funds are settled to Brendava’s bank account.</p>
  </div>
 
  <div class="footer-bottom">
@@ -3191,7 +3190,7 @@ html.splash-on{overflow:hidden}
     items.push({
      id: p.id, title: p.title,
      description: p.paymentEnabled
-      ? (p.category || "Safari") + " package. Priced per person; pay directly to Brendava by international bank transfer."
+      ? (p.category || "Safari") + " package. Priced per person; pay securely online through DPO."
       : (p.category || "Safari") + " package. Request a quotation and Brendava will reply with a tailored price.",
      image: "IMG_3108.jpeg", duration: dayMatch ? dayMatch[1] + " days" : "",
      price: prices.length ? "$" + Math.min(...prices).toLocaleString("en-US") + " per person" : "",
@@ -3589,8 +3588,8 @@ ${messageField.value}
  feedback.innerHTML = `
  <strong>Thank you!</strong> Your safari request has been sent successfully.<br><br>
  We will reply within a few hours with a tailored proposal and the exact deposit amount.<br><br>
- <strong>Payment:</strong> Direct international SWIFT bank transfer to Brendava’s I&amp;M Bank account. Your booking is confirmed after funds are received and verified.<br><br>
- <a href="#payment" style="color:#0f766e; font-weight:600; text-decoration:underline;">View bank transfer instructions →</a>
+ <strong>Payment:</strong> Secure DPO checkout. Your booking is confirmed only after the payment is verified by DPO.<br><br>
+ <a href="#payment" style="color:#0f766e; font-weight:600; text-decoration:underline;">Go to secure payment →</a>
  `;
  feedback.style.display = 'block';
 
@@ -3635,24 +3634,6 @@ ${messageField.value}
  if (tab.getAttribute('onclick') && tab.getAttribute('onclick').includes("'" + method + "'")) {
  tab.classList.add('active');
  }
- });
- }
-
- // Copy bank account number
- function copyAccountNumber() {
- const account = "50721817001";
- navigator.clipboard.writeText(account).then(() => {
- const btn = document.querySelector('.copy-btn');
- if (btn) {
- btn.classList.add('copied');
- btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
- setTimeout(() => {
- btn.classList.remove('copied');
- btn.innerHTML = '<i class="fas fa-copy"></i> Copy Account Number';
- }, 2000);
- }
- }).catch(() => {
- alert("Account number: 50721817001");
  });
  }
 
@@ -3844,7 +3825,7 @@ ${messageField.value}
  review_comment_ph: "Tell us about your safari or gorilla trek...",
  submit_review: "Submit Review",
  booking_title: "Book Your Safari Online",
- booking_sub: "Fill in your details below. We reply quickly with a clear proposal, then you can pay by direct international SWIFT bank transfer to Brendava’s I&M Bank account.",
+ booking_sub: "Fill in your details below. We reply quickly with a clear proposal, then you can pay securely online through DPO, with the payment settled to Brendava’s bank account.",
  payment_title: "Secure Online Payment",
  map_title: "Uganda's Parks & Landscapes",
  map_sub: "From Bwindi's misty forests to the Nile at Murchison Falls and the remote valleys of Kidepo — Uganda is the Pearl of Africa.",
@@ -4531,231 +4512,81 @@ ${messageField.value}
 
 
 <script>
-// Brendava Tours & Travel — direct I&M Bank SWIFT transfer
-// The customer initiates the transfer from their own bank; this page does not process or hold funds.
+// Brendava Tours & Travel — DPO hosted checkout frontend.
+// API secrets stay in Cloudflare Worker; never place them in this file.
 (function () {
   "use strict";
-  const BV_WORKER_URL = (window.BRENDAVA_PAYMENT_API_URL && !String(window.BRENDAVA_PAYMENT_API_URL).includes("YOUR-WORKER-NAME"))
-    ? String(window.BRENDAVA_PAYMENT_API_URL).replace(/\/$/, "")
-    : "https://brendava-global-ai.shonesol28.workers.dev";
-  const BV_ALLOWED_PERCENTS = [30, 50, 100];
+  const API = (window.BRENDAVA_PAYMENT_API_URL || "https://brendava-global-ai.shonesol28.workers.dev").replace(/\/$/, "");
   const form = document.getElementById("brendavaBookingForm");
   if (!form) return;
-
-  let catalogue = [];
-  let catalogueLoaded = false;
-  let selectedPackage = null;
-  let submitting = false;
+  const allowedPercents = [30, 50, 100];
+  let catalogue = [], catalogueLoaded = false, selectedPackage = null, submitting = false;
   const byId = id => document.getElementById(id);
   const message = text => { const el = byId("bvPaymentMessage"); if (el) el.textContent = text; };
-  const money = (amount, currency = "USD") => new Intl.NumberFormat("en-US", {
-    style: "currency", currency, maximumFractionDigits: 2
-  }).format(amount);
-
-  async function loadCatalogue(force = false) {
+  const money = (n, c="USD") => new Intl.NumberFormat("en-US", {style:"currency",currency:c,maximumFractionDigits:2}).format(n);
+  async function loadCatalogue(force=false) {
     if (catalogueLoaded && !force) return catalogue;
-    const response = await fetch(BV_WORKER_URL + "/api/itineraries", {
-      method: "GET", headers: { "Accept": "application/json" }, cache: "no-store"
-    });
-    const data = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(data.message || data.error || "Could not load safari prices.");
-    if (!Array.isArray(data.itineraries)) throw new Error("The payment server returned an invalid safari catalogue.");
-    catalogue = data.itineraries;
-    catalogueLoaded = true;
-    return catalogue;
+    const r = await fetch(API + "/api/itineraries", {headers:{Accept:"application/json"},cache:"no-store"});
+    const d = await r.json().catch(()=>({}));
+    if (!r.ok || !Array.isArray(d.itineraries)) throw new Error(d.message || d.error || "Could not load safari prices.");
+    catalogue=d.itineraries; catalogueLoaded=true; return catalogue;
   }
-
-  function findPackage(id, title) {
-    const wantedId = String(id || "");
-    const wantedTitle = String(title || "").trim().toLowerCase();
-    return catalogue.find(p => wantedId && String(p.id) === wantedId) ||
-      catalogue.find(p => wantedTitle && String(p.title || "").trim().toLowerCase() === wantedTitle) || null;
+  function findPackage(id,title) {
+    return catalogue.find(p=>id && String(p.id)===String(id)) || catalogue.find(p=>title && String(p.title||"").toLowerCase()===String(title).toLowerCase()) || null;
   }
-
   function quoteFor(pkg) {
-    if (!pkg || pkg.paymentEnabled !== true || !pkg.prices || typeof pkg.prices !== "object") return null;
-    const travellers = Math.max(1, Math.min(50, Math.floor(Number(form.elements.travellers.value) || 1)));
-    const tiers = Object.keys(pkg.prices).map(Number).filter(n => Number.isFinite(n) && n > 0).sort((a, b) => a - b);
-    const tier = tiers.filter(n => n <= travellers).pop();
-    if (!tier) return null;
-    const perPerson = Number(pkg.prices[tier]);
-    if (!Number.isFinite(perPerson) || perPerson <= 0) return null;
-    const total = Math.round(perPerson * travellers * 100) / 100;
-    const rawPercent = Number(form.elements.paymentPercent.value);
-    const percent = BV_ALLOWED_PERCENTS.includes(rawPercent) ? rawPercent : 30;
-    const deposit = Math.round(total * percent) / 100;
-    return { travellers, perPerson, total, percent, deposit, balance: Math.round((total - deposit) * 100) / 100, currency: pkg.currency || "USD" };
+    if (!pkg || pkg.paymentEnabled!==true || !pkg.prices) return null;
+    const travellers=Math.max(1,Math.min(50,Math.floor(Number(form.elements.travellers.value)||1)));
+    const tiers=Object.keys(pkg.prices).map(Number).filter(n=>Number.isFinite(n)&&n>0).sort((a,b)=>a-b);
+    const tier=tiers.filter(n=>n<=travellers).pop(); if(!tier) return null;
+    const perPerson=Number(pkg.prices[tier]); if(!Number.isFinite(perPerson)||perPerson<=0) return null;
+    const total=Math.round(perPerson*travellers*100)/100;
+    const percent=allowedPercents.includes(Number(form.elements.paymentPercent.value))?Number(form.elements.paymentPercent.value):30;
+    const deposit=Math.round(total*percent)/100;
+    return {travellers,perPerson,total,percent,deposit,balance:Math.round((total-deposit)*100)/100,currency:pkg.currency||"USD"};
   }
-
-  function refreshTotal() {
-    const totalEl = byId("bvPayAmount");
-    if (!totalEl) return;
-    const quote = quoteFor(selectedPackage);
-    if (!selectedPackage) { totalEl.textContent = "Select an itinerary"; return; }
-    if (!quote) { totalEl.textContent = "Request a quotation"; return; }
-    totalEl.textContent = quote.percent === 100
-      ? money(quote.total, quote.currency) + " due now (" + quote.travellers + " travellers)"
-      : money(quote.deposit, quote.currency) + " due now · " + quote.percent + "% deposit · balance " + money(quote.balance, quote.currency);
+  function refreshTotal(){
+    const el=byId("bvPayAmount"), q=quoteFor(selectedPackage); if(!el)return;
+    if(!selectedPackage){el.textContent="Select an itinerary";return;}
+    if(!q){el.textContent="Request a quotation";return;}
+    el.textContent=q.percent===100?money(q.total,q.currency)+" due now ("+q.travellers+" travellers)":money(q.deposit,q.currency)+" due now · "+q.percent+"% deposit · balance "+money(q.balance,q.currency);
   }
-
-  function fillDropdown() {
-    const select = byId("bvSelectedItinerary");
-    if (!select) return;
-    const currentId = selectedPackage ? String(selectedPackage.id) : "";
-    const payable = catalogue.filter(p => p && p.paymentEnabled === true && p.prices && p.title && p.id);
-    select.innerHTML = '<option value="">Choose a safari package…</option>';
-    payable.forEach(pkg => {
-      const option = document.createElement("option");
-      option.value = pkg.title;
-      option.dataset.id = pkg.id;
-      option.textContent = pkg.title + (pkg.category ? " (" + pkg.category + ")" : "");
-      select.appendChild(option);
+  function fillDropdown(){
+    const select=byId("bvSelectedItinerary"); if(!select)return;
+    const current=selectedPackage?String(selectedPackage.id):"";
+    select.innerHTML='<option value="">Choose a safari package…</option>';
+    catalogue.filter(p=>p&&p.paymentEnabled===true&&p.prices&&p.title&&p.id).forEach(p=>{
+      const o=document.createElement("option");o.value=p.title;o.dataset.id=p.id;o.textContent=p.title+(p.category?" ("+p.category+")":"");select.appendChild(o);
     });
-    if (currentId) {
-      const match = Array.from(select.options).find(option => option.dataset.id === currentId);
-      if (match) select.value = match.value;
-    }
+    if(current){const o=Array.from(select.options).find(x=>x.dataset.id===current);if(o)select.value=o.value;}
   }
-
-  async function selectPackage(pkg) {
-    selectedPackage = pkg || null;
-    const idField = byId("bvItineraryId");
-    if (idField) idField.value = pkg && pkg.id ? pkg.id : "";
-    form.dataset.itineraryId = pkg && pkg.id ? pkg.id : "";
-    refreshTotal();
-    if (!pkg) { message("Choose a safari package to see its current price."); return; }
-    const quote = quoteFor(pkg);
-    message(quote
-      ? "Price is calculated per person from Brendava’s published itinerary catalogue. The amount shown is payable directly to Brendava’s I&M Bank account by SWIFT transfer."
-      : "A price for this group size is not available online yet. Please contact Brendava for a confirmed quotation.");
+  async function selectPackage(pkg){
+    selectedPackage=pkg||null; if(byId("bvItineraryId"))byId("bvItineraryId").value=pkg?.id||"";
+    form.dataset.itineraryId=pkg?.id||"";refreshTotal();
+    if(!pkg){message("Choose a safari package to see its current price.");return;}
+    message(quoteFor(pkg)?"Price is calculated per person from Brendava’s published itinerary catalogue. Continue to DPO's secure checkout to pay.":"A price for this group size is not available online. Please contact Brendava for a quotation.");
   }
-
-  window.selectBrendavaItinerary = async function (item) {
-    if (!item) return;
-    try {
-      await loadCatalogue();
-      const pkg = findPackage(item.id, item.title);
-      if (!pkg) { message("This itinerary is not currently available for online payment. Please contact Brendava."); return; }
-      fillDropdown();
-      const select = byId("bvSelectedItinerary");
-      if (select) select.value = pkg.title;
-      await selectPackage(pkg);
-      byId("payment")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    } catch (error) { message(error.message || "Could not load this itinerary."); }
+  window.selectBrendavaItinerary=async function(item){
+    if(!item)return;try{await loadCatalogue();const pkg=findPackage(item.id,item.title);if(!pkg){message("This itinerary is not available for online payment. Please contact Brendava.");return;}fillDropdown();const s=byId("bvSelectedItinerary");if(s)s.value=pkg.title;await selectPackage(pkg);byId("payment")?.scrollIntoView({behavior:"smooth",block:"start"});}catch(e){message(e.message||"Could not load itinerary.");}
   };
-
-  async function initialise() {
-    try {
-      await loadCatalogue();
-      fillDropdown();
-      const params = new URLSearchParams(window.location.search);
-      const wanted = params.get("select");
-      if (wanted) {
-        const match = findPackage(wanted, wanted);
-        if (match) {
-          const select = byId("bvSelectedItinerary");
-          if (select) select.value = match.title;
-          await selectPackage(match);
-        }
-      }
-    } catch (error) {
-      console.error("Brendava checkout initialisation failed:", error);
-      message("Safari prices could not be loaded at the moment. Please refresh or contact Brendava for assistance.");
-    }
-  }
-
-
-  byId("bvSelectedItinerary")?.addEventListener("change", async event => {
-    const option = event.target.selectedOptions[0];
-    if (!option || !option.value) { await selectPackage(null); return; }
-    const pkg = findPackage(option.dataset.id, option.value);
-    await selectPackage(pkg);
+  async function initialise(){try{await loadCatalogue();fillDropdown();const wanted=new URLSearchParams(location.search).get("select");if(wanted){const p=findPackage(wanted,wanted);if(p){byId("bvSelectedItinerary").value=p.title;await selectPackage(p);}}}catch(e){console.error("DPO checkout catalogue error",e);message("Safari prices are temporarily unavailable. Please refresh or contact Brendava.");}}
+  byId("bvSelectedItinerary")?.addEventListener("change",async e=>{const o=e.target.selectedOptions[0];await selectPackage(o&&o.value?findPackage(o.dataset.id,o.value):null);});
+  form.elements.travellers?.addEventListener("input",refreshTotal);form.elements.paymentPercent?.addEventListener("change",refreshTotal);
+  form.addEventListener("submit",async e=>{
+    e.preventDefault();if(submitting)return;
+    const pkg=selectedPackage||findPackage(byId("bvSelectedItinerary")?.selectedOptions[0]?.dataset.id,form.elements.itinerary?.value);
+    const q=quoteFor(pkg);if(!pkg||!q){message("Please select a payable itinerary and a valid traveller count.");return;}
+    if(!form.reportValidity())return;
+    const button=byId("bvPayButton"), old=button.innerHTML;submitting=true;button.disabled=true;button.innerHTML='<i class="fas fa-spinner fa-spin"></i> Creating secure checkout…';
+    try{
+      const fd=new FormData(form);
+      const payload={name:String(fd.get("name")||"").trim(),email:String(fd.get("email")||"").trim(),phone:String(fd.get("phone")||"").trim(),travelDate:String(fd.get("travelDate")||""),travellers:q.travellers,paymentPercent:q.percent,itineraryId:String(pkg.id),itinerary:String(pkg.title),notes:String(fd.get("notes")||"")};
+      const r=await fetch(API+"/api/dpo/create-payment",{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify(payload)});
+      const data=await r.json().catch(()=>({}));if(!r.ok||!data.redirect_url)throw new Error(data.message||data.error||"DPO could not create the payment session.");
+      const u=new URL(data.redirect_url);if(u.protocol!=="https:")throw new Error("The payment provider returned an insecure checkout URL.");
+      message("Secure checkout created. Redirecting to DPO…");location.assign(u.href);
+    }catch(err){console.error("DPO payment creation failed",err);message(err.message||"Unable to start payment. Please contact Brendava.");submitting=false;button.disabled=false;button.innerHTML=old;}
   });
-  form.elements.travellers?.addEventListener("input", refreshTotal);
-  form.elements.paymentPercent?.addEventListener("change", refreshTotal);
-  function createBookingReference() {
-    const bytes = new Uint8Array(5);
-    if (window.crypto && window.crypto.getRandomValues) window.crypto.getRandomValues(bytes);
-    else for (let i = 0; i < bytes.length; i++) bytes[i] = Math.floor(Math.random() * 256);
-    const suffix = Array.from(bytes, b => b.toString(16).padStart(2, "0")).join("").toUpperCase();
-    return "BRD-" + Date.now().toString(36).toUpperCase() + "-" + suffix;
-  }
-
-  function showBankTransfer(formData, quote) {
-    const ref = createBookingReference();
-    const box = byId("bvBankBox");
-    if (!box) throw new Error("Bank transfer details area is missing.");
-    box.replaceChildren();
-    const rows = [
-      ["Amount to send", money(quote.deposit, quote.currency) + " (" + quote.percent + "% deposit)"],
-      ["Total safari price", money(quote.total, quote.currency)],
-      ["Balance due later", money(quote.balance, quote.currency)],
-      ["Bank", "I&M Bank"],
-      ["Account number", "50721817001"],
-      ["Account name", "NABACHWA BRENDA"],
-      ["SWIFT / BIC code", "ORINUGKA"],
-      ["Payment reference (include exactly)", ref]
-    ];
-    rows.forEach(([key, value]) => {
-      const row = document.createElement("p");
-      const strong = document.createElement("strong");
-      strong.textContent = key + ": ";
-      row.append(strong, document.createTextNode(value));
-      box.appendChild(row);
-    });
-    const note = document.createElement("p");
-    note.textContent = "IMPORTANT: Make the transfer from your bank using the exact payment reference above. The money goes directly to the I&M Bank account shown; this website does not receive, route or hold the funds. Your bank or intermediary bank may charge transfer fees. Ask your bank to ensure Brendava receives the full invoice amount. Send the transfer receipt to Brendava. Your booking is confirmed only after the funds appear in the account and are verified.";
-    box.appendChild(note);
-    const wa = document.createElement("a");
-    wa.className = "btn whatsapp";
-    wa.target = "_blank";
-    wa.rel = "noopener noreferrer";
-    wa.textContent = "Send bank transfer proof on WhatsApp";
-    wa.href = "https://wa.me/256789336441?text=" + encodeURIComponent(
-      "Hello Brendava, I have made a direct SWIFT bank transfer. Reference: " + ref + ". Name: " + formData.get("name") +
-      ". Email: " + formData.get("email") + ". Safari: " + formData.get("itinerary") +
-      ". Amount sent: " + money(quote.deposit, quote.currency) + ". Total safari price: " + money(quote.total, quote.currency) +
-      ". Travellers: " + quote.travellers + ". Travel date: " + formData.get("travelDate") + "."
-    );
-    box.appendChild(wa);
-    box.style.display = "block";
-    message("Bank details are displayed below. Please send proof of transfer so Brendava can verify receipt.");
-  }
-
-  form.addEventListener("submit", async event => {
-    event.preventDefault();
-    if (submitting) return;
-    if (!form.reportValidity()) return;
-    const button = byId("bvPayButton");
-    const original = button ? button.innerHTML : "Show direct bank transfer details";
-    const formData = new FormData(form);
-    try {
-      submitting = true;
-      if (button) { button.disabled = true; button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Preparing bank instructions…'; }
-      await loadCatalogue(true);
-      const itineraryId = form.dataset.itineraryId || byId("bvItineraryId")?.value || "";
-      const pkg = findPackage(itineraryId, formData.get("itinerary"));
-      if (!pkg) throw new Error("Please select an itinerary that is currently published for online payment.");
-      selectedPackage = pkg;
-      const quote = quoteFor(pkg);
-      if (!quote) throw new Error("This itinerary does not have an active online price for this group size. Please request a quotation.");
-      const customerName = String(formData.get("name") || "").trim();
-      const customerEmail = String(formData.get("email") || "").trim();
-      const customerPhone = String(formData.get("phone") || "").trim();
-      const travelDate = String(formData.get("travelDate") || "");
-      if (!customerName || !customerEmail || !customerPhone || !travelDate) throw new Error("Please complete your name, email, phone number and travel date.");
-      showBankTransfer(formData, quote);
-      submitting = false;
-      if (button) { button.disabled = false; button.innerHTML = original; }
-      return;
-    } catch (error) {
-      console.error("Brendava bank-transfer instructions error:", error);
-      message(error.message || "Payment could not be started. Please try again or contact Brendava.");
-      submitting = false;
-      if (button) { button.disabled = false; button.innerHTML = original; }
-    }
-  });
-
   initialise();
 })();
 </script>
